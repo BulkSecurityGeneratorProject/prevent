@@ -1,0 +1,10 @@
+version: '2'
+services:
+    prevent-elasticsearch:
+        container_name: prevent-elasticsearch
+        image: elasticsearch:2.4.0
+        # volumes:
+        #     - ~/volumes/jhipster/prevent/elasticsearch/:/usr/share/elasticsearch/data/
+        ports:
+            - 9200:9200
+            - 9300:9300

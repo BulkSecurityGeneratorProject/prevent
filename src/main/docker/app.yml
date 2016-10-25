@@ -1,0 +1,22 @@
+version: '2'
+services:
+    prevent-app:
+        image: prevent
+        external_links:
+            - prevent-mysql:mysql
+            - prevent-elasticsearch:elasticsearch
+        environment:
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/prevent?useUnicode=true&characterEncoding=utf8&useSSL=false
+            - JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
+            - SPRING_DATA_ELASTICSEARCH_CLUSTER_NODES=elasticsearch:9300
+        ports:
+            - 8080:8080
+    prevent-mysql:
+        extends:
+            file: mysql.yml
+            service: prevent-mysql
+    prevent-elasticsearch:
+        extends:
+            file: elasticsearch.yml
+            service: prevent-elasticsearch
