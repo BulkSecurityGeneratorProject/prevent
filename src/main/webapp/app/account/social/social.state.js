@@ -16,7 +16,7 @@
                 pageTitle: 'Register with {{ label }}'
             },
             views: {
-                'content@': {
+                'content-frontend@frontend': {
                     templateUrl: 'app/account/social/social-register.html',
                     controller: 'SocialRegisterController',
                     controllerAs: 'vm'
@@ -30,7 +30,7 @@
                 authorities: []
             },
             views: {
-                'content@': {
+                'content-frontend@frontend': {
                     controller: 'SocialAuthController'
                 }
             }

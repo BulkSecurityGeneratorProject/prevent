@@ -16,7 +16,7 @@
                 pageTitle: 'Registration'
             },
             views: {
-                'content@': {
+                'content-frontend@frontend': {
                     templateUrl: 'app/account/register/register.html',
                     controller: 'RegisterController',
                     controllerAs: 'vm'

@@ -16,7 +16,7 @@
                 pageTitle: 'Settings'
             },
             views: {
-                'content@': {
+                'content-frontend@frontend': {
                     templateUrl: 'app/account/settings/settings.html',
                     controller: 'SettingsController',
                     controllerAs: 'vm'

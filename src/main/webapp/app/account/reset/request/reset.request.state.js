@@ -15,7 +15,7 @@
                 authorities: []
             },
             views: {
-                'content@': {
+                'content-frontend@frontend': {
                     templateUrl: 'app/account/reset/request/reset.request.html',
                     controller: 'RequestResetController',
                     controllerAs: 'vm'

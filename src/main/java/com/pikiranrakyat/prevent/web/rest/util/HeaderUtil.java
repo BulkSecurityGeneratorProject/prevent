@@ -11,7 +11,7 @@ public final class HeaderUtil {
 
     private static final Logger log = LoggerFactory.getLogger(HeaderUtil.class);
 
-    private HeaderUtil(){
+    private HeaderUtil() {
     }
 
     public static HttpHeaders createAlert(String message, String param) {
@@ -26,7 +26,7 @@ public final class HeaderUtil {
     }
 
     public static HttpHeaders createEntityUpdateAlert(String entityName, String param) {
-        return createAlert("A " + entityName + " is updated with identifier " + param, param);
+        return createAlert(entityName + " telah diupdate dengan identifier " + param, param);
     }
 
     public static HttpHeaders createEntityDeletionAlert(String entityName, String param) {

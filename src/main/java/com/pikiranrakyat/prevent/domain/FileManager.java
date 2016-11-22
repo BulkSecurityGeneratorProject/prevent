@@ -161,11 +161,12 @@ public class FileManager extends AbstractAuditingEntity implements Serializable 
     public String toString() {
         return "FileManager{" +
             "id=" + id +
-            ", original='" + original + "'" +
-            ", name='" + name + "'" +
-            ", path='" + path + "'" +
-            ", extension='" + extension + "'" +
-            ", size='" + size + "'" +
+            ", original='" + original + '\'' +
+            ", name='" + name + '\'' +
+            ", path='" + path + '\'' +
+            ", extension='" + extension + '\'' +
+            ", size=" + size +
+            ", user=" + user +
             '}';
     }
 }

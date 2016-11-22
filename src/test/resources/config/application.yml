@@ -90,3 +90,7 @@ jhipster:
         contactEmail:
         license:
         licenseUrl:
+upload:
+    path:
+        image: /Users/aseprojali/Workspace/work/temp/image/
+        file: /Users/aseprojali/Workspace/work/temp/file/

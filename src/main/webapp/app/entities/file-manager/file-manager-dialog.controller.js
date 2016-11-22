@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     angular
@@ -7,7 +7,7 @@
 
     FileManagerDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'FileManager', 'User'];
 
-    function FileManagerDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, FileManager, User) {
+    function FileManagerDialogController($timeout, $scope, $stateParams, $uibModalInstance, entity, FileManager, User) {
         var vm = this;
 
         vm.fileManager = entity;
@@ -15,15 +15,15 @@
         vm.save = save;
         vm.users = User.query();
 
-        $timeout(function (){
+        $timeout(function () {
             angular.element('.form-group:eq(1)>input').focus();
         });
 
-        function clear () {
+        function clear() {
             $uibModalInstance.dismiss('cancel');
         }
 
-        function save () {
+        function save() {
             vm.isSaving = true;
             if (vm.fileManager.id !== null) {
                 FileManager.update(vm.fileManager, onSaveSuccess, onSaveError);
@@ -32,13 +32,13 @@
             }
         }
 
-        function onSaveSuccess (result) {
+        function onSaveSuccess(result) {
             $scope.$emit('preventApp:fileManagerUpdate', result);
             $uibModalInstance.close(result);
             vm.isSaving = false;
         }
 
-        function onSaveError () {
+        function onSaveError() {
             vm.isSaving = false;
         }
 

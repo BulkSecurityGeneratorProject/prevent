@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     angular
@@ -8,10 +8,10 @@
     FileManagerSearch.$inject = ['$resource'];
 
     function FileManagerSearch($resource) {
-        var resourceUrl =  'api/_search/file-managers/:id';
+        var resourceUrl = 'api/_search/file-managers/:id';
 
         return $resource(resourceUrl, {}, {
-            'query': { method: 'GET', isArray: true}
+            'query': {method: 'GET', isArray: true}
         });
     }
 })();

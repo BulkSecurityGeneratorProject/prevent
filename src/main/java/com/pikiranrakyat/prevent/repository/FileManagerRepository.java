@@ -16,7 +16,6 @@ public interface FileManagerRepository extends JpaRepository<FileManager, Long> 
     @Query("select fileManager from FileManager fileManager where fileManager.user.login = ?#{principal.username}")
     List<FileManager> findByUserIsCurrentUser();
 
-
     Optional<FileManager> findOneByName(String name);
 
 }

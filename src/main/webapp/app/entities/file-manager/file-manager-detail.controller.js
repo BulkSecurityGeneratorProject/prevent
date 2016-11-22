@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     angular
@@ -13,7 +13,7 @@
         vm.fileManager = entity;
         vm.previousState = previousState.name;
 
-        var unsubscribe = $rootScope.$on('preventApp:fileManagerUpdate', function(event, result) {
+        var unsubscribe = $rootScope.$on('preventApp:fileManagerUpdate', function (event, result) {
             vm.fileManager = result;
         });
         $scope.$on('$destroy', unsubscribe);

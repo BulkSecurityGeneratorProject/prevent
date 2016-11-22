@@ -1,9 +1,9 @@
-(function() {
+(function () {
     'use strict';
 
     angular
         .module('preventApp')
-        .controller('FileManagerDeleteController',FileManagerDeleteController);
+        .controller('FileManagerDeleteController', FileManagerDeleteController);
 
     FileManagerDeleteController.$inject = ['$uibModalInstance', 'entity', 'FileManager'];
 
@@ -13,12 +13,12 @@
         vm.fileManager = entity;
         vm.clear = clear;
         vm.confirmDelete = confirmDelete;
-        
-        function clear () {
+
+        function clear() {
             $uibModalInstance.dismiss('cancel');
         }
 
-        function confirmDelete (id) {
+        function confirmDelete(id) {
             FileManager.delete({id: id},
                 function () {
                     $uibModalInstance.close(true);
