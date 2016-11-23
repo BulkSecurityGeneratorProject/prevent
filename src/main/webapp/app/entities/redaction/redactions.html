@@ -1,13 +1,13 @@
 <div>
-    <h2>Merchandises</h2>
+    <h2>Redactions</h2>
     <jhi-alert></jhi-alert>
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="merchandise.new" >
+                <button class="btn btn-primary" ui-sref="redaction.new" >
                     <span class="glyphicon glyphicon-plus"></span>
                     <span class="hidden-xs" >
-                        Create new Merchandise
+                        Create new Redaction
                     </span>
                 </button>
             </div>
@@ -43,28 +43,27 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="merchandise in vm.merchandises track by merchandise.id">
-                    <td><a ui-sref="merchandise-detail({id:merchandise.id})">{{merchandise.id}}</a></td>
-                    <td>{{merchandise.code}}</td>
-                    <td>{{merchandise.name}}</td>
-                    <td>{{merchandise.price}}</td>
-                    <td>{{merchandise.description}}</td>
+                <tr ng-repeat="redaction in vm.redactions track by redaction.id">
+                    <td><a ui-sref="redaction-detail({id:redaction.id})">{{redaction.id}}</a></td>
+                    <td>{{redaction.name}}</td>
+                    <td>{{redaction.price}}</td>
+                    <td>{{redaction.description}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
-                                    ui-sref="merchandise-detail({id:merchandise.id})"
+                                    ui-sref="redaction-detail({id:redaction.id})"
                                     class="btn btn-info btn-sm">
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-xs hidden-sm"></span>
                             </button>
                             <button type="submit"
-                                    ui-sref="merchandise.edit({id:merchandise.id})"
+                                    ui-sref="redaction.edit({id:redaction.id})"
                                     class="btn btn-primary btn-sm">
                                 <span class="glyphicon glyphicon-pencil"></span>
                                 <span class="hidden-xs hidden-sm"></span>
                             </button>
                             <button type="submit"
-                                    ui-sref="merchandise.delete({id:merchandise.id})"
+                                    ui-sref="redaction.delete({id:redaction.id})"
                                     class="btn btn-danger btn-sm">
                                 <span class="glyphicon glyphicon-remove-circle"></span>
                                 <span class="hidden-xs hidden-sm"></span>

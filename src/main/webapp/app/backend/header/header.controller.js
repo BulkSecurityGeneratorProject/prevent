@@ -21,7 +21,6 @@
         });
 
         Principal.identity().then(function (account) {
-            console.log('account', account);
             vm.account = account;
         });
 

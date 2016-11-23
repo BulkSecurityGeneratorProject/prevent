@@ -14,19 +14,19 @@
     <property name="floatType" value="float" dbms="mysql, oracle"/>
 
     <!--
-        Added the entity AdsCategory.
+        Added the entity Redaction.
     -->
-    <changeSet id="20161123165253-1" author="jhipster">
-        <createTable tableName="ads_category">
+    <changeSet id="20161123174018-1" author="jhipster">
+        <createTable tableName="master_redaction">
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="varchar(255)">
-                <constraints nullable="false" unique="true" />
+                <constraints nullable="false" unique="true"/>
             </column>
 
-            <column name="price" type="decimal(10,2)">
-                <constraints nullable="false" />
+            <column name="price" type="decimal(30,2)">
+                <constraints nullable="true" />
             </column>
 
             <column name="description" type="varchar(255)">

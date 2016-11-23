@@ -1,4 +1,3 @@
-
 <form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
 
     <div class="modal-header">
@@ -8,39 +7,56 @@
     </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
-        <div class="form-group" ng-show="vm.merchandise.id">
-            <label for="id">ID</label>
-            <input type="text" class="form-control" id="id" name="id"
-                    ng-model="vm.merchandise.id" readonly />
-        </div>
+        <!--<div class="form-group" ng-show="vm.merchandise.id">-->
+        <!--<label for="id">ID</label>-->
+        <!--<input type="text" class="form-control" id="id" name="id"-->
+        <!--ng-model="vm.merchandise.id" readonly/>-->
+        <!--</div>-->
+
         <div class="form-group">
             <label class="control-label" for="field_name">Name</label>
             <input type="text" class="form-control" name="name" id="field_name"
-                    ng-model="vm.merchandise.name"
-                    required />
+                   ng-model="vm.merchandise.name"
+                   required/>
             <div ng-show="editForm.name.$invalid">
                 <p class="help-block"
-                    ng-show="editForm.name.$error.required">
+                   ng-show="editForm.name.$error.required">
                     This field is required.
                 </p>
             </div>
         </div>
+
+        <div class="form-group">
+            <label class="control-label" for="field_code">Code</label>
+            <input type="text" class="form-control" name="code" id="field_code"
+                   ng-model="vm.merchandise.code"
+                   required/>
+            <div ng-show="editForm.code.$invalid">
+                <p class="help-block"
+                   ng-show="editForm.code.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+
+
+
         <div class="form-group">
             <label class="control-label" for="field_price">Price</label>
             <input type="number" class="form-control" name="price" id="field_price"
-                    ng-model="vm.merchandise.price"
-                    required min="0" />
+                   ng-model="vm.merchandise.price"
+                   required min="0"/>
             <div ng-show="editForm.price.$invalid">
                 <p class="help-block"
-                    ng-show="editForm.price.$error.required">
+                   ng-show="editForm.price.$error.required">
                     This field is required.
                 </p>
                 <p class="help-block"
-                    ng-show="editForm.price.$error.min" translate-value-min="0">
+                   ng-show="editForm.price.$error.min" translate-value-min="0">
                     This field should be more than 0.
                 </p>
                 <p class="help-block"
-                    ng-show="editForm.price.$error.number">
+                   ng-show="editForm.price.$error.number">
                     This field should be a number.
                 </p>
             </div>
@@ -48,8 +64,8 @@
         <div class="form-group">
             <label class="control-label" for="field_description">Description</label>
             <input type="text" class="form-control" name="description" id="field_description"
-                    ng-model="vm.merchandise.description"
-                     />
+                   ng-model="vm.merchandise.description"
+            />
         </div>
 
     </div>

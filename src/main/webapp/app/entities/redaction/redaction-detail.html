@@ -1,24 +1,20 @@
 
 <div>
-    <h2><span>Merchandise</span> {{vm.merchandise.id}}</h2>
+    <h2><span>Redaction</span> {{vm.redaction.id}}</h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="dl-horizontal jh-entity-details">
-        <dt><span>Code</span></dt>
-        <dd>
-            <span>{{vm.merchandise.code}}</span>
-        </dd>
         <dt><span>Name</span></dt>
         <dd>
-            <span>{{vm.merchandise.name}}</span>
+            <span>{{vm.redaction.name}}</span>
         </dd>
         <dt><span>Price</span></dt>
         <dd>
-            <span>{{vm.merchandise.price}}</span>
+            <span>{{vm.redaction.price}}</span>
         </dd>
         <dt><span>Description</span></dt>
         <dd>
-            <span>{{vm.merchandise.description}}</span>
+            <span>{{vm.redaction.description}}</span>
         </dd>
     </dl>
 
@@ -28,7 +24,7 @@
         <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
     </button>
 
-    <button type="button" ui-sref="merchandise-detail.edit({id:vm.merchandise.id})" class="btn btn-primary">
+    <button type="button" ui-sref="redaction-detail.edit({id:vm.redaction.id})" class="btn btn-primary">
         <span class="glyphicon glyphicon-pencil"></span>
         <span class="hidden-xs hidden-sm"> Edit</span>
     </button>

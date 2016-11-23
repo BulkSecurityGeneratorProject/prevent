@@ -9,17 +9,17 @@
 
     function stateConfig($stateProvider) {
         $stateProvider
-        .state('merchandise', {
+        .state('redaction', {
             parent: 'entity',
-            url: '/merchandise?page&sort&search',
+            url: '/redaction?page&sort&search',
             data: {
                 authorities: ['ROLE_ADMIN'],
-                pageTitle: 'Merchandises'
+                pageTitle: 'Redactions'
             },
             views: {
                 'main-content@backend': {
-                    templateUrl: 'app/entities/merchandise/merchandises.html',
-                    controller: 'MerchandiseController',
+                    templateUrl: 'app/entities/redaction/redactions.html',
+                    controller: 'RedactionController',
                     controllerAs: 'vm'
                 }
             },
@@ -46,27 +46,27 @@
                 }],
             }
         })
-        .state('merchandise-detail', {
+        .state('redaction-detail', {
             parent: 'entity',
-            url: '/merchandise/{id}',
+            url: '/redaction/{id}',
             data: {
                 authorities: ['ROLE_ADMIN'],
-                pageTitle: 'Merchandise'
+                pageTitle: 'Redaction'
             },
             views: {
                 'main-content@backend': {
-                    templateUrl: 'app/entities/merchandise/merchandise-detail.html',
-                    controller: 'MerchandiseDetailController',
+                    templateUrl: 'app/entities/redaction/redaction-detail.html',
+                    controller: 'RedactionDetailController',
                     controllerAs: 'vm'
                 }
             },
             resolve: {
-                entity: ['$stateParams', 'Merchandise', function($stateParams, Merchandise) {
-                    return Merchandise.get({id : $stateParams.id}).$promise;
+                entity: ['$stateParams', 'Redaction', function($stateParams, Redaction) {
+                    return Redaction.get({id : $stateParams.id}).$promise;
                 }],
                 previousState: ["$state", function ($state) {
                     var currentStateData = {
-                        name: $state.current.name || 'merchandise',
+                        name: $state.current.name || 'redaction',
                         params: $state.params,
                         url: $state.href($state.current.name, $state.params)
                     };
@@ -74,22 +74,22 @@
                 }]
             }
         })
-        .state('merchandise-detail.edit', {
-            parent: 'merchandise-detail',
+        .state('redaction-detail.edit', {
+            parent: 'redaction-detail',
             url: '/detail/edit',
             data: {
                 authorities: ['ROLE_ADMIN']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/merchandise/merchandise-dialog.html',
-                    controller: 'MerchandiseDialogController',
+                    templateUrl: 'app/entities/redaction/redaction-dialog.html',
+                    controller: 'RedactionDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
-                        entity: ['Merchandise', function(Merchandise) {
-                            return Merchandise.get({id : $stateParams.id}).$promise;
+                        entity: ['Redaction', function(Redaction) {
+                            return Redaction.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
@@ -99,23 +99,22 @@
                 });
             }]
         })
-        .state('merchandise.new', {
-            parent: 'merchandise',
+        .state('redaction.new', {
+            parent: 'redaction',
             url: '/new',
             data: {
                 authorities: ['ROLE_ADMIN']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/merchandise/merchandise-dialog.html',
-                    controller: 'MerchandiseDialogController',
+                    templateUrl: 'app/entities/redaction/redaction-dialog.html',
+                    controller: 'RedactionDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
                         entity: function () {
                             return {
-                                code: null,
                                 name: null,
                                 price: null,
                                 description: null,
@@ -124,56 +123,56 @@
                         }
                     }
                 }).result.then(function() {
-                    $state.go('merchandise', null, { reload: 'merchandise' });
+                    $state.go('redaction', null, { reload: 'redaction' });
                 }, function() {
-                    $state.go('merchandise');
+                    $state.go('redaction');
                 });
             }]
         })
-        .state('merchandise.edit', {
-            parent: 'merchandise',
+        .state('redaction.edit', {
+            parent: 'redaction',
             url: '/{id}/edit',
             data: {
                 authorities: ['ROLE_ADMIN']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/merchandise/merchandise-dialog.html',
-                    controller: 'MerchandiseDialogController',
+                    templateUrl: 'app/entities/redaction/redaction-dialog.html',
+                    controller: 'RedactionDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
-                        entity: ['Merchandise', function(Merchandise) {
-                            return Merchandise.get({id : $stateParams.id}).$promise;
+                        entity: ['Redaction', function(Redaction) {
+                            return Redaction.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('merchandise', null, { reload: 'merchandise' });
+                    $state.go('redaction', null, { reload: 'redaction' });
                 }, function() {
                     $state.go('^');
                 });
             }]
         })
-        .state('merchandise.delete', {
-            parent: 'merchandise',
+        .state('redaction.delete', {
+            parent: 'redaction',
             url: '/{id}/delete',
             data: {
                 authorities: ['ROLE_ADMIN']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/merchandise/merchandise-delete-dialog.html',
-                    controller: 'MerchandiseDeleteController',
+                    templateUrl: 'app/entities/redaction/redaction-delete-dialog.html',
+                    controller: 'RedactionDeleteController',
                     controllerAs: 'vm',
                     size: 'md',
                     resolve: {
-                        entity: ['Merchandise', function(Merchandise) {
-                            return Merchandise.get({id : $stateParams.id}).$promise;
+                        entity: ['Redaction', function(Redaction) {
+                            return Redaction.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('merchandise', null, { reload: 'merchandise' });
+                    $state.go('redaction', null, { reload: 'redaction' });
                 }, function() {
                     $state.go('^');
                 });
