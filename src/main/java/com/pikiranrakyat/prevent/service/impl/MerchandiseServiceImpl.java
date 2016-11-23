@@ -1,7 +1,7 @@
 package com.pikiranrakyat.prevent.service.impl;
 
 import com.pikiranrakyat.prevent.service.MerchandiseService;
-import com.pikiranrakyat.prevent.domain.Merchandise;
+import com.pikiranrakyat.prevent.domain.master.Merchandise;
 import com.pikiranrakyat.prevent.repository.MerchandiseRepository;
 import com.pikiranrakyat.prevent.repository.search.MerchandiseSearchRepository;
 import org.slf4j.Logger;
@@ -12,9 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
@@ -26,7 +23,7 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class MerchandiseServiceImpl implements MerchandiseService{
 
     private final Logger log = LoggerFactory.getLogger(MerchandiseServiceImpl.class);
-    
+
     @Inject
     private MerchandiseRepository merchandiseRepository;
 
@@ -48,11 +45,11 @@ public class MerchandiseServiceImpl implements MerchandiseService{
 
     /**
      *  Get all the merchandises.
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public Page<Merchandise> findAll(Pageable pageable) {
         log.debug("Request to get all Merchandises");
         Page<Merchandise> result = merchandiseRepository.findAll(pageable);
@@ -65,7 +62,7 @@ public class MerchandiseServiceImpl implements MerchandiseService{
      *  @param id the id of the entity
      *  @return the entity
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public Merchandise findOne(Long id) {
         log.debug("Request to get Merchandise : {}", id);
         Merchandise merchandise = merchandiseRepository.findOne(id);

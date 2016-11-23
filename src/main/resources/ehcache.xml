@@ -62,7 +62,7 @@
         timeToLiveSeconds="3600">
     </cache>
 
-    <cache name="com.pikiranrakyat.prevent.domain.Merchandise"
+    <cache name="com.pikiranrakyat.prevent.domain.master.Merchandise"
         timeToLiveSeconds="3600">
     </cache>
 

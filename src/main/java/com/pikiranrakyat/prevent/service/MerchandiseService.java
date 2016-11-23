@@ -1,10 +1,8 @@
 package com.pikiranrakyat.prevent.service;
 
-import com.pikiranrakyat.prevent.domain.Merchandise;
+import com.pikiranrakyat.prevent.domain.master.Merchandise;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-
-import java.util.List;
 
 /**
  * Service Interface for managing Merchandise.
@@ -21,7 +19,7 @@ public interface MerchandiseService {
 
     /**
      *  Get all the merchandises.
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
@@ -46,7 +44,7 @@ public interface MerchandiseService {
      * Search for the merchandise corresponding to the query.
      *
      *  @param query the query of the search
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
