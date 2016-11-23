@@ -36,6 +36,7 @@
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="code"><span>Code</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="name"><span>Name</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="cols"><span>Cols</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="millimeter"><span>Millimeter</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -48,6 +49,7 @@
             <tbody>
                 <tr ng-repeat="ads in vm.ads track by ads.id">
                     <td><a ui-sref="ads-detail({id:ads.id})">{{ads.id}}</a></td>
+                    <td>{{ads.code}}</td>
                     <td>{{ads.name}}</td>
                     <td>{{ads.cols}}</td>
                     <td>{{ads.millimeter}}</td>

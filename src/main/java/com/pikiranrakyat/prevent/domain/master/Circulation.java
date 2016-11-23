@@ -26,13 +26,19 @@ public class Circulation extends AbstractAuditingEntity implements Serializable 
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+
+    @NotNull
+    @Column(name = "code", nullable = false, unique = true)
+    private String code;
+
+
     @NotNull
     @Column(name = "name", nullable = false)
     private String name;
 
     @NotNull
     @DecimalMin(value = "0")
-    @Column(name = "price", precision=30, scale=2, nullable = false)
+    @Column(name = "price", precision = 30, scale = 2, nullable = false)
     private BigDecimal price;
 
     @Column(name = "description")
@@ -44,6 +50,19 @@ public class Circulation extends AbstractAuditingEntity implements Serializable 
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public Circulation code(String code) {
+        this.code = code;
+        return this;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getName() {
@@ -94,7 +113,7 @@ public class Circulation extends AbstractAuditingEntity implements Serializable 
             return false;
         }
         Circulation circulation = (Circulation) o;
-        if(circulation.id == null || id == null) {
+        if (circulation.id == null || id == null) {
             return false;
         }
         return Objects.equals(id, circulation.id);

@@ -7,11 +7,12 @@
     </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
-        <div class="form-group" ng-show="vm.ads.id">
-            <label for="id">ID</label>
-            <input type="text" class="form-control" id="id" name="id"
-                   ng-model="vm.ads.id" readonly/>
-        </div>
+
+        <!--<div class="form-group" ng-show="vm.ads.id">-->
+            <!--<label for="id">ID</label>-->
+            <!--<input type="text" class="form-control" id="id" name="id"-->
+                   <!--ng-model="vm.ads.id" readonly/>-->
+        <!--</div>-->
 
         <div class="form-group">
             <label for="field_adsCategory">Ads Category</label>
@@ -36,6 +37,19 @@
             <div ng-show="editForm.name.$invalid">
                 <p class="help-block"
                    ng-show="editForm.name.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label" for="field_code">Code</label>
+            <input type="text" class="form-control" name="name" id="field_code"
+                   ng-model="vm.ads.code"
+                   required/>
+            <div ng-show="editForm.code.$invalid">
+                <p class="help-block"
+                   ng-show="editForm.code.$error.required">
                     This field is required.
                 </p>
             </div>

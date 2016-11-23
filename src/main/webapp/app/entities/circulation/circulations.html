@@ -36,6 +36,7 @@
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="code"><span>Code</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="name"><span>Name</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="price"><span>Price</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="description"><span>Description</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -45,6 +46,7 @@
             <tbody>
                 <tr ng-repeat="circulation in vm.circulations track by circulation.id">
                     <td><a ui-sref="circulation-detail({id:circulation.id})">{{circulation.id}}</a></td>
+                    <td>{{circulation.code}}</td>
                     <td>{{circulation.name}}</td>
                     <td>{{circulation.price}}</td>
                     <td>{{circulation.description}}</td>

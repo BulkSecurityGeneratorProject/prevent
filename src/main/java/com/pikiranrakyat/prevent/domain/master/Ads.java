@@ -27,6 +27,12 @@ public class Ads extends AbstractAuditingEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+
+    @NotNull
+    @Column(name = "code", nullable = false, unique = true)
+    private String code;
+
+
     @NotNull
     @Column(name = "name", nullable = false)
     private String name;
@@ -43,7 +49,7 @@ public class Ads extends AbstractAuditingEntity implements Serializable {
 
     @NotNull
     @DecimalMin(value = "0")
-    @Column(name = "total_price", precision=30, scale=2, nullable = false)
+    @Column(name = "total_price", precision = 30, scale = 2, nullable = false)
     private BigDecimal totalPrice;
 
     @Column(name = "description")
@@ -59,6 +65,19 @@ public class Ads extends AbstractAuditingEntity implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public Ads code(String code) {
+        this.code = code;
+        return this;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getName() {
@@ -148,7 +167,7 @@ public class Ads extends AbstractAuditingEntity implements Serializable {
             return false;
         }
         Ads ads = (Ads) o;
-        if(ads.id == null || id == null) {
+        if (ads.id == null || id == null) {
             return false;
         }
         return Objects.equals(id, ads.id);

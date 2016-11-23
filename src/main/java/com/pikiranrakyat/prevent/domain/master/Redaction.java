@@ -27,10 +27,15 @@ public class Redaction extends AbstractAuditingEntity implements Serializable {
     private Long id;
 
     @NotNull
+    @Column(name = "code", nullable = false, unique = true)
+    private String code;
+
+
+    @NotNull
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "price", precision=10, scale=2)
+    @Column(name = "price", precision = 10, scale = 2)
     private BigDecimal price;
 
     @Column(name = "description")
@@ -42,6 +47,21 @@ public class Redaction extends AbstractAuditingEntity implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+
+    public String getCode() {
+        return code;
+    }
+
+
+    public Redaction code(String code) {
+        this.code = code;
+        return this;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getName() {
@@ -92,7 +112,7 @@ public class Redaction extends AbstractAuditingEntity implements Serializable {
             return false;
         }
         Redaction redaction = (Redaction) o;
-        if(redaction.id == null || id == null) {
+        if (redaction.id == null || id == null) {
             return false;
         }
         return Objects.equals(id, redaction.id);

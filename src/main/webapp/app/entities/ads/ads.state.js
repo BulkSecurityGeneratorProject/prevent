@@ -115,6 +115,7 @@
                     resolve: {
                         entity: function () {
                             return {
+                                code: null,
                                 name: null,
                                 cols: null,
                                 millimeter: null,
