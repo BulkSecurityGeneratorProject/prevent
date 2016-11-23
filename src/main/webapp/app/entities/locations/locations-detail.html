@@ -1,0 +1,47 @@
+
+<div>
+    <h2><span>Locations</span> {{vm.locations.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Name</span></dt>
+        <dd>
+            <span>{{vm.locations.name}}</span>
+        </dd>
+        <dt><span>Address</span></dt>
+        <dd>
+            <span>{{vm.locations.address}}</span>
+        </dd>
+        <dt><span>City</span></dt>
+        <dd>
+            <span>{{vm.locations.city}}</span>
+        </dd>
+        <dt><span>State</span></dt>
+        <dd>
+            <span>{{vm.locations.state}}</span>
+        </dd>
+        <dt><span>Postal Code</span></dt>
+        <dd>
+            <span>{{vm.locations.postalCode}}</span>
+        </dd>
+        <dt><span>Latitude</span></dt>
+        <dd>
+            <span>{{vm.locations.latitude}}</span>
+        </dd>
+        <dt><span>Longitude</span></dt>
+        <dd>
+            <span>{{vm.locations.longitude}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="locations-detail.edit({id:vm.locations.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm"> Edit</span>
+    </button>
+</div>

@@ -1,7 +1,12 @@
 body {
+    margin: 0 auto;
     background: #fafafa;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #333;
+}
+
+.content-wrapper {
+    min-height: 738px; !important;
 }
 
 /* ==========================================================================

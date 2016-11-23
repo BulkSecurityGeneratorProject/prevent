@@ -3,7 +3,7 @@
 
     angular
         .module('preventApp', [
-            'ngStorage', 
+            'ngStorage',
             'ngResource',
             'ngCookies',
             'ngAria',
@@ -22,5 +22,6 @@
 
     function run(stateHandler) {
         stateHandler.initialize();
+
     }
 })();

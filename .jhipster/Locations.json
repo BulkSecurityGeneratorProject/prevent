@@ -1,0 +1,60 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "minlength",
+                "maxlength"
+            ],
+            "fieldValidateRulesMinlength": "3",
+            "fieldValidateRulesMaxlength": "50"
+        },
+        {
+            "fieldName": "address",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "city",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "state",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "postalCode",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "pattern"
+            ],
+            "fieldValidateRulesPattern": "0-9"
+        },
+        {
+            "fieldName": "latitude",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "longitude",
+            "fieldType": "Double"
+        }
+    ],
+    "changelogDate": "20161123150953",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "locations",
+    "pagination": "pagination"
+}

@@ -17,6 +17,15 @@
             views: {
                 'content@': {
                     templateUrl: 'app/backend/backend.html'
+                },
+                'main-content-header@backend': {
+                    templateUrl: 'app/backend/header/header.html'
+                },
+                'main-content-sidebar@backend': {
+                    templateUrl: 'app/backend/sidebar/sidebar.html'
+                },
+                'main-content-footer@backend': {
+                    templateUrl: 'app/backend/footer/footer.html'
                 }
             }
         });

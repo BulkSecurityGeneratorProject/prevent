@@ -11,6 +11,9 @@
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css">
+    <link rel="stylesheet" href="bower_components/AdminLTE/dist/css/AdminLTE.css">
+    <link rel="stylesheet" href="bower_components/AdminLTE/dist/css/skins/_all-skins.css">
+    <link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.css">
     <!--<link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/bootstrap-material-design.css">-->
     <!--<link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/ripples.css">-->
     <!-- endinject -->
@@ -19,13 +22,13 @@
     <link rel="stylesheet" href="content/css/main.css">
     <!-- endbuild -->
 </head>
-<body ng-app="preventApp" ng-strict-di>
+<body class="hold-transition skin-blue sidebar-mini" ng-app="preventApp" ng-strict-di>
 <!--[if lt IE 9]>
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
     your browser</a> to improve your experience.</p>
 <![endif]-->
 <!--<page-ribbon></page-ribbon>-->
-<div ui-view="content"></div>
+<div style="max-width: 100%" ui-view="content"></div>
 
 <!-- Google Analytics: uncomment and change UA-XXXXX-X to be your site's ID.
 <script>
@@ -61,6 +64,7 @@
 <script src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
 <script src="bower_components/bootstrap-material-design/dist/js/material.js"></script>
 <script src="bower_components/bootstrap-material-design/dist/js/ripples.js"></script>
+<script src="bower_components/AdminLTE/dist/js/app.js"></script>
 <!-- endinject -->
 <!-- endbuild -->
 
@@ -81,12 +85,19 @@
 <script src="app/services/auth/auth.jwt.service.js"></script>
 <script src="app/services/auth/activate.service.js"></script>
 <script src="app/services/auth/account.service.js"></script>
-<script src="app/frontend/navbar/navbar.controller.js"></script>
 <script src="app/layouts/navbar/active-link.directive.js"></script>
 <script src="app/layouts/error/error.state.js"></script>
-<script src="app/frontend/frontend.state.js"></script>
+<script src="app/frontend/navbar/navbar.controller.js"></script>
 <script src="app/frontend/home/home.state.js"></script>
 <script src="app/frontend/home/home.controller.js"></script>
+<script src="app/frontend/frontend.state.js"></script>
+<script src="app/entities/locations/locations-dialog.controller.js"></script>
+<script src="app/entities/locations/locations-detail.controller.js"></script>
+<script src="app/entities/locations/locations-delete-dialog.controller.js"></script>
+<script src="app/entities/locations/locations.state.js"></script>
+<script src="app/entities/locations/locations.service.js"></script>
+<script src="app/entities/locations/locations.search.service.js"></script>
+<script src="app/entities/locations/locations.controller.js"></script>
 <script src="app/entities/file-manager/file-manager-dialog.controller.js"></script>
 <script src="app/entities/file-manager/file-manager-detail.controller.js"></script>
 <script src="app/entities/file-manager/file-manager-delete-dialog.controller.js"></script>
@@ -113,6 +124,7 @@
 <script src="app/components/util/data-util.service.js"></script>
 <script src="app/components/util/capitalize.filter.js"></script>
 <script src="app/components/util/base64.service.js"></script>
+<script src="app/components/sidebar.directive.js"></script>
 <script src="app/components/login/login.service.js"></script>
 <script src="app/components/login/login.controller.js"></script>
 <script src="app/components/form/show-validation.directive.js"></script>
@@ -132,7 +144,10 @@
 <script src="app/blocks/config/localstorage.config.js"></script>
 <script src="app/blocks/config/http.config.js"></script>
 <script src="app/blocks/config/compile.config.js"></script>
+<script src="app/blocks/config/bootstrap-material.config.js"></script>
 <script src="app/blocks/config/alert.config.js"></script>
+<script src="app/backend/dashboard/dashboard.state.js"></script>
+<script src="app/backend/backend.state.js"></script>
 <script src="app/app.state.js"></script>
 <script src="app/app.constants.js"></script>
 <script src="app/admin/user-management/user-management-dialog.controller.js"></script>
@@ -181,8 +196,6 @@
 <script src="app/account/activate/activate.state.js"></script>
 <script src="app/account/activate/activate.controller.js"></script>
 <script src="app/account/account.state.js"></script>
-<script src="app/backend/backend.state.js"></script>
-<script src="app/backend/dashboard/dashboard.state.js"></script>
 <!-- endinject -->
 <!-- endbuild -->
 

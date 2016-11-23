@@ -1,0 +1,107 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myLocationsLabel">Create or edit a Locations</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.locations.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.locations.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                    ng-model="vm.locations.name"
+                    required ng-minlength="3" ng-maxlength="50" />
+            <div ng-show="editForm.name.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.name.$error.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.name.$error.minlength" translate-value-min="3">
+                    This field is required to be at least 3 characters.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.name.$error.maxlength">
+                    This field cannot be longer than 50 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_address">Address</label>
+            <input type="text" class="form-control" name="address" id="field_address"
+                    ng-model="vm.locations.address"
+                    required />
+            <div ng-show="editForm.address.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.address.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_city">City</label>
+            <input type="text" class="form-control" name="city" id="field_city"
+                    ng-model="vm.locations.city"
+                    required />
+            <div ng-show="editForm.city.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.city.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_state">State</label>
+            <input type="text" class="form-control" name="state" id="field_state"
+                    ng-model="vm.locations.state"
+                    required />
+            <div ng-show="editForm.state.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.state.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_postalCode">Postal Code</label>
+            <input type="text" class="form-control" name="postalCode"
+                   id="field_postalCode"
+                    ng-model="vm.locations.postalCode"
+                    required  />
+            <div ng-show="editForm.postalCode.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.postalCode.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_latitude">Latitude</label>
+            <input type="number" class="form-control" name="latitude" id="field_latitude"
+                    ng-model="vm.locations.latitude"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_longitude">Longitude</label>
+            <input type="number" class="form-control" name="longitude" id="field_longitude"
+                    ng-model="vm.locations.longitude"
+                     />
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>
