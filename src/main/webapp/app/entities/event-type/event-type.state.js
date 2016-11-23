@@ -9,17 +9,17 @@
 
     function stateConfig($stateProvider) {
         $stateProvider
-        .state('contact-person', {
+        .state('event-type', {
             parent: 'entity',
-            url: '/contact-person?page&sort&search',
+            url: '/event-type?page&sort&search',
             data: {
                 authorities: ['ROLE_ADMIN'],
-                pageTitle: 'ContactPeople'
+                pageTitle: 'EventTypes'
             },
             views: {
                 'main-content@backend': {
-                    templateUrl: 'app/entities/contact-person/contact-people.html',
-                    controller: 'ContactPersonController',
+                    templateUrl: 'app/entities/event-type/event-types.html',
+                    controller: 'EventTypeController',
                     controllerAs: 'vm'
                 }
             },
@@ -46,27 +46,27 @@
                 }],
             }
         })
-        .state('contact-person-detail', {
+        .state('event-type-detail', {
             parent: 'entity',
-            url: '/contact-person/{id}',
+            url: '/event-type/{id}',
             data: {
                 authorities: ['ROLE_ADMIN'],
-                pageTitle: 'ContactPerson'
+                pageTitle: 'EventType'
             },
             views: {
                 'main-content@backend': {
-                    templateUrl: 'app/entities/contact-person/contact-person-detail.html',
-                    controller: 'ContactPersonDetailController',
+                    templateUrl: 'app/entities/event-type/event-type-detail.html',
+                    controller: 'EventTypeDetailController',
                     controllerAs: 'vm'
                 }
             },
             resolve: {
-                entity: ['$stateParams', 'ContactPerson', function($stateParams, ContactPerson) {
-                    return ContactPerson.get({id : $stateParams.id}).$promise;
+                entity: ['$stateParams', 'EventType', function($stateParams, EventType) {
+                    return EventType.get({id : $stateParams.id}).$promise;
                 }],
                 previousState: ["$state", function ($state) {
                     var currentStateData = {
-                        name: $state.current.name || 'contact-person',
+                        name: $state.current.name || 'event-type',
                         params: $state.params,
                         url: $state.href($state.current.name, $state.params)
                     };
@@ -74,22 +74,22 @@
                 }]
             }
         })
-        .state('contact-person-detail.edit', {
-            parent: 'contact-person-detail',
+        .state('event-type-detail.edit', {
+            parent: 'event-type-detail',
             url: '/detail/edit',
             data: {
                 authorities: ['ROLE_ADMIN']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/contact-person/contact-person-dialog.html',
-                    controller: 'ContactPersonDialogController',
+                    templateUrl: 'app/entities/event-type/event-type-dialog.html',
+                    controller: 'EventTypeDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
-                        entity: ['ContactPerson', function(ContactPerson) {
-                            return ContactPerson.get({id : $stateParams.id}).$promise;
+                        entity: ['EventType', function(EventType) {
+                            return EventType.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
@@ -99,16 +99,16 @@
                 });
             }]
         })
-        .state('contact-person.new', {
-            parent: 'contact-person',
+        .state('event-type.new', {
+            parent: 'event-type',
             url: '/new',
             data: {
                 authorities: ['ROLE_ADMIN']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/contact-person/contact-person-dialog.html',
-                    controller: 'ContactPersonDialogController',
+                    templateUrl: 'app/entities/event-type/event-type-dialog.html',
+                    controller: 'EventTypeDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
@@ -116,63 +116,62 @@
                         entity: function () {
                             return {
                                 name: null,
-                                email: null,
-                                phone: null,
+                                description: null,
                                 id: null
                             };
                         }
                     }
                 }).result.then(function() {
-                    $state.go('contact-person', null, { reload: 'contact-person' });
+                    $state.go('event-type', null, { reload: 'event-type' });
                 }, function() {
-                    $state.go('contact-person');
+                    $state.go('event-type');
                 });
             }]
         })
-        .state('contact-person.edit', {
-            parent: 'contact-person',
+        .state('event-type.edit', {
+            parent: 'event-type',
             url: '/{id}/edit',
             data: {
                 authorities: ['ROLE_ADMIN']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/contact-person/contact-person-dialog.html',
-                    controller: 'ContactPersonDialogController',
+                    templateUrl: 'app/entities/event-type/event-type-dialog.html',
+                    controller: 'EventTypeDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
-                        entity: ['ContactPerson', function(ContactPerson) {
-                            return ContactPerson.get({id : $stateParams.id}).$promise;
+                        entity: ['EventType', function(EventType) {
+                            return EventType.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('contact-person', null, { reload: 'contact-person' });
+                    $state.go('event-type', null, { reload: 'event-type' });
                 }, function() {
                     $state.go('^');
                 });
             }]
         })
-        .state('contact-person.delete', {
-            parent: 'contact-person',
+        .state('event-type.delete', {
+            parent: 'event-type',
             url: '/{id}/delete',
             data: {
                 authorities: ['ROLE_ADMIN']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/contact-person/contact-person-delete-dialog.html',
-                    controller: 'ContactPersonDeleteController',
+                    templateUrl: 'app/entities/event-type/event-type-delete-dialog.html',
+                    controller: 'EventTypeDeleteController',
                     controllerAs: 'vm',
                     size: 'md',
                     resolve: {
-                        entity: ['ContactPerson', function(ContactPerson) {
-                            return ContactPerson.get({id : $stateParams.id}).$promise;
+                        entity: ['EventType', function(EventType) {
+                            return EventType.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('contact-person', null, { reload: 'contact-person' });
+                    $state.go('event-type', null, { reload: 'event-type' });
                 }, function() {
                     $state.go('^');
                 });

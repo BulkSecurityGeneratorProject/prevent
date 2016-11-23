@@ -1,7 +1,7 @@
 package com.pikiranrakyat.prevent.service.impl;
 
 import com.pikiranrakyat.prevent.service.LocationsService;
-import com.pikiranrakyat.prevent.domain.Locations;
+import com.pikiranrakyat.prevent.domain.master.Locations;
 import com.pikiranrakyat.prevent.repository.LocationsRepository;
 import com.pikiranrakyat.prevent.repository.search.LocationsSearchRepository;
 import org.slf4j.Logger;
@@ -12,9 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
@@ -26,7 +23,7 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class LocationsServiceImpl implements LocationsService{
 
     private final Logger log = LoggerFactory.getLogger(LocationsServiceImpl.class);
-    
+
     @Inject
     private LocationsRepository locationsRepository;
 
@@ -48,11 +45,11 @@ public class LocationsServiceImpl implements LocationsService{
 
     /**
      *  Get all the locations.
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public Page<Locations> findAll(Pageable pageable) {
         log.debug("Request to get all Locations");
         Page<Locations> result = locationsRepository.findAll(pageable);
@@ -65,7 +62,7 @@ public class LocationsServiceImpl implements LocationsService{
      *  @param id the id of the entity
      *  @return the entity
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public Locations findOne(Long id) {
         log.debug("Request to get Locations : {}", id);
         Locations locations = locationsRepository.findOne(id);

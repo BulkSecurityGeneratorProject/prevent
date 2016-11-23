@@ -1,52 +1,52 @@
 package com.pikiranrakyat.prevent.service;
 
-import com.pikiranrakyat.prevent.domain.master.Locations;
+import com.pikiranrakyat.prevent.domain.master.EventType;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 /**
- * Service Interface for managing Locations.
+ * Service Interface for managing EventType.
  */
-public interface LocationsService {
+public interface EventTypeService {
 
     /**
-     * Save a locations.
+     * Save a eventType.
      *
-     * @param locations the entity to save
+     * @param eventType the entity to save
      * @return the persisted entity
      */
-    Locations save(Locations locations);
+    EventType save(EventType eventType);
 
     /**
-     *  Get all the locations.
+     *  Get all the eventTypes.
      *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
-    Page<Locations> findAll(Pageable pageable);
+    Page<EventType> findAll(Pageable pageable);
 
     /**
-     *  Get the "id" locations.
+     *  Get the "id" eventType.
      *
      *  @param id the id of the entity
      *  @return the entity
      */
-    Locations findOne(Long id);
+    EventType findOne(Long id);
 
     /**
-     *  Delete the "id" locations.
+     *  Delete the "id" eventType.
      *
      *  @param id the id of the entity
      */
     void delete(Long id);
 
     /**
-     * Search for the locations corresponding to the query.
+     * Search for the eventType corresponding to the query.
      *
      *  @param query the query of the search
      *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
-    Page<Locations> search(String query, Pageable pageable);
+    Page<EventType> search(String query, Pageable pageable);
 }

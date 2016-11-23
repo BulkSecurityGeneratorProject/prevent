@@ -1,7 +1,7 @@
 package com.pikiranrakyat.prevent.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
-import com.pikiranrakyat.prevent.domain.Locations;
+import com.pikiranrakyat.prevent.domain.master.Locations;
 import com.pikiranrakyat.prevent.service.LocationsService;
 import com.pikiranrakyat.prevent.web.rest.util.HeaderUtil;
 import com.pikiranrakyat.prevent.web.rest.util.PaginationUtil;
@@ -21,10 +21,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing Locations.
@@ -34,7 +30,7 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class LocationsResource {
 
     private final Logger log = LoggerFactory.getLogger(LocationsResource.class);
-        
+
     @Inject
     private LocationsService locationsService;
 
@@ -143,7 +139,7 @@ public class LocationsResource {
      * SEARCH  /_search/locations?query=:query : search for the locations corresponding
      * to the query.
      *
-     * @param query the query of the locations search 
+     * @param query the query of the locations search
      * @param pageable the pagination information
      * @return the result of the search
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers

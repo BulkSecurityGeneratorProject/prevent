@@ -36,7 +36,7 @@
     <cache name="com.pikiranrakyat.prevent.domain.User.persistentTokens"
            timeToLiveSeconds="3600">
     </cache>
-    
+
 
     <cache name="com.pikiranrakyat.prevent.social.SocialUserConnection"
            timeToLiveSeconds="3600">
@@ -50,7 +50,11 @@
         timeToLiveSeconds="3600">
     </cache>
 
-    <cache name="com.pikiranrakyat.prevent.domain.Locations"
+    <cache name="com.pikiranrakyat.prevent.domain.master.Locations"
+        timeToLiveSeconds="3600">
+    </cache>
+
+    <cache name="com.pikiranrakyat.prevent.domain.master.EventType"
         timeToLiveSeconds="3600">
     </cache>
 

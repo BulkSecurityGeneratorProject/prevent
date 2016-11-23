@@ -1,6 +1,6 @@
 package com.pikiranrakyat.prevent.repository.search;
 
-import com.pikiranrakyat.prevent.domain.Locations;
+import com.pikiranrakyat.prevent.domain.master.Locations;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 
 /**
