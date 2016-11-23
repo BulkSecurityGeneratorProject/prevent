@@ -125,7 +125,7 @@ public class Organizer extends AbstractAuditingEntity implements Serializable {
             return false;
         }
         Organizer organizer = (Organizer) o;
-        if (organizer.id == null || id == null) {
+        if(organizer.id == null || id == null) {
             return false;
         }
         return Objects.equals(id, organizer.id);

@@ -2,6 +2,10 @@ package com.pikiranrakyat.prevent.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.pikiranrakyat.prevent.domain.Organizer;
+import com.pikiranrakyat.prevent.domain.User;
+import com.pikiranrakyat.prevent.exception.ResourceNotFoundException;
+import com.pikiranrakyat.prevent.repository.UserRepository;
+import com.pikiranrakyat.prevent.security.SecurityUtils;
 import com.pikiranrakyat.prevent.service.OrganizerService;
 import com.pikiranrakyat.prevent.web.rest.util.HeaderUtil;
 import com.pikiranrakyat.prevent.web.rest.util.PaginationUtil;
@@ -21,10 +25,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing Organizer.
@@ -34,9 +34,12 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class OrganizerResource {
 
     private final Logger log = LoggerFactory.getLogger(OrganizerResource.class);
-        
+
     @Inject
     private OrganizerService organizerService;
+
+    @Inject
+    private UserRepository userRepository;
 
     /**
      * POST  /organizers : Create a new organizer.
@@ -49,11 +52,16 @@ public class OrganizerResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Organizer> createOrganizer(@Valid @RequestBody Organizer organizer) throws URISyntaxException {
+    public ResponseEntity<Organizer> createOrganizer(@RequestBody Organizer organizer) throws URISyntaxException {
         log.debug("REST request to save Organizer : {}", organizer);
         if (organizer.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("organizer", "idexists", "A new organizer cannot already have an ID")).body(null);
         }
+
+        User user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin())
+            .orElseThrow(() -> new ResourceNotFoundException("User tidak ada"));
+        organizer.setUser(user);
+
         Organizer result = organizerService.save(organizer);
         return ResponseEntity.created(new URI("/api/organizers/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("organizer", result.getId().toString()))
@@ -143,7 +151,7 @@ public class OrganizerResource {
      * SEARCH  /_search/organizers?query=:query : search for the organizer corresponding
      * to the query.
      *
-     * @param query the query of the organizer search 
+     * @param query    the query of the organizer search
      * @param pageable the pagination information
      * @return the result of the search
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
