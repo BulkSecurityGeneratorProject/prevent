@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     angular
@@ -7,15 +7,22 @@
 
     HeaderController.$inject = ['$state', 'Auth', 'Principal', 'ProfileService', 'LoginService'];
 
-    function HeaderController ($state, Auth, Principal, ProfileService, LoginService) {
+    function HeaderController($state, Auth, Principal, ProfileService, LoginService) {
         var vm = this;
 
+        vm.account = null;
         vm.isNavbarCollapsed = true;
         vm.isAuthenticated = Principal.isAuthenticated;
 
-        ProfileService.getProfileInfo().then(function(response) {
+
+        ProfileService.getProfileInfo().then(function (response) {
             vm.inProduction = response.inProduction;
             vm.swaggerEnabled = response.swaggerEnabled;
+        });
+
+        Principal.identity().then(function (account) {
+            console.log('account', account);
+            vm.account = account;
         });
 
         vm.login = login;
