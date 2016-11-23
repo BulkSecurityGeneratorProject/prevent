@@ -1,0 +1,39 @@
+
+<div>
+    <h2><span>Organizer</span> {{vm.organizer.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Name</span></dt>
+        <dd>
+            <span>{{vm.organizer.name}}</span>
+        </dd>
+        <dt><span>Description</span></dt>
+        <dd>
+            <span>{{vm.organizer.description}}</span>
+        </dd>
+        <dt><span>Facebook</span></dt>
+        <dd>
+            <span>{{vm.organizer.facebook}}</span>
+        </dd>
+        <dt><span>Twitter</span></dt>
+        <dd>
+            <span>{{vm.organizer.twitter}}</span>
+        </dd>
+        <dt><span>User</span></dt>
+        <dd>
+            {{vm.organizer.user.email}}
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="organizer-detail.edit({id:vm.organizer.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm"> Edit</span>
+    </button>
+</div>
