@@ -1,0 +1,122 @@
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myAdsLabel">Create or edit a Ads</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.ads.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   ng-model="vm.ads.id" readonly/>
+        </div>
+
+        <div class="form-group">
+            <label for="field_adsCategory">Ads Category</label>
+            <select class="form-control" id="field_adsCategory" name="adsCategory" ng-model="vm.ads.adsCategory"
+                    ng-options="adsCategory as adsCategory.name for adsCategory in vm.adscategories track by adsCategory.id"
+                    required>
+                <option value=""></option>
+            </select>
+        </div>
+        <div ng-show="editForm.adsCategory.$invalid">
+            <p class="help-block"
+               ng-show="editForm.adsCategory.$error.required">
+                This field is required.
+            </p>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                   ng-model="vm.ads.name"
+                   required/>
+            <div ng-show="editForm.name.$invalid">
+                <p class="help-block"
+                   ng-show="editForm.name.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_cols">Cols</label>
+            <input type="number" class="form-control" name="cols" id="field_cols"
+                   ng-model="vm.ads.cols"
+                   ng-change="vm.calculate()"
+                   required min="0"/>
+            <div ng-show="editForm.cols.$invalid">
+                <p class="help-block"
+                   ng-show="editForm.cols.$error.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                   ng-show="editForm.cols.$error.min" translate-value-min="0">
+                    This field should be more than 0.
+                </p>
+                <p class="help-block"
+                   ng-show="editForm.cols.$error.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_millimeter">Millimeter</label>
+            <input type="number" class="form-control" name="millimeter" id="field_millimeter"
+                   ng-model="vm.ads.millimeter"
+                   ng-change="vm.calculate()"
+                   required min="0"/>
+            <div ng-show="editForm.millimeter.$invalid">
+                <p class="help-block"
+                   ng-show="editForm.millimeter.$error.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                   ng-show="editForm.millimeter.$error.min" translate-value-min="0">
+                    This field should be more than 0.
+                </p>
+                <p class="help-block"
+                   ng-show="editForm.millimeter.$error.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_totalPrice">Total Price</label>
+            <input type="number" class="form-control" name="totalPrice" id="field_totalPrice"
+                   ng-model="vm.ads.totalPrice"
+                   required min="0"/>
+            <div ng-show="editForm.totalPrice.$invalid">
+                <p class="help-block"
+                   ng-show="editForm.totalPrice.$error.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                   ng-show="editForm.totalPrice.$error.min" translate-value-min="0">
+                    This field should be more than 0.
+                </p>
+                <p class="help-block"
+                   ng-show="editForm.totalPrice.$error.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_description">Description</label>
+            <input type="text" class="form-control" name="description" id="field_description"
+                   ng-model="vm.ads.description"
+            />
+        </div>
+
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

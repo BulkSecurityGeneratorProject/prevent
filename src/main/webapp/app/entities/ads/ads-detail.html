@@ -1,0 +1,43 @@
+
+<div>
+    <h2><span>Ads</span> {{vm.ads.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Name</span></dt>
+        <dd>
+            <span>{{vm.ads.name}}</span>
+        </dd>
+        <dt><span>Cols</span></dt>
+        <dd>
+            <span>{{vm.ads.cols}}</span>
+        </dd>
+        <dt><span>Millimeter</span></dt>
+        <dd>
+            <span>{{vm.ads.millimeter}}</span>
+        </dd>
+        <dt><span>Total Price</span></dt>
+        <dd>
+            <span>{{vm.ads.totalPrice}}</span>
+        </dd>
+        <dt><span>Description</span></dt>
+        <dd>
+            <span>{{vm.ads.description}}</span>
+        </dd>
+        <dt><span>Ads Category</span></dt>
+        <dd>
+            <a ui-sref="ads-category-detail({id:vm.ads.adsCategory.id})">{{vm.ads.adsCategory.name}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="ads-detail.edit({id:vm.ads.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm"> Edit</span>
+    </button>
+</div>
