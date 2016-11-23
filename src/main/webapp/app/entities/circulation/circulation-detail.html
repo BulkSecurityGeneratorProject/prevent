@@ -1,0 +1,31 @@
+
+<div>
+    <h2><span>Circulation</span> {{vm.circulation.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Name</span></dt>
+        <dd>
+            <span>{{vm.circulation.name}}</span>
+        </dd>
+        <dt><span>Price</span></dt>
+        <dd>
+            <span>{{vm.circulation.price}}</span>
+        </dd>
+        <dt><span>Description</span></dt>
+        <dd>
+            <span>{{vm.circulation.description}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="circulation-detail.edit({id:vm.circulation.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm"> Edit</span>
+    </button>
+</div>

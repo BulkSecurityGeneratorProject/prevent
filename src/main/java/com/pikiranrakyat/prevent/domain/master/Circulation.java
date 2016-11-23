@@ -12,13 +12,13 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 /**
- * A Merchandise.
+ * A Circulation.
  */
 @Entity
-@Table(name = "master_merchandise")
+@Table(name = "master_circulation")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@Document(indexName = "master_merchandise")
-public class Merchandise extends AbstractAuditingEntity implements Serializable {
+@Document(indexName = "master_circulation")
+public class Circulation extends AbstractAuditingEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -27,12 +27,12 @@ public class Merchandise extends AbstractAuditingEntity implements Serializable 
     private Long id;
 
     @NotNull
-    @Column(name = "name", nullable = false, unique = true)
+    @Column(name = "name", nullable = false)
     private String name;
 
     @NotNull
     @DecimalMin(value = "0")
-    @Column(name = "price", precision = 30, scale = 2, nullable = false)
+    @Column(name = "price", precision=30, scale=2, nullable = false)
     private BigDecimal price;
 
     @Column(name = "description")
@@ -50,7 +50,7 @@ public class Merchandise extends AbstractAuditingEntity implements Serializable 
         return name;
     }
 
-    public Merchandise name(String name) {
+    public Circulation name(String name) {
         this.name = name;
         return this;
     }
@@ -63,7 +63,7 @@ public class Merchandise extends AbstractAuditingEntity implements Serializable 
         return price;
     }
 
-    public Merchandise price(BigDecimal price) {
+    public Circulation price(BigDecimal price) {
         this.price = price;
         return this;
     }
@@ -76,7 +76,7 @@ public class Merchandise extends AbstractAuditingEntity implements Serializable 
         return description;
     }
 
-    public Merchandise description(String description) {
+    public Circulation description(String description) {
         this.description = description;
         return this;
     }
@@ -93,11 +93,11 @@ public class Merchandise extends AbstractAuditingEntity implements Serializable 
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Merchandise merchandise = (Merchandise) o;
-        if (merchandise.id == null || id == null) {
+        Circulation circulation = (Circulation) o;
+        if(circulation.id == null || id == null) {
             return false;
         }
-        return Objects.equals(id, merchandise.id);
+        return Objects.equals(id, circulation.id);
     }
 
     @Override
@@ -107,7 +107,7 @@ public class Merchandise extends AbstractAuditingEntity implements Serializable 
 
     @Override
     public String toString() {
-        return "Merchandise{" +
+        return "Circulation{" +
             "id=" + id +
             ", name='" + name + "'" +
             ", price='" + price + "'" +

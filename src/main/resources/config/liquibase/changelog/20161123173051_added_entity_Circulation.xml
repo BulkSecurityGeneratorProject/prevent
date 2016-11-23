@@ -14,35 +14,23 @@
     <property name="floatType" value="float" dbms="mysql, oracle"/>
 
     <!--
-        Added the entity Ads.
+        Added the entity Circulation.
     -->
-    <changeSet id="20161123171236-1" author="jhipster">
-        <createTable tableName="master_ads">
+    <changeSet id="20161123173051-1" author="jhipster">
+        <createTable tableName="master_circulation">
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="varchar(255)">
-                <constraints nullable="false" />
+                <constraints nullable="false" unique="true"/>
             </column>
 
-            <column name="cols" type="integer">
-                <constraints nullable="false" />
-            </column>
-
-            <column name="millimeter" type="integer">
-                <constraints nullable="false" />
-            </column>
-
-            <column name="total_price" type="decimal(30,2)">
-                <constraints nullable="false" />
+            <column name="price" type="decimal(30,2)">
+                <constraints nullable="false"/>
             </column>
 
             <column name="description" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="ads_category_id" type="bigint">
-                <constraints nullable="false" />
+                <constraints nullable="true"/>
             </column>
 
             <column name="created_by" type="varchar(50)">

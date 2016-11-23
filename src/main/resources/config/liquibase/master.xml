@@ -16,4 +16,5 @@
     <include file="classpath:config/liquibase/changelog/20161123165253_added_entity_AdsCategory.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20161123171236_added_entity_Ads.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20161123171236_added_entity_constraints_Ads.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20161123173051_added_entity_Circulation.xml" relativeToChangelogFile="false"/>
 </databaseChangeLog>
