@@ -1,7 +1,7 @@
 package com.pikiranrakyat.prevent.service.impl;
 
 import com.pikiranrakyat.prevent.service.EventTypeService;
-import com.pikiranrakyat.prevent.domain.master.EventType;
+import com.pikiranrakyat.prevent.domain.EventType;
 import com.pikiranrakyat.prevent.repository.EventTypeRepository;
 import com.pikiranrakyat.prevent.repository.search.EventTypeSearchRepository;
 import org.slf4j.Logger;

@@ -2,7 +2,7 @@ package com.pikiranrakyat.prevent.web.rest;
 
 import com.pikiranrakyat.prevent.PreventApp;
 
-import com.pikiranrakyat.prevent.domain.master.EventType;
+import com.pikiranrakyat.prevent.domain.EventType;
 import com.pikiranrakyat.prevent.repository.EventTypeRepository;
 import com.pikiranrakyat.prevent.service.EventTypeService;
 import com.pikiranrakyat.prevent.repository.search.EventTypeSearchRepository;

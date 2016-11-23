@@ -54,7 +54,7 @@
         timeToLiveSeconds="3600">
     </cache>
 
-    <cache name="com.pikiranrakyat.prevent.domain.master.EventType"
+    <cache name="com.pikiranrakyat.prevent.domain.EventType"
         timeToLiveSeconds="3600">
     </cache>
 

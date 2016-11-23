@@ -1,6 +1,6 @@
 package com.pikiranrakyat.prevent.service;
 
-import com.pikiranrakyat.prevent.domain.master.EventType;
+import com.pikiranrakyat.prevent.domain.EventType;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
