@@ -14,29 +14,53 @@
     <property name="floatType" value="float" dbms="mysql, oracle"/>
 
     <!--
-        Added the entity Merchandise.
+        Added the entity Events.
     -->
-    <changeSet id="20161123164002-1" author="jhipster">
-        <createTable tableName="master_merchandise">
+    <changeSet id="20161124185556-1" author="jhipster">
+        <createTable tableName="events">
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-
-            <column name="code" type="varchar(50)">
-                <constraints nullable="false" unique="true"/>
-            </column>
-
-            <column name="name" type="varchar(255)">
+            <column name="title" type="varchar(50)">
                 <constraints nullable="false"/>
             </column>
 
-            <column name="price" type="decimal(30,2)">
+            <column name="description" type="varchar(300)">
                 <constraints nullable="false"/>
             </column>
 
-            <column name="description" type="varchar(255)">
+            <column name="starts" type="timestamp" defaultValueDate="${now}">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="ends" type="timestamp" defaultValueDate="${now}">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="subtotal" type="decimal(30,2)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="accept" type="bit">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="note" type="varchar(255)">
                 <constraints nullable="true"/>
             </column>
+
+            <column name="is_order" type="bit">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="event_type_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="locations_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+
 
             <column name="created_by" type="varchar(50)">
                 <constraints nullable="false"/>
@@ -53,11 +77,6 @@
 
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
-
-        <loadData encoding="UTF-8"
-                  file="config/liquibase/merchandise.csv"
-                  separator=";"
-                  tableName="master_merchandise"/>
 
     </changeSet>
 </databaseChangeLog>

@@ -82,5 +82,9 @@
         timeToLiveSeconds="3600">
     </cache>
 
+    <cache name="com.pikiranrakyat.prevent.domain.Events"
+        timeToLiveSeconds="3600">
+    </cache>
+
     <!-- jhipster-needle-ehcache-add-entry -->
 </ehcache>

@@ -1,0 +1,4 @@
+id;code;name;price;description;created_by;last_modified_by
+1;MM1;Merchandise 1;10000;;System;System;system@localhost;true;en;system;system
+2;MM2;Merchandise 2;10000;;System;System;system@localhost;true;en;system;system
+3;MM3;Merchandise 3;10000;;System;System;system@localhost;true;en;system;system

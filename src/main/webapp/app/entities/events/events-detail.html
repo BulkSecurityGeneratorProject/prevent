@@ -1,0 +1,59 @@
+
+<div>
+    <h2><span>Events</span> {{vm.events.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Title</span></dt>
+        <dd>
+            <span>{{vm.events.title}}</span>
+        </dd>
+        <dt><span>Description</span></dt>
+        <dd>
+            <span>{{vm.events.description}}</span>
+        </dd>
+        <dt><span>Starts</span></dt>
+        <dd>
+            <span>{{vm.events.starts | date:'medium'}}</span>
+        </dd>
+        <dt><span>Ends</span></dt>
+        <dd>
+            <span>{{vm.events.ends | date:'medium'}}</span>
+        </dd>
+        <dt><span>Subtotal</span></dt>
+        <dd>
+            <span>{{vm.events.subtotal}}</span>
+        </dd>
+        <dt><span>Accept</span></dt>
+        <dd>
+            <span>{{vm.events.accept}}</span>
+        </dd>
+        <dt><span>Note</span></dt>
+        <dd>
+            <span>{{vm.events.note}}</span>
+        </dd>
+        <dt><span>Is Order</span></dt>
+        <dd>
+            <span>{{vm.events.isOrder}}</span>
+        </dd>
+        <dt><span>Event Type</span></dt>
+        <dd>
+            <a ui-sref="event-type-detail({id:vm.events.eventType.id})">{{vm.events.eventType.name}}</a>
+        </dd>
+        <dt><span>Locations</span></dt>
+        <dd>
+            <a ui-sref="locations-detail({id:vm.events.locations.id})">{{vm.events.locations.name}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="events-detail.edit({id:vm.events.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm"> Edit</span>
+    </button>
+</div>
