@@ -6,8 +6,11 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 /**
@@ -34,6 +37,16 @@ public class OrderMerchandise extends AbstractAuditingEntity implements Serializ
 
     @Column(name = "note")
     private String note;
+
+    @NotNull
+    @Min(value = 0)
+    @Column(name = "qty", nullable = false)
+    private Integer qty;
+
+    @NotNull
+    @DecimalMin(value = "0")
+    @Column(name = "total", precision = 30, scale = 2, nullable = false)
+    private BigDecimal total;
 
     @ManyToOne
     @NotNull
@@ -90,6 +103,32 @@ public class OrderMerchandise extends AbstractAuditingEntity implements Serializ
         this.note = note;
     }
 
+    public Integer getQty() {
+        return qty;
+    }
+
+    public OrderMerchandise qty(Integer qty) {
+        this.qty = qty;
+        return this;
+    }
+
+    public void setQty(Integer qty) {
+        this.qty = qty;
+    }
+
+    public BigDecimal getTotal() {
+        return total;
+    }
+
+    public OrderMerchandise total(BigDecimal total) {
+        this.total = total;
+        return this;
+    }
+
+    public void setTotal(BigDecimal total) {
+        this.total = total;
+    }
+
     public Merchandise getMerchandise() {
         return merchandise;
     }
@@ -125,7 +164,7 @@ public class OrderMerchandise extends AbstractAuditingEntity implements Serializ
             return false;
         }
         OrderMerchandise orderMerchandise = (OrderMerchandise) o;
-        if(orderMerchandise.id == null || id == null) {
+        if (orderMerchandise.id == null || id == null) {
             return false;
         }
         return Objects.equals(id, orderMerchandise.id);
@@ -143,6 +182,8 @@ public class OrderMerchandise extends AbstractAuditingEntity implements Serializ
             ", orderNumber='" + orderNumber + "'" +
             ", accept='" + accept + "'" +
             ", note='" + note + "'" +
+            ", qty='" + qty + "'" +
+            ", total='" + total + "'" +
             '}';
     }
 }

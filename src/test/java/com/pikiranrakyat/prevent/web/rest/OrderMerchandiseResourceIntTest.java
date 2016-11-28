@@ -24,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import java.math.BigDecimal;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -48,6 +49,12 @@ public class OrderMerchandiseResourceIntTest {
 
     private static final String DEFAULT_NOTE = "AAAAA";
     private static final String UPDATED_NOTE = "BBBBB";
+
+    private static final Integer DEFAULT_QTY = 0;
+    private static final Integer UPDATED_QTY = 1;
+
+    private static final BigDecimal DEFAULT_TOTAL = new BigDecimal(0);
+    private static final BigDecimal UPDATED_TOTAL = new BigDecimal(1);
 
     @Inject
     private OrderMerchandiseRepository orderMerchandiseRepository;
@@ -91,7 +98,9 @@ public class OrderMerchandiseResourceIntTest {
         OrderMerchandise orderMerchandise = new OrderMerchandise()
                 .orderNumber(DEFAULT_ORDER_NUMBER)
                 .accept(DEFAULT_ACCEPT)
-                .note(DEFAULT_NOTE);
+                .note(DEFAULT_NOTE)
+                .qty(DEFAULT_QTY)
+                .total(DEFAULT_TOTAL);
         // Add required entity
         Merchandise merchandise = MerchandiseResourceIntTest.createEntity(em);
         em.persist(merchandise);
@@ -130,6 +139,8 @@ public class OrderMerchandiseResourceIntTest {
         assertThat(testOrderMerchandise.getOrderNumber()).isEqualTo(DEFAULT_ORDER_NUMBER);
         assertThat(testOrderMerchandise.isAccept()).isEqualTo(DEFAULT_ACCEPT);
         assertThat(testOrderMerchandise.getNote()).isEqualTo(DEFAULT_NOTE);
+        assertThat(testOrderMerchandise.getQty()).isEqualTo(DEFAULT_QTY);
+        assertThat(testOrderMerchandise.getTotal()).isEqualTo(DEFAULT_TOTAL);
 
         // Validate the OrderMerchandise in ElasticSearch
         OrderMerchandise orderMerchandiseEs = orderMerchandiseSearchRepository.findOne(testOrderMerchandise.getId());
@@ -174,6 +185,42 @@ public class OrderMerchandiseResourceIntTest {
 
     @Test
     @Transactional
+    public void checkQtyIsRequired() throws Exception {
+        int databaseSizeBeforeTest = orderMerchandiseRepository.findAll().size();
+        // set the field null
+        orderMerchandise.setQty(null);
+
+        // Create the OrderMerchandise, which fails.
+
+        restOrderMerchandiseMockMvc.perform(post("/api/order-merchandises")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(orderMerchandise)))
+                .andExpect(status().isBadRequest());
+
+        List<OrderMerchandise> orderMerchandises = orderMerchandiseRepository.findAll();
+        assertThat(orderMerchandises).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkTotalIsRequired() throws Exception {
+        int databaseSizeBeforeTest = orderMerchandiseRepository.findAll().size();
+        // set the field null
+        orderMerchandise.setTotal(null);
+
+        // Create the OrderMerchandise, which fails.
+
+        restOrderMerchandiseMockMvc.perform(post("/api/order-merchandises")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(orderMerchandise)))
+                .andExpect(status().isBadRequest());
+
+        List<OrderMerchandise> orderMerchandises = orderMerchandiseRepository.findAll();
+        assertThat(orderMerchandises).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllOrderMerchandises() throws Exception {
         // Initialize the database
         orderMerchandiseRepository.saveAndFlush(orderMerchandise);
@@ -185,7 +232,9 @@ public class OrderMerchandiseResourceIntTest {
                 .andExpect(jsonPath("$.[*].id").value(hasItem(orderMerchandise.getId().intValue())))
                 .andExpect(jsonPath("$.[*].orderNumber").value(hasItem(DEFAULT_ORDER_NUMBER.toString())))
                 .andExpect(jsonPath("$.[*].accept").value(hasItem(DEFAULT_ACCEPT.booleanValue())))
-                .andExpect(jsonPath("$.[*].note").value(hasItem(DEFAULT_NOTE.toString())));
+                .andExpect(jsonPath("$.[*].note").value(hasItem(DEFAULT_NOTE.toString())))
+                .andExpect(jsonPath("$.[*].qty").value(hasItem(DEFAULT_QTY)))
+                .andExpect(jsonPath("$.[*].total").value(hasItem(DEFAULT_TOTAL.intValue())));
     }
 
     @Test
@@ -201,7 +250,9 @@ public class OrderMerchandiseResourceIntTest {
             .andExpect(jsonPath("$.id").value(orderMerchandise.getId().intValue()))
             .andExpect(jsonPath("$.orderNumber").value(DEFAULT_ORDER_NUMBER.toString()))
             .andExpect(jsonPath("$.accept").value(DEFAULT_ACCEPT.booleanValue()))
-            .andExpect(jsonPath("$.note").value(DEFAULT_NOTE.toString()));
+            .andExpect(jsonPath("$.note").value(DEFAULT_NOTE.toString()))
+            .andExpect(jsonPath("$.qty").value(DEFAULT_QTY))
+            .andExpect(jsonPath("$.total").value(DEFAULT_TOTAL.intValue()));
     }
 
     @Test
@@ -225,7 +276,9 @@ public class OrderMerchandiseResourceIntTest {
         updatedOrderMerchandise
                 .orderNumber(UPDATED_ORDER_NUMBER)
                 .accept(UPDATED_ACCEPT)
-                .note(UPDATED_NOTE);
+                .note(UPDATED_NOTE)
+                .qty(UPDATED_QTY)
+                .total(UPDATED_TOTAL);
 
         restOrderMerchandiseMockMvc.perform(put("/api/order-merchandises")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -239,6 +292,8 @@ public class OrderMerchandiseResourceIntTest {
         assertThat(testOrderMerchandise.getOrderNumber()).isEqualTo(UPDATED_ORDER_NUMBER);
         assertThat(testOrderMerchandise.isAccept()).isEqualTo(UPDATED_ACCEPT);
         assertThat(testOrderMerchandise.getNote()).isEqualTo(UPDATED_NOTE);
+        assertThat(testOrderMerchandise.getQty()).isEqualTo(UPDATED_QTY);
+        assertThat(testOrderMerchandise.getTotal()).isEqualTo(UPDATED_TOTAL);
 
         // Validate the OrderMerchandise in ElasticSearch
         OrderMerchandise orderMerchandiseEs = orderMerchandiseSearchRepository.findOne(testOrderMerchandise.getId());
@@ -280,6 +335,8 @@ public class OrderMerchandiseResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(orderMerchandise.getId().intValue())))
             .andExpect(jsonPath("$.[*].orderNumber").value(hasItem(DEFAULT_ORDER_NUMBER.toString())))
             .andExpect(jsonPath("$.[*].accept").value(hasItem(DEFAULT_ACCEPT.booleanValue())))
-            .andExpect(jsonPath("$.[*].note").value(hasItem(DEFAULT_NOTE.toString())));
+            .andExpect(jsonPath("$.[*].note").value(hasItem(DEFAULT_NOTE.toString())))
+            .andExpect(jsonPath("$.[*].qty").value(hasItem(DEFAULT_QTY)))
+            .andExpect(jsonPath("$.[*].total").value(hasItem(DEFAULT_TOTAL.intValue())));
     }
 }

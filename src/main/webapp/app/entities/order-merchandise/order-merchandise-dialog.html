@@ -1,3 +1,4 @@
+
 <form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
 
     <div class="modal-header">
@@ -8,66 +9,102 @@
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
         <!--<div class="form-group" ng-show="vm.orderMerchandise.id">-->
-        <!--<label for="id">ID</label>-->
-        <!--<input type="text" class="form-control" id="id" name="id"-->
-        <!--ng-model="vm.orderMerchandise.id" readonly />-->
+            <!--<label for="id">ID</label>-->
+            <!--<input type="text" class="form-control" id="id" name="id"-->
+                    <!--ng-model="vm.orderMerchandise.id" readonly />-->
         <!--</div>-->
         <!--<div class="form-group">-->
-        <!--<label class="control-label" for="field_orderNumber">Order Number</label>-->
-        <!--<input type="text" class="form-control" name="orderNumber" id="field_orderNumber"-->
-        <!--ng-model="vm.orderMerchandise.orderNumber"-->
-        <!--required />-->
-        <!--<div ng-show="editForm.orderNumber.$invalid">-->
-        <!--<p class="help-block"-->
-        <!--ng-show="editForm.orderNumber.$error.required">-->
-        <!--This field is required.-->
-        <!--</p>-->
-        <!--</div>-->
+            <!--<label class="control-label" for="field_orderNumber">Order Number</label>-->
+            <!--<input type="text" class="form-control" name="orderNumber" id="field_orderNumber"-->
+                    <!--ng-model="vm.orderMerchandise.orderNumber"-->
+                    <!--required />-->
+            <!--<div ng-show="editForm.orderNumber.$invalid">-->
+                <!--<p class="help-block"-->
+                    <!--ng-show="editForm.orderNumber.$error.required">-->
+                    <!--This field is required.-->
+                <!--</p>-->
+            <!--</div>-->
         <!--</div>-->
         <!--<div class="form-group">-->
-        <!--<label class="control-label" for="field_accept">Accept</label>-->
-        <!--<input type="checkbox" class="form-control" name="accept" id="field_accept"-->
-        <!--ng-model="vm.orderMerchandise.accept"-->
-        <!--/>-->
-        <!--<div ng-show="editForm.accept.$invalid">-->
-        <!--<p class="help-block"-->
-        <!--ng-show="editForm.accept.$error.required">-->
-        <!--This field is required.-->
-        <!--</p>-->
-        <!--</div>-->
+            <!--<label class="control-label" for="field_accept">Accept</label>-->
+            <!--<input type="checkbox" class="form-control" name="accept" id="field_accept"-->
+                    <!--ng-model="vm.orderMerchandise.accept"-->
+                     <!--/>-->
+            <!--<div ng-show="editForm.accept.$invalid">-->
+                <!--<p class="help-block"-->
+                    <!--ng-show="editForm.accept.$error.required">-->
+                    <!--This field is required.-->
+                <!--</p>-->
+            <!--</div>-->
         <!--</div>-->
         <div class="form-group">
             <label class="control-label" for="field_note">Note</label>
             <input type="text" class="form-control" name="note" id="field_note"
-                   ng-model="vm.orderMerchandise.note"
-            />
+                    ng-model="vm.orderMerchandise.note"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_qty">Qty</label>
+            <input type="number" class="form-control" name="qty" id="field_qty"
+                    ng-model="vm.orderMerchandise.qty"
+                    required min="0" />
+            <div ng-show="editForm.qty.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.qty.$error.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.qty.$error.min" translate-value-min="0">
+                    This field should be more than 0.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.qty.$error.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_total">Total</label>
+            <input type="number" class="form-control" name="total" id="field_total"
+                    ng-model="vm.orderMerchandise.total"
+                    required min="0" />
+            <div ng-show="editForm.total.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.total.$error.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.total.$error.min" translate-value-min="0">
+                    This field should be more than 0.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.total.$error.number">
+                    This field should be a number.
+                </p>
+            </div>
         </div>
 
         <div class="form-group">
             <label for="field_merchandise">Merchandise</label>
-            <select class="form-control" id="field_merchandise" name="merchandise"
-                    ng-model="vm.orderMerchandise.merchandise"
-                    ng-options="merchandise as merchandise.name for merchandise in vm.merchandises track by merchandise.id"
-                    required>
+            <select class="form-control" id="field_merchandise" name="merchandise" ng-model="vm.orderMerchandise.merchandise" ng-options="merchandise as merchandise.name for merchandise in vm.merchandises track by merchandise.id" required>
                 <option value=""></option>
             </select>
         </div>
         <div ng-show="editForm.merchandise.$invalid">
             <p class="help-block"
-               ng-show="editForm.merchandise.$error.required">
+                ng-show="editForm.merchandise.$error.required">
                 This field is required.
             </p>
         </div>
         <div class="form-group">
             <label for="field_events">Events</label>
-            <select class="form-control" id="field_events" name="events" ng-model="vm.orderMerchandise.events"
-                    ng-options="events as events.title for events in vm.events track by events.id" required>
+            <select class="form-control" id="field_events" name="events" ng-model="vm.orderMerchandise.events" ng-options="events as events.title for events in vm.events track by events.id" required>
                 <option value=""></option>
             </select>
         </div>
         <div ng-show="editForm.events.$invalid">
             <p class="help-block"
-               ng-show="editForm.events.$error.required">
+                ng-show="editForm.events.$error.required">
                 This field is required.
             </p>
         </div>

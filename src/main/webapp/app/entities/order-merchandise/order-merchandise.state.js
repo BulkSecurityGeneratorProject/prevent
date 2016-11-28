@@ -14,7 +14,7 @@
             url: '/order-merchandise?page&sort&search',
             data: {
                 authorities: ['ROLE_ADMIN'],
-                pageTitle: 'Order Marcomm'
+                pageTitle: 'OrderMerchandises'
             },
             views: {
                 'main-content@backend': {
@@ -51,7 +51,7 @@
             url: '/order-merchandise/{id}',
             data: {
                 authorities: ['ROLE_ADMIN'],
-                pageTitle: 'Order Marcomm'
+                pageTitle: 'OrderMerchandise'
             },
             views: {
                 'main-content@backend': {
@@ -118,6 +118,8 @@
                                 orderNumber: null,
                                 accept: false,
                                 note: null,
+                                qty: null,
+                                total: null,
                                 id: null
                             };
                         }

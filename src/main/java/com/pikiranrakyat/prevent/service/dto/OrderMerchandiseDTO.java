@@ -4,6 +4,8 @@ import com.pikiranrakyat.prevent.domain.Events;
 import com.pikiranrakyat.prevent.domain.OrderMerchandise;
 import com.pikiranrakyat.prevent.domain.master.Merchandise;
 
+import java.math.BigDecimal;
+
 /**
  * A DTO representing a user, with his authorities.
  */
@@ -20,22 +22,26 @@ public class OrderMerchandiseDTO {
 
     private Events events;
 
+    private Integer qty;
+
+    private BigDecimal total;
+
     public OrderMerchandiseDTO() {
     }
 
     public OrderMerchandiseDTO(OrderMerchandise o) {
-        this( o.getOrderNumber(),o.isAccept(),o.getNote(),o.getMerchandise(),o.getEvents());
+        this(o.getOrderNumber(), o.isAccept(), o.getNote(), o.getMerchandise(), o.getEvents(), o.getQty(), o.getTotal());
     }
 
-    public OrderMerchandiseDTO( String orderNumber, Boolean accept, String note, Merchandise merchandise, Events events) {
+    public OrderMerchandiseDTO(String orderNumber, Boolean accept, String note, Merchandise merchandise, Events events, Integer qty, BigDecimal total) {
         this.orderNumber = orderNumber;
         this.accept = accept;
         this.note = note;
         this.merchandise = merchandise;
         this.events = events;
+        this.qty = qty;
+        this.total = total;
     }
-
-
 
     public String getOrderNumber() {
         return orderNumber;
@@ -77,14 +83,32 @@ public class OrderMerchandiseDTO {
         this.events = events;
     }
 
+    public Integer getQty() {
+        return qty;
+    }
+
+    public void setQty(Integer qty) {
+        this.qty = qty;
+    }
+
+    public BigDecimal getTotal() {
+        return total;
+    }
+
+    public void setTotal(BigDecimal total) {
+        this.total = total;
+    }
+
     @Override
     public String toString() {
         return "OrderMerchandiseDTO{" +
-            ", orderNumber='" + orderNumber + '\'' +
+            "orderNumber='" + orderNumber + '\'' +
             ", accept=" + accept +
             ", note='" + note + '\'' +
             ", merchandise=" + merchandise +
             ", events=" + events +
+            ", qty=" + qty +
+            ", total=" + total +
             '}';
     }
 }

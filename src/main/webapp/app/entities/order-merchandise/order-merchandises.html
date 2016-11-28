@@ -46,6 +46,8 @@
                     <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="orderNumber"><span>Order Number</span> <span
                         class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="qty"><span>QTY</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="total"><span>Total</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="accept"><span>Accept</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="note"><span>Note</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="merchandise.name"><span>Merchandise</span> <span
@@ -66,6 +68,8 @@
                 <tr ng-repeat="orderMerchandise in vm.orderMerchandises track by orderMerchandise.id">
                     <td><a ui-sref="order-merchandise-detail({id:orderMerchandise.id})">{{orderMerchandise.id}}</a></td>
                     <td>{{orderMerchandise.orderNumber}}</td>
+                    <td>{{orderMerchandise.qty}}</td>
+                    <td>{{orderMerchandise.total}}</td>
                     <td>{{orderMerchandise.accept}}</td>
                     <td>{{orderMerchandise.note}}</td>
                     <td>

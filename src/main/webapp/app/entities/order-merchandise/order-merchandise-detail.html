@@ -16,6 +16,14 @@
         <dd>
             <span>{{vm.orderMerchandise.note}}</span>
         </dd>
+        <dt><span>Qty</span></dt>
+        <dd>
+            <span>{{vm.orderMerchandise.qty}}</span>
+        </dd>
+        <dt><span>Total</span></dt>
+        <dd>
+            <span>{{vm.orderMerchandise.total}}</span>
+        </dd>
         <dt><span>Merchandise</span></dt>
         <dd>
             <a ui-sref="merchandise-detail({id:vm.orderMerchandise.merchandise.id})">{{vm.orderMerchandise.merchandise.name}}</a>

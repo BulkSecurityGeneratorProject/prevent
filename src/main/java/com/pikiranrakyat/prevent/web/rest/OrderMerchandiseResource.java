@@ -143,7 +143,7 @@ public class OrderMerchandiseResource {
      * SEARCH  /_search/order-merchandises?query=:query : search for the orderMerchandise corresponding
      * to the query.
      *
-     * @param query    the query of the orderMerchandise search
+     * @param query the query of the orderMerchandise search
      * @param pageable the pagination information
      * @return the result of the search
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
