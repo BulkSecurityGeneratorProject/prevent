@@ -1,15 +1,15 @@
-(function() {
+(function () {
     'use strict';
 
     angular
         .module('preventApp')
         .controller('OrderMerchandiseController', OrderMerchandiseController);
 
-    OrderMerchandiseController.$inject = ['$scope', '$state', 'OrderMerchandise', 'OrderMerchandiseSearch', 'ParseLinks', 'AlertService', 'pagingParams', 'paginationConstants'];
+    OrderMerchandiseController.$inject = ['$scope', '$state', 'OrderMerchandise', 'OrderMerchandiseSearch', 'ParseLinks', 'AlertService', 'pagingParams', 'paginationConstants', 'ManageOrder', 'SweetAlert'];
 
-    function OrderMerchandiseController ($scope, $state, OrderMerchandise, OrderMerchandiseSearch, ParseLinks, AlertService, pagingParams, paginationConstants) {
+    function OrderMerchandiseController($scope, $state, OrderMerchandise, OrderMerchandiseSearch, ParseLinks, AlertService, pagingParams, paginationConstants, ManageOrder, SweetAlert) {
         var vm = this;
-        
+
         vm.loadPage = loadPage;
         vm.predicate = pagingParams.predicate;
         vm.reverse = pagingParams.ascending;
@@ -20,10 +20,12 @@
         vm.loadAll = loadAll;
         vm.searchQuery = pagingParams.search;
         vm.currentSearch = pagingParams.search;
+        vm.agreeOrder = agreeOrder;
+        vm.disagreeOrder = disagreeOrder;
 
         loadAll();
 
-        function loadAll () {
+        function loadAll() {
             if (pagingParams.search) {
                 OrderMerchandiseSearch.query({
                     query: pagingParams.search,
@@ -45,6 +47,7 @@
                 }
                 return result;
             }
+
             function onSuccess(data, headers) {
                 vm.links = ParseLinks.parse(headers('link'));
                 vm.totalItems = headers('X-Total-Count');
@@ -52,17 +55,18 @@
                 vm.orderMerchandises = data;
                 vm.page = pagingParams.page;
             }
+
             function onError(error) {
                 AlertService.error(error.data.message);
             }
         }
 
-        function loadPage (page) {
+        function loadPage(page) {
             vm.page = page;
             vm.transition();
         }
 
-        function transition () {
+        function transition() {
             $state.transitionTo($state.$current, {
                 page: vm.page,
                 sort: vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc'),
@@ -70,8 +74,8 @@
             });
         }
 
-        function search (searchQuery) {
-            if (!searchQuery){
+        function search(searchQuery) {
+            if (!searchQuery) {
                 return vm.clear();
             }
             vm.links = null;
@@ -82,13 +86,79 @@
             vm.transition();
         }
 
-        function clear () {
+        function clear() {
             vm.links = null;
             vm.page = 1;
             vm.predicate = 'id';
             vm.reverse = true;
             vm.currentSearch = null;
             vm.transition();
+        }
+
+        /**
+         * Agree merchandise
+         *
+         * @param merchandise
+         */
+        function agreeOrder(merchandise) {
+            SweetAlert.swal({
+                    title: "Agree order?",
+                    text: "Are you sure agree this order",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55", confirmButtonText: "Yes",
+                    cancelButtonText: "No",
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                },
+                function (isConfirm) {
+                    if (isConfirm) {
+                        ManageOrder.agreeOrderMerchandise(merchandise.id)
+                            .then(function (response) {
+                                loadAll();
+                                SweetAlert.swal("Order Marcomm", "Order is agree", "success");
+                            }, function (error) {
+                                SweetAlert.swal(error.data.error, error.data.message, "error");
+                            })
+                    } else {
+                        SweetAlert.swal("Order Merchandise", "Order cancel agreement", "error");
+                    }
+                });
+
+
+        }
+
+        /**
+         * Disagree merchandise
+         *
+         * @param merchandise
+         */
+        function disagreeOrder(merchandise) {
+            SweetAlert.swal({
+                    title: "Disagree order?",
+                    text: "Are you sure disagree this order",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55", confirmButtonText: "Yes",
+                    cancelButtonText: "No",
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                },
+                function (isConfirm) {
+                    if (isConfirm) {
+                        ManageOrder.disagreeOrderMerchandise(merchandise.id)
+                            .then(function (response) {
+                                loadAll();
+                                SweetAlert.swal("Order Marcomm", "Order disagree", "success");
+                            }, function (error) {
+                                SweetAlert.swal(error.data.error, error.data.message, "error");
+                            })
+                    } else {
+                        SweetAlert.swal("Order Merchandise", "Order cancel agreement", "error");
+                    }
+                });
+
+
         }
     }
 })();

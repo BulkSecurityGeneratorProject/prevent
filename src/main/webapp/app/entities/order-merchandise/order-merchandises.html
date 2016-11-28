@@ -1,21 +1,21 @@
 <div>
-    <h2>Order Merchandises</h2>
     <jhi-alert></jhi-alert>
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="order-merchandise.new" >
+                <button class="btn btn-primary" ui-sref="order-merchandise.new">
                     <span class="glyphicon glyphicon-plus"></span>
-                    <span class="hidden-xs" >
-                        Create new Order Merchandise
+                    <span class="hidden-xs">
+                        Create new Order Marcomm
                     </span>
                 </button>
             </div>
             <div class="col-xs-8 no-padding-right">
                 <form name="searchForm" class="form-inline">
-                    <div class="input-group pull-right" >
-                        <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="Query">
-                        <span  class="input-group-btn width-min" >
+                    <div class="input-group pull-right">
+                        <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery"
+                               placeholder="Query">
+                        <span class="input-group-btn width-min">
                             <button class="btn btn-info" ng-click="vm.search(vm.searchQuery)">
                                 <span class="glyphicon glyphicon-search"></span>
                             </button>
@@ -31,20 +31,38 @@
         </div>
     </div>
     <br/>
-    <div class="table-responsive">
-        <table class="jh-table table table-striped">
-            <thead>
+
+</div>
+<div class="box">
+    <div class="box-header with-border">
+        <h3 class="box-title">Order Marcomm</h3>
+
+    </div>
+    <div class="box-body">
+        <div class="table-responsive">
+            <table class="jh-table table table-striped">
+                <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="orderNumber"><span>Order Number</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="orderNumber"><span>Order Number</span> <span
+                        class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="accept"><span>Accept</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="note"><span>Note</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="merchandise.name"><span>Merchandise</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="events.title"><span>Events</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="merchandise.name"><span>Merchandise</span> <span
+                        class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="events.title"><span>Events</span> <span class="glyphicon glyphicon-sort"></span>
+                    </th>
+                    <th jh-sort-by="createdDate"><span>Created Date</span> <span
+                        class="glyphicon glyphicon-sort"></span>
+                    </th>
+                    <th jh-sort-by="lastModifiedBy"><span>Last Modified By</span> <span
+                        class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedDate"><span>Last Modified Date</span> <span
+                        class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
-            </thead>
-            <tbody>
+                </thead>
+                <tbody>
                 <tr ng-repeat="orderMerchandise in vm.orderMerchandises track by orderMerchandise.id">
                     <td><a ui-sref="order-merchandise-detail({id:orderMerchandise.id})">{{orderMerchandise.id}}</a></td>
                     <td>{{orderMerchandise.orderNumber}}</td>
@@ -56,21 +74,37 @@
                     <td>
                         <a ui-sref="events-detail({id:orderMerchandise.events.id})">{{orderMerchandise.events.title}}</a>
                     </td>
+                    <td>{{orderMerchandise.createdDate | date:'dd/MM/yy HH:mm'}}</td>
+                    <td>{{orderMerchandise.lastModifiedBy}}</td>
+                    <td>{{orderMerchandise.lastModifiedDate | date:'dd/MM/yy HH:mm'}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
-                            <button type="submit"
-                                    ui-sref="order-merchandise-detail({id:orderMerchandise.id})"
+                            <button type="button"
+                                    ng-disabled="orderMerchandise.events.accept == true"
+                                    ng-show="!orderMerchandise.accept"
+                                    ng-click="vm.agreeOrder(orderMerchandise)"
                                     class="btn btn-info btn-sm">
-                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <i class="fa fa-check fa-fw"></i>
                                 <span class="hidden-xs hidden-sm"></span>
                             </button>
-                            <button type="submit"
+
+                            <button type="button"
+                                    ng-disabled="orderMerchandise.events.accept == true"
+                                    ng-show="orderMerchandise.accept"
+                                    ng-click="vm.disagreeOrder(orderMerchandise)"
+                                    class="btn btn-danger btn-sm">
+                                <i class="fa fa-minus fa-fw"></i>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="button"
+                                    ng-disabled="orderMerchandise.events.accept == true"
                                     ui-sref="order-merchandise.edit({id:orderMerchandise.id})"
                                     class="btn btn-primary btn-sm">
                                 <span class="glyphicon glyphicon-pencil"></span>
                                 <span class="hidden-xs hidden-sm"></span>
                             </button>
-                            <button type="submit"
+                            <button type="button"
+                                    ng-disabled="orderMerchandise.events.accept == true"
                                     ui-sref="order-merchandise.delete({id:orderMerchandise.id})"
                                     class="btn btn-danger btn-sm">
                                 <span class="glyphicon glyphicon-remove-circle"></span>
@@ -79,11 +113,19 @@
                         </div>
                     </td>
                 </tr>
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
+
     </div>
-    <div class="text-center">
-        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
-        <uib-pagination class="pagination-sm" total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    <!-- /.box-body -->
+    <div class="box-footer">
+        <div class="text-center">
+            <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+            <uib-pagination class="pagination-sm" total-items="vm.totalItems" ng-model="vm.page"
+                            ng-change="vm.transition()"></uib-pagination>
+        </div>
     </div>
+    <!-- /.box-footer-->
 </div>
+

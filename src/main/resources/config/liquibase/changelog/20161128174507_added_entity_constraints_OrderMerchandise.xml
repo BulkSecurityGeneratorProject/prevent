@@ -17,6 +17,7 @@
         <addForeignKeyConstraint baseColumnNames="events_id"
                                  baseTableName="order_merchandise"
                                  constraintName="fk_order_merchandise_events_id"
+                                 onUpdate="CASCADE"
                                  referencedColumnNames="id"
                                  referencedTableName="events"/>
 

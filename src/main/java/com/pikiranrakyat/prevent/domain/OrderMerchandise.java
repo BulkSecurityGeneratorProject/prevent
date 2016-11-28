@@ -25,7 +25,6 @@ public class OrderMerchandise extends AbstractAuditingEntity implements Serializ
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotNull
     @Column(name = "order_number", nullable = false)
     private String orderNumber;
 

@@ -29,6 +29,7 @@ public final class HeaderUtil {
         return createAlert(entityName + " telah diupdate dengan identifier " + param, param);
     }
 
+
     public static HttpHeaders createEntityDeletionAlert(String entityName, String param) {
         return createAlert("A " + entityName + " is deleted with identifier " + param, param);
     }
