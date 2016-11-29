@@ -3,7 +3,7 @@ package com.pikiranrakyat.prevent.web.rest;
 import com.pikiranrakyat.prevent.PreventApp;
 import com.pikiranrakyat.prevent.domain.Events;
 import com.pikiranrakyat.prevent.domain.OrderMerchandise;
-import com.pikiranrakyat.prevent.domain.master.Merchandise;
+import com.pikiranrakyat.prevent.domain.Merchandise;
 import com.pikiranrakyat.prevent.repository.OrderMerchandiseRepository;
 import com.pikiranrakyat.prevent.repository.search.OrderMerchandiseSearchRepository;
 import com.pikiranrakyat.prevent.service.OrderMerchandiseService;

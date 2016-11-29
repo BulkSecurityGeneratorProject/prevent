@@ -1,6 +1,5 @@
-package com.pikiranrakyat.prevent.domain.master;
+package com.pikiranrakyat.prevent.domain;
 
-import com.pikiranrakyat.prevent.domain.AbstractAuditingEntity;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
@@ -12,20 +11,19 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 /**
- * A Circulation.
+ * A Redaction.
  */
 @Entity
-@Table(name = "master_circulation")
+@Table(name = "master_redaction")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@Document(indexName = "master_circulation")
-public class Circulation extends AbstractAuditingEntity implements Serializable {
+@Document(indexName = "master_redaction")
+public class Redaction extends AbstractAuditingEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
 
     @NotNull
     @Column(name = "code", nullable = false, unique = true)
@@ -36,9 +34,7 @@ public class Circulation extends AbstractAuditingEntity implements Serializable 
     @Column(name = "name", nullable = false)
     private String name;
 
-    @NotNull
-    @DecimalMin(value = "0")
-    @Column(name = "price", precision = 30, scale = 2, nullable = false)
+    @Column(name = "price", precision = 10, scale = 2)
     private BigDecimal price;
 
     @Column(name = "description")
@@ -52,11 +48,13 @@ public class Circulation extends AbstractAuditingEntity implements Serializable 
         this.id = id;
     }
 
+
     public String getCode() {
         return code;
     }
 
-    public Circulation code(String code) {
+
+    public Redaction code(String code) {
         this.code = code;
         return this;
     }
@@ -69,7 +67,7 @@ public class Circulation extends AbstractAuditingEntity implements Serializable 
         return name;
     }
 
-    public Circulation name(String name) {
+    public Redaction name(String name) {
         this.name = name;
         return this;
     }
@@ -82,7 +80,7 @@ public class Circulation extends AbstractAuditingEntity implements Serializable 
         return price;
     }
 
-    public Circulation price(BigDecimal price) {
+    public Redaction price(BigDecimal price) {
         this.price = price;
         return this;
     }
@@ -95,7 +93,7 @@ public class Circulation extends AbstractAuditingEntity implements Serializable 
         return description;
     }
 
-    public Circulation description(String description) {
+    public Redaction description(String description) {
         this.description = description;
         return this;
     }
@@ -112,11 +110,11 @@ public class Circulation extends AbstractAuditingEntity implements Serializable 
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Circulation circulation = (Circulation) o;
-        if (circulation.id == null || id == null) {
+        Redaction redaction = (Redaction) o;
+        if (redaction.id == null || id == null) {
             return false;
         }
-        return Objects.equals(id, circulation.id);
+        return Objects.equals(id, redaction.id);
     }
 
     @Override
@@ -126,7 +124,7 @@ public class Circulation extends AbstractAuditingEntity implements Serializable 
 
     @Override
     public String toString() {
-        return "Circulation{" +
+        return "Redaction{" +
             "id=" + id +
             ", name='" + name + "'" +
             ", price='" + price + "'" +

@@ -1,6 +1,6 @@
 package com.pikiranrakyat.prevent.repository;
 
-import com.pikiranrakyat.prevent.domain.master.Locations;
+import com.pikiranrakyat.prevent.domain.Locations;
 
 import org.springframework.data.jpa.repository.*;
 

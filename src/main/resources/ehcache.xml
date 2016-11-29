@@ -50,7 +50,7 @@
         timeToLiveSeconds="3600">
     </cache>
 
-    <cache name="com.pikiranrakyat.prevent.domain.master.Locations"
+    <cache name="com.pikiranrakyat.prevent.domain.Locations"
         timeToLiveSeconds="3600">
     </cache>
 
@@ -62,7 +62,7 @@
         timeToLiveSeconds="3600">
     </cache>
 
-    <cache name="com.pikiranrakyat.prevent.domain.master.Merchandise"
+    <cache name="com.pikiranrakyat.prevent.domain.Merchandise"
         timeToLiveSeconds="3600">
     </cache>
 
@@ -70,15 +70,15 @@
         timeToLiveSeconds="3600">
     </cache>
 
-    <cache name="com.pikiranrakyat.prevent.domain.master.Ads"
+    <cache name="com.pikiranrakyat.prevent.domain.Ads"
         timeToLiveSeconds="3600">
     </cache>
 
-    <cache name="com.pikiranrakyat.prevent.domain.master.Circulation"
+    <cache name="com.pikiranrakyat.prevent.domain.Circulation"
         timeToLiveSeconds="3600">
     </cache>
 
-    <cache name="com.pikiranrakyat.prevent.domain.master.Redaction"
+    <cache name="com.pikiranrakyat.prevent.domain.Redaction"
         timeToLiveSeconds="3600">
     </cache>
 
@@ -87,6 +87,10 @@
     </cache>
 
     <cache name="com.pikiranrakyat.prevent.domain.OrderMerchandise"
+        timeToLiveSeconds="3600">
+    </cache>
+
+    <cache name="com.pikiranrakyat.prevent.domain.OrderAds"
         timeToLiveSeconds="3600">
     </cache>
 

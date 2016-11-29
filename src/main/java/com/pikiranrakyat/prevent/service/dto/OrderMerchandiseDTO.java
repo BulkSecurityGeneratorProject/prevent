@@ -2,7 +2,7 @@ package com.pikiranrakyat.prevent.service.dto;
 
 import com.pikiranrakyat.prevent.domain.Events;
 import com.pikiranrakyat.prevent.domain.OrderMerchandise;
-import com.pikiranrakyat.prevent.domain.master.Merchandise;
+import com.pikiranrakyat.prevent.domain.Merchandise;
 
 import java.math.BigDecimal;
 

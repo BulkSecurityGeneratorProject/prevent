@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <!--
+        Added the constraints for entity OrderAds.
+    -->
+    <changeSet id="20161129094614-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="ads_id"
+                                 baseTableName="order_ads"
+                                 constraintName="fk_order_ads_master_ads_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="master_ads"/>
+
+        <addForeignKeyConstraint baseColumnNames="events_id"
+                                 baseTableName="order_ads"
+                                 constraintName="fk_order_ads_events_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="events"/>
+
+    </changeSet>
+</databaseChangeLog>

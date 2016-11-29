@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
+import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -54,6 +55,8 @@ public class OrderMerchandiseResource {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("orderMerchandise", "idexists", "A new orderMerchandise cannot already have an ID")).body(null);
         }
         orderMerchandise.setOrderNumber(UUID.randomUUID().toString());
+        orderMerchandise.setTotal(BigDecimal.valueOf(orderMerchandise.getMerchandise().getPrice().doubleValue() * orderMerchandise.getQty()));
+
         OrderMerchandise result = orderMerchandiseService.save(orderMerchandise);
         return ResponseEntity.created(new URI("/api/order-merchandises/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("orderMerchandise", result.getId().toString()))
@@ -143,7 +146,7 @@ public class OrderMerchandiseResource {
      * SEARCH  /_search/order-merchandises?query=:query : search for the orderMerchandise corresponding
      * to the query.
      *
-     * @param query the query of the orderMerchandise search
+     * @param query    the query of the orderMerchandise search
      * @param pageable the pagination information
      * @return the result of the search
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers

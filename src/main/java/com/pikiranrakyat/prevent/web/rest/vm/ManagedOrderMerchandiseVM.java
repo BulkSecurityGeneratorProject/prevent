@@ -78,7 +78,7 @@ public class ManagedOrderMerchandiseVM extends OrderMerchandiseDTO {
 
     @Override
     public String toString() {
-        return "ManagedUserVM{" +
+        return "ManagedOrderMerchandiseVM{" +
             "id=" + id +
             ", createdBy=" + createdBy +
             ", createdDate=" + createdDate +

@@ -1,0 +1,5 @@
+id;name;price;description;created_by;last_modified_by
+1;Iklan Display Umum BW;55000;Iklan Display Umum BW;System;System;system@localhost;true;en;system;system
+2;Iklan Full Color;75000;Iklan Berwarna;System;System;system@localhost;true;en;system;system
+3;Iklan Peta;500000;Paket Iklan Hari Sabtu;System;System;system@localhost;true;en;system;system
+4;Aktivitas;0;Iklan/liputan untuk event Pikiran Rakyat dan dikerjasamakan dengan Pikiran Rakyat;System;System;system@localhost;true;en;system;system

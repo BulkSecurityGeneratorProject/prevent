@@ -1,6 +1,6 @@
 package com.pikiranrakyat.prevent.repository.search;
 
-import com.pikiranrakyat.prevent.domain.master.Ads;
+import com.pikiranrakyat.prevent.domain.Ads;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 
 /**

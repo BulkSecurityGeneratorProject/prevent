@@ -3,7 +3,7 @@ package com.pikiranrakyat.prevent.web.rest;
 import com.pikiranrakyat.prevent.PreventApp;
 import com.pikiranrakyat.prevent.domain.EventType;
 import com.pikiranrakyat.prevent.domain.Events;
-import com.pikiranrakyat.prevent.domain.master.Locations;
+import com.pikiranrakyat.prevent.domain.Locations;
 import com.pikiranrakyat.prevent.repository.EventsRepository;
 import com.pikiranrakyat.prevent.repository.search.EventsSearchRepository;
 import com.pikiranrakyat.prevent.service.EventsService;

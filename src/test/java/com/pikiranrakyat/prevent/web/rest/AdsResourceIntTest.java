@@ -2,7 +2,7 @@ package com.pikiranrakyat.prevent.web.rest;
 
 import com.pikiranrakyat.prevent.PreventApp;
 
-import com.pikiranrakyat.prevent.domain.master.Ads;
+import com.pikiranrakyat.prevent.domain.Ads;
 import com.pikiranrakyat.prevent.domain.AdsCategory;
 import com.pikiranrakyat.prevent.repository.AdsRepository;
 import com.pikiranrakyat.prevent.service.AdsService;

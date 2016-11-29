@@ -1,7 +1,7 @@
 package com.pikiranrakyat.prevent.service.impl;
 
 import com.pikiranrakyat.prevent.service.RedactionService;
-import com.pikiranrakyat.prevent.domain.master.Redaction;
+import com.pikiranrakyat.prevent.domain.Redaction;
 import com.pikiranrakyat.prevent.repository.RedactionRepository;
 import com.pikiranrakyat.prevent.repository.search.RedactionSearchRepository;
 import org.slf4j.Logger;

@@ -1,7 +1,7 @@
 package com.pikiranrakyat.prevent.service.impl;
 
 import com.pikiranrakyat.prevent.service.AdsService;
-import com.pikiranrakyat.prevent.domain.master.Ads;
+import com.pikiranrakyat.prevent.domain.Ads;
 import com.pikiranrakyat.prevent.repository.AdsRepository;
 import com.pikiranrakyat.prevent.repository.search.AdsSearchRepository;
 import org.slf4j.Logger;
@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 
+import java.math.BigDecimal;
+
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
@@ -20,7 +22,7 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
  */
 @Service
 @Transactional
-public class AdsServiceImpl implements AdsService{
+public class AdsServiceImpl implements AdsService {
 
     private final Logger log = LoggerFactory.getLogger(AdsServiceImpl.class);
 
@@ -38,16 +40,17 @@ public class AdsServiceImpl implements AdsService{
      */
     public Ads save(Ads ads) {
         log.debug("Request to save Ads : {}", ads);
+        ads.setTotalPrice(BigDecimal.valueOf(ads.getAdsCategory().getPrice().doubleValue() * ads.getCols() * ads.getMillimeter()));
         Ads result = adsRepository.save(ads);
         adsSearchRepository.save(result);
         return result;
     }
 
     /**
-     *  Get all the ads.
+     * Get all the ads.
      *
-     *  @param pageable the pagination information
-     *  @return the list of entities
+     * @param pageable the pagination information
+     * @return the list of entities
      */
     @Transactional(readOnly = true)
     public Page<Ads> findAll(Pageable pageable) {
@@ -57,10 +60,10 @@ public class AdsServiceImpl implements AdsService{
     }
 
     /**
-     *  Get one ads by id.
+     * Get one ads by id.
      *
-     *  @param id the id of the entity
-     *  @return the entity
+     * @param id the id of the entity
+     * @return the entity
      */
     @Transactional(readOnly = true)
     public Ads findOne(Long id) {
@@ -70,9 +73,9 @@ public class AdsServiceImpl implements AdsService{
     }
 
     /**
-     *  Delete the  ads by id.
+     * Delete the  ads by id.
      *
-     *  @param id the id of the entity
+     * @param id the id of the entity
      */
     public void delete(Long id) {
         log.debug("Request to delete Ads : {}", id);
@@ -83,8 +86,8 @@ public class AdsServiceImpl implements AdsService{
     /**
      * Search for the ads corresponding to the query.
      *
-     *  @param query the query of the search
-     *  @return the list of entities
+     * @param query the query of the search
+     * @return the list of entities
      */
     @Transactional(readOnly = true)
     public Page<Ads> search(String query, Pageable pageable) {

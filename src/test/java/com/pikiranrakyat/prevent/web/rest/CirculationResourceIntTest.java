@@ -2,7 +2,7 @@ package com.pikiranrakyat.prevent.web.rest;
 
 import com.pikiranrakyat.prevent.PreventApp;
 
-import com.pikiranrakyat.prevent.domain.master.Circulation;
+import com.pikiranrakyat.prevent.domain.Circulation;
 import com.pikiranrakyat.prevent.repository.CirculationRepository;
 import com.pikiranrakyat.prevent.service.CirculationService;
 import com.pikiranrakyat.prevent.repository.search.CirculationSearchRepository;

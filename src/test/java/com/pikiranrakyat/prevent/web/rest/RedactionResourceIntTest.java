@@ -2,7 +2,7 @@ package com.pikiranrakyat.prevent.web.rest;
 
 import com.pikiranrakyat.prevent.PreventApp;
 
-import com.pikiranrakyat.prevent.domain.master.Redaction;
+import com.pikiranrakyat.prevent.domain.Redaction;
 import com.pikiranrakyat.prevent.repository.RedactionRepository;
 import com.pikiranrakyat.prevent.service.RedactionService;
 import com.pikiranrakyat.prevent.repository.search.RedactionSearchRepository;

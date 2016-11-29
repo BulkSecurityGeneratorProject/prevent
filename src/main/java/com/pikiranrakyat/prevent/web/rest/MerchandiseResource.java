@@ -1,7 +1,7 @@
 package com.pikiranrakyat.prevent.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
-import com.pikiranrakyat.prevent.domain.master.Merchandise;
+import com.pikiranrakyat.prevent.domain.Merchandise;
 import com.pikiranrakyat.prevent.service.MerchandiseService;
 import com.pikiranrakyat.prevent.web.rest.util.HeaderUtil;
 import com.pikiranrakyat.prevent.web.rest.util.PaginationUtil;

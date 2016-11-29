@@ -1,0 +1,55 @@
+
+<div>
+    <h2><span>Order Ads</span> {{vm.orderAds.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Order Number</span></dt>
+        <dd>
+            <span>{{vm.orderAds.orderNumber}}</span>
+        </dd>
+        <dt><span>Title</span></dt>
+        <dd>
+            <span>{{vm.orderAds.title}}</span>
+        </dd>
+        <dt><span>Content</span></dt>
+        <dd>
+            <span>{{vm.orderAds.content}}</span>
+        </dd>
+        <dt><span>Note</span></dt>
+        <dd>
+            <span>{{vm.orderAds.note}}</span>
+        </dd>
+        <dt><span>Accept</span></dt>
+        <dd>
+            <span>{{vm.orderAds.accept}}</span>
+        </dd>
+        <dt><span>Publish Date</span></dt>
+        <dd>
+            <span>{{vm.orderAds.publishDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Total</span></dt>
+        <dd>
+            <span>{{vm.orderAds.total}}</span>
+        </dd>
+        <dt><span>Ads</span></dt>
+        <dd>
+            <a ui-sref="ads-detail({id:vm.orderAds.ads.id})">{{vm.orderAds.ads.name}}</a>
+        </dd>
+        <dt><span>Events</span></dt>
+        <dd>
+            <a ui-sref="events-detail({id:vm.orderAds.events.id})">{{vm.orderAds.events.title}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="order-ads-detail.edit({id:vm.orderAds.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm"> Edit</span>
+    </button>
+</div>

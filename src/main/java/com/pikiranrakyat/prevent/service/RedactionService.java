@@ -1,6 +1,6 @@
 package com.pikiranrakyat.prevent.service;
 
-import com.pikiranrakyat.prevent.domain.master.Redaction;
+import com.pikiranrakyat.prevent.domain.Redaction;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

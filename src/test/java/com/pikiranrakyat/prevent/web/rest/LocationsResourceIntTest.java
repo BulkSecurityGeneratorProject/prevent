@@ -2,7 +2,7 @@ package com.pikiranrakyat.prevent.web.rest;
 
 import com.pikiranrakyat.prevent.PreventApp;
 
-import com.pikiranrakyat.prevent.domain.master.Locations;
+import com.pikiranrakyat.prevent.domain.Locations;
 import com.pikiranrakyat.prevent.repository.LocationsRepository;
 import com.pikiranrakyat.prevent.service.LocationsService;
 import com.pikiranrakyat.prevent.repository.search.LocationsSearchRepository;

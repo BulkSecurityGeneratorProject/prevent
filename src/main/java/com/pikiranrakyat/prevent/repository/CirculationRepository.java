@@ -1,6 +1,6 @@
 package com.pikiranrakyat.prevent.repository;
 
-import com.pikiranrakyat.prevent.domain.master.Circulation;
+import com.pikiranrakyat.prevent.domain.Circulation;
 
 import org.springframework.data.jpa.repository.*;
 

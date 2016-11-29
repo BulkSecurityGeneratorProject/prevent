@@ -1,7 +1,5 @@
-package com.pikiranrakyat.prevent.domain.master;
+package com.pikiranrakyat.prevent.domain;
 
-import com.pikiranrakyat.prevent.domain.AbstractAuditingEntity;
-import com.pikiranrakyat.prevent.domain.AdsCategory;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;

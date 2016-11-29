@@ -1,7 +1,7 @@
 package com.pikiranrakyat.prevent.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
-import com.pikiranrakyat.prevent.domain.master.Ads;
+import com.pikiranrakyat.prevent.domain.Ads;
 import com.pikiranrakyat.prevent.service.AdsService;
 import com.pikiranrakyat.prevent.web.rest.util.HeaderUtil;
 import com.pikiranrakyat.prevent.web.rest.util.PaginationUtil;
@@ -50,6 +50,8 @@ public class AdsResource {
         if (ads.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("ads", "idexists", "A new ads cannot already have an ID")).body(null);
         }
+
+
         Ads result = adsService.save(ads);
         return ResponseEntity.created(new URI("/api/ads/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("ads", result.getId().toString()))
@@ -139,7 +141,7 @@ public class AdsResource {
      * SEARCH  /_search/ads?query=:query : search for the ads corresponding
      * to the query.
      *
-     * @param query the query of the ads search
+     * @param query    the query of the ads search
      * @param pageable the pagination information
      * @return the result of the search
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
