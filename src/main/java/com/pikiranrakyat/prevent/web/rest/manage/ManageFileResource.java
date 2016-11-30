@@ -1,4 +1,4 @@
-package com.pikiranrakyat.prevent.web.rest;
+package com.pikiranrakyat.prevent.web.rest.manage;
 
 import com.pikiranrakyat.prevent.service.FileManagerService;
 import com.pikiranrakyat.prevent.service.util.MimeUtil;

@@ -5,20 +5,23 @@
         .module('preventApp')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$scope', 'Principal', 'LoginService', '$state'];
+    HomeController.$inject = ['$scope', 'Principal', 'LoginService', '$state', 'ManageEvents'];
 
-    function HomeController($scope, Principal, LoginService, $state) {
+    function HomeController($scope, Principal, LoginService, $state, ManageEvents) {
         var vm = this;
-
+        vm.events = [];
         vm.account = null;
         vm.isAuthenticated = null;
         vm.login = LoginService.open;
+        vm.loadAll = loadAll;
         vm.register = register;
+
         $scope.$on('authenticationSuccess', function () {
             getAccount();
         });
 
         getAccount();
+        loadAll();
 
         function getAccount() {
             Principal.identity().then(function (account) {
@@ -30,25 +33,15 @@
         function register() {
             $state.go('register');
         }
-
-        vm.slides = [];
-
-        vm.myInterval = 5000;
-        var currIndex = 0;
-
-        function addSlide() {
-            vm.slides.push({
-                image: 'http://loremflickr.com/1280/500/beach',
-                text: ['Nice image', 'Awesome photograph', 'That is so cool', 'I love that'][vm.slides.length % 4],
-                id: currIndex++
-            });
-        };
-
-        for (var i = 0; i < 4; i++) {
-            addSlide();
+        
+        function loadAll() {
+            ManageEvents.findEventOrderByCreated()
+                .then(function (response) {
+                    vm.events = response.data;
+                }, function (error) {
+                    console.log(error);
+                })
         }
-
-        addSlide();
 
 
     }

@@ -10,15 +10,21 @@
     <!-- build:css content/css/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
-    <link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.css">
     <link rel="stylesheet" href="bower_components/AdminLTE/dist/css/AdminLTE.css">
+    <link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.css">
     <link rel="stylesheet" href="bower_components/sweetalert/dist/sweetalert.css">
     <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css">
     <!-- endinject -->
     <!-- endbuild -->
     <!-- build:css content/css/main.css -->
+    <!--<link rel="stylesheet" href="content/css/site.css">-->
     <link rel="stylesheet" href="content/css/main.css">
     <link rel="stylesheet" href="content/css/_all-skins.css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet'
+          type='text/css'>
+    <link
+        href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+        rel='stylesheet' type='text/css'>
     <!-- endbuild -->
 </head>
 <body class="hold-transition skin-blue sidebar-mini" ng-app="preventApp" ng-strict-di>
@@ -27,7 +33,9 @@
     your browser</a> to improve your experience.</p>
 <![endif]-->
 <!--<page-ribbon></page-ribbon>-->
-<div style="max-width: 100%" ui-view="content"></div>
+<div style="max-width: 100%" ui-view="content">
+
+</div>
 
 <!-- Google Analytics: uncomment and change UA-XXXXX-X to be your site's ID.
 <script>
@@ -75,7 +83,6 @@
 <script src="app/services/user/user.service.js"></script>
 <script src="app/services/profiles/profile.service.js"></script>
 <script src="app/services/profiles/page-ribbon.directive.js"></script>
-<script src="app/services/manage/manage-order.service.js"></script>
 <script src="app/services/auth/register.service.js"></script>
 <script src="app/services/auth/principal.service.js"></script>
 <script src="app/services/auth/password-reset-init.service.js"></script>
@@ -282,6 +289,9 @@
 <script src="app/account/activate/activate.state.js"></script>
 <script src="app/account/activate/activate.controller.js"></script>
 <script src="app/account/account.state.js"></script>
+<!--manage-->
+<script src="app/services/manage/manage-order.service.js"></script>
+<script src="app/services/manage/manage-events.service.js"></script>
 <!-- endinject -->
 <!-- endbuild -->
 

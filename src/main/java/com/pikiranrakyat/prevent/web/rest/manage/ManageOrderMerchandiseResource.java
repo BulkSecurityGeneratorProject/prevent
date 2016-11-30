@@ -1,4 +1,4 @@
-package com.pikiranrakyat.prevent.web.rest;
+package com.pikiranrakyat.prevent.web.rest.manage;
 
 import com.codahale.metrics.annotation.Timed;
 import com.pikiranrakyat.prevent.domain.OrderMerchandise;

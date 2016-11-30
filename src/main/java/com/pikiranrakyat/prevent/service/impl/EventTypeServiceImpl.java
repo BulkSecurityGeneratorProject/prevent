@@ -20,7 +20,7 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
  */
 @Service
 @Transactional
-public class EventTypeServiceImpl implements EventTypeService{
+public class EventTypeServiceImpl implements EventTypeService {
 
     private final Logger log = LoggerFactory.getLogger(EventTypeServiceImpl.class);
 
@@ -44,10 +44,10 @@ public class EventTypeServiceImpl implements EventTypeService{
     }
 
     /**
-     *  Get all the eventTypes.
+     * Get all the eventTypes.
      *
-     *  @param pageable the pagination information
-     *  @return the list of entities
+     * @param pageable the pagination information
+     * @return the list of entities
      */
     @Transactional(readOnly = true)
     public Page<EventType> findAll(Pageable pageable) {
@@ -57,10 +57,10 @@ public class EventTypeServiceImpl implements EventTypeService{
     }
 
     /**
-     *  Get one eventType by id.
+     * Get one eventType by id.
      *
-     *  @param id the id of the entity
-     *  @return the entity
+     * @param id the id of the entity
+     * @return the entity
      */
     @Transactional(readOnly = true)
     public EventType findOne(Long id) {
@@ -70,9 +70,9 @@ public class EventTypeServiceImpl implements EventTypeService{
     }
 
     /**
-     *  Delete the  eventType by id.
+     * Delete the  eventType by id.
      *
-     *  @param id the id of the entity
+     * @param id the id of the entity
      */
     public void delete(Long id) {
         log.debug("Request to delete EventType : {}", id);
@@ -83,13 +83,12 @@ public class EventTypeServiceImpl implements EventTypeService{
     /**
      * Search for the eventType corresponding to the query.
      *
-     *  @param query the query of the search
-     *  @return the list of entities
+     * @param query the query of the search
+     * @return the list of entities
      */
     @Transactional(readOnly = true)
     public Page<EventType> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of EventTypes for query {}", query);
-        Page<EventType> result = eventTypeSearchRepository.search(queryStringQuery(query), pageable);
-        return result;
+        return eventTypeSearchRepository.search(queryStringQuery(query), pageable);
     }
 }
