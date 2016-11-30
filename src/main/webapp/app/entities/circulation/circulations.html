@@ -1,5 +1,4 @@
 <div>
-    <h2>Sirkulasi</h2>
     <jhi-alert></jhi-alert>
     <div class="container-fluid">
         <div class="row">
@@ -31,9 +30,16 @@
         </div>
     </div>
     <br/>
-    <div class="table-responsive">
-        <table class="jh-table table table-striped">
-            <thead>
+</div>
+<div class="box">
+    <div class="box-header with-border">
+        <h3 class="box-title">Sirkulasi</h3>
+
+    </div>
+    <div class="box-body">
+        <div class="table-responsive">
+            <table class="jh-table table table-striped">
+                <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="code"><span>Code</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -42,8 +48,8 @@
                     <th jh-sort-by="description"><span>Description</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
-            </thead>
-            <tbody>
+                </thead>
+                <tbody>
                 <tr ng-repeat="circulation in vm.circulations track by circulation.id">
                     <td><a ui-sref="circulation-detail({id:circulation.id})">{{circulation.id}}</a></td>
                     <td>{{circulation.code}}</td>
@@ -73,11 +79,16 @@
                         </div>
                     </td>
                 </tr>
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
     </div>
-    <div class="text-center">
-        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
-        <uib-pagination class="pagination-sm" total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    <!-- /.box-body -->
+    <div class="box-footer">
+        <div class="text-center">
+            <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+            <uib-pagination class="pagination-sm" total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+        </div>
     </div>
+    <!-- /.box-footer-->
 </div>
