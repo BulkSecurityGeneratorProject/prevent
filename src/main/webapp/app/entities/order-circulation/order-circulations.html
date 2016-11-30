@@ -3,19 +3,18 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="redaction.new">
+                <button class="btn btn-primary" ui-sref="order-circulation.new" >
                     <span class="glyphicon glyphicon-plus"></span>
-                    <span class="hidden-xs">
-                        Create new Redaction
+                    <span class="hidden-xs" >
+                        Create new Order Sirkulasi
                     </span>
                 </button>
             </div>
             <div class="col-xs-8 no-padding-right">
                 <form name="searchForm" class="form-inline">
-                    <div class="input-group pull-right">
-                        <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery"
-                               placeholder="Query">
-                        <span class="input-group-btn width-min">
+                    <div class="input-group pull-right" >
+                        <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="Query">
+                        <span  class="input-group-btn width-min" >
                             <button class="btn btn-info" ng-click="vm.search(vm.searchQuery)">
                                 <span class="glyphicon glyphicon-search"></span>
                             </button>
@@ -32,46 +31,58 @@
     </div>
     <br/>
 </div>
+
 <div class="box">
     <div class="box-header with-border">
-        <h3 class="box-title">Redactions</h3>
+        <h3 class="box-title">Order Sirkulasi</h3>
 
     </div>
     <div class="box-body">
         <div class="table-responsive">
-            <table class="jh-table table table-striped">
+            <table class="jh-table table table-striped table-hover">
                 <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="code"><span>Code</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="name"><span>Name</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="description"><span>Description</span> <span class="glyphicon glyphicon-sort"></span>
-                    </th>
+                    <th jh-sort-by="orderNumber"><span>Order Number</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="title"><span>Title</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="content"><span>Content</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="accept"><span>Accept</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="note"><span>Note</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="redaction.name"><span>Redaction</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="events.title"><span>Events</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="redaction in vm.redactions track by redaction.id">
-                    <td><a ui-sref="redaction-detail({id:redaction.id})">{{redaction.id}}</a></td>
-                    <td>{{redaction.code}}</td>
-                    <td>{{redaction.name}}</td>
-                    <td>{{redaction.description}}</td>
+                <tr ng-repeat="orderCirculation in vm.orderCirculations track by orderCirculation.id">
+                    <td><a ui-sref="order-circulation-detail({id:orderCirculation.id})">{{orderCirculation.id}}</a></td>
+                    <td>{{orderCirculation.orderNumber}}</td>
+                    <td>{{orderCirculation.title}}</td>
+                    <td>{{orderCirculation.content}}</td>
+                    <td>{{orderCirculation.accept}}</td>
+                    <td>{{orderCirculation.note}}</td>
+                    <td>
+                        <a ui-sref="redaction-detail({id:orderCirculation.redaction.id})">{{orderCirculation.redaction.name}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="events-detail({id:orderCirculation.events.id})">{{orderCirculation.events.title}}</a>
+                    </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
-                                    ui-sref="redaction-detail({id:redaction.id})"
+                                    ui-sref="order-circulation-detail({id:orderCirculation.id})"
                                     class="btn btn-info btn-sm">
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-xs hidden-sm"></span>
                             </button>
                             <button type="submit"
-                                    ui-sref="redaction.edit({id:redaction.id})"
+                                    ui-sref="order-circulation.edit({id:orderCirculation.id})"
                                     class="btn btn-primary btn-sm">
                                 <span class="glyphicon glyphicon-pencil"></span>
                                 <span class="hidden-xs hidden-sm"></span>
                             </button>
                             <button type="submit"
-                                    ui-sref="redaction.delete({id:redaction.id})"
+                                    ui-sref="order-circulation.delete({id:orderCirculation.id})"
                                     class="btn btn-danger btn-sm">
                                 <span class="glyphicon glyphicon-remove-circle"></span>
                                 <span class="hidden-xs hidden-sm"></span>
@@ -87,8 +98,7 @@
     <div class="box-footer">
         <div class="text-center">
             <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
-            <uib-pagination class="pagination-sm" total-items="vm.totalItems" ng-model="vm.page"
-                            ng-change="vm.transition()"></uib-pagination>
+            <uib-pagination class="pagination-sm" total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
         </div>
     </div>
     <!-- /.box-footer-->

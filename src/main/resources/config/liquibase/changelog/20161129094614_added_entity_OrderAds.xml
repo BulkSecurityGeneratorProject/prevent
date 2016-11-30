@@ -22,7 +22,7 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="order_number" type="varchar(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" unique="true"/>
             </column>
 
             <column name="title" type="varchar(100)">
@@ -37,7 +37,7 @@
                 <constraints nullable="true"/>
             </column>
 
-            <column name="accept" type="bit">
+            <column name="accept" type="boolean">
                 <constraints nullable="false"/>
             </column>
 

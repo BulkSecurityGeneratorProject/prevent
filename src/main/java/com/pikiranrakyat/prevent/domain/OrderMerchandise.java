@@ -42,7 +42,6 @@ public class OrderMerchandise extends AbstractAuditingEntity implements Serializ
     @Column(name = "qty", nullable = false)
     private Integer qty;
 
-    @NotNull
     @DecimalMin(value = "0")
     @Column(name = "total", precision = 30, scale = 2, nullable = false)
     private BigDecimal total;

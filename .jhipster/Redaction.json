@@ -10,10 +10,6 @@
             ]
         },
         {
-            "fieldName": "price",
-            "fieldType": "BigDecimal"
-        },
-        {
             "fieldName": "description",
             "fieldType": "String"
         }

@@ -84,7 +84,6 @@
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="button"
-                                    ng-disabled="orderMerchandise.events.accept == true"
                                     ng-show="!orderMerchandise.accept"
                                     ng-click="vm.agreeOrder(orderMerchandise)"
                                     class="btn btn-info btn-sm">
@@ -93,7 +92,6 @@
                             </button>
 
                             <button type="button"
-                                    ng-disabled="orderMerchandise.events.accept == true"
                                     ng-show="orderMerchandise.accept"
                                     ng-click="vm.disagreeOrder(orderMerchandise)"
                                     class="btn btn-danger btn-sm">
@@ -101,14 +99,14 @@
                                 <span class="hidden-xs hidden-sm"></span>
                             </button>
                             <button type="button"
-                                    ng-disabled="orderMerchandise.events.accept == true"
+                                    ng-disabled="orderMerchandise.accept"
                                     ui-sref="order-merchandise.edit({id:orderMerchandise.id})"
                                     class="btn btn-primary btn-sm">
                                 <span class="glyphicon glyphicon-pencil"></span>
                                 <span class="hidden-xs hidden-sm"></span>
                             </button>
                             <button type="button"
-                                    ng-disabled="orderMerchandise.events.accept == true"
+                                    ng-disabled="orderMerchandise.accept"
                                     ui-sref="order-merchandise.delete({id:orderMerchandise.id})"
                                     class="btn btn-danger btn-sm">
                                 <span class="glyphicon glyphicon-remove-circle"></span>

@@ -41,7 +41,7 @@
                 <constraints nullable="false"/>
             </column>
 
-            <column name="accept" type="bit">
+            <column name="accept" type="boolean">
                 <constraints nullable="false"/>
             </column>
 
@@ -49,7 +49,7 @@
                 <constraints nullable="true"/>
             </column>
 
-            <column name="is_order" type="bit">
+            <column name="is_order" type="boolean">
                 <constraints nullable="false"/>
             </column>
 
@@ -81,7 +81,10 @@
         <loadData encoding="UTF-8"
                   file="config/liquibase/events.csv"
                   separator=";"
-                  tableName="events"/>
+                  tableName="events">
+
+            <column name="accept" type="BOOLEAN"/>
+        </loadData>
 
     </changeSet>
 </databaseChangeLog>

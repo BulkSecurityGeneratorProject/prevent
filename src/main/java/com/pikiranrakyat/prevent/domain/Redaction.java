@@ -5,9 +5,8 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Objects;
 
 /**
@@ -33,9 +32,6 @@ public class Redaction extends AbstractAuditingEntity implements Serializable {
     @NotNull
     @Column(name = "name", nullable = false)
     private String name;
-
-    @Column(name = "price", precision = 10, scale = 2)
-    private BigDecimal price;
 
     @Column(name = "description")
     private String description;
@@ -76,18 +72,6 @@ public class Redaction extends AbstractAuditingEntity implements Serializable {
         this.name = name;
     }
 
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public Redaction price(BigDecimal price) {
-        this.price = price;
-        return this;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
 
     public String getDescription() {
         return description;
@@ -127,7 +111,6 @@ public class Redaction extends AbstractAuditingEntity implements Serializable {
         return "Redaction{" +
             "id=" + id +
             ", name='" + name + "'" +
-            ", price='" + price + "'" +
             ", description='" + description + "'" +
             '}';
     }

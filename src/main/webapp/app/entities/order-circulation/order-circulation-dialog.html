@@ -1,0 +1,99 @@
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myOrderCirculationLabel">Create or edit a Order Circulation</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group">
+            <label for="field_redaction">Redaction</label>
+            <select class="form-control" id="field_redaction" name="redaction" ng-model="vm.orderCirculation.redaction"
+                    ng-options="redaction as redaction.name for redaction in vm.redactions track by redaction.id"
+                    required>
+                <option value=""></option>
+            </select>
+        </div>
+        <div ng-show="editForm.redaction.$invalid">
+            <p class="help-block"
+               ng-show="editForm.redaction.$error.required">
+                This field is required.
+            </p>
+        </div>
+        <div class="form-group">
+            <label for="field_events">Events</label>
+            <select class="form-control" id="field_events" name="events" ng-model="vm.orderCirculation.events"
+                    ng-options="events as events.title for events in vm.events track by events.id" required>
+                <option value=""></option>
+            </select>
+        </div>
+
+        <div ng-show="editForm.events.$invalid">
+            <p class="help-block"
+               ng-show="editForm.events.$error.required">
+                This field is required.
+            </p>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label" for="field_title">Title</label>
+            <input type="text" class="form-control" name="title" id="field_title"
+                   ng-model="vm.orderCirculation.title"
+                   required ng-minlength="5" ng-maxlength="100"/>
+            <div ng-show="editForm.title.$invalid">
+                <p class="help-block"
+                   ng-show="editForm.title.$error.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                   ng-show="editForm.title.$error.minlength" translate-value-min="5">
+                    This field is required to be at least 5 characters.
+                </p>
+                <p class="help-block"
+                   ng-show="editForm.title.$error.maxlength">
+                    This field cannot be longer than 100 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_content">Content</label>
+            <input type="text" class="form-control" name="content" id="field_content"
+                   ng-model="vm.orderCirculation.content"
+                   required ng-minlength="10" ng-maxlength="200"/>
+            <div ng-show="editForm.content.$invalid">
+                <p class="help-block"
+                   ng-show="editForm.content.$error.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                   ng-show="editForm.content.$error.minlength" translate-value-min="10">
+                    This field is required to be at least 10 characters.
+                </p>
+                <p class="help-block"
+                   ng-show="editForm.content.$error.maxlength">
+                    This field cannot be longer than 200 characters.
+                </p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label" for="field_note">Note</label>
+            <input type="text" class="form-control" name="note" id="field_note"
+                   ng-model="vm.orderCirculation.note"
+            />
+        </div>
+
+
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

@@ -24,4 +24,5 @@
     <include file="classpath:config/liquibase/changelog/20161128174507_added_entity_constraints_OrderMerchandise.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20161129094614_added_entity_OrderAds.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20161129094614_added_entity_constraints_OrderAds.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20161130143350_added_entity_OrderCirculation.xml" relativeToChangelogFile="false"/>
 </databaseChangeLog>

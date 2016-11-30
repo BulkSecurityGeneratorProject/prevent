@@ -1,0 +1,4 @@
+id;code;name;cols;millimeter;total_price;description;ads_category_id;created_by;last_modified_by
+1;FC14;Iklan FC 1/4 Halaman;4;270;81000000;;2;System;System;system@localhost;true;en;system;system
+2;BW14;Iklan 1/4 hal Hitam Putih;4;270;59400000;;1;System;System;system@localhost;true;en;system;system
+3;PT;Iklan Peta;1;1;500000;;3;System;System;system@localhost;true;en;system;system

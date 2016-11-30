@@ -26,6 +26,31 @@
             <!--</div>-->
         <!--</div>-->
         <div class="form-group">
+            <label for="field_ads">Ads</label>
+            <select class="form-control" id="field_ads" name="ads" ng-model="vm.orderAds.ads" ng-options="ads as ads.name for ads in vm.ads track by ads.id" required>
+                <option value=""></option>
+            </select>
+        </div>
+        <div ng-show="editForm.ads.$invalid">
+            <p class="help-block"
+               ng-show="editForm.ads.$error.required">
+                This field is required.
+            </p>
+        </div>
+        <div class="form-group">
+            <label for="field_events">Events</label>
+            <select class="form-control" id="field_events" name="events" ng-model="vm.orderAds.events" ng-options="events as events.title for events in vm.events track by events.id" required>
+                <option value=""></option>
+            </select>
+        </div>
+        <div ng-show="editForm.events.$invalid">
+            <p class="help-block"
+               ng-show="editForm.events.$error.required">
+                This field is required.
+            </p>
+        </div>
+
+        <div class="form-group">
             <label class="control-label" for="field_title">Title</label>
             <input type="text" class="form-control" name="title" id="field_title"
                     ng-model="vm.orderAds.title"
@@ -114,30 +139,7 @@
             <!--</div>-->
         <!--</div>-->
 
-        <div class="form-group">
-            <label for="field_ads">Ads</label>
-            <select class="form-control" id="field_ads" name="ads" ng-model="vm.orderAds.ads" ng-options="ads as ads.name for ads in vm.ads track by ads.id" required>
-                <option value=""></option>
-            </select>
-        </div>
-        <div ng-show="editForm.ads.$invalid">
-            <p class="help-block"
-                ng-show="editForm.ads.$error.required">
-                This field is required.
-            </p>
-        </div>
-        <div class="form-group">
-            <label for="field_events">Events</label>
-            <select class="form-control" id="field_events" name="events" ng-model="vm.orderAds.events" ng-options="events as events.title for events in vm.events track by events.id" required>
-                <option value=""></option>
-            </select>
-        </div>
-        <div ng-show="editForm.events.$invalid">
-            <p class="help-block"
-                ng-show="editForm.events.$error.required">
-                This field is required.
-            </p>
-        </div>
+
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">

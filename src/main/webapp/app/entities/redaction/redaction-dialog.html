@@ -1,4 +1,3 @@
-
 <form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
 
     <div class="modal-header">
@@ -9,18 +8,18 @@
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
         <!--<div class="form-group" ng-show="vm.redaction.id">-->
-            <!--<label for="id">ID</label>-->
-            <!--<input type="text" class="form-control" id="id" name="id"-->
-                    <!--ng-model="vm.redaction.id" readonly />-->
+        <!--<label for="id">ID</label>-->
+        <!--<input type="text" class="form-control" id="id" name="id"-->
+        <!--ng-model="vm.redaction.id" readonly />-->
         <!--</div>-->
         <div class="form-group">
             <label class="control-label" for="field_name">Name</label>
             <input type="text" class="form-control" name="name" id="field_name"
-                    ng-model="vm.redaction.name"
-                    required />
+                   ng-model="vm.redaction.name"
+                   required/>
             <div ng-show="editForm.name.$invalid">
                 <p class="help-block"
-                    ng-show="editForm.name.$error.required">
+                   ng-show="editForm.name.$error.required">
                     This field is required.
                 </p>
             </div>
@@ -29,26 +28,21 @@
         <div class="form-group">
             <label class="control-label" for="field_code">Code</label>
             <input type="text" class="form-control" name="name" id="field_code"
-                    ng-model="vm.redaction.code"
-                    required />
+                   ng-model="vm.redaction.code"
+                   required/>
             <div ng-show="editForm.name.$invalid">
                 <p class="help-block"
-                    ng-show="editForm.name.$error.required">
+                   ng-show="editForm.name.$error.required">
                     This field is required.
                 </p>
             </div>
         </div>
-        <div class="form-group">
-            <label class="control-label" for="field_price">Price</label>
-            <input type="number" class="form-control" name="price" id="field_price"
-                    ng-model="vm.redaction.price"
-                     />
-        </div>
+
         <div class="form-group">
             <label class="control-label" for="field_description">Description</label>
             <input type="text" class="form-control" name="description" id="field_description"
-                    ng-model="vm.redaction.description"
-                     />
+                   ng-model="vm.redaction.description"
+            />
         </div>
 
     </div>

@@ -1,21 +1,18 @@
 package com.pikiranrakyat.prevent.web.rest;
 
 import com.pikiranrakyat.prevent.PreventApp;
-
 import com.pikiranrakyat.prevent.domain.Redaction;
 import com.pikiranrakyat.prevent.repository.RedactionRepository;
-import com.pikiranrakyat.prevent.service.RedactionService;
 import com.pikiranrakyat.prevent.repository.search.RedactionSearchRepository;
-
+import com.pikiranrakyat.prevent.service.RedactionService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import static org.hamcrest.Matchers.hasItem;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
@@ -25,10 +22,10 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import java.math.BigDecimal;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -44,8 +41,6 @@ public class RedactionResourceIntTest {
     private static final String DEFAULT_NAME = "AAAAA";
     private static final String UPDATED_NAME = "BBBBB";
 
-    private static final BigDecimal DEFAULT_PRICE = new BigDecimal(1);
-    private static final BigDecimal UPDATED_PRICE = new BigDecimal(2);
 
     private static final String DEFAULT_DESCRIPTION = "AAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBB";
@@ -91,7 +86,6 @@ public class RedactionResourceIntTest {
     public static Redaction createEntity(EntityManager em) {
         Redaction redaction = new Redaction()
                 .name(DEFAULT_NAME)
-                .price(DEFAULT_PRICE)
                 .description(DEFAULT_DESCRIPTION);
         return redaction;
     }
@@ -119,7 +113,6 @@ public class RedactionResourceIntTest {
         assertThat(redactions).hasSize(databaseSizeBeforeCreate + 1);
         Redaction testRedaction = redactions.get(redactions.size() - 1);
         assertThat(testRedaction.getName()).isEqualTo(DEFAULT_NAME);
-        assertThat(testRedaction.getPrice()).isEqualTo(DEFAULT_PRICE);
         assertThat(testRedaction.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
 
         // Validate the Redaction in ElasticSearch
@@ -157,7 +150,6 @@ public class RedactionResourceIntTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(redaction.getId().intValue())))
                 .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-                .andExpect(jsonPath("$.[*].price").value(hasItem(DEFAULT_PRICE.intValue())))
                 .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
     }
 
@@ -173,7 +165,6 @@ public class RedactionResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(redaction.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
-            .andExpect(jsonPath("$.price").value(DEFAULT_PRICE.intValue()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()));
     }
 
@@ -197,7 +188,6 @@ public class RedactionResourceIntTest {
         Redaction updatedRedaction = redactionRepository.findOne(redaction.getId());
         updatedRedaction
                 .name(UPDATED_NAME)
-                .price(UPDATED_PRICE)
                 .description(UPDATED_DESCRIPTION);
 
         restRedactionMockMvc.perform(put("/api/redactions")
@@ -210,7 +200,6 @@ public class RedactionResourceIntTest {
         assertThat(redactions).hasSize(databaseSizeBeforeUpdate);
         Redaction testRedaction = redactions.get(redactions.size() - 1);
         assertThat(testRedaction.getName()).isEqualTo(UPDATED_NAME);
-        assertThat(testRedaction.getPrice()).isEqualTo(UPDATED_PRICE);
         assertThat(testRedaction.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
 
         // Validate the Redaction in ElasticSearch
@@ -252,7 +241,6 @@ public class RedactionResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(redaction.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].price").value(hasItem(DEFAULT_PRICE.intValue())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
     }
 }
