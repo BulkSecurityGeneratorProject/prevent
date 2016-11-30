@@ -3,19 +3,18 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="order-ads.new">
+                <button class="btn btn-primary" ui-sref="order-redaction.new" >
                     <span class="glyphicon glyphicon-plus"></span>
-                    <span class="hidden-xs">
-                        Create new Order Ads
+                    <span class="hidden-xs" >
+                        Create new Order Redaksi
                     </span>
                 </button>
             </div>
             <div class="col-xs-8 no-padding-right">
                 <form name="searchForm" class="form-inline">
-                    <div class="input-group pull-right">
-                        <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery"
-                               placeholder="Query">
-                        <span class="input-group-btn width-min">
+                    <div class="input-group pull-right" >
+                        <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="Query">
+                        <span  class="input-group-btn width-min" >
                             <button class="btn btn-info" ng-click="vm.search(vm.searchQuery)">
                                 <span class="glyphicon glyphicon-search"></span>
                             </button>
@@ -31,12 +30,10 @@
         </div>
     </div>
     <br/>
-
 </div>
 <div class="box">
     <div class="box-header with-border">
-        <h3 class="box-title">Order Ads</h3>
-
+        <h3 class="box-title">Order Redaksi</h3>
     </div>
     <div class="box-body">
         <div class="table-responsive">
@@ -44,63 +41,46 @@
                 <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="orderNumber"><span>Order Number</span> <span
-                        class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="orderNumber"><span>Order Number</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="title"><span>Title</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="content"><span>Content</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="note"><span>Note</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="accept"><span>Accept</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="publishDate"><span>Publish Date</span> <span
-                        class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="total"><span>Total</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="ads.name"><span>Ads</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="events.title"><span>Events</span> <span class="glyphicon glyphicon-sort"></span>
-                    </th>
-                    <th jh-sort-by="createdDate"><span>Created Date</span> <span
-                        class="glyphicon glyphicon-sort"></span>
-                    </th>
-                    <th jh-sort-by="lastModifiedBy"><span>Last Modified By</span> <span
-                        class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="lastModifiedDate"><span>Last Modified Date</span> <span
-                        class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="note"><span>Note</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="redaction.name"><span>Redaction</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="events.title"><span>Events</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="orderAds in vm.orderAds track by orderAds.id">
-                    <td><a ui-sref="order-ads-detail({id:orderAds.id})">{{orderAds.id}}</a></td>
-                    <td>{{orderAds.orderNumber}}</td>
-                    <td>{{orderAds.title}}</td>
-                    <td>{{orderAds.content}}</td>
-                    <td>{{orderAds.note}}</td>
-                    <td>{{orderAds.accept}}</td>
-                    <td>{{orderAds.publishDate | date:'mediumDate'}}</td>
-                    <td>{{orderAds.total}}</td>
+                <tr ng-repeat="orderRedaction in vm.orderRedactions track by orderRedaction.id">
+                    <td><a ui-sref="order-redaction-detail({id:orderRedaction.id})">{{orderRedaction.id}}</a></td>
+                    <td>{{orderRedaction.orderNumber}}</td>
+                    <td>{{orderRedaction.title}}</td>
+                    <td>{{orderRedaction.content}}</td>
+                    <td>{{orderRedaction.accept}}</td>
+                    <td>{{orderRedaction.note}}</td>
                     <td>
-                        <a ui-sref="ads-detail({id:orderAds.ads.id})">{{orderAds.ads.name}}</a>
+                        <a ui-sref="redaction-detail({id:orderRedaction.redaction.id})">{{orderRedaction.redaction.name}}</a>
                     </td>
                     <td>
-                        <a ui-sref="events-detail({id:orderAds.events.id})">{{orderAds.events.title}}</a>
+                        <a ui-sref="events-detail({id:orderRedaction.events.id})">{{orderRedaction.events.title}}</a>
                     </td>
-                    <td>{{orderAds.createdDate | date:'dd/MM/yy HH:mm'}}</td>
-                    <td>{{orderAds.lastModifiedBy}}</td>
-                    <td>{{orderAds.lastModifiedDate | date:'dd/MM/yy HH:mm'}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
-                                    ui-sref="order-ads-detail({id:orderAds.id})"
+                                    ui-sref="order-redaction-detail({id:orderRedaction.id})"
                                     class="btn btn-info btn-sm">
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-xs hidden-sm"></span>
                             </button>
                             <button type="submit"
-                                    ui-sref="order-ads.edit({id:orderAds.id})"
+                                    ui-sref="order-redaction.edit({id:orderRedaction.id})"
                                     class="btn btn-primary btn-sm">
                                 <span class="glyphicon glyphicon-pencil"></span>
                                 <span class="hidden-xs hidden-sm"></span>
                             </button>
                             <button type="submit"
-                                    ui-sref="order-ads.delete({id:orderAds.id})"
+                                    ui-sref="order-redaction.delete({id:orderRedaction.id})"
                                     class="btn btn-danger btn-sm">
                                 <span class="glyphicon glyphicon-remove-circle"></span>
                                 <span class="hidden-xs hidden-sm"></span>
@@ -116,8 +96,7 @@
     <div class="box-footer">
         <div class="text-center">
             <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
-            <uib-pagination class="pagination-sm" total-items="vm.totalItems" ng-model="vm.page"
-                            ng-change="vm.transition()"></uib-pagination>
+            <uib-pagination class="pagination-sm" total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
         </div>
     </div>
     <!-- /.box-footer-->

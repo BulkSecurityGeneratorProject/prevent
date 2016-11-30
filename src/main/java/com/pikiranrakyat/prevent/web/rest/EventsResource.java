@@ -5,6 +5,7 @@ import com.pikiranrakyat.prevent.domain.Events;
 import com.pikiranrakyat.prevent.service.EventsService;
 import com.pikiranrakyat.prevent.web.rest.util.HeaderUtil;
 import com.pikiranrakyat.prevent.web.rest.util.PaginationUtil;
+import com.pikiranrakyat.prevent.web.rest.vm.ManagedEventsVM;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -22,9 +23,6 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing Events.
@@ -34,7 +32,7 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class EventsResource {
 
     private final Logger log = LoggerFactory.getLogger(EventsResource.class);
-        
+
     @Inject
     private EventsService eventsService;
 
@@ -95,12 +93,12 @@ public class EventsResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<List<Events>> getAllEvents(Pageable pageable)
+    public ResponseEntity<List<ManagedEventsVM>> getAllEvents(Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to get a page of Events");
         Page<Events> page = eventsService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/events");
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+        return new ResponseEntity<>(page.getContent().stream().map(ManagedEventsVM::new).collect(Collectors.toList()), headers, HttpStatus.OK);
     }
 
     /**
@@ -143,7 +141,7 @@ public class EventsResource {
      * SEARCH  /_search/events?query=:query : search for the events corresponding
      * to the query.
      *
-     * @param query the query of the events search 
+     * @param query    the query of the events search
      * @param pageable the pagination information
      * @return the result of the search
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
