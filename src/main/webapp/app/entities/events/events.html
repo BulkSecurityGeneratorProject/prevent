@@ -43,12 +43,10 @@
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="title"><span>Title</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="description"><span>Description</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="starts"><span>Starts</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="ends"><span>Ends</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="subtotal"><span>Subtotal</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="accept"><span>Accept</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="note"><span>Note</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="isOrder"><span>Is Order</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="eventType.name"><span>Event Type</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="locations.name"><span>Locations</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -69,12 +67,10 @@
                 <tr ng-repeat="events in vm.events track by events.id">
                     <td><a ui-sref="events-detail({id:events.id})">{{events.id}}</a></td>
                     <td>{{events.title}}</td>
-                    <td>{{events.description}}</td>
                     <td>{{events.starts | date:'medium'}}</td>
                     <td>{{events.ends | date:'medium'}}</td>
                     <td>{{events.subtotal}}</td>
                     <td>{{events.accept}}</td>
-                    <td>{{events.note}}</td>
                     <td>{{events.isOrder}}</td>
                     <td>
                         <a ui-sref="event-type-detail({id:events.eventType.id})">{{events.eventType.name}}</a>
