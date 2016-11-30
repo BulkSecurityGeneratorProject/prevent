@@ -33,7 +33,7 @@
         function register() {
             $state.go('register');
         }
-        
+
         function loadAll() {
             ManageEvents.findEventOrderByCreated()
                 .then(function (response) {
