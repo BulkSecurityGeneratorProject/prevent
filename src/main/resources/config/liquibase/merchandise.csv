@@ -1,4 +1,13 @@
 id;code;name;price;description;created_by;last_modified_by
-1;MM1;Merchandise 1;10000;;System;System;system@localhost;true;en;system;system
-2;MM2;Merchandise 2;10000;;System;System;system@localhost;true;en;system;system
-3;MM3;Merchandise 3;10000;;System;System;system@localhost;true;en;system;system
+1;MM1;Piala;110000;1 Set Piala;System;System;system@localhost;true;en;system;system
+2;MM2;Kaos biasa;50000;Kaos PR Biasa;System;System;system@localhost;true;en;system;system
+3;MM3;Mug;16500;Mug Hitam Cetak Putih;System;System;system@localhost;true;en;system;system
+4;MM4;Ballpoint;0;Mug Hitam Cetak Putih;System;System;system@localhost;true;en;system;system
+5;MM5;Spanduk;100000;Ukuran 1 x 4 M;System;System;system@localhost;true;en;system;system
+6;MM6;Umbul - Umbul;100000;Ukuran 1 x 4 Mm;System;System;system@localhost;true;en;system;system
+7;MM7;Backdrop;187500;ukuran 3 x 2,5 M;System;System;system@localhost;true;en;system;system
+8;MM8;Payung Lipat;65000;Payung lipat 3 biru cetak putih 4 daun;System;System;system@localhost;true;en;system;system
+9;MM9;Polo Shirt;90000;Kaos PR Official;System;System;system@localhost;true;en;system;system
+10;MM10;Kalender Event;0;Pemuatan Logo, Review & Post Event;System;System;system@localhost;true;en;system;system
+11;MM11;Tv Digital Signge PR;25000;Promo di TV Digital Signage PR 10xperhari;System;System;system@localhost;true;en;system;system
+12;MM12;VideoTron;50000;Promo di 3 titik Videotron: Supratman, Laswi, Pasteur 8 kali perhari;System;System;system@localhost;true;en;system;system

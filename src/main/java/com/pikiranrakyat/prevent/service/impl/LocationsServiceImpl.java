@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 
+import java.util.Optional;
+
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
@@ -20,7 +22,7 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
  */
 @Service
 @Transactional
-public class LocationsServiceImpl implements LocationsService{
+public class LocationsServiceImpl implements LocationsService {
 
     private final Logger log = LoggerFactory.getLogger(LocationsServiceImpl.class);
 
@@ -44,23 +46,28 @@ public class LocationsServiceImpl implements LocationsService{
     }
 
     /**
-     *  Get all the locations.
+     * Get all the locations.
      *
-     *  @param pageable the pagination information
-     *  @return the list of entities
+     * @param pageable the pagination information
+     * @return the list of entities
      */
     @Transactional(readOnly = true)
     public Page<Locations> findAll(Pageable pageable) {
         log.debug("Request to get all Locations");
-        Page<Locations> result = locationsRepository.findAll(pageable);
-        return result;
+        return locationsRepository.findAll(pageable);
+    }
+
+    @Override
+    public Optional<Locations> findByNameIgnoreCase(String name) {
+        log.debug("Request find location by " + name);
+        return locationsRepository.findByNameIgnoreCase(name);
     }
 
     /**
-     *  Get one locations by id.
+     * Get one locations by id.
      *
-     *  @param id the id of the entity
-     *  @return the entity
+     * @param id the id of the entity
+     * @return the entity
      */
     @Transactional(readOnly = true)
     public Locations findOne(Long id) {
@@ -70,9 +77,9 @@ public class LocationsServiceImpl implements LocationsService{
     }
 
     /**
-     *  Delete the  locations by id.
+     * Delete the  locations by id.
      *
-     *  @param id the id of the entity
+     * @param id the id of the entity
      */
     public void delete(Long id) {
         log.debug("Request to delete Locations : {}", id);
@@ -83,8 +90,8 @@ public class LocationsServiceImpl implements LocationsService{
     /**
      * Search for the locations corresponding to the query.
      *
-     *  @param query the query of the search
-     *  @return the list of entities
+     * @param query the query of the search
+     * @return the list of entities
      */
     @Transactional(readOnly = true)
     public Page<Locations> search(String query, Pageable pageable) {

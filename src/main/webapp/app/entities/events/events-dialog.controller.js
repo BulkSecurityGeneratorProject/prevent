@@ -15,6 +15,7 @@
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
         vm.save = save;
+
         vm.eventtypes = EventType.query();
         vm.locations = Locations.query();
 

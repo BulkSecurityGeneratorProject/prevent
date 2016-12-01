@@ -3,3 +3,139 @@ id;login;password_hash;first_name;last_name;email;activated;lang_key;created_by;
 2;anonymoususer;$2a$10$j8S5d7Sr7.8VTOYNviDPOeWX8KcYILUVJBsYV83Y5NtECayypx9lO;Anonymous;User;anonymous@localhost;true;en;system;system
 3;admin;$2a$10$gSAhZrxMllrbgj/kkK9UceBPpChGWJA7SYIb1Mqo.n5aNLq1/oRrC;Administrator;Administrator;aseprojali@gmail.com;true;en;system;system
 4;user;$2a$10$VEjxo0jq2YG9Rbk2HmX9S.k1uZBGYUHdUcid3g/vfiEl7lwWgOH/K;User;User;user@localhost;true;en;system;system
+5;redaksi;$2a$10$gSAhZrxMllrbgj/kkK9UceBPpChGWJA7SYIb1Mqo.n5aNLq1/oRrC;Divisi;Redaksi;aseprojali2@gmail.com;true;en;System;System
+6;merchandise;$2a$10$gSAhZrxMllrbgj/kkK9UceBPpChGWJA7SYIb1Mqo.n5aNLq1/oRrC;Divisi;Merchandise;aseprojali3@gmail.com;true;en;System;System
+7;sirkulasi;$2a$10$gSAhZrxMllrbgj/kkK9UceBPpChGWJA7SYIb1Mqo.n5aNLq1/oRrC;Divisi;Sirkulasi;aseprojali4@gmail.com;true;en;System;System
+8;iklan;$2a$10$gSAhZrxMllrbgj/kkK9UceBPpChGWJA7SYIb1Mqo.n5aNLq1/oRrC;Divisi;Iklan;aseprojali5@gmail.com;true;en;System;System
+9;desain;$2a$10$gSAhZrxMllrbgj/kkK9UceBPpChGWJA7SYIb1Mqo.n5aNLq1/oRrC;Divisi;Desain;aseprojali6@gmail.com;true;en;System;System
+10;cksie;$2a$10$V0Wf33cnnLJAis2UR1nwKuSMUnJE3BnrdphkQlACxjj/cHNt5fSg2;null;null;christopherksie@gmail.com;true;en;System;System
+11;pkl1;$2a$10$HkWZf0axRmDtXvHyk59pxeaBZ17E6wFqg.rTo5fez.WdzUSMv3yZS;pkl1;pkl1;pkl1@cisgroups.com;true;en;System;System
+12;agisfathurizki;$2a$10$PtsKdiqWxhnLsqEHukuRfem1Prhbkd03nSZ6WAjWQAzgLSFJj3O0u;null;null;agisfathurizki@gmail.com;true;en;System;System
+13;adlan;$2a$10$ufsC9YhOJePZ0AALUBJIJ.qGyjDVE5zZUu.zi/x6OT.ZwEZDrfTkC;null;null;adlanghilmandzar@gmail.com;true;en;System;System
+14;prmarcomm;$2a$10$xsCCL831h6FS1.xlRMgUKO9KayxM41mbThEUeg89t1m0xxiGJtlqS;null;null;pikiranrakyatmarcomm@gmail.com;true;en;System;System
+15;user007;$2a$10$Wg0Reo.ja1hNXx1flCl46eyEQiZypgxZ7UKT6tFkXfqLZRo7a9jLG;null;null;prevent@pikiran-rakyat.com;true;en;System;System
+16;karina;$2a$10$gx2lJ9L2T/Y/XDa5PY0Ey.qkySuL9ytCass07NT15eP6ROL8pqf1O;null;null;karina.hapsari@ymail.com;true;en;System;System
+17;zabidin;$2a$10$xnsxw/hyASjaEBrgByrApumHLZEyX.VwkMBwnFXVznx6JREHj8CXy;null;null;zahidinali5@gmail.com;true;en;System;System
+18;mianurmiarani;$2a$10$gSAhZrxMllrbgj/kkK9UceBPpChGWJA7SYIb1Mqo.n5aNLq1/oRrC;null;null;maha_ranni@yahoo.com;true;en;System;System
+19;anggi;$2a$10$BUGWw2roYjej7rHZhLD/3.iNx5GWHxL8QpvrX4yjgc3arW3kAAM6i;null;null;anggihervi@gmail.com;true;en;System;System
+20;user01;$2a$10$sHXM/HW86Fpz9nFzlkzRbethrTJVYs00uNXK9thbhpgS.M9sI2fZq;null;null;userpikiranrakyat01@gmail.com;true;en;System;System
+21;dharmapr;$2a$10$c0sPOxy16Od4a3Tnxwlpwe5hMHvnuscFI4U8bjLM7mpzQ/O0KWWSq;null;null;dharmapr17@gmail.com;true;en;System;System
+22;herusdianto;$2a$10$K7jqC2uGfUqnO/7sDrZdrei2RtTukydhK8NAqQk4ALBH4la5nYcOC;null;null;heru.rusdianto.93@gmail.com;true;en;System;System
+23;zazada123;$2a$10$sN.5ESw9YB00fVAGIbwd.O9aTpihMNXbUZxQC5bQuVo8D2cu2aZlW;Zaza;Da;zaza.da.987@gmail.com;true;en;System;System
+24;denher;$2a$10$je8hvo4bksuGjttYtrSE1OUgDuQKfDx4QsM7Nnzxv5Nl.FDLbCqAC;Deden;Heri;denheri62@gmail.com;true;en;System;System
+25;dudisugandi;$2a$10$skt4otuQTJ2hreD4r0ah.ujZRQdf0zlVzwJKRA/N0dYqL3KL/zAky;Dudi;Sugandi;dudisugandi@gmail.com;true;en;System;System
+26;adnan;$2a$10$wksJLj7V/WYdA0A3bLX30.zJaD2O30KxRwFskAcy99gscN.7XPMqC;null;null;adnanjeh0601@gmail.com;true;en;System;System
+27;firdausdmc;$2a$10$UzhZkA2c5V8uo0Tk7Vt8wOlppNYeqflJUzH5T.gQpP6hgO/WQdAD6;null;null;dausds@gmail.com;true;en;System;System
+28;rahman;$2a$10$0XOE8LKAEuTClBtMzsYU7Oe81EuKE.5wdgjbACdPjBHdmqrfffUIy;Boy;Rahman;boicoutz@gmail.com;true;en;System;System
+29;ayahazmi;$2a$10$IWFJ513zRrQgwWWzldOSlOJzA1MHfHWb1lji4TYTltluIqWpgpq72;Iman;Rohiman;azmirahman111111@gmail.com;true;en;System;System
+30;ubay;$2a$10$IFCfIZPjik6SRNcz5WyDluz5sUvlEPE.x.Gq/.BqmePjdRsy8aeVu;Ubai;Dillah;ubaydillah373@gmail.com;true;en;System;System
+31;paetea;$2a$10$ytDS3CkOyTjSX3ZJPWkFWuGTqhGwEMKpLiOcYjP6i/im08ssPlEuO;Eman ;Suherman;paetea28@gmail.com;true;en;System;System
+32;ismoyoagung;$2a$10$Tc0c/KdQgd9TmXKhw9EfaOGYXSrYDywh36g7ciJkQ1nwPOMnVBaDG;Agung;Ismoyo;ismoyoagung22@gmail.com;true;en;System;System
+33;aifangelo;$2a$10$q.LtCre10pkLAbV1GRc0NusAnBW9zHVA1GgZs3y1SPXLWVqBuegxW;Arif;Kurniawan;aifagromedia@gmail.com;true;en;System;System
+34;saksonobraja;$2a$10$Vx2qL5iwz9MUG8btbT5mXuuXU6uR8RIPWxZ78e0TdEhcrOOFsE7nq;Saksono;Braja;brajahitam@gmail.com;true;en;System;System
+35;anggy;$2a$10$1FEeBullx9uTD5Ox0r2LguCrepHzOi7V7MoFjXLuPari/WqAeIrru;Anggy;Maulana;anggy.all@gmail.com;true;en;System;System
+36;azmiaja;$2a$10$WK3gMTp8eVqIKqBHrf5QGuDBqe.mApCq.2Y07Z7mQJcyXIIkXZlPG;Azmi;Rizkia;azmirizkia111111@gmail.com;true;en;System;System
+37;akbarprabawa;$2a$10$X8Z.Dr7uRd/G6qAbO7jnIuwS4/tJ/r7bHzwvDagiWyfzMxEdDPayy;Akbar;Prabawa;akbarcbr83@gmail.com;true;en;System;System
+38;wahyu45;$2a$10$gg6/4wuMm9EYnE9ZVlYQlOKuCrlWyB8RQFuVDhMxGL2LNMA0Y5g4i;Wahyu;Rian Hidayat;rian.febriano45@gmail.com;true;en;System;System
+39;travelandconvex;$2a$10$f4p/vzvd0Oc7afRLz.NpI.hpWm.dzobSpjt3gC7MPCOpSAUc7DVxS;Traveland;Convex;travelandbandung@gmail.com;true;en;System;System
+40;indra;$2a$10$lGu1QH.roASKt3ffNUfRG.ODK6alW5MQ2VDlnHNwRbtKd3UvpI/JG;Indra;Indra;pb.indrakusuma@gmail.com;true;en;System;System
+41;adhiyaksa456;$2a$10$uybanzMk50.wsDqTCzI0gOkXGqe1UvcKBQ4n0QaTPFcl6GpncQKc6;L;Adhiyaksa;adhi4765@gmail.com;true;en;System;System
+42;nurzaman;$2a$10$Nj4wzEskfLuXyM4bGItwP.kp/WNdGzrf48Ym4UUO4hx4dA.n9GEZq;Nur;Zaman;nur.zamen@gmail.com;true;en;System;System
+43;asecakep;$2a$10$y7yWxdwJlWoO8LJwCwqeuOuZ.sFiJ1sIbUHCdy50y.iTXSqGHMeoW;Agus;Setiawan;agus_ase_cakep@yahoo.co.id;true;en;System;System
+44;setiabudi;$2a$10$2O91VR5tiuDpYXzVnB6lzOD3pnT8665TR1uuIGM/MPOL/5FuGeRM6;SETIABUDI;PRABOWO;setiabudi.prabowo@tafinance.com;true;en;System;System
+45;me;$2a$10$Xwp2PxpZY79u9Qbh3aMupeizmx9eSNeAU9MX4KeEIdSYdrqBUmVQ2;Me;Ordinary People;arlinyanti99@gmail.com;true;en;System;System
+46;herman;$2a$10$/28fAaImNK8funP1DHXkxu9Lw4d48Za9k9Yl3kfgUfUYwfcjZFxvm;Herman;Yamashita;hermamyamashita@yahoo.com;true;en;System;System
+47;marsell;$2a$10$Q2k3z2kJtKqq2qAox20qR.o0HI/XwfaN54U.BcWr7oiiC0ELFoL..;Maria;Rian;maurins_rian@yahoo.com;true;en;System;System
+48;bambangst;$2a$10$7WmWAVOFFT5te6nzeTXfX.C3UP8iXbZ6JILXXQRfO49xwt573mRZO;Bambang ;Setyawan;bambangsetyawan91@gmail.com;true;en;System;System
+49;dittochan;$2a$10$2JNJbRrjaB6JnLhoRQbBxO654q2CWwYYy9d/bHRX1kwEzI20eIRtW;Aditya;Gunawan;dit.dit.ditto@gmail.com;true;en;System;System
+50;marishyach;$2a$10$xXCrm4lWhUcnJxqOtF0ege9j/5B60vPSGcSEYt5QvGedq/TQO5otK;Marisa;Nuralimah;mareeshyarose@gmail.com;true;en;System;System
+51;wisnuaditiya;$2a$10$3mCZzceEaYaApc9tsWk2DuVcdmf6yUQHr2oSRLrC5LQMmr0RMngU6;Aditiya;Wisnu;aditiyawisnuwardana@yahoo.com;true;en;System;System
+52;ulfah;$2a$10$BnU/R30zrWq7A/xhkWoBSe.9Ni64vyspnU2R3VwedXi97UzlgklZ.;Ulfah;Fauziah;fauziahulfah89@yahoo.com;true;en;System;System
+53;jejen;$2a$10$higEP640RJb/.QOaNt..Juyy3.t2m5x1ekbYjKwUuLfQWXu4Sd4L2;Jejen;Zainal;jejenbiosronjb@gmail.com;true;en;System;System
+54;yuliuspl;$2a$10$ygiGjq7INKJ7PSNidmI1WeIohkne.WoNDE0dIfxxMSlrhTBzOerjS;Yulius;Puji Laksono;yuliuspl@yahoo.co.id;true;en;System;System
+55;usuryana;$2a$10$aSOamL9yexedUwv49m82..BsaGxaPTRzcDSyRRRnHuyzDo..vvk06;Ujang;Suryana;ujangsuryana73@gmail.com;true;en;System;System
+56;ahmadhibban;$2a$10$Xh45uUnevOrQ.JvCVl3JpOk5JKzpnj7aFbGhtSqaUbUsM4V53m6hm;Ahmad;Bey;ahmadfaith23@yahoo.com;true;en;System;System
+57;iwan18;$2a$10$Plik3GQso5c7dlJB2nwwfOBu6YYOPBQLVhmKUDc2F4s4dWCFrS5yO;Iwan;Kurniawan;kiwan5925@gmail.com;true;en;System;System
+58;usefandri;$2a$10$Km64uGHdstrqWSgyrwZaAOkqjehtdf5IL1Pkem00m80HFBkYGLitm;usef;Andri;usefandri18@gmail.com;true;en;System;System
+59;lexwinata;$2a$10$LiA2RxRljV7FsgUdjSPTDuihx/vzSknBeKgjPQsXQwwVt5AUbDJwW;Alexander;Winata;lexwinata@yahoo.com;true;en;System;System
+60;sugengasiadi;$2a$10$ByKmNNMCY2FfMVKt/oNC.uL3rp4FwKVW4Jx//6MZ2cZeZh3KSwVx.;Sugeng;Asiadi;sugeng.asiadi@gmail.com;true;en;System;System
+61;arwienz;$2a$10$90KcL1eHxIoR0cytkuQiRu1IvnmzJb2eJOHKaNC6IITp1zAvZiGni;AB;Arwin;arwienz@yahoo.co.id;true;en;System;System
+62;usefandry;$2a$10$krQpTworc9GFowckrIh/COMrQrGq6cKZAzfaakzWtkzFhBflLgfN.;Usef;Andry;usefandry10@yahoo.co.id;true;en;System;System
+63;rickiboy1678;$2a$10$Go6YWhhJtB03YUsYh1MGCeOJd0e/akhMR1DEYffyrpLMqhfP.GWSy;Ricky;Halim;rickiboy1678@gmail.com;true;en;System;System
+64;lupalag1;$2a$10$iFQ/.9XWbfmmlNrg2RPmHOHcA/HahWs0S04FwR4gR4mkPUMYb8m/K;Heti;Rahmawati;rahmawatiheti@yahoo.com;true;en;System;System
+65;firmanghazali;$2a$10$jb7T1zAiDBAcbeop0fPcC.9H1o7HPM/xbzGrm6koqDP79lPLI48fS;Mochamad ;Ghazali;afghazali25@gmail.com;true;en;System;System
+66;yugo;$2a$10$DxeOlrU0azACPBMnTfrowelr88BeMAxfh6V0HqSspSMbTbj/o2MC6;TRI;YUGO;yoego.three@gmail.com;true;en;System;System
+67;asepdadangkusnandar;$2a$10$Qj3Gv2WQ1BHSdm5BIROprOnjkDgb168OtZbi2biKCcfMX0GfsuRNK;null;null;asepdadangkusnandar@gmail.com;true;en;System;System
+68;youree;$2a$10$j/rdvz0oyulHA7z/Drd2ReKdlbAmJqaqNig4o4upRSDWQhUhiKxla;Yuri;Andika;yuri.andika87@gmail.com;true;en;System;System
+69;herlamabang;$2a$10$.24P0sKnnwfvh/w63U0kou0Mv237FyrTo5OmkzHC1YZtNHpciIsCC;Dedi;Herlambang;dediherlambang@gmail.com;true;en;System;System
+70;cepayifitriana;$2a$10$yde/c88jPV62bX6kAj9YLuPmBYMbjHc7yWDvAdGcUvXqv33gmh112;Cep Ayi;Fitriana;cepayifitriana@yahoo.com;true;en;System;System
+71;yudi;$2a$10$Dd1s8nT8VQFrhyXchA4XW.1Dr.nG00DjBeks1beMdmIiG7fyveI6a;Yudi;Prihanto;prihantoyudi@gmail.com;true;en;System;System
+72;eka1980;$2a$10$iKCTKsRUWGfOuhTPx3YmRumApFRcUa7XjGlrPeNczPs78TDeuoMDe;eka ;setiaputra;ekasp@gmail.com;true;en;System;System
+73;thon1990;$2a$10$kfVF3cdclY7wlIepMQ11X.FHA7Ew94aM0GKNPATskOQLAnwTmE6sS;Thon ;Mulyana ;thon.mulyana@gmail.com;true;en;System;System
+74;andykusumayadi;$2a$10$L0c/aHGMXTTe7gjYdHtTEO1BxeAV1h0Ee/6UpGkhrA8o.z5bk9Rou;Andy;Kusumayadi ;andykusumayadi@yahoo.com;true;en;System;System
+75;yanuardg;$2a$10$7W0bJig9X457pyPvuMDhCumRY6uoS16Ek5ifjvXv9r4MmJEuEp1Ka;Yanuar;Gunawan;yanuardg26@gmail.com;true;en;System;System
+76;muchlismuharom;$2a$10$SFi10l4ms7xwG.YwvsxRD.2trpZRT5ywNFFVlq3Rnpl7hSMjUOLYu;Muchlis;Muharom;muchlismuharom@gmail.com;true;en;System;System
+77;alit;$2a$10$uko5.HBplduuSPtK.V6JeuyFeJg4GKhDpXpxwVH0Mq92TOWfJCaJ.;Tiwa;Sopandi;tiwasopandi1974@gmail.com;true;en;System;System
+78;020793;$2a$10$a/u./nd9XTj4ZhVElgYfCOAtMG7YlpwTasSYgBNtBqglYy02STokS;Daris;Emon;daris@hotmail.com;true;en;System;System
+79;ariq;$2a$10$fXQImKPF7ZSkHVQVT5MBk.v6hx9ubyR7u56uVrnbu2hPmNt2vrv1a;Attoriq;Rizal;attoriqrizali@gmail.com;true;en;System;System
+80;edwar;$2a$10$lHx82lTaLzYgmYszMjr9XOBzc6Mu2FGeXNmOV02PaUEdPt7joK.qi;Edwar;Annas;edwaradputra.ed@gmail.com;true;en;System;System
+81;engkus;$2a$10$et2yJ0ibOieL42mTh7jcu.HgqRS2Vipp.dghjXQdBrnUyv3LcJGwu;Engkus;Kuswara;engkus.jamkrida@yahoo.com;true;en;System;System
+82;yadiafillah;$2a$10$yJCl3lwdneLSS71hqvDs5ugHPAlGZs0FPR3T7D89sJ2ptHlzlI.WW;Yadi;Afillah;yadiafillah9978@gmail.com;true;en;System;System
+83;white;$2a$10$L3HW0fQ4OA6gcKmEsvZMF.4CDwjMzTQ2nI8OkPxMVOJtcVISspwWu;Wegi;Maulana;whitewinegi@yahoo.com;true;en;System;System
+84;sephan27;$2a$10$jFYOp5novQWyGet25mkxPOCJ/e.n2GqUx4kWQR3ghHbyk/bxy3l8m;Asep;Saepudin;asaepudin114@gmail.com;true;en;System;System
+85;charlytoar2015;$2a$10$WOA0oMbpmBAGR93MZWe0g.VU.tsCCNPdNHtMMwtMgPjKRqPVlnVJ2;Charly;Toar;charlytoar2015@gmail.com;true;en;System;System
+86;darmana;$2a$10$ZU3JVmKS9meh72/ttqdiI.rT7yJ6ZalTorB0nMuRnu59TmkbSgopq;Darmana;Darmana ;darmana.suhanda@gmail.com;true;en;System;System
+87;athaya1603;$2a$10$.Jj3PK4nckyP2dJJfr1oIuzYlr/I8eM350Up/wX3ynxZC1v.sH4k.;Athaya;Ramadhina;athaya.dhina16@gmail.com;true;en;System;System
+88;aryosuatmodjo;$2a$10$E0dqNQwvjR9iY68SkaWUUeK321TnAK03NVXAqlxvgbBz84Jq7V1OS;Aryo;Suatmodjo ;aryosuatmodjo@yahoo.com.sg;true;en;System;System
+89;freddy123;$2a$10$kOG5cUcs23Y2U3k9rjQKOeHIMlJunvCscMLAUrCTMD0NW51illtg2;Freddy Caesar ;Ardiansyah;aptfreddy@gmail.com;true;en;System;System
+90;rachmat;$2a$10$yBPLXkvcARaZHGJUVURELuD1Vl9EdpY1kgXfspNEEXNThuTxHmL0S;Rachmat;Risyana;rachmatrisyana@gmail.com;true;en;System;System
+91;qwerty;$2a$10$lKcVO9hvI1Mo0h4fGEBF/ey7lZ7KywG9FQ11zf9VLKQA2SFbyS3M6;Qwerty;Qwerty;asdf@yahoo.com;true;en;System;System
+92;triaadhimu;$2a$10$DELWMhUPUKqHFJntyu.rlOyvHmulOur9FMhwU37VPIaesX8BzU.Ni;Tria;Adhimu;triaadhimu24@gmail.com;true;en;System;System
+93;1973;$2a$10$eOGHmTB/KExzqrnG2TsnhezyFsZSX7NYr/Y6VV/q37D4YNHBTKN3e;Mas;DUKUT;adhietdmc@gmail.com;true;en;System;System
+94;atep123;$2a$10$kTKOiUn27qQiAL4wSDbOcuIdXZA/38UNksGz7Hzi95PpDIwiipHyO;atep ;sopian;bagusfadilah155@gmail.com;true;en;System;System
+95;lina;$2a$10$AfHZFdrKA63QJUPf/..d0egH4fKbQqmtr4UvGLcO0SAwEKfVDKeLS;Lina;Nursanty;linanursanty@gmail.com;true;en;System;System
+96;ariefrachmat;$2a$10$5C5OcNlqHmDYz5BKT0a80u5yLWiEY3waCE3HIjs.fybvK9cbg.tCe;Arief ;Rachmat ;ariefrachmat687@gmail.com;true;en;System;System
+97;di2priyanto;$2a$10$tSjBvGlu0mxIpBs0O8YQsue3OdZFGjfSmW4AKRA76CAb1Rq5hmUXa;Didi;Priyanto ;di2pekos@gmail.com;true;en;System;System
+98;mfreakthing;$2a$10$zmZtyzO.RIPgDFkjgnUYK.pVv08zZS0jaePjWDSIC8m.eqBXBst2G;Ghani;Param;mfreakthing@gmail.com;true;en;System;System
+99;gioariantara;$2a$10$Noeazt5Ct/ffeGsxINLomehSI/U2KPxA8UhOcu14nrLaUjrXCRTEe;Raden Giovanni;Ariantara;giovaniariantara@gmail.com;true;en;System;System
+100;nicolasruslim;$2a$10$0PsLye1Bi3dpDMmCO9t/meZKNrv6UhGm0O3tbqxBespTpjdCHeVkC;Nicolas;Ruslim;nicolasruslim1@gmail.com;true;en;System;System
+101;yantisutiarni;$2a$10$B.H1ZO.gSud1x2SFH10UbO6edkjWEA56BKKXA3cgEcT5IN9fc/NjW;Yanti;Sutiarni;yantisutiarnikaimun@gmail.com;true;en;System;System
+102;anneke;$2a$10$4TvZPF1LTkIV.1EIPZmFyOxSwUsiVUoj6YtEGvABTja1LlhS3n7Xm;Anneke;Silfiyanti;anneke.silfiyanti@yahoo.com;true;en;System;System
+103;ilal;$2a$10$bf.g/rLvNX5/5AY7Oj9hqepMLfm3ewuItA33IbeHgBdUSxDK.rLPa;Muhamad;Rizal;ilal.ahad@gmail.com;true;en;System;System
+104;fitri;$2a$10$3ffDK2aqfhtbmQo11DNEUuMVNnzmaufoYOCza3Eiz1DMb9IbXjCxa;Widi;Octaviani;octavianiw@gmail.com;true;en;System;System
+105;dwi;$2a$10$apGQXRp.CnlCjaKuLyTcUunxSedRUTzTiA0nZILedsLLdiROd2DEa;Dwi;Irianto;mail.designku@gmail.com;true;en;System;System
+106;tendi;$2a$10$T8Km5Lw09mtDJruM97y/K.2SMj59qtLi8djwAW/t9QBnn0pkqLEYu;Tendi;Hidayat;tendihidayat@rocketmail.com;true;en;System;System
+107;nabilismail;$2a$10$XxBv5LcbSe.OmsNBHAefCO3iIDUgzffX/FpmNtOdI.h/A2UbfinXu;Nabil;Ismail;nabil89ismail@gmail.com;true;en;System;System
+108;kyira;$2a$10$ggv7qULTs75M1xVlVAilHOdmWWwtpxchTAM9o3hTvhYZ.nZUvzqlq;Indra;Kosasih;kimmo_kenyen@yahoo.com;true;en;System;System
+109;ardhirahmansyah;$2a$10$smLDXlPYo6/G8wgtDXoPF.g53jHkEE6af5G8czJ6zjs2AE03hm3sa;Ardhi ;Rahmansyah;khanoman_satu@yahoo.com;true;en;System;System
+110;hafizh24am;$2a$10$YPu3/oZxXaj1wmMY4cjiyOPI10oQ560NFFz7ptSHxPzUraBzP9Ysu;Hafizh ;Ahmad Maushul;hafizh.amaushul@gmail.com;true;en;System;System
+111;dhywara;$2a$10$3hM9wgt5x2hw3pxdGv.aOe0bFwLFPDxm9XEPRZQzZ4m0d1t.pf.OC;Sandhy;Ariyaswara;dhywara@gmail.com;true;en;System;System
+112;bayuhikmah;$2a$10$MwTixArxHDjdPpF5z4ZMVeTMQiLCmZby92N2Nvy/048NDw9x6r6ju;null;null;bayuhikmahf@gmail.com;true;en;System;System
+113;cindyalvionitas;$2a$10$92vUJSm04XwqtEyP7FjONuio62SHkqkfDsjZ9AIog1cvNuf2b/7su;null;null;alvionitacindy97@gmail.com;true;en;System;System
+114;fildzahaam;$2a$10$cYEzejkscojq.LD53evP1OKMZUnOXNAp7l1wlN4ug8Bs7/31CxeKe;Fildzah;Maysur;fildzahaam@gmail.com;true;en;System;System
+115;kiki;$2a$10$ZvYRK3PKUKH.py/LSsp2.O3IwY1n1MinjJk0AzTBS65UoMDLHdoly;Endy;Kiki;kikiendy@gmail.com;true;en;System;System
+116;nelinikla;$2a$10$X0OF3MdZGDeTEjPE7D3Srexqyn0AXOQySfa85IID7GQKCfJvX.qUW;null;null;neli.iklimanikla@gmail.com;true;en;System;System
+117;blogkoding;$2a$10$xOOrecH2Vf/UKEDF2JcgjeZthroMjZE9xaxGrlXqYmirzIDo1Z/Ny;Blog;Koding;blogkoding@gmail.com;true;en;System;System
+118;adrianjanapriya;$2a$10$6QBZT3XwuqkNQWbuDHSffeKCTaEBNVJ6TwbvNG.5fa00NtrFwItHS;Adrian;Janapriya;adrianjanapriya@yahoo.com;true;en;System;System
+119;dendi;$2a$10$Oi6GYFA0K1uALxEWAS89lufNbyuz4bGBPFLGRWxkHNFHxfbsFny7W;null;null;dendy_yusuf@yahoo.co.id;true;en;System;System
+120;ganapermana;$2a$10$1VdHkAjo.mP40qTkYORXkOC/4qiXovsQ1gBkf52nwIdp2TH/3ctHO;null;null;tasaphiraa@gmail.com;true;en;System;System
+121;dimz21;$2a$10$20Vd35oNvikzTFVyr7vUeupLWGsbzNhJ8mj8J.7RFMmWkTkoDU03e;Dimas;Yudhistira;dhimzynisme@gmail.com;true;en;System;System
+122;herdy;$2a$10$EGrU8VzNR.EDRpChDNHDV.NIBqwcZH793Pp5pyWWVAO2tvqaqBu8e;Herdy;Herjuna;herdy2016@gmail.com;true;en;System;System
+123;rikamelyaa;$2a$10$VedzQK6RbxCHQY34L3UJ9.kucaso589eV.RB.vrGo1BxYy0pMGf16;Rika;Melya;rikamelyaefriyana.9ar@gmail.com;true;en;System;System
+124;komunitas22ibu;$2a$10$gSalrpSVFC2O4aH9HgAfP.sXzrGWlmbU14Euihk7aukF6tY.LZfq2;null;null;duniaibu425@gmail.com;true;en;System;System
+125;nurmaldew;$2a$10$oDWCXUnavf2Tcrgstx4TLO3YEt76hTiDMulr00S.rkMhrD6pn4dSK;null;null;nurrrmala@gmail.com;true;en;System;System
+126;tedy;$2a$10$JfJlEXyfnlLLZY3L7TTsWu9ZjsIB/n/qeXS.8HVqJSGB8U65f6wWu;Tedy;Willem;worotitjantedy@yahoo.com;true;en;System;System
+127;iqbal;$2a$10$5wlW.BxHeiqxOdEl7/ydpeVnxZbIfS6vSOI.RBwtctI0uHl208Tl2;null;null;mohiqbalfalahudin@gmail.com;true;en;System;System
+128;imanatahira;$2a$10$QBGyp7gN6gs1WQwFrDSkwOeolNv3sQ7HwnteK7641ZNC1Dm7IG60q;null;null;tahiraimana05@gmail.com;true;en;System;System
+129;herusaputra;$2a$10$BknFv5H00kAHF7EaLTAaWewOiVS2StzI1Fg5NAdgCVyAZlK48cHSO;null;null;putrahardist@gmail.com;true;en;System;System
+130;mgee;$2a$10$XoZkMr7nVi0GxgigJM/0Fu4O09mv0IW5LsBmYudxkTy1A2I0jQ9ey;null;null;m.ginandjar@gmail.com;true;en;System;System
+131;fikry;$2a$10$n51t4zHHzYQDyCQPVd26fOfw06GF827P1LDT7cO5hYN49rAnbyPza;null;null;fikry_mauludi@pikiran-rakyat.com;true;en;System;System
+132;teabdg;$2a$10$55TQhR7nXY6kmDq/x/.Y1OMPDF2JGBISO9nx46VoUcrJKpQ5LPrGW;null;null;tea.bdg@gmail.com;true;en;System;System
+133;muhammaddinan18;$2a$10$C6mk2qvEeeoirRUMVXtn7usmxtqMDHtvg3/8vfuwj7qrmlXkSzqEa;null;null;muhammaddinan18@gmail.com;true;en;System;System
+134;sugeng;$2a$10$JbchfIXlrTk9l2z6kmh.KeIFRZKvjSmb0NgK/Z3lQa.4m5bo2tyrG;null;null;sugengaima24@yahoo.com;true;en;System;System
+135;yodas55;$2a$10$phxRiIJKQbPzg.c3Bl4ySOCQvbr.quDk8AR1e/eD62u1zUVYPTnRO;Bahrum;D Atmana;bb.galuh@gmail.com;true;en;System;System
+136;alqoori;$2a$10$uc2fRmiIfNKG0/zPVnX0r.vzd8Tmi/UaX4oDGY.Lra6Z8WRFUhx/C;null;null;nendendr@gmail.com;true;en;System;System
+137;narayana;$2a$10$.aTAzK3yt.yp.jYM4JQ3/.cKGEUqbK.W1d11/Zun4tcuvrjMlZ7Qu;null;null;yayatnarayana@gmail.com;true;en;System;System
+138;arissawd;$2a$10$6OCD0eTu/uelVbhRI7bZhu1GqI1uz.D2Aphnwzyl0mT44viRqy0te;null;null;arisshaandharie@gmail.com;true;en;System;System
+139;bayu7;$2a$10$jMhAQW51UqCOJRJMZFkqGON21q/eGsQdUnF3ZxTyIZwGQp75dC7pW;null;null;byu.pratama@gmail.com;true;en;System;System
+140;karambafpikunpad;$2a$10$LJBHYxkBXdf4gLXP3zT8H.qqo6paOyowlbUHaZWxGaWjYnYJ7Ky9.;null;null;karamba.fpikunpad@gmail.com;true;en;System;System

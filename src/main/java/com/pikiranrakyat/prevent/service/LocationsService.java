@@ -4,6 +4,8 @@ import com.pikiranrakyat.prevent.domain.Locations;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.Optional;
+
 /**
  * Service Interface for managing Locations.
  */
@@ -18,35 +20,36 @@ public interface LocationsService {
     Locations save(Locations locations);
 
     /**
-     *  Get all the locations.
+     * Get all the locations.
      *
-     *  @param pageable the pagination information
-     *  @return the list of entities
+     * @param pageable the pagination information
+     * @return the list of entities
      */
     Page<Locations> findAll(Pageable pageable);
 
+    Optional<Locations> findByNameIgnoreCase(String name);
+
     /**
-     *  Get the "id" locations.
+     * Get the "id" locations.
      *
-     *  @param id the id of the entity
-     *  @return the entity
+     * @param id the id of the entity
+     * @return the entity
      */
     Locations findOne(Long id);
 
     /**
-     *  Delete the "id" locations.
+     * Delete the "id" locations.
      *
-     *  @param id the id of the entity
+     * @param id the id of the entity
      */
     void delete(Long id);
 
     /**
      * Search for the locations corresponding to the query.
      *
-     *  @param query the query of the search
-     *
-     *  @param pageable the pagination information
-     *  @return the list of entities
+     * @param query    the query of the search
+     * @param pageable the pagination information
+     * @return the list of entities
      */
     Page<Locations> search(String query, Pageable pageable);
 }

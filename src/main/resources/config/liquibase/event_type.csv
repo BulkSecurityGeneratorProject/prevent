@@ -1,2 +1,15 @@
 id;name;description;created_by;last_modified_by
-1;Seminar;;System;System;system@localhost;true;en;system;system
+1;Seminar/Pelatihan/Workshop;;System;System;system@localhost;true;en;system;system
+2;Pameran/Exhibition;;System;System;system@localhost;true;en;system;system
+3;Event Kreatif;;System;System;system@localhost;true;en;system;system
+4;Olahraga;;System;System;system@localhost;true;en;system;system
+5;Otomotif;;System;System;system@localhost;true;en;system;system
+6;Kompetisi/Kontes;;System;System;system@localhost;true;en;system;system
+7;Event Instansi Pemerintahan;;System;System;system@localhost;true;en;system;system
+8;Corporate Social Responsibility;;System;System;system@localhost;true;en;system;system
+9;Music;;System;System;system@localhost;true;en;system;system
+10;Event Komunitas;;System;System;system@localhost;true;en;system;system
+11;Yayasan;;System;System;system@localhost;true;en;system;system
+12;Event Sekolah;;System;System;system@localhost;true;en;system;system
+13;Event Universitas;;System;System;system@localhost;true;en;system;system
+14;Perusahaan dan EO;;System;System;system@localhost;true;en;system;system
