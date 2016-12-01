@@ -1,32 +1,30 @@
 package com.pikiranrakyat.prevent.service.impl;
 
-import com.pikiranrakyat.prevent.service.OrganizerService;
 import com.pikiranrakyat.prevent.domain.Organizer;
 import com.pikiranrakyat.prevent.repository.OrganizerRepository;
 import com.pikiranrakyat.prevent.repository.search.OrganizerSearchRepository;
+import com.pikiranrakyat.prevent.service.OrganizerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
+import java.util.Optional;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
 /**
  * Service Implementation for managing Organizer.
  */
 @Service
 @Transactional
-public class OrganizerServiceImpl implements OrganizerService{
+public class OrganizerServiceImpl implements OrganizerService {
 
     private final Logger log = LoggerFactory.getLogger(OrganizerServiceImpl.class);
-    
+
     @Inject
     private OrganizerRepository organizerRepository;
 
@@ -47,12 +45,12 @@ public class OrganizerServiceImpl implements OrganizerService{
     }
 
     /**
-     *  Get all the organizers.
-     *  
-     *  @param pageable the pagination information
-     *  @return the list of entities
+     * Get all the organizers.
+     *
+     * @param pageable the pagination information
+     * @return the list of entities
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public Page<Organizer> findAll(Pageable pageable) {
         log.debug("Request to get all Organizers");
         Page<Organizer> result = organizerRepository.findAll(pageable);
@@ -60,22 +58,28 @@ public class OrganizerServiceImpl implements OrganizerService{
     }
 
     /**
-     *  Get one organizer by id.
+     * Get one organizer by id.
      *
-     *  @param id the id of the entity
-     *  @return the entity
+     * @param id the id of the entity
+     * @return the entity
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public Organizer findOne(Long id) {
         log.debug("Request to get Organizer : {}", id);
         Organizer organizer = organizerRepository.findOne(id);
         return organizer;
     }
 
+    @Override
+    public Optional<Organizer> findByNameIgnoreCase(String name) {
+        log.debug("Request to find organizer by name : " + name);
+        return organizerRepository.findByName(name);
+    }
+
     /**
-     *  Delete the  organizer by id.
+     * Delete the  organizer by id.
      *
-     *  @param id the id of the entity
+     * @param id the id of the entity
      */
     public void delete(Long id) {
         log.debug("Request to delete Organizer : {}", id);
@@ -86,8 +90,8 @@ public class OrganizerServiceImpl implements OrganizerService{
     /**
      * Search for the organizer corresponding to the query.
      *
-     *  @param query the query of the search
-     *  @return the list of entities
+     * @param query the query of the search
+     * @return the list of entities
      */
     @Transactional(readOnly = true)
     public Page<Organizer> search(String query, Pageable pageable) {

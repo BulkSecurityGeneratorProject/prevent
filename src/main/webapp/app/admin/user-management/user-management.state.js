@@ -17,7 +17,7 @@
                 pageTitle: 'Users'
             },
             views: {
-                'content@': {
+                'main-content@backend': {
                     templateUrl: 'app/admin/user-management/user-management.html',
                     controller: 'UserManagementController',
                     controllerAs: 'vm'
@@ -50,7 +50,7 @@
                 pageTitle: 'prevent'
             },
             views: {
-                'content@': {
+                'main-content@backend': {
                     templateUrl: 'app/admin/user-management/user-management-detail.html',
                     controller: 'UserManagementDetailController',
                     controllerAs: 'vm'

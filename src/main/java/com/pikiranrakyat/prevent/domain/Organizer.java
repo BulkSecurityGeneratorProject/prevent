@@ -28,7 +28,20 @@ public class Organizer extends AbstractAuditingEntity implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
 
+
     @NotNull
+    @Column(name = "address", nullable = false)
+    private String address;
+
+    @NotNull
+    @Column(name = "phone", nullable = false)
+    private String phone;
+
+    @NotNull
+    @Column(name = "email", nullable = false)
+    private String email;
+
+
     @Size(min = 10, max = 200)
     @Column(name = "description", length = 200, nullable = false)
     private String description;
@@ -62,6 +75,47 @@ public class Organizer extends AbstractAuditingEntity implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+
+    public String getAddress() {
+        return address;
+    }
+
+    public Organizer address(String address) {
+        this.address = address;
+        return this;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public Organizer phone(String phone) {
+        this.phone = phone;
+        return this;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+
+    public String getEmail() {
+        return email;
+    }
+
+    public Organizer email(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getDescription() {
@@ -125,7 +179,7 @@ public class Organizer extends AbstractAuditingEntity implements Serializable {
             return false;
         }
         Organizer organizer = (Organizer) o;
-        if(organizer.id == null || id == null) {
+        if (organizer.id == null || id == null) {
             return false;
         }
         return Objects.equals(id, organizer.id);
@@ -140,10 +194,14 @@ public class Organizer extends AbstractAuditingEntity implements Serializable {
     public String toString() {
         return "Organizer{" +
             "id=" + id +
-            ", name='" + name + "'" +
-            ", description='" + description + "'" +
-            ", facebook='" + facebook + "'" +
-            ", twitter='" + twitter + "'" +
+            ", name='" + name + '\'' +
+            ", address='" + address + '\'' +
+            ", phone='" + phone + '\'' +
+            ", email='" + email + '\'' +
+            ", description='" + description + '\'' +
+            ", facebook='" + facebook + '\'' +
+            ", twitter='" + twitter + '\'' +
+            ", user=" + user +
             '}';
     }
 }

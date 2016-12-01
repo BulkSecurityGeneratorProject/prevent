@@ -16,7 +16,7 @@
                 pageTitle: 'API'
             },
             views: {
-                'content@': {
+                'main-content@backend': {
                     templateUrl: 'app/admin/docs/docs.html'
                 }
             }

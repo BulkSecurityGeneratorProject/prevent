@@ -4,7 +4,7 @@ import com.pikiranrakyat.prevent.domain.Organizer;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.List;
+import java.util.Optional;
 
 /**
  * Service Interface for managing Organizer.
@@ -20,35 +20,36 @@ public interface OrganizerService {
     Organizer save(Organizer organizer);
 
     /**
-     *  Get all the organizers.
-     *  
-     *  @param pageable the pagination information
-     *  @return the list of entities
+     * Get all the organizers.
+     *
+     * @param pageable the pagination information
+     * @return the list of entities
      */
     Page<Organizer> findAll(Pageable pageable);
 
     /**
-     *  Get the "id" organizer.
+     * Get the "id" organizer.
      *
-     *  @param id the id of the entity
-     *  @return the entity
+     * @param id the id of the entity
+     * @return the entity
      */
     Organizer findOne(Long id);
 
+    Optional<Organizer> findByNameIgnoreCase(String name);
+
     /**
-     *  Delete the "id" organizer.
+     * Delete the "id" organizer.
      *
-     *  @param id the id of the entity
+     * @param id the id of the entity
      */
     void delete(Long id);
 
     /**
      * Search for the organizer corresponding to the query.
      *
-     *  @param query the query of the search
-     *  
-     *  @param pageable the pagination information
-     *  @return the list of entities
+     * @param query    the query of the search
+     * @param pageable the pagination information
+     * @return the list of entities
      */
     Page<Organizer> search(String query, Pageable pageable);
 }

@@ -108,4 +108,5 @@ upload:
     path:
         image: /Users/aseprojali/Workspace/work/temp/image/
         file: /Users/aseprojali/Workspace/work/temp/file/
+        import: /Users/aseprojali/Workspace/work/temp/import/
 
