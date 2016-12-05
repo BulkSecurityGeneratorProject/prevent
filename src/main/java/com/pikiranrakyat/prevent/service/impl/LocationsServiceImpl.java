@@ -59,8 +59,20 @@ public class LocationsServiceImpl implements LocationsService {
 
     @Override
     public Optional<Locations> findByNameIgnoreCase(String name) {
-        log.debug("Request find location by " + name);
+        log.debug("Request find location ignore case by " + name);
         return locationsRepository.findByNameIgnoreCase(name);
+    }
+
+    @Override
+    public Optional<Locations> findByName(String name) {
+        log.debug("Request find location by " + name);
+        return locationsRepository.findByName(name);
+    }
+
+    @Override
+    public Optional<Locations> findByNameAndAddress(String name, String address) {
+        log.debug("Request find location by " + name + " and address " + address);
+        return locationsRepository.findByNameAndAddress(name, address);
     }
 
     /**

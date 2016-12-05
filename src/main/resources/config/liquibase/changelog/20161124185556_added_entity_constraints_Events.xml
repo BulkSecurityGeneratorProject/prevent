@@ -7,7 +7,7 @@
         Added the constraints for entity Events.
     -->
     <changeSet id="20161124185556-2" author="jhipster">
-        
+
         <addForeignKeyConstraint baseColumnNames="event_type_id"
                                  baseTableName="events"
                                  constraintName="fk_events_event_type_id"
@@ -19,6 +19,12 @@
                                  constraintName="fk_events_locations_id"
                                  referencedColumnNames="id"
                                  referencedTableName="locations"/>
+
+        <addForeignKeyConstraint baseColumnNames="organizer_id"
+                                 baseTableName="events"
+                                 constraintName="fk_events_organizer_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="organizer"/>
 
     </changeSet>
 </databaseChangeLog>

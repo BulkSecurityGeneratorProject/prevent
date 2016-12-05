@@ -25,8 +25,8 @@ public class Locations extends AbstractAuditingEntity implements Serializable {
     private Long id;
 
     @NotNull
-    @Size(min = 3, max = 50)
-    @Column(name = "name", length = 50, nullable = false)
+    @Size(min = 3, max = 100)
+    @Column(name = "name", length = 100, nullable = false)
     private String name;
 
     @NotNull

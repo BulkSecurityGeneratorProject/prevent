@@ -29,6 +29,10 @@ public interface LocationsService {
 
     Optional<Locations> findByNameIgnoreCase(String name);
 
+    Optional<Locations> findByName(String name);
+
+    Optional<Locations> findByNameAndAddress(String name, String address);
+
     /**
      * Get the "id" locations.
      *

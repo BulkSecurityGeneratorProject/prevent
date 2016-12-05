@@ -73,7 +73,7 @@ public class OrganizerServiceImpl implements OrganizerService {
     @Override
     public Optional<Organizer> findByNameIgnoreCase(String name) {
         log.debug("Request to find organizer by name : " + name);
-        return organizerRepository.findByName(name);
+        return organizerRepository.findByNameIgnoreCase(name);
     }
 
     /**

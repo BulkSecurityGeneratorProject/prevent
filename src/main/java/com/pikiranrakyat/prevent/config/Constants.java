@@ -30,9 +30,11 @@ public final class Constants {
     private Constants() {
     }
 
+    public static final String DELIMETER_CSV = ";";
     public interface IMPORT {
 
-        String ORGANIZER = "ORGANIZER";
+        String ORGANIZER = "organizer";
+        String EVENT = "event";
     }
 
 }

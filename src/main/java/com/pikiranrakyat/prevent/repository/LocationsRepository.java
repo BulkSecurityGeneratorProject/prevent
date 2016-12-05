@@ -10,7 +10,11 @@ import java.util.Optional;
  * Spring Data JPA repository for the Locations entity.
  */
 @SuppressWarnings("unused")
-public interface LocationsRepository extends JpaRepository<Locations,Long> {
+public interface LocationsRepository extends JpaRepository<Locations, Long> {
 
     Optional<Locations> findByNameIgnoreCase(String name);
+
+    Optional<Locations> findByName(String name);
+
+    Optional<Locations> findByNameAndAddress(String name, String address);
 }

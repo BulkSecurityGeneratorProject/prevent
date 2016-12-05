@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 
+import java.util.Optional;
+
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
@@ -67,6 +69,12 @@ public class EventTypeServiceImpl implements EventTypeService {
         log.debug("Request to get EventType : {}", id);
         EventType eventType = eventTypeRepository.findOne(id);
         return eventType;
+    }
+
+    @Override
+    public Optional<EventType> findByNameIgnoreCase(String name) {
+        log.debug("Request to find event type by name : {}" + name);
+        return eventTypeRepository.findByNameIgnoreCase(name);
     }
 
     /**

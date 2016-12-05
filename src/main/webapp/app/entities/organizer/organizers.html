@@ -44,8 +44,6 @@
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="name"><span>Name</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="facebook"><span>Facebook</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="twitter"><span>Twitter</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="user.email"><span>User</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
@@ -54,8 +52,6 @@
                 <tr ng-repeat="organizer in vm.organizers track by organizer.id">
                     <td><a ui-sref="organizer-detail({id:organizer.id})">{{organizer.id}}</a></td>
                     <td>{{organizer.name}}</td>
-                    <td>{{organizer.facebook}}</td>
-                    <td>{{organizer.twitter}}</td>
                     <td>
                         {{organizer.user.email}}
                     </td>

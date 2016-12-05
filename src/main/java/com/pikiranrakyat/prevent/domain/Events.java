@@ -29,13 +29,13 @@ public class Events extends AbstractAuditingEntity implements Serializable {
     private Long id;
 
     @NotNull
-    @Size(min = 6, max = 50)
-    @Column(name = "title", length = 50, nullable = false)
+    @Size(min = 6, max = 200)
+    @Column(name = "title", length = 200, nullable = false)
     private String title;
 
     @NotNull
-    @Size(min = 10, max = 300)
-    @Column(name = "description", length = 300, nullable = false)
+    @Size(min = 10, max = 10000)
+    @Column(name = "description", length = 10000, nullable = false)
     private String description;
 
     @NotNull
@@ -47,20 +47,24 @@ public class Events extends AbstractAuditingEntity implements Serializable {
     private ZonedDateTime ends;
 
     @NotNull
+    @Column(name = "agree_date", nullable = false)
+    private ZonedDateTime agreeDate;
+
+    @NotNull
     @DecimalMin(value = "0")
     @Column(name = "subtotal", precision = 10, scale = 2, nullable = false)
-    private BigDecimal subtotal;
+    private BigDecimal subtotal = BigDecimal.ZERO;
 
     @NotNull
     @Column(name = "accept", nullable = false)
-    private Boolean accept;
+    private Boolean accept = Boolean.FALSE;
 
     @Column(name = "note")
     private String note;
 
     @NotNull
     @Column(name = "is_order", nullable = false)
-    private Boolean isOrder;
+    private Boolean isOrder = Boolean.FALSE;
 
     @ManyToOne
     @NotNull
@@ -69,6 +73,11 @@ public class Events extends AbstractAuditingEntity implements Serializable {
     @ManyToOne
     @NotNull
     private Locations locations;
+
+
+    @ManyToOne
+    @NotNull
+    private Organizer organizer;
 
     public Long getId() {
         return id;
@@ -119,6 +128,20 @@ public class Events extends AbstractAuditingEntity implements Serializable {
 
     public ZonedDateTime getEnds() {
         return ends;
+    }
+
+
+    public Events agreeDate(ZonedDateTime agreeDate) {
+        this.agreeDate = agreeDate;
+        return this;
+    }
+
+    public void setAgreeDate(ZonedDateTime agreeDate) {
+        this.agreeDate = agreeDate;
+    }
+
+    public ZonedDateTime getAgreeDate() {
+        return agreeDate;
     }
 
     public Events ends(ZonedDateTime ends) {
@@ -208,6 +231,20 @@ public class Events extends AbstractAuditingEntity implements Serializable {
         this.locations = locations;
     }
 
+
+    public Organizer getOrganizer() {
+        return organizer;
+    }
+
+    public Events organizer(Organizer organizer) {
+        this.organizer = organizer;
+        return this;
+    }
+
+    public void setOrganizer(Organizer organizer) {
+        this.organizer = organizer;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -232,14 +269,18 @@ public class Events extends AbstractAuditingEntity implements Serializable {
     public String toString() {
         return "Events{" +
             "id=" + id +
-            ", title='" + title + "'" +
-            ", description='" + description + "'" +
-            ", starts='" + starts + "'" +
-            ", ends='" + ends + "'" +
-            ", subtotal='" + subtotal + "'" +
-            ", accept='" + accept + "'" +
-            ", note='" + note + "'" +
-            ", isOrder='" + isOrder + "'" +
+            ", title='" + title + '\'' +
+            ", description='" + description + '\'' +
+            ", starts=" + starts +
+            ", ends=" + ends +
+            ", agreeDate=" + agreeDate +
+            ", subtotal=" + subtotal +
+            ", accept=" + accept +
+            ", note='" + note + '\'' +
+            ", isOrder=" + isOrder +
+            ", eventType=" + eventType +
+            ", locations=" + locations +
+            ", organizer=" + organizer +
             '}';
     }
 }

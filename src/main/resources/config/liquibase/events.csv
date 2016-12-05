@@ -1,4 +1,0 @@
-id;title;description;starts;ends;subtotal;accept;note;is_order;event_type_id;locations_id;created_by;last_modified_by
-1;Event Title 1;Event Description 1;2016-12-03 00:00:00;2016-12-15 00:00:00;0;1;;;1;1;System;System;system@localhost;true;en;system;system
-2;Event Title 2;Event Description 2;2016-12-04 00:00:00;2016-12-05 00:00:00;0;1;;;1;1;System;System;system@localhost;true;en;system;system
-3;Event Title 3;Event Description 3;2016-12-16 00:00:00;2016-12-20 00:00:00;0;1;;;1;1;System;System;system@localhost;true;en;system;system

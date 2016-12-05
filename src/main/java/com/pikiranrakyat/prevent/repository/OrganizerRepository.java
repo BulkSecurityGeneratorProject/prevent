@@ -17,6 +17,6 @@ public interface OrganizerRepository extends JpaRepository<Organizer, Long> {
     @Query("select organizer from Organizer organizer where organizer.user.login = ?#{principal.username}")
     List<Organizer> findByUserIsCurrentUser();
 
-    Optional<Organizer> findByName(String name);
+    Optional<Organizer> findByNameIgnoreCase(String name);
 
 }
