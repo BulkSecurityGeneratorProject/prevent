@@ -67,8 +67,8 @@
                 <tr ng-repeat="events in vm.events track by events.id">
                     <td><a ui-sref="events-detail({id:events.id})">{{events.id}}</a></td>
                     <td>{{events.title}}</td>
-                    <td>{{events.starts | date:'medium'}}</td>
-                    <td>{{events.ends | date:'medium'}}</td>
+                    <td>{{events.starts |  date:'dd-MM-yy HH:mm'}}</td>
+                    <td>{{events.ends |  date:'dd-MM-yy HH:mm'}}</td>
                     <td>{{events.subtotal}}</td>
                     <td>{{events.accept}}</td>
                     <td>{{events.isOrder}}</td>
@@ -78,7 +78,7 @@
                     <td>
                         <a ui-sref="locations-detail({id:events.locations.id})">{{events.locations.name}}</a>
                     </td>
-                    <td>{{events.createdDate | date:'dd/MM/yy HH:mm'}}</td>
+                    <td>{{events.createdDate | date:'dd-MM-yy HH:mm'}}</td>
                     <td>{{events.createdBy}}</td>
                     <td>{{events.lastModifiedBy}}</td>
                     <td>{{events.lastModifiedDate | date:'dd/MM/yy HH:mm'}}</td>
