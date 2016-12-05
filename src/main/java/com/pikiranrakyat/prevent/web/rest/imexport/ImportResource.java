@@ -16,7 +16,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -72,7 +71,6 @@ public class ImportResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    @Async
     public void postImport(
         @RequestParam(value = "type") String type,
         @RequestParam(value = "file") MultipartFile multipartFile) throws IOException {
@@ -104,6 +102,7 @@ public class ImportResource {
         if (!file.exists()) {
             file.createNewFile();
         }
+
         // Create file to full path
         BufferedOutputStream stream =
             new BufferedOutputStream(new FileOutputStream(file));

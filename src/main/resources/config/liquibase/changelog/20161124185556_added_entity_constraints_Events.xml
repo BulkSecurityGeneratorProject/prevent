@@ -26,5 +26,17 @@
                                  referencedColumnNames="id"
                                  referencedTableName="organizer"/>
 
+        <addForeignKeyConstraint baseColumnNames="image_id"
+                                 baseTableName="events"
+                                 constraintName="fk_events_image_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="file_manager"/>
+
+        <addForeignKeyConstraint baseColumnNames="file_id"
+                                 baseTableName="events"
+                                 constraintName="fk_events_file_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="file_manager"/>
+
     </changeSet>
 </databaseChangeLog>

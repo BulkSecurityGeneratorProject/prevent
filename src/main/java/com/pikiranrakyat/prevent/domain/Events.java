@@ -74,10 +74,15 @@ public class Events extends AbstractAuditingEntity implements Serializable {
     @NotNull
     private Locations locations;
 
-
     @ManyToOne
     @NotNull
     private Organizer organizer;
+
+    @ManyToOne
+    private FileManager image;
+
+    @ManyToOne
+    private FileManager file;
 
     public Long getId() {
         return id;
@@ -245,6 +250,22 @@ public class Events extends AbstractAuditingEntity implements Serializable {
         this.organizer = organizer;
     }
 
+    public FileManager getImage() {
+        return image;
+    }
+
+    public void setImage(FileManager image) {
+        this.image = image;
+    }
+
+    public FileManager getFile() {
+        return file;
+    }
+
+    public void setFile(FileManager file) {
+        this.file = file;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -281,6 +302,8 @@ public class Events extends AbstractAuditingEntity implements Serializable {
             ", eventType=" + eventType +
             ", locations=" + locations +
             ", organizer=" + organizer +
+            ", image=" + image +
+            ", file=" + file +
             '}';
     }
 }

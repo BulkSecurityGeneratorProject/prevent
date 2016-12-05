@@ -69,9 +69,18 @@
                 <constraints nullable="false"/>
             </column>
 
+            <column name="image_id" type="bigint">
+                <constraints nullable="true"/>
+            </column>
+
+
+            <column name="file_id" type="bigint">
+                <constraints nullable="true"/>
+            </column>
+
 
             <column name="created_by" type="varchar(50)">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
 
             <column name="created_date" type="timestamp" defaultValueDate="${now}">
