@@ -3,10 +3,12 @@ package com.pikiranrakyat.prevent.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.google.common.io.Files;
 import com.pikiranrakyat.prevent.domain.FileManager;
+import com.pikiranrakyat.prevent.domain.ImageManager;
 import com.pikiranrakyat.prevent.domain.User;
 import com.pikiranrakyat.prevent.repository.UserRepository;
 import com.pikiranrakyat.prevent.security.SecurityUtils;
 import com.pikiranrakyat.prevent.service.FileManagerService;
+import com.pikiranrakyat.prevent.service.ImageManagerService;
 import com.pikiranrakyat.prevent.web.rest.vm.UploadVM;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -38,17 +40,58 @@ public class UploadResource {
     @Value("${upload.path.file}")
     String pathFile;
 
+    @Value("${upload.path.image}")
+    String pathImage;
+
     @Inject
     private UserRepository userRepository;
 
     @Inject
     private FileManagerService fileManagerService;
 
-    @RequestMapping(value = "/upload",
+    @Inject
+    private ImageManagerService imageManagerService;
+
+    @RequestMapping(value = "/upload/file",
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<?> postUpload(@RequestParam("file") MultipartFile multipartFile) {
+    public ResponseEntity<?> postUploadFile(@RequestParam("file") MultipartFile multipartFile) {
+        try {
+            // Create file to full path
+            FileManager fileManager = setFile(multipartFile, pathFile);
+            FileManager saved = fileManagerService.save(fileManager);
+
+            return new ResponseEntity<>(new UploadVM(saved), HttpStatus.CREATED);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            log.error("Error upload file " + e.getMessage());
+            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
+    @RequestMapping(value = "/upload/image",
+        method = RequestMethod.POST,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<?> postUploadImage(@RequestParam("image") MultipartFile multipartFile) {
+        try {
+            // Create file to full path
+            ImageManager imageManager = setImage(multipartFile, pathImage);
+            ImageManager saved = imageManagerService.save(imageManager);
+            return new ResponseEntity<>(saved, HttpStatus.CREATED);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            log.error("Error upload file " + e.getMessage());
+            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
+    private FileManager setFile(MultipartFile multipartFile, String path) throws IOException {
 
         Optional<User> user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin());
 
@@ -66,7 +109,7 @@ public class UploadResource {
         log.debug("newFileName " + newFileName);
 
         // Get full path
-        String filePath = Paths.get(pathFile, newFileName).toString();
+        String filePath = Paths.get(path, newFileName).toString();
         log.debug("filePath " + filePath);
 
         // Get size file
@@ -76,32 +119,70 @@ public class UploadResource {
         // New File
         File file = new File(filePath);
 
-        try {
+        // Create file to full path
+        BufferedOutputStream stream =
+            new BufferedOutputStream(new FileOutputStream(file));
+        stream.write(multipartFile.getBytes());
+        stream.close();
 
-            // Create file to full path
-            BufferedOutputStream stream =
-                new BufferedOutputStream(new FileOutputStream(file));
-            stream.write(multipartFile.getBytes());
-            stream.close();
 
-            FileManager fileManager = new FileManager();
-            fileManager.setOriginal(originalFilename);
-            fileManager.setName(Files.getNameWithoutExtension(file.getAbsolutePath()));
-            fileManager.setPath(filePath);
-            fileManager.setExtension(fileExtension);
-            fileManager.setSize(size);
-            fileManager.setUser(user.get());
+        FileManager fileManager = new FileManager();
+        fileManager.setOriginal(originalFilename);
+        fileManager.setName(Files.getNameWithoutExtension(file.getAbsolutePath()));
+        fileManager.setPath(filePath);
+        fileManager.setExtension(fileExtension);
+        fileManager.setSize(size);
+        fileManager.setUser(user.get());
 
-            FileManager saved = fileManagerService.save(fileManager);
-
-            return new ResponseEntity<>(new UploadVM(saved), HttpStatus.CREATED);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            log.error("Error upload file " + e.getMessage());
-            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
+        return fileManager;
     }
+
+
+    private ImageManager setImage(MultipartFile multipartFile, String path) throws IOException {
+
+        Optional<User> user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin());
+
+        // Get original filename
+        String originalFilename = multipartFile.getOriginalFilename();
+
+        log.debug("originalFilename " + originalFilename);
+
+        // Get file extension
+        String fileExtension = Files.getFileExtension(originalFilename);
+        log.debug("fileExtension " + fileExtension);
+
+        // Create random file name
+        String newFileName = UUID.randomUUID().toString() + "." + fileExtension;
+        log.debug("newFileName " + newFileName);
+
+        // Get full path
+        String filePath = Paths.get(path, newFileName).toString();
+        log.debug("filePath " + filePath);
+
+        // Get size file
+        long size = multipartFile.getSize();
+        log.debug("file size  " + size);
+
+        // New File
+        File file = new File(filePath);
+
+        // Create file to full path
+        BufferedOutputStream stream =
+            new BufferedOutputStream(new FileOutputStream(file));
+        stream.write(multipartFile.getBytes());
+        stream.close();
+
+
+        ImageManager imageManager = new ImageManager();
+        imageManager.setOriginal(originalFilename);
+        imageManager.setName(Files.getNameWithoutExtension(file.getAbsolutePath()));
+        imageManager.setPath(filePath);
+        imageManager.setExtension(fileExtension);
+        imageManager.setSize(size);
+        imageManager.setUser(user.get());
+
+        return imageManager;
+    }
+
 
 }

@@ -7,7 +7,6 @@
     ManageLocations.$inject = ['$http'];
 
     function ManageLocations($http) {
-
         return {
             findByName: function (val) {
                 return $http.get('api/location/search', {

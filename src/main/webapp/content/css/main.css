@@ -508,3 +508,11 @@ Fix error field display
     /*background-color: #080808;*/
 /*}*/
 
+.drop-box {
+    background: #F8F8F8;
+    border: 5px dashed #DDD;
+    /*width: 170px;*/
+    text-align: center;
+    padding: 50px 10px;
+    /*margin-left: 10px;*/
+}

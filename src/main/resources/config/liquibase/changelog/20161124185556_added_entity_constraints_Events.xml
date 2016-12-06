@@ -30,7 +30,7 @@
                                  baseTableName="events"
                                  constraintName="fk_events_image_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="file_manager"/>
+                                 referencedTableName="image_manager"/>
 
         <addForeignKeyConstraint baseColumnNames="file_id"
                                  baseTableName="events"

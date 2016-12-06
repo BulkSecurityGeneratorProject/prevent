@@ -6,8 +6,10 @@
 
     <include file="classpath:config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20161025181940_added_entity_FileManager.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20161025181941_added_entity_ImageManager.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20161026012814_added_entity_ContactPerson.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20161025181940_added_entity_constraints_FileManager.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20161025181941_added_entity_constraints_ImageManager.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20161123150953_added_entity_Locations.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20161123153143_added_entity_EventType.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20161123155202_added_entity_Organizer.xml" relativeToChangelogFile="false"/>

@@ -1,9 +1,11 @@
 package com.pikiranrakyat.prevent.repository;
 
+import com.pikiranrakyat.prevent.domain.EventType;
 import com.pikiranrakyat.prevent.domain.Organizer;
 
 import org.aspectj.weaver.ast.Or;
 import org.springframework.data.jpa.repository.*;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,4 +21,6 @@ public interface OrganizerRepository extends JpaRepository<Organizer, Long> {
 
     Optional<Organizer> findByNameIgnoreCase(String name);
 
+    @Query("SELECT organizer FROM Organizer organizer WHERE organizer.name LIKE CONCAT('%',:name,'%') AND organizer.user.login = ?#{principal.username}")
+    List<Organizer> findOrganizerLikeNameWhereUserLogin(@Param("name") String name);
 }

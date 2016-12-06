@@ -1,34 +1,56 @@
 <form name="editForm" role="form" novalidate ng-submit="vm.create()" show-validation>
+
+    <!--meta data-->
     <div class="box">
         <div class="box-header with-border">
             <h3 class="box-title">Create Event</h3>
         </div>
         <div class="box-body">
             <div class="row">
-                <div class="col-sm-12">
+                <div class="col-sm-6">
 
+                    <!--organizer-->
+                    <div class="form-group">
+                        <label for="field_organizer">Organizer</label>
+                        <select class="form-control" id="field_organizer" name="organizer"
+                                ng-model="vm.events.organizer"
+                                ng-options="organizer as organizer.name for organizer in vm.organizers track by organizer.id"
+                                required>
+                            <option value=""></option>
+                        </select>
+                    </div>
+                    <div ng-show="editForm.organizer.$invalid">
+                        <p class="help-block"
+                           ng-show="editForm.organizer.$error.required">
+                            This field is required.
+                        </p>
+                    </div>
+                    <!--end organizer-->
+
+                    <!--title-->
                     <div class="form-group">
                         <label class="control-label" for="field_title">Title</label>
                         <input type="text" class="form-control" name="title" id="field_title"
                                ng-model="vm.events.title"
                                required ng-minlength="6" ng-maxlength="50"/>
-                        <div ng-show="editForm.title.$invalid">
-                            <p class="help-block"
-                               ng-show="editForm.title.$error.required">
-                                This field is required.
-                            </p>
-                            <p class="help-block"
-                               ng-show="editForm.title.$error.minlength" translate-value-min="6">
-                                This field is required to be at least 6 characters.
-                            </p>
-                            <p class="help-block"
-                               ng-show="editForm.title.$error.maxlength">
-                                This field cannot be longer than 50 characters.
-                            </p>
-                        </div>
                     </div>
+                    <div ng-show="editForm.title.$invalid">
+                        <p class="help-block"
+                           ng-show="editForm.title.$error.required">
+                            This field is required.
+                        </p>
+                        <p class="help-block"
+                           ng-show="editForm.title.$error.minlength" translate-value-min="6">
+                            This field is required to be at least 6 characters.
+                        </p>
+                        <p class="help-block"
+                           ng-show="editForm.title.$error.maxlength">
+                            This field cannot be longer than 50 characters.
+                        </p>
+                    </div>
+                    <!--end title-->
 
-
+                    <!--description-->
                     <div class="form-group">
                         <label class="control-label" for="field_description">Description</label>
 
@@ -37,23 +59,30 @@
                                   ng-model="vm.events.description"
                                   required ng-minlength="10" ng-maxlength="300"
                                   placeholder="Enter ..."></textarea>
-
-                        <div ng-show="editForm.description.$invalid">
-                            <p class="help-block"
-                               ng-show="editForm.description.$error.required">
-                                This field is required.
-                            </p>
-                            <p class="help-block"
-                               ng-show="editForm.description.$error.minlength" translate-value-min="10">
-                                This field is required to be at least 10 characters.
-                            </p>
-                            <p class="help-block"
-                               ng-show="editForm.description.$error.maxlength">
-                                This field cannot be longer than 300 characters.
-                            </p>
-                        </div>
                     </div>
+                    <div ng-show="editForm.description.$invalid">
+                        <p class="help-block"
+                           ng-show="editForm.description.$error.required">
+                            This field is required.
+                        </p>
+                        <p class="help-block"
+                           ng-show="editForm.description.$error.minlength" translate-value-min="10">
+                            This field is required to be at least 10 characters.
+                        </p>
+                        <p class="help-block"
+                           ng-show="editForm.description.$error.maxlength">
+                            This field cannot be longer than 300 characters.
+                        </p>
+                    </div>
+                    <!--end description-->
 
+
+
+
+                </div>
+
+                <div class="col-sm-6">
+                    <!--starts-->
                     <div class="form-group">
                         <label class="control-label" for="field_starts">Starts</label>
                         <div class="input-group">
@@ -66,18 +95,20 @@
                             class="glyphicon glyphicon-calendar"></i></button>
                     </span>
                         </div>
-                        <div ng-show="editForm.starts.$invalid">
-                            <p class="help-block"
-                               ng-show="editForm.starts.$error.required">
-                                This field is required.
-                            </p>
-                            <p class="help-block"
-                               ng-show="editForm.starts.$error.ZonedDateTimelocal">
-                                This field should be a date and time.
-                            </p>
-                        </div>
                     </div>
+                    <div ng-show="editForm.starts.$invalid">
+                        <p class="help-block"
+                           ng-show="editForm.starts.$error.required">
+                            This field is required.
+                        </p>
+                        <p class="help-block"
+                           ng-show="editForm.starts.$error.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </p>
+                    </div>
+                    <!--end starts-->
 
+                    <!--ends-->
                     <div class="form-group">
                         <label class="control-label" for="field_ends">Ends</label>
                         <div class="input-group">
@@ -90,67 +121,206 @@
                             class="glyphicon glyphicon-calendar"></i></button>
                     </span>
                         </div>
-                        <div ng-show="editForm.ends.$invalid">
-                            <p class="help-block"
-                               ng-show="editForm.ends.$error.required">
-                                This field is required.
-                            </p>
-                            <p class="help-block"
-                               ng-show="editForm.ends.$error.ZonedDateTimelocal">
-                                This field should be a date and time.
-                            </p>
-                        </div>
                     </div>
+                    <div ng-show="editForm.ends.$invalid">
+                        <p class="help-block"
+                           ng-show="editForm.ends.$error.required">
+                            This field is required.
+                        </p>
+                        <p class="help-block"
+                           ng-show="editForm.ends.$error.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </p>
+                    </div>
+                    <!--end ends-->
 
+                    <!--kategori event-->
                     <div class="form-group">
-                        <label class="control-label" for="field_note">Note</label>
-                        <input type="text" class="form-control" name="note" id="field_note"
-                               ng-model="vm.events.note"
-                        />
+                        <label for="field_eventType">Kategory Event</label>
+                        <select class="form-control" id="field_eventType" name="eventType"
+                                ng-model="vm.events.eventType"
+                                ng-options="eventType as eventType.name for eventType in vm.eventtypes track by eventType.id"
+                                required>
+                            <option value=""></option>
+                        </select>
                     </div>
-
-                    <div class="form-group">
-                        <label class="control-label" for="field_lokasi">Lokasi</label>
-                        <input type="text"
-                               class="form-control"
-                               name="lokasi"
-                               uib-typeahead="address for address in vm.getLocation($viewValue)"
-                               typeahead-loading="loadingLocations"
-                               typeahead-no-results="noResults"
-                               id="field_lokasi"
-                               typeahead-min-length="5"
-                               typeahead-wait-ms="100"
-                               typeahead-append-to-body="true"
-                               ng-model="vm.events.lokasi"
-                        />
-
-
-                        <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
-                        <div ng-show="noResults">
-                            <i class="glyphicon glyphicon-remove"></i> No Results Found
-                        </div>
-                        <!--<input type="text" ng-model="asyncSelected" placeholder="Locations loaded via $http"-->
-                        <!--uib-typeahead="address for address in vm.getLocation($viewValue)"-->
-                        <!--typeahead-loading="loadingLocations" typeahead-no-results="noResults"-->
-                        <!--class="form-control">-->
-                        <!--<i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>-->
-                        <!--<div ng-show="noResults">-->
-                        <!--<i class="glyphicon glyphicon-remove"></i> No Results Found-->
-                        <!--</div>-->
+                    <div ng-show="editForm.eventType.$invalid">
+                        <p class="help-block"
+                           ng-show="editForm.eventType.$error.required">
+                            This field is required.
+                        </p>
                     </div>
-
+                    <!--end kategori event-->
                 </div>
+
+
             </div>
+        </div>
+    </div>
+    <!--end meta data-->
+
+    <!--lokasi-->
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Lokasi</h3>
+
+        </div>
+        <div class="box-body">
+            <!--lokasi-->
+            <div class="form-group">
+                <label class="control-label" for="field_lokasi">Lokasi</label>
+                <input type="text"
+                       class="form-control"
+                       name="lokasi"
+                       autocomplete="off"
+                       uib-typeahead="address as address.name for address in vm.getLocation($viewValue)"
+                       typeahead-loading="loadingLocations"
+                       typeahead-no-results="noResults"
+                       id="field_lokasi"
+                       typeahead-min-length="5"
+                       typeahead-wait-ms="100"
+                       typeahead-append-to-body="true"
+                       ng-model="vm.events.locations"
+                       required/>
+            </div>
+            <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
+            <div ng-show="noResults">
+                <i class="glyphicon glyphicon-remove"></i>
+                Lokasi tidak ada, Mohon masukan lokasi
+            </div>
+            <div ng-show="editForm.lokasi.$invalid">
+                <p class="help-block"
+                   ng-show="editForm.lokasi.$error.required">
+                    This field is required.
+                </p>
+            </div>
+            <!--end lokasi-->
         </div>
         <!-- /.box-body -->
         <div class="box-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
-                <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
-            </button>
-            <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
-                <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
-            </button>
+            Footer
         </div>
         <!-- /.box-footer-->
     </div>
+    <!--end lokasi-->
+
+    <!--brosur-->
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Upload Brosur</h3>
+
+        </div>
+        <div class="box-body">
+            <div class="form-group">
+                <label class="control-label" for="field_image">Brosur</label>
+                <div class="drop-box"
+                     id="field_image"
+                     ng-model="image"
+                     name="image"
+                     ng-keep="false"
+                     ngf-pattern="'image/*'"
+                     ngf-accept="'image/*'"
+                     ngf-max-size="5MB"
+                     ngf-min-width="720"
+                     required
+                     ngf-select="vm.uploadImage($file)">
+                    Pilih Brosur
+                </div>
+                <br>
+                <uib-progressbar animate="false"
+                                 value="vm.progressImage">
+                    <b>{{vm.progressImage}}%</b>
+                </uib-progressbar>
+                <br>
+
+                <div ngf-no-file-drop>
+                    File Drag / Drop tidak didukung untuk browser ini.
+                </div>
+                <div ng-show="editForm.image.$dirty && editForm.image.$invalid">
+                    <p class="help-block"
+                       ng-show="editForm.image.$error.required"
+                       translate="entity.validation.required">
+                        This field is required.
+                    </p>
+
+                    <p class="help-block"
+                       ng-show="editForm.image.$error.maxSize">
+                        Ukuran file maksimal 5MB.
+                    </p>
+
+                    <p class="help-block"
+                       ng-show="editForm.image.$error.minWidth">
+                        Lebar gambar minimal 720px.
+                    </p>
+
+                    <p class="help-block"
+                       ng-show="editForm.image.$error.minHeight">
+                        Tinggi gambar minimal 480px.
+                    </p>
+                </div>
+
+                <p>Preview</p>
+                <img ngf-src="image" class="img-responsive">
+
+
+            </div>
+        </div>
+    </div>
+    <!--end brosur-->
+
+    <!--file proposal-->
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Upload Proposal</h3>
+
+        </div>
+        <div class="box-body">
+            <div class="form-group">
+                <label class="control-label" for="field_file">Proposal</label>
+                <div class="drop-box"
+                     id="field_file"
+                     ng-model="file"
+                     name="file"
+                     ng-keep="false"
+                     accept=".pdf,.doc,.docx"
+                     ngf-max-size="5MB"
+                     required
+                     ngf-select="vm.uploadFile($file)">
+                    Pilih Proposal
+                </div>
+                <br>
+                <uib-progressbar animate="false"
+                                 value="vm.progressFile">
+                    <b>{{vm.progressFile}}%</b>
+                </uib-progressbar>
+                <br>
+
+                <div ngf-no-file-drop>
+                    File Drag / Drop tidak didukung untuk browser ini.
+                </div>
+                <div ng-show="editForm.file.$dirty && editForm.file.$invalid">
+                    <p class="help-block"
+                       ng-show="editForm.file.$error.required"
+                       translate="entity.validation.required">
+                        This field is required.
+                    </p>
+
+                    <p class="help-block"
+                       ng-show="editForm.file.$error.maxSize">
+                        Ukuran file maksimal 5MB.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end file proposal-->
+
+    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+        <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+    </button>
+    <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+        <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+    </button>
+
+
 </form>

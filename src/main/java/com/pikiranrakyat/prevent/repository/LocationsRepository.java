@@ -20,6 +20,6 @@ public interface LocationsRepository extends JpaRepository<Locations, Long> {
 
     Optional<Locations> findByNameAndAddress(String name, String address);
 
-    @Query("SELECT u.name FROM Locations u WHERE u.name LIKE CONCAT('%',:name,'%')")
+    @Query("SELECT u FROM Locations u WHERE u.name LIKE CONCAT('%',:name,'%')")
     List<Locations> findLocationLikeName(@Param("name") String name);
 }

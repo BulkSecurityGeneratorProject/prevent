@@ -29,7 +29,7 @@
                         squash: true
                     },
                     sort: {
-                        value: 'id,asc',
+                        value: 'createdDate,desc',
                         squash: true
                     },
                     search: null
@@ -70,10 +70,43 @@
                             subtotal: 0,
                             accept: false,
                             note: null,
+                            image: null,
+                            file: null,
+                            locations: null,
+                            eventType: null,
+                            organizer: null,
                             isOrder: false,
                             id: null
                         };
                     },
+                    previousState: ["$state", function ($state) {
+                        var currentStateData = {
+                            name: $state.current.name || 'event',
+                            params: $state.params,
+                            url: $state.href($state.current.name, $state.params)
+                        };
+                        return currentStateData;
+                    }]
+                }
+            })
+            .state('event-edit', {
+                parent: 'entity',
+                url: '/event/edit/{id}',
+                data: {
+                    authorities: ['ROLE_ADMIN'],
+                    pageTitle: 'Events'
+                },
+                views: {
+                    'main-content@backend': {
+                        templateUrl: 'app/entities/event-order/event-order-create.html',
+                        controller: 'EventCreateController',
+                        controllerAs: 'vm'
+                    }
+                },
+                resolve: {
+                    entity: ['$stateParams', 'Events', function ($stateParams, Events) {
+                        return Events.get({id: $stateParams.id}).$promise;
+                    }],
                     previousState: ["$state", function ($state) {
                         var currentStateData = {
                             name: $state.current.name || 'event',

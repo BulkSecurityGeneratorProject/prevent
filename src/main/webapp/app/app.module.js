@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     angular
@@ -16,7 +16,8 @@
             'ds.objectDiff',
             // jhipster-needle-angularjs-add-module JHipster will add new module here
             'angular-loading-bar',
-            'oitozero.ngSweetAlert'
+            'oitozero.ngSweetAlert',
+            'ngFileUpload'
         ])
         .run(run);
 

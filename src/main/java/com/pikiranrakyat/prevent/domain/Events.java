@@ -46,7 +46,6 @@ public class Events extends AbstractAuditingEntity implements Serializable {
     @Column(name = "ends", nullable = false)
     private ZonedDateTime ends;
 
-    @NotNull
     @Column(name = "agree_date", nullable = false)
     private ZonedDateTime agreeDate;
 
@@ -79,7 +78,7 @@ public class Events extends AbstractAuditingEntity implements Serializable {
     private Organizer organizer;
 
     @ManyToOne
-    private FileManager image;
+    private ImageManager image;
 
     @ManyToOne
     private FileManager file;
@@ -250,11 +249,11 @@ public class Events extends AbstractAuditingEntity implements Serializable {
         this.organizer = organizer;
     }
 
-    public FileManager getImage() {
+    public ImageManager getImage() {
         return image;
     }
 
-    public void setImage(FileManager image) {
+    public void setImage(ImageManager image) {
         this.image = image;
     }
 
