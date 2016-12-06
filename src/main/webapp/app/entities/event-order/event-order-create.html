@@ -115,19 +115,29 @@
                                class="form-control"
                                name="lokasi"
                                uib-typeahead="address for address in vm.getLocation($viewValue)"
-                               typeahead-loading="loadingLocations" typeahead-no-results="noResults"
+                               typeahead-loading="loadingLocations"
+                               typeahead-no-results="noResults"
                                id="field_lokasi"
+                               typeahead-min-length="5"
+                               typeahead-wait-ms="100"
+                               typeahead-append-to-body="true"
                                ng-model="vm.events.lokasi"
                         />
+
+
+                        <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
+                        <div ng-show="noResults">
+                            <i class="glyphicon glyphicon-remove"></i> No Results Found
+                        </div>
                         <!--<input type="text" ng-model="asyncSelected" placeholder="Locations loaded via $http"-->
-                               <!--uib-typeahead="address for address in vm.getLocation($viewValue)"-->
-                               <!--typeahead-loading="loadingLocations" typeahead-no-results="noResults"-->
-                               <!--class="form-control">-->
+                        <!--uib-typeahead="address for address in vm.getLocation($viewValue)"-->
+                        <!--typeahead-loading="loadingLocations" typeahead-no-results="noResults"-->
+                        <!--class="form-control">-->
                         <!--<i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>-->
                         <!--<div ng-show="noResults">-->
-                            <!--<i class="glyphicon glyphicon-remove"></i> No Results Found-->
+                        <!--<i class="glyphicon glyphicon-remove"></i> No Results Found-->
                         <!--</div>-->
-                    <!--</div>-->
+                    </div>
 
                 </div>
             </div>

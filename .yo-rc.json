@@ -25,5 +25,8 @@
     "jhiPrefix": "jhi",
     "enableTranslation": false,
     "herokuAppName": "prevents"
+  },
+  "generator-jhipster-entity-audit": {
+    "auditFramework": "custom"
   }
 }

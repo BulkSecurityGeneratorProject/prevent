@@ -14,20 +14,16 @@
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
         vm.eventtypes = EventType.query();
-        vm.locations = Locations.query();
         vm.getLocation = getLocation;
         vm.create = create;
 
         function getLocation(val) {
-            ManageLocations.findByName(val)
-                .then(function (response) {
-                    console.log(response)
-                    // return response.data.results.map(function (item) {
-                    //     return item.formatted_address;
-                    // });
-                },function (error) {
-                    console.log(error);
-                });
+            if (val != null) {
+                return ManageLocations.findByName(val)
+                    .then(function (response) {
+                        return response.data;
+                    });
+            }
         };
 
         function create() {
