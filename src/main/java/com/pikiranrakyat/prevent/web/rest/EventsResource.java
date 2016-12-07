@@ -2,7 +2,9 @@ package com.pikiranrakyat.prevent.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.pikiranrakyat.prevent.domain.Events;
+import com.pikiranrakyat.prevent.domain.Locations;
 import com.pikiranrakyat.prevent.service.EventsService;
+import com.pikiranrakyat.prevent.service.LocationsService;
 import com.pikiranrakyat.prevent.web.rest.util.HeaderUtil;
 import com.pikiranrakyat.prevent.web.rest.util.PaginationUtil;
 import com.pikiranrakyat.prevent.web.rest.vm.ManagedEventsVM;
@@ -36,6 +38,9 @@ public class EventsResource {
     @Inject
     private EventsService eventsService;
 
+    @Inject
+    private LocationsService locationsService;
+
     /**
      * POST  /events : Create a new events.
      *
@@ -52,6 +57,21 @@ public class EventsResource {
         if (events.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("events", "idexists", "A new events cannot already have an ID")).body(null);
         }
+
+        Locations location = locationsService
+            .findByNameIgnoreCase(events.getLocations().getName())
+            .orElseGet(() -> {
+                Locations locations = new Locations();
+                locations.setName(events.getLocations().getName());
+                locations.setAddress(events.getLocations().getAddress());
+                locations.setCity(events.getLocations().getCity());
+                locations.setState(events.getLocations().getState());
+                locations.setPostalCode(events.getLocations().getPostalCode());
+                locations.setLatitude(events.getLocations().getLatitude());
+                locations.setLongitude(events.getLocations().getLongitude());
+                return locationsService.save(locations);
+            });
+        events.setLocations(location);
         Events result = eventsService.save(events);
         return ResponseEntity.created(new URI("/api/events/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("events", result.getId().toString()))

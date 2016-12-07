@@ -5,11 +5,23 @@
         .module('preventApp')
         .controller('EventCreateController', EventOrderController);
 
-    EventOrderController.$inject = ['$scope', '$state', 'Events', 'entity',
-        'EventType', 'Locations', 'ManageLocations', 'Upload', '$timeout', 'EventOrder', 'ManageSearch'];
+    EventOrderController.$inject = ['$scope',
+        '$state',
+        'Events',
+        'entity',
+        'EventType',
+        'Locations',
+        'ManageLocations',
+        'Upload',
+        '$timeout',
+        'EventOrder',
+        'ManageSearch',
+        'geolocation'
+    ];
 
     function EventOrderController($scope, $state, Events, entity,
-                                  EventType, Locations, ManageLocations, Upload, $timeout, EventOrder, ManageSearch) {
+                                  EventType, Locations, ManageLocations, Upload, $timeout,
+                                  EventOrder, ManageSearch, geolocation) {
         var vm = this;
         vm.events = entity;
 
@@ -63,7 +75,6 @@
             }).then(function () {
                 EventOrder.create(vm.events)
                     .then(function (response) {
-                        console.log(response);
                         swal(
                             'Created',
                             'Event success has been created',
@@ -78,8 +89,27 @@
                         )
                     });
 
+
             })
         };
+
+        function save(data) {
+            EventOrder.create(data)
+                .then(function (response) {
+                    swal(
+                        'Created',
+                        'Event success has been created',
+                        'success'
+                    )
+                }, function (error) {
+                    console.log(error);
+                    swal(
+                        'Error',
+                        'Event fail to be created ' + error.message,
+                        'error'
+                    )
+                });
+        }
 
         function uploadImage(file) {
             Upload.upload({
@@ -126,6 +156,12 @@
         function init() {
             getAllEventType();
             getOrganizer();
+            geolocation.getLocation().then(function (response) {
+                vm.events.locations.latitude = response.coords.latitude;
+                vm.events.locations.longitude = response.coords.longitude;
+            }, function (error) {
+                console.log(error)
+            });
         }
 
         init();

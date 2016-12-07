@@ -72,7 +72,15 @@
                             note: null,
                             image: null,
                             file: null,
-                            locations: null,
+                            locations: {
+                                name: null,
+                                address: null,
+                                city: null,
+                                state: null,
+                                postalCode: null,
+                                latitude: 0,
+                                longitude: 0
+                            },
                             eventType: null,
                             organizer: null,
                             isOrder: false,
@@ -117,5 +125,29 @@
                     }]
                 }
             })
+            .state('event.delete', {
+                parent: 'event',
+                url: '/{id}/delete',
+                data: {
+                    authorities: ['ROLE_ADMIN']
+                },
+                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                    $uibModal.open({
+                        templateUrl: 'app/entities/events/events-delete-dialog.html',
+                        controller: 'EventsDeleteController',
+                        controllerAs: 'vm',
+                        size: 'md',
+                        resolve: {
+                            entity: ['Events', function(Events) {
+                                return Events.get({id : $stateParams.id}).$promise;
+                            }]
+                        }
+                    }).result.then(function() {
+                        $state.go('event', null, { reload: 'event' });
+                    }, function() {
+                        $state.go('^');
+                    });
+                }]
+            });
     }
 })();

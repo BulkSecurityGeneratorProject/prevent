@@ -217,15 +217,81 @@
 
             <li class="header">ADMINISTRATION</li>
 
-            <li id="management-user-menu">
-                <a ui-sref="user-management">
-                    <i class="fa fa-users fa-fw"></i>
-                    <span>Users Management</span>
+            <li class="treeview">
+                <a href="">
+                    <i class="fa fa-archive fa-fw"></i> <span>Administration</span>
+                    <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
                 </a>
+
+                <ul class="treeview-menu">
+
+                    <li ui-sref-active="active">
+                        <a ui-sref="user-management" ng-click="vm.collapseNavbar()">
+                            <span class="glyphicon glyphicon-user"></span>&nbsp;
+                            <span>User management</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a ui-sref="jhi-tracker" ng-click="vm.collapseNavbar()">
+                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;
+                            <span>User tracker</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a ui-sref="jhi-metrics" ng-click="vm.collapseNavbar()">
+                            <span class="glyphicon glyphicon-dashboard"></span>&nbsp;
+                            <span>Metrics</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a ui-sref="jhi-health" ng-click="vm.collapseNavbar()">
+                            <span class="glyphicon glyphicon-heart"></span>&nbsp;
+                            <span>Health</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a ui-sref="jhi-configuration" ng-click="vm.collapseNavbar()">
+                            <span class="glyphicon glyphicon-list-alt"></span>&nbsp;
+                            <span>Configuration</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a ui-sref="audits" ng-click="vm.collapseNavbar()">
+                            <span class="glyphicon glyphicon-bell"></span>&nbsp;
+                            <span>Audits</span>
+                        </a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a ui-sref="logs" ng-click="vm.collapseNavbar()">
+                            <span class="glyphicon glyphicon-tasks"></span>&nbsp;
+                            <span>Logs</span>
+                        </a>
+                    </li>
+                    <li ng-show="vm.swaggerEnabled" ui-sref-active="active">
+                        <a ui-sref="docs" ng-click="vm.collapseNavbar()">
+                            <span class="glyphicon glyphicon-book"></span>&nbsp;
+                            <span>API</span>
+                        </a>
+                    </li>
+                </ul>
             </li>
 
-
             <li class="header">SETTING</li>
+
+            <li ui-sref-active="active">
+                <a ui-sref="settings-admin" ng-click="vm.collapseNavbar()">
+                    <span class="glyphicon glyphicon-wrench"></span>&nbsp;
+                    <span>Settings</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="password-admin" ng-click="vm.collapseNavbar()">
+                    <span class="glyphicon glyphicon-lock"></span>&nbsp;
+                    <span>Password</span>
+                </a>
+            </li>
 
             <li id="frontend-menu">
                 <a ui-sref="home">

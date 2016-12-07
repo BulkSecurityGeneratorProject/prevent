@@ -39,15 +39,15 @@
             </column>
 
             <column name="postal_code" type="varchar(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
 
-            <column name="latitude" type="double">
-                <constraints nullable="false"/>
+            <column name="latitude" type="double" defaultValue="0">
+                <constraints nullable="true"/>
             </column>
 
-            <column name="longitude" type="double">
-                <constraints nullable="false"/>
+            <column name="longitude" type="double" defaultValue="0">
+                <constraints nullable="true"/>
             </column>
 
             <column name="created_by" type="varchar(50)">

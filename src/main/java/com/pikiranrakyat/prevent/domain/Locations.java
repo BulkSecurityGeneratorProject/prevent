@@ -41,7 +41,6 @@ public class Locations extends AbstractAuditingEntity implements Serializable {
     @Column(name = "state", nullable = false)
     private String state;
 
-    @NotNull
     @Column(name = "postal_code", nullable = false)
     private String postalCode;
 

@@ -14,6 +14,9 @@
                         name: val
                     }
                 })
+            },
+            checkLocation: function (data) {
+                return $http.post('api/location/check', data);
             }
         }
     }

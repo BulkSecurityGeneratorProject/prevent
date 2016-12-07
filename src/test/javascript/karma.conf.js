@@ -51,6 +51,7 @@ module.exports = function (config) {
             'src/main/webapp/bower_components/ngSweetAlert/SweetAlert.js',
             'src/main/webapp/bower_components/sweetalert2/dist/sweetalert2.js',
             'src/main/webapp/bower_components/angular-object-diff/dist/angular-object-diff.js',
+            'src/main/webapp/bower_components/angularjs-geolocation/src/geolocation.js',
             'src/main/webapp/bower_components/angular-mocks/angular-mocks.js',
             // endbower
             'src/main/webapp/app/app.module.js',

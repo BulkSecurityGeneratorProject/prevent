@@ -7,13 +7,13 @@ import com.pikiranrakyat.prevent.domain.Organizer;
 import com.pikiranrakyat.prevent.repository.EventTypeRepository;
 import com.pikiranrakyat.prevent.repository.LocationsRepository;
 import com.pikiranrakyat.prevent.repository.OrganizerRepository;
+import com.pikiranrakyat.prevent.service.LocationsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import java.net.URISyntaxException;
@@ -73,6 +73,9 @@ public class ManageSearchResource {
     @Inject
     private LocationsRepository locationsRepository;
 
+    @Inject
+    private LocationsService locationsService;
+
     /**
      * GET  /location/search: get all the locations.
      *
@@ -91,6 +94,37 @@ public class ManageSearchResource {
             .limit(10)
             .sorted((o1, o2) -> o1.getName().compareToIgnoreCase(o2.getName()))
             .collect(Collectors.toList());
+    }
+
+
+    /**
+     * GET  /location/search: get all the locations.
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of locations in body
+     * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
+     */
+    @RequestMapping(value = "/location/check",
+        method = RequestMethod.POST,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<?> checkLocation(@RequestBody Locations locations)
+        throws URISyntaxException {
+        log.debug("REST request to check location by " + locations);
+
+        Locations locationCheck = locationsService
+            .findByNameIgnoreCase(locations.getName())
+            .orElseGet(() -> {
+                Locations location = new Locations();
+                location.setName(locations.getName());
+                location.setAddress(locations.getAddress());
+                location.setCity(locations.getCity());
+                location.setState(locations.getState());
+                location.setPostalCode(locations.getPostalCode());
+                location.setLatitude(locations.getLatitude());
+                location.setLongitude(locations.getLongitude());
+                return locationsService.save(location);
+            });
+        return new ResponseEntity<>(locationCheck, HttpStatus.OK);
     }
 
 

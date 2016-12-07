@@ -35,7 +35,8 @@
         }
 
         function loadAll() {
-            ManageEvents.findEventOrderByCreated()
+            ManageEvents
+                .findEventOrderByCreated()
                 .then(function (response) {
                     vm.events = response.data;
                 }, function (error) {

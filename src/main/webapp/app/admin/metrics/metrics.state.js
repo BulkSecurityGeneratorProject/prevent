@@ -16,7 +16,7 @@
                 pageTitle: 'Application Metrics'
             },
             views: {
-                'content@': {
+                'main-content@backend': {
                     templateUrl: 'app/admin/metrics/metrics.html',
                     controller: 'JhiMetricsMonitoringController',
                     controllerAs: 'vm'

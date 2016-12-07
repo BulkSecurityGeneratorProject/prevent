@@ -16,7 +16,7 @@
                 pageTitle: 'Real-time user activities'
             },
             views: {
-                'content@': {
+                'main-content@backend': {
                     templateUrl: 'app/admin/tracker/tracker.html',
                     controller: 'JhiTrackerController',
                     controllerAs: 'vm'
