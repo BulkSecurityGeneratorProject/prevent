@@ -399,7 +399,7 @@
                 <table class="table table-striped table-hover">
                     <thead>
                     <tr>
-                        <th><span>Kode</span></th>
+                        <th><span>Nama Order</span></th>
                         <th><span>Name</span></th>
                         <th><span>Price</span></th>
                         <th></th>
@@ -482,13 +482,12 @@
     <div class="box">
         <div class="box-header with-border">
             <h3 class="box-title">List Order</h3>
-
         </div>
         <div class="box-body">
             <div class="table-responsive">
-                <table class="table table-striped table-hover">
+                <table class="table table-striped table-hover" ng-show="vm.events.orderMerchandises > 0">
+                    <h4 ng-show="vm.events.orderMerchandises > 0">Order Marcomm</h4>
                     <thead>
-                    <h4>Order Marcomm</h4>
                     <tr>
                         <th><span>Kode</span></th>
                         <th><span>Name</span></th>
