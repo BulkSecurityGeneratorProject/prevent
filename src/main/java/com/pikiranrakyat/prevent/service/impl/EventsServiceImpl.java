@@ -1,6 +1,7 @@
 package com.pikiranrakyat.prevent.service.impl;
 
 import com.pikiranrakyat.prevent.domain.Events;
+import com.pikiranrakyat.prevent.domain.OrderAds;
 import com.pikiranrakyat.prevent.domain.OrderCirculation;
 import com.pikiranrakyat.prevent.domain.OrderMerchandise;
 import com.pikiranrakyat.prevent.repository.EventsRepository;
@@ -45,6 +46,9 @@ public class EventsServiceImpl implements EventsService {
 
     @Inject
     private OrderCirculationService orderCirculationService;
+
+    @Inject
+    private OrderAdsService orderAdsService;
 
     /**
      * Save a events.
@@ -107,7 +111,7 @@ public class EventsServiceImpl implements EventsService {
                     orderMerchandiseService.save(orderMerchandise);
                 });
 
-        
+
         if (dto.getOrderCirculations().size() > 0)
             dto.getOrderCirculations()
                 .forEach(o -> {
@@ -128,6 +132,31 @@ public class EventsServiceImpl implements EventsService {
                     orderCirculation.setEvents(save);
 
                     orderCirculationService.save(orderCirculation);
+                });
+
+        if (dto.getOrderAds().size() > 0)
+            dto.getOrderAds()
+                .forEach(o -> {
+                    OrderAds orderAds = new OrderAds();
+
+                    if (o.getId() != null)
+                        orderAds.setId(o.getId());
+
+                    if (o.getOrderNumber() != null)
+                        orderAds.setOrderNumber(o.getOrderNumber());
+
+                    orderAds.setOrderNumber(UUID.randomUUID().toString());
+                    orderAds.setTitle(o.getTitle());
+                    orderAds.setContent(o.getContent());
+                    orderAds.setNote(o.getNote());
+                    orderAds.setAccept(o.getAccept());
+                    orderAds.setPublishDate(o.getPublishDate());
+                    orderAds.setTotal(o.getTotal());
+                    orderAds.setAds(o.getAds());
+                    orderAds.setEvents(save);
+
+                    orderAdsService.save(orderAds);
+
                 });
 
         return save;

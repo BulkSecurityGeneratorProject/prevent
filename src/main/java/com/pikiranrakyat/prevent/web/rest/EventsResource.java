@@ -2,14 +2,12 @@ package com.pikiranrakyat.prevent.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.pikiranrakyat.prevent.domain.Events;
-import com.pikiranrakyat.prevent.service.EventsService;
-import com.pikiranrakyat.prevent.service.LocationsService;
-import com.pikiranrakyat.prevent.service.OrderCirculationService;
-import com.pikiranrakyat.prevent.service.OrderMerchandiseService;
+import com.pikiranrakyat.prevent.service.*;
 import com.pikiranrakyat.prevent.service.dto.EventOrderDTO;
 import com.pikiranrakyat.prevent.web.rest.util.HeaderUtil;
 import com.pikiranrakyat.prevent.web.rest.util.PaginationUtil;
 import com.pikiranrakyat.prevent.web.rest.vm.ManagedEventsVM;
+import com.pikiranrakyat.prevent.web.rest.vm.ManagedOrderAdsVM;
 import com.pikiranrakyat.prevent.web.rest.vm.ManagedOrderCirculationVM;
 import com.pikiranrakyat.prevent.web.rest.vm.ManagedOrderMerchandiseVM;
 import org.slf4j.Logger;
@@ -43,13 +41,13 @@ public class EventsResource {
     private EventsService eventsService;
 
     @Inject
-    private LocationsService locationsService;
-
-    @Inject
     private OrderMerchandiseService orderMerchandiseService;
 
     @Inject
     private OrderCirculationService orderCirculationService;
+
+    @Inject
+    private OrderAdsService orderAdsService;
 
     /**
      * POST  /events : Create a new events.
@@ -161,6 +159,13 @@ public class EventsResource {
                     orderCirculationService.findByEvent(dto.getId())
                         .stream()
                         .map(ManagedOrderCirculationVM::new)
+                        .collect(Collectors.toList())
+                );
+
+                dto.setOrderAds(
+                    orderAdsService.findByEvent(dto.getId())
+                        .stream()
+                        .map(ManagedOrderAdsVM::new)
                         .collect(Collectors.toList())
                 );
 

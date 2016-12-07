@@ -52,7 +52,7 @@ public class OrderAds extends AbstractAuditingEntity implements Serializable {
     private LocalDate publishDate;
 
     @DecimalMin(value = "0")
-    @Column(name = "total", precision = 30, scale = 2, nullable = false)
+    @Column(name = "total", precision = 30, scale = 2, nullable = true)
     private BigDecimal total;
 
     @ManyToOne

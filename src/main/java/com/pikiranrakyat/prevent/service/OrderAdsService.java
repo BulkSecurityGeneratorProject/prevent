@@ -20,35 +20,36 @@ public interface OrderAdsService {
     OrderAds save(OrderAds orderAds);
 
     /**
-     *  Get all the orderAds.
-     *  
-     *  @param pageable the pagination information
-     *  @return the list of entities
+     * Get all the orderAds.
+     *
+     * @param pageable the pagination information
+     * @return the list of entities
      */
     Page<OrderAds> findAll(Pageable pageable);
 
+    List<OrderAds> findByEvent(Long eventId);
+
     /**
-     *  Get the "id" orderAds.
+     * Get the "id" orderAds.
      *
-     *  @param id the id of the entity
-     *  @return the entity
+     * @param id the id of the entity
+     * @return the entity
      */
     OrderAds findOne(Long id);
 
     /**
-     *  Delete the "id" orderAds.
+     * Delete the "id" orderAds.
      *
-     *  @param id the id of the entity
+     * @param id the id of the entity
      */
     void delete(Long id);
 
     /**
      * Search for the orderAds corresponding to the query.
      *
-     *  @param query the query of the search
-     *  
-     *  @param pageable the pagination information
-     *  @return the list of entities
+     * @param query    the query of the search
+     * @param pageable the pagination information
+     * @return the list of entities
      */
     Page<OrderAds> search(String query, Pageable pageable);
 }

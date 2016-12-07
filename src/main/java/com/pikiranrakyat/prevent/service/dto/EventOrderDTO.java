@@ -1,6 +1,7 @@
 package com.pikiranrakyat.prevent.service.dto;
 
 import com.pikiranrakyat.prevent.domain.*;
+import com.pikiranrakyat.prevent.web.rest.vm.ManagedOrderAdsVM;
 import com.pikiranrakyat.prevent.web.rest.vm.ManagedOrderCirculationVM;
 import com.pikiranrakyat.prevent.web.rest.vm.ManagedOrderMerchandiseVM;
 
@@ -61,6 +62,8 @@ public class EventOrderDTO {
     private List<ManagedOrderMerchandiseVM> orderMerchandises = new ArrayList<>();
 
     private List<ManagedOrderCirculationVM> orderCirculations = new ArrayList<>();
+
+    private List<ManagedOrderAdsVM> orderAds = new ArrayList<>();
 
 
     public EventOrderDTO() {
@@ -271,6 +274,14 @@ public class EventOrderDTO {
         this.orderCirculations = orderCirculations;
     }
 
+    public List<ManagedOrderAdsVM> getOrderAds() {
+        return orderAds;
+    }
+
+    public void setOrderAds(List<ManagedOrderAdsVM> orderAds) {
+        this.orderAds = orderAds;
+    }
+
     @Override
     public String toString() {
         return "EventOrderDTO{" +
@@ -294,6 +305,7 @@ public class EventOrderDTO {
             ", file=" + file +
             ", orderMerchandises=" + orderMerchandises +
             ", orderCirculations=" + orderCirculations +
+            ", orderAds=" + orderAds +
             '}';
     }
 }

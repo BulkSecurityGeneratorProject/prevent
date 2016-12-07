@@ -1,32 +1,30 @@
 package com.pikiranrakyat.prevent.service.impl;
 
-import com.pikiranrakyat.prevent.service.OrderAdsService;
 import com.pikiranrakyat.prevent.domain.OrderAds;
 import com.pikiranrakyat.prevent.repository.OrderAdsRepository;
 import com.pikiranrakyat.prevent.repository.search.OrderAdsSearchRepository;
+import com.pikiranrakyat.prevent.service.OrderAdsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
 /**
  * Service Implementation for managing OrderAds.
  */
 @Service
 @Transactional
-public class OrderAdsServiceImpl implements OrderAdsService{
+public class OrderAdsServiceImpl implements OrderAdsService {
 
     private final Logger log = LoggerFactory.getLogger(OrderAdsServiceImpl.class);
-    
+
     @Inject
     private OrderAdsRepository orderAdsRepository;
 
@@ -47,25 +45,30 @@ public class OrderAdsServiceImpl implements OrderAdsService{
     }
 
     /**
-     *  Get all the orderAds.
-     *  
-     *  @param pageable the pagination information
-     *  @return the list of entities
+     * Get all the orderAds.
+     *
+     * @param pageable the pagination information
+     * @return the list of entities
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public Page<OrderAds> findAll(Pageable pageable) {
         log.debug("Request to get all OrderAds");
         Page<OrderAds> result = orderAdsRepository.findAll(pageable);
         return result;
     }
 
+    @Override
+    public List<OrderAds> findByEvent(Long eventId) {
+        return orderAdsRepository.findByEventsId(eventId);
+    }
+
     /**
-     *  Get one orderAds by id.
+     * Get one orderAds by id.
      *
-     *  @param id the id of the entity
-     *  @return the entity
+     * @param id the id of the entity
+     * @return the entity
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public OrderAds findOne(Long id) {
         log.debug("Request to get OrderAds : {}", id);
         OrderAds orderAds = orderAdsRepository.findOne(id);
@@ -73,9 +76,9 @@ public class OrderAdsServiceImpl implements OrderAdsService{
     }
 
     /**
-     *  Delete the  orderAds by id.
+     * Delete the  orderAds by id.
      *
-     *  @param id the id of the entity
+     * @param id the id of the entity
      */
     public void delete(Long id) {
         log.debug("Request to delete OrderAds : {}", id);
@@ -86,8 +89,8 @@ public class OrderAdsServiceImpl implements OrderAdsService{
     /**
      * Search for the orderAds corresponding to the query.
      *
-     *  @param query the query of the search
-     *  @return the list of entities
+     * @param query the query of the search
+     * @return the list of entities
      */
     @Transactional(readOnly = true)
     public Page<OrderAds> search(String query, Pageable pageable) {

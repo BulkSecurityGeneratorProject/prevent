@@ -18,7 +18,8 @@
         'ImageManager',
         'ListOrder',
         'OrderMerchandise',
-        'OrderCirculation'
+        'OrderCirculation',
+        'OrderAds'
     ];
 
     function EventOrderController($state, entity,
@@ -27,7 +28,8 @@
                                   EventOrder, ManageSearch,
                                   geolocation, FileManager,
                                   ImageManager, ListOrder,
-                                  OrderMerchandise, OrderCirculation) {
+                                  OrderMerchandise, OrderCirculation,
+                                  OrderAds) {
         var vm = this;
         vm.events = entity;
 
@@ -278,7 +280,6 @@
 
 
         // order circulation
-
         vm.addOrderCirculations = addOrderCirculations;
         vm.orderCirculation = {};
 
@@ -306,8 +307,44 @@
                     console.log(error);
                 });
         };
-
         //end order circulation
+
+        // order ads
+        vm.orderAds = {};
+        vm.addOrderAds = function addOrderAds(ads) {
+            vm.orderAds.ads = ads;
+            for (var i = 0; i < vm.events.orderAds.length; i++) {
+                if (vm.events.orderAds[i].ads.id == vm.orderAds.ads.id) {
+                    swal(
+                        'Error',
+                        'Order ' + ads.name + " sudah ada dalam list order",
+                        'error'
+                    );
+                    return false;
+                }
+            }
+            vm.events.orderAds.push(vm.orderAds);
+            vm.orderAds = {};
+        };
+
+        vm.deleteOrderAds = function deleteOrderAds(id, idx) {
+            OrderAds.delete({id: id},
+                function (response) {
+                    vm.events.orderAds.splice(idx, 1);
+                }, function (error) {
+                    console.log(error);
+                });
+        };
+        //end order ads
+
+        vm.dateFormat = 'yyyy-MM-dd';
+        vm.openPublisDate = openPublisDate;
+        vm.datePublishOpenStatus = {};
+        vm.datePublishOpenStatus.publishDate = false;
+
+        function openPublisDate(date) {
+            vm.datePublishOpenStatus[date] = true;
+        }
 
 
         function init() {

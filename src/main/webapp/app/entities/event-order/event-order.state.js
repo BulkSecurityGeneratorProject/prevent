@@ -81,7 +81,8 @@
                             isOrder: false,
                             id: null,
                             orderMerchandises: [],
-                            orderCirculations: []
+                            orderCirculations: [],
+                            orderAds: []
 
                         };
                     },

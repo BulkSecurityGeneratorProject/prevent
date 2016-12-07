@@ -8,7 +8,7 @@ import java.time.ZonedDateTime;
 /**
  * View Model extending the UserDTO, which is meant to be used in the user management UI.
  */
-public class ManagedOrderAdsVM extends OrderAdsDTO{
+public class ManagedOrderAdsVM extends OrderAdsDTO {
 
 
     private Long id;
