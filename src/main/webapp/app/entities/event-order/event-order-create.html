@@ -164,48 +164,12 @@
 
         </div>
         <div class="box-body">
-            <!--<div class="row">-->
-                <!--<div class="col-sm-12">-->
-                    <!--&lt;!&ndash;lokasi&ndash;&gt;-->
-                    <!--<div class="form-group">-->
-                        <!--<label class="control-label" for="field_lokasi">Cari Lokasi</label>-->
-                        <!--<input type="text"-->
-                               <!--class="form-control"-->
-                               <!--name="lokasi"-->
-                               <!--placeholder="Ketik lokasi untuk mencari.."-->
-                               <!--autocomplete="off"-->
-                               <!--uib-typeahead="address as address.name for address in vm.getLocation($viewValue)"-->
-                               <!--typeahead-loading="loadingLocations"-->
-                               <!--typeahead-no-results="noResults"-->
-                               <!--id="field_lokasi"-->
-                               <!--typeahead-min-length="3"-->
-                               <!--typeahead-wait-ms="100"-->
-                               <!--typeahead-append-to-body="true"-->
-                               <!--ng-model="vm.events.locations"-->
-                               <!--required/>-->
-                    <!--</div>-->
-                    <!--<i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>-->
-                    <!--<div ng-show="noResults">-->
-                        <!--<i class="glyphicon glyphicon-remove"></i>-->
-                        <!--Lokasi tidak ada, Mohon masukan lokasi dibawah ini-->
-                    <!--</div>-->
-                    <!--<div ng-show="editForm.lokasi.$invalid">-->
-                        <!--<p class="help-block"-->
-                           <!--ng-show="editForm.lokasi.$error.required">-->
-                            <!--This field is required.-->
-                        <!--</p>-->
-                    <!--</div>-->
-                    <!--&lt;!&ndash;end lokasi&ndash;&gt;-->
-
-                <!--</div>-->
-            <!--</div>-->
-
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label class="control-label" for="field_name">Name</label>
                         <input type="text" class="form-control" name="name" id="field_name"
-                               ng-model="vm.events.locations.name"
+                               ng-model="vm.events.locationName"
                                required ng-minlength="3" ng-maxlength="50"/>
 
                         <div ng-show="editForm.name.$invalid">
@@ -226,48 +190,11 @@
                     <div class="form-group">
                         <label class="control-label" for="field_address">Address</label>
                         <input type="text" class="form-control" name="address" id="field_address"
-                               ng-model="vm.events.locations.address"
+                               ng-model="vm.events.locationAddress"
                                required/>
                         <div ng-show="editForm.address.$invalid">
                             <p class="help-block"
                                ng-show="editForm.address.$error.required">
-                                This field is required.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label" for="field_city">City</label>
-                        <input type="text" class="form-control" name="city" id="field_city"
-                               ng-model="vm.events.locations.city"
-                               required/>
-                        <div ng-show="editForm.city.$invalid">
-                            <p class="help-block"
-                               ng-show="editForm.city.$error.required">
-                                This field is required.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label" for="field_state">State</label>
-                        <input type="text" class="form-control" name="state" id="field_state"
-                               ng-model="vm.events.locations.state"
-                               required/>
-                        <div ng-show="editForm.state.$invalid">
-                            <p class="help-block"
-                               ng-show="editForm.state.$error.required">
-                                This field is required.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label" for="field_postalCode">Postal Code</label>
-                        <input type="text" class="form-control" name="postalCode"
-                               id="field_postalCode"
-                               ng-model="vm.events.locations.postalCode"
-                               required/>
-                        <div ng-show="editForm.postalCode.$invalid">
-                            <p class="help-block"
-                               ng-show="editForm.postalCode.$error.required">
                                 This field is required.
                             </p>
                         </div>
@@ -278,13 +205,13 @@
                     <div class="form-group">
                         <label class="control-label" for="field_latitude">Latitude</label>
                         <input type="number" class="form-control" name="latitude" id="field_latitude"
-                               ng-model="vm.events.locations.latitude"
+                               ng-model="vm.events.locationLatitude"
                         />
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="field_longitude">Longitude</label>
                         <input type="number" class="form-control" name="longitude" id="field_longitude"
-                               ng-model="vm.events.locations.longitude"
+                               ng-model="vm.events.locationLongitude"
                         />
                     </div>
                 </div>
@@ -315,7 +242,6 @@
                      ngf-accept="'image/*'"
                      ngf-max-size="5MB"
                      ngf-min-width="720"
-                     required
                      ngf-select="vm.uploadImage($file)">
                     Pilih Brosur
                 </div>
@@ -329,31 +255,50 @@
                 <div ngf-no-file-drop>
                     File Drag / Drop tidak didukung untuk browser ini.
                 </div>
-                <div ng-show="editForm.image.$dirty && editForm.image.$invalid">
-                    <p class="help-block"
-                       ng-show="editForm.image.$error.required"
-                       translate="entity.validation.required">
-                        This field is required.
-                    </p>
 
-                    <p class="help-block"
-                       ng-show="editForm.image.$error.maxSize">
-                        Ukuran file maksimal 5MB.
-                    </p>
+                <div class="form-group">
+                    <table class="table"
+                           ng-show="vm.events.image">
+                        <thead>
+                        <tr>
+                            <th>Filename</th>
+                            <th>Type</th>
+                            <th>Size (<i>
+                                <small>KB</small>
+                            </i>)
+                            </th>
+                            <th>File</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>{{vm.events.image.original}}</td>
+                            <td>{{vm.events.image.extension}}</td>
+                            <td>{{vm.events.image.size / 1000}}</td>
+                            <td>
+                                <button type="button"
+                                        class="btn btn-danger btn-sm"
+                                        ng-click="vm.removeImage()">
+                                    <i class="fa fa-remove fa-fw"></i></button>
+                            </td>
 
-                    <p class="help-block"
-                       ng-show="editForm.image.$error.minWidth">
-                        Lebar gambar minimal 720px.
-                    </p>
-
-                    <p class="help-block"
-                       ng-show="editForm.image.$error.minHeight">
-                        Tinggi gambar minimal 480px.
-                    </p>
+                        </tr>
+                        <!--<tr>-->
+                            <!--<td colspan="4"-->
+                                <!--ng-show="vm.event.fileList.length == 0">-->
+                                <!--<small><i>No attachment selected.</i></small>-->
+                            <!--</td>-->
+                        <!--</tr>-->
+                        </tbody>
+                    </table>
                 </div>
 
-                <p>Preview</p>
-                <img ngf-src="image" class="img-responsive">
+                <!--<img-->
+                    <!--ng-show="vm.events.image.name != null"-->
+                    <!--ng-src="/api/image/{{vm.events.image.name}}"-->
+                    <!--alt="image"-->
+                    <!--style="margin: 0"-->
+                    <!--class="img-responsive" fallback-src/>-->
 
 
             </div>
@@ -377,7 +322,6 @@
                      ng-keep="false"
                      accept=".pdf,.doc,.docx"
                      ngf-max-size="5MB"
-                     required
                      ngf-select="vm.uploadFile($file)">
                     Pilih Proposal
                 </div>
@@ -403,6 +347,42 @@
                         Ukuran file maksimal 5MB.
                     </p>
                 </div>
+            </div>
+            <div class="form-group">
+                <table class="table"
+                       ng-show="vm.events.file">
+                    <thead>
+                    <tr>
+                        <th>Filename</th>
+                        <th>Type</th>
+                        <th>Size (<i>
+                            <small>KB</small>
+                        </i>)
+                        </th>
+                        <th>File</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>{{vm.events.file.original}}</td>
+                        <td>{{vm.events.file.extension}}</td>
+                        <td>{{vm.events.file.size / 1000}}</td>
+                        <td>
+                            <button type="button"
+                                    class="btn btn-danger btn-sm"
+                                    ng-click="vm.removeFile()">
+                                <i class="fa fa-remove fa-fw"></i></button>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td colspan="4"
+                            ng-show="vm.event.fileList.length == 0">
+                            <small><i>No attachment selected.</i></small>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

@@ -71,6 +71,19 @@ public class EventsResourceIntTest {
     private static final Boolean DEFAULT_IS_ORDER = false;
     private static final Boolean UPDATED_IS_ORDER = true;
 
+    private static final String DEFAULT_LOCATION_NAME = "AAA";
+    private static final String UPDATED_LOCATION_NAME = "BBB";
+
+    private static final String DEFAULT_LOCATION_ADDRESS = "AAAAA";
+    private static final String UPDATED_LOCATION_ADDRESS = "BBBBB";
+
+
+    private static final Double DEFAULT_LOCATION_LATITUDE = 1D;
+    private static final Double UPDATED_LOCATION_LATITUDE = 2D;
+
+    private static final Double DEFAULT_LOCATION_LONGITUDE = 1D;
+    private static final Double UPDATED_LOCATION_LONGITUDE = 2D;
+
     @Inject
     private EventsRepository eventsRepository;
 
@@ -128,7 +141,6 @@ public class EventsResourceIntTest {
         Locations locations = LocationsResourceIntTest.createEntity(em);
         em.persist(locations);
         em.flush();
-        events.setLocations(locations);
         return events;
     }
 

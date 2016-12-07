@@ -46,13 +46,28 @@ public class Events extends AbstractAuditingEntity implements Serializable {
     @Column(name = "ends", nullable = false)
     private ZonedDateTime ends;
 
-    @Column(name = "agree_date", nullable = false)
-    private ZonedDateTime agreeDate;
+
+    @Size(min = 3, max = 100)
+    @Column(name = "location_name", length = 100, nullable = false)
+    private String locationName;
+
+    @NotNull
+    @Column(name = "location_address", nullable = false)
+    private String locationAddress;
+
+    @Column(name = "location_latitude")
+    private Double locationLatitude;
+
+    @Column(name = "location_longitude")
+    private Double locationLongitude;
 
     @NotNull
     @DecimalMin(value = "0")
     @Column(name = "subtotal", precision = 10, scale = 2, nullable = false)
     private BigDecimal subtotal = BigDecimal.ZERO;
+
+    @Column(name = "agree_date", nullable = false)
+    private ZonedDateTime agreeDate;
 
     @NotNull
     @Column(name = "accept", nullable = false)
@@ -68,10 +83,6 @@ public class Events extends AbstractAuditingEntity implements Serializable {
     @ManyToOne
     @NotNull
     private EventType eventType;
-
-    @ManyToOne
-    @NotNull
-    private Locations locations;
 
     @ManyToOne
     @NotNull
@@ -222,19 +233,6 @@ public class Events extends AbstractAuditingEntity implements Serializable {
         this.eventType = eventType;
     }
 
-    public Locations getLocations() {
-        return locations;
-    }
-
-    public Events locations(Locations locations) {
-        this.locations = locations;
-        return this;
-    }
-
-    public void setLocations(Locations locations) {
-        this.locations = locations;
-    }
-
 
     public Organizer getOrganizer() {
         return organizer;
@@ -265,6 +263,43 @@ public class Events extends AbstractAuditingEntity implements Serializable {
         this.file = file;
     }
 
+    public String getLocationName() {
+        return locationName;
+    }
+
+    public Events locationName(String locationName) {
+        this.locationName = locationName;
+        return this;
+    }
+
+    public void setLocationName(String locationName) {
+        this.locationName = locationName;
+    }
+
+    public String getLocationAddress() {
+        return locationAddress;
+    }
+
+    public void setLocationAddress(String locationAddress) {
+        this.locationAddress = locationAddress;
+    }
+
+    public Double getLocationLatitude() {
+        return locationLatitude;
+    }
+
+    public void setLocationLatitude(Double locationLatitude) {
+        this.locationLatitude = locationLatitude;
+    }
+
+    public Double getLocationLongitude() {
+        return locationLongitude;
+    }
+
+    public void setLocationLongitude(Double locationLongitude) {
+        this.locationLongitude = locationLongitude;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -293,13 +328,16 @@ public class Events extends AbstractAuditingEntity implements Serializable {
             ", description='" + description + '\'' +
             ", starts=" + starts +
             ", ends=" + ends +
-            ", agreeDate=" + agreeDate +
+            ", locationName='" + locationName + '\'' +
+            ", locationAddress='" + locationAddress + '\'' +
+            ", locationLatitude=" + locationLatitude +
+            ", locationLongitude=" + locationLongitude +
             ", subtotal=" + subtotal +
+            ", agreeDate=" + agreeDate +
             ", accept=" + accept +
             ", note='" + note + '\'' +
             ", isOrder=" + isOrder +
             ", eventType=" + eventType +
-            ", locations=" + locations +
             ", organizer=" + organizer +
             ", image=" + image +
             ", file=" + file +

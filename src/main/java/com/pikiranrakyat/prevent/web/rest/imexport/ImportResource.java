@@ -167,22 +167,10 @@ public class ImportResource {
                             .orElseThrow(() -> new DataNotFoundException("Event type tidak ada " + contents[7]));
                         event.setEventType(eventType);
 
-
-                        Locations locations = locationsService
-                            .findByNameAndAddress(contents[8], contents[9])
-                            .orElseGet(() -> {
-                                Locations location = new Locations();
-                                location.setName(contents[8]);
-                                location.setAddress(contents[9]);
-                                location.setCity("");
-                                location.setState("");
-                                location.setPostalCode("00000");
-                                location.setLatitude(0.0);
-                                location.setLongitude(0.0);
-                                return locationsService.save(location);
-                            });
-
-                        event.setLocations(locations);
+                        event.setLocationName(contents[8]);
+                        event.setLocationAddress(contents[9]);
+                        event.setLocationLatitude(Double.valueOf(contents[15]));
+                        event.setLocationLongitude(Double.valueOf(contents[16]));
 
                         event.setCreatedBy(contents[11]);
                         event.setCreatedDate(convertToZoneDateTime(contents[12]));

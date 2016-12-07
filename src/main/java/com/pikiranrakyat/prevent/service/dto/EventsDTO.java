@@ -2,7 +2,6 @@ package com.pikiranrakyat.prevent.service.dto;
 
 import com.pikiranrakyat.prevent.domain.EventType;
 import com.pikiranrakyat.prevent.domain.Events;
-import com.pikiranrakyat.prevent.domain.Locations;
 
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
@@ -20,6 +19,14 @@ public class EventsDTO {
 
     private ZonedDateTime ends;
 
+    private String locationName;
+
+    private String locationAddress;
+
+    private Double locationLatitude;
+
+    private Double locationLongitude;
+
     private BigDecimal subtotal;
 
     private Boolean accept;
@@ -30,22 +37,28 @@ public class EventsDTO {
 
     private EventType eventType;
 
-    private Locations locations;
-
     public EventsDTO() {
     }
 
-    public EventsDTO(String title, String description, ZonedDateTime starts, ZonedDateTime ends, BigDecimal subtotal, Boolean accept, String note, Boolean isOrder, EventType eventType, Locations locations) {
+    public EventsDTO(String title, String description, ZonedDateTime starts, ZonedDateTime ends,
+                     String locationName,
+                     String locationAddress,
+                     Double locationLatitude,
+                     Double locationLongitude,
+                     BigDecimal subtotal, Boolean accept, String note, Boolean isOrder, EventType eventType) {
         this.title = title;
         this.description = description;
         this.starts = starts;
         this.ends = ends;
+        this.locationName = locationName;
+        this.locationAddress = locationAddress;
+        this.locationLatitude = locationLatitude;
+        this.locationLongitude = locationLongitude;
         this.subtotal = subtotal;
         this.accept = accept;
         this.note = note;
         this.isOrder = isOrder;
         this.eventType = eventType;
-        this.locations = locations;
     }
 
     public EventsDTO(Events o) {
@@ -54,12 +67,15 @@ public class EventsDTO {
             o.getDescription(),
             o.getStarts(),
             o.getEnds(),
+            o.getLocationName(),
+            o.getLocationAddress(),
+            o.getLocationLatitude(),
+            o.getLocationLongitude(),
             o.getSubtotal(),
             o.isAccept(),
             o.getNote(),
             o.isIsOrder(),
-            o.getEventType(),
-            o.getLocations()
+            o.getEventType()
         );
     }
 
@@ -135,12 +151,36 @@ public class EventsDTO {
         this.eventType = eventType;
     }
 
-    public Locations getLocations() {
-        return locations;
+    public String getLocationName() {
+        return locationName;
     }
 
-    public void setLocations(Locations locations) {
-        this.locations = locations;
+    public void setLocationName(String locationName) {
+        this.locationName = locationName;
+    }
+
+    public String getLocationAddress() {
+        return locationAddress;
+    }
+
+    public void setLocationAddress(String locationAddress) {
+        this.locationAddress = locationAddress;
+    }
+
+    public Double getLocationLatitude() {
+        return locationLatitude;
+    }
+
+    public void setLocationLatitude(Double locationLatitude) {
+        this.locationLatitude = locationLatitude;
+    }
+
+    public Double getLocationLongitude() {
+        return locationLongitude;
+    }
+
+    public void setLocationLongitude(Double locationLongitude) {
+        this.locationLongitude = locationLongitude;
     }
 
     @Override
@@ -150,12 +190,15 @@ public class EventsDTO {
             ", description='" + description + '\'' +
             ", starts=" + starts +
             ", ends=" + ends +
+            ", locationName='" + locationName + '\'' +
+            ", locationAddress='" + locationAddress + '\'' +
+            ", locationLatitude=" + locationLatitude +
+            ", locationLongitude=" + locationLongitude +
             ", subtotal=" + subtotal +
             ", accept=" + accept +
             ", note='" + note + '\'' +
             ", isOrder=" + isOrder +
             ", eventType=" + eventType +
-            ", locations=" + locations +
             '}';
     }
 }

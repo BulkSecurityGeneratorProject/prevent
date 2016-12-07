@@ -35,6 +35,7 @@ module.exports = function (config) {
             'src/main/webapp/bower_components/jquery-ui/jquery-ui.js',
             'src/main/webapp/bower_components/sweetalert/dist/sweetalert.min.js',
             'src/main/webapp/bower_components/es6-promise/es6-promise.js',
+            'src/main/webapp/bower_components/angular-img-fallback/angular.dcb-img-fallback.js',
             'src/main/webapp/bower_components/angular/angular.js',
             'src/main/webapp/bower_components/angular-aria/angular-aria.js',
             'src/main/webapp/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',

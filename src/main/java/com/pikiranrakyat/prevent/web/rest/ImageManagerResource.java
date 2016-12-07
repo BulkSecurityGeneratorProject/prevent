@@ -1,7 +1,7 @@
 package com.pikiranrakyat.prevent.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
-import com.pikiranrakyat.prevent.service.FileManagerService;
+import com.pikiranrakyat.prevent.service.ImageManagerService;
 import com.pikiranrakyat.prevent.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,32 +15,32 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.inject.Inject;
 
 /**
- * REST controller for managing FileManager.
+ * REST controller for managing ImageManager.
  */
 @RestController
 @RequestMapping("/api")
-public class FileManagerResource {
+public class ImageManagerResource {
 
-    private final Logger log = LoggerFactory.getLogger(FileManagerResource.class);
+    private final Logger log = LoggerFactory.getLogger(ImageManagerResource.class);
 
     @Inject
-    private FileManagerService fileManagerService;
+    private ImageManagerService imageManagerService;
 
 
     /**
-     * DELETE  /file-managers/:id : delete the "id" fileManager.
+     * DELETE  /image-managers/:id : delete the "id" imageManager.
      *
-     * @param id the id of the fileManager to delete
+     * @param id the id of the imageManager to delete
      * @return the ResponseEntity with status 200 (OK)
      */
-    @RequestMapping(value = "/file-managers/{id}",
+    @RequestMapping(value = "/image-managers/{id}",
         method = RequestMethod.DELETE,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Void> deleteFileManager(@PathVariable Long id) {
-        log.debug("REST request to delete FileManager : {}", id);
-        fileManagerService.delete(id);
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("fileManager", id.toString())).build();
+    public ResponseEntity<Void> deleteImageManager(@PathVariable Long id) {
+        log.debug("REST request to delete ImageManager : {}", id);
+        imageManagerService.delete(id);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("imageManager", id.toString())).build();
     }
 
 }

@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
+import java.io.File;
 import java.util.Optional;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
@@ -44,10 +45,10 @@ public class FileManagerService {
     }
 
     /**
-     *  Get all the fileManagers.
+     * Get all the fileManagers.
      *
-     *  @param pageable the pagination information
-     *  @return the list of entities
+     * @param pageable the pagination information
+     * @return the list of entities
      */
     @Transactional(readOnly = true)
     public Page<FileManager> findAll(Pageable pageable) {
@@ -57,10 +58,10 @@ public class FileManagerService {
     }
 
     /**
-     *  Get one fileManager by id.
+     * Get one fileManager by id.
      *
-     *  @param id the id of the entity
-     *  @return the entity
+     * @param id the id of the entity
+     * @return the entity
      */
     @Transactional(readOnly = true)
     public FileManager findOne(Long id) {
@@ -70,12 +71,18 @@ public class FileManagerService {
     }
 
     /**
-     *  Delete the  fileManager by id.
+     * Delete the  fileManager by id.
      *
-     *  @param id the id of the entity
+     * @param id the id of the entity
      */
     public void delete(Long id) {
         log.debug("Request to delete FileManager : {}", id);
+
+        String path = fileManagerRepository.findOne(id).getPath();
+        File file = new File(path);
+        if (file.exists())
+            file.delete();
+
         fileManagerRepository.delete(id);
         fileManagerSearchRepository.delete(id);
     }
@@ -83,8 +90,8 @@ public class FileManagerService {
     /**
      * Search for the fileManager corresponding to the query.
      *
-     *  @param query the query of the search
-     *  @return the list of entities
+     * @param query the query of the search
+     * @return the list of entities
      */
     @Transactional(readOnly = true)
     public Page<FileManager> search(String query, Pageable pageable) {

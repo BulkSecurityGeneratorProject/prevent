@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
+import java.io.File;
 import java.util.Optional;
 
 import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
@@ -76,6 +77,12 @@ public class ImageManagerService {
      */
     public void delete(Long id) {
         log.debug("Request to delete ImageManager : {}", id);
+
+        String path = imageManagerRepository.findOne(id).getPath();
+        File file = new File(path);
+        if (file.exists())
+            file.delete();
+
         imageManagerRepository.delete(id);
         imageManagerSearchRepository.delete(id);
     }

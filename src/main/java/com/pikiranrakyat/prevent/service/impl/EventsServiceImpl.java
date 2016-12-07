@@ -4,6 +4,8 @@ import com.pikiranrakyat.prevent.domain.Events;
 import com.pikiranrakyat.prevent.repository.EventsRepository;
 import com.pikiranrakyat.prevent.repository.search.EventsSearchRepository;
 import com.pikiranrakyat.prevent.service.EventsService;
+import com.pikiranrakyat.prevent.service.FileManagerService;
+import com.pikiranrakyat.prevent.service.ImageManagerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -29,6 +31,12 @@ public class EventsServiceImpl implements EventsService {
 
     @Inject
     private EventsSearchRepository eventsSearchRepository;
+
+    @Inject
+    private FileManagerService fileManagerService;
+
+    @Inject
+    private ImageManagerService imageManagerService;
 
     /**
      * Save a events.
@@ -82,6 +90,10 @@ public class EventsServiceImpl implements EventsService {
      */
     public void delete(Long id) {
         log.debug("Request to delete Events : {}", id);
+
+        fileManagerService.delete(eventsRepository.findOne(id).getFile().getId());
+        imageManagerService.delete(eventsRepository.findOne(id).getImage().getId());
+
         eventsRepository.delete(id);
         eventsSearchRepository.delete(id);
     }

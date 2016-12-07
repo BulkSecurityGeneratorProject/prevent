@@ -16,12 +16,14 @@
         '$timeout',
         'EventOrder',
         'ManageSearch',
-        'geolocation'
+        'geolocation',
+        'FileManager',
+        'ImageManager'
     ];
 
     function EventOrderController($scope, $state, Events, entity,
                                   EventType, Locations, ManageLocations, Upload, $timeout,
-                                  EventOrder, ManageSearch, geolocation) {
+                                  EventOrder, ManageSearch, geolocation, FileManager, ImageManager) {
         var vm = this;
         vm.events = entity;
 
@@ -41,6 +43,9 @@
         vm.create = create;
         vm.uploadImage = uploadImage;
         vm.uploadFile = uploadFile;
+
+        vm.removeFile = removeFile;
+        vm.removeImage = removeImage;
 
         function getLocation(val) {
             if (val != null) {
@@ -66,50 +71,64 @@
         };
 
         function create() {
-            swal({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Ya'
-            }).then(function () {
-                EventOrder.create(vm.events)
-                    .then(function (response) {
-                        swal(
-                            'Created',
-                            'Event success has been created',
-                            'success'
-                        )
-                    }, function (error) {
-                        console.log(error);
-                        swal(
-                            'Error',
-                            'Event fail to be created ' + error.message,
-                            'error'
-                        )
-                    });
+            if (vm.events.id == null) {
+                swal({
+                    title: 'Create?',
+                    text: "Create Event",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya'
+                }).then(function () {
+                    EventOrder.create(vm.events)
+                        .then(function (response) {
+                            $state.go('event', null, {reload: true});
+                            swal(
+                                'Created',
+                                'Event success has been created',
+                                'success'
+                            )
+                        }, function (error) {
+                            console.log(error);
+                            swal(
+                                'Error',
+                                error.headers('X-preventApp-error'),
+                                'error'
+                            )
+                        });
 
 
-            })
+                })
+            } else {
+                swal({
+                    title: 'Update ?',
+                    text: "Update Event",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya'
+                }).then(function () {
+                    EventOrder.update(vm.events)
+                        .then(function (response) {
+                            $state.go('event', null, {reload: true});
+                            swal(
+                                'Update',
+                                'Event success has been updated',
+                                'success'
+                            )
+                        }, function (error) {
+                            swal(
+                                'Error',
+                                error.headers('X-preventApp-error'),
+                                'error'
+                            )
+                        });
+
+
+                })
+
+            }
+
         };
 
-        function save(data) {
-            EventOrder.create(data)
-                .then(function (response) {
-                    swal(
-                        'Created',
-                        'Event success has been created',
-                        'success'
-                    )
-                }, function (error) {
-                    console.log(error);
-                    swal(
-                        'Error',
-                        'Event fail to be created ' + error.message,
-                        'error'
-                    )
-                });
-        }
 
         function uploadImage(file) {
             Upload.upload({
@@ -146,6 +165,32 @@
                     });
         };
 
+        function removeFile() {
+            FileManager
+                .deleteFile(vm.events.file.id)
+                .then(function (response) {
+                    console.log(response);
+                    vm.events.file = null;
+                    vm.file = null;
+                    vm.progressFile = 0;
+                }, function (error) {
+                    console.log(error);
+                });
+        };
+
+        function removeImage() {
+            ImageManager
+                .deleteImage(vm.events.image.id)
+                .then(function (response) {
+                    console.log(response);
+                    vm.events.image = null;
+                    vm.image = null;
+                    vm.progressImage = 0;
+                }, function (error) {
+                    console.log(error);
+                });
+        };
+
         vm.datePickerOpenStatus.starts = false;
         vm.datePickerOpenStatus.ends = false;
 
@@ -157,8 +202,12 @@
             getAllEventType();
             getOrganizer();
             geolocation.getLocation().then(function (response) {
-                vm.events.locations.latitude = response.coords.latitude;
-                vm.events.locations.longitude = response.coords.longitude;
+                if (vm.events.locationLatitude == 0) {
+                    vm.events.locationLatitude = response.coords.latitude;
+                }
+                if (vm.events.locationLongitude == 0) {
+                    vm.events.locationLongitude = response.coords.longitude;
+                }
             }, function (error) {
                 console.log(error)
             });

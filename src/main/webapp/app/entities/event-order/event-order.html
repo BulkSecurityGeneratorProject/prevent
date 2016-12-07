@@ -50,7 +50,7 @@
                     <th jh-sort-by="accept"><span>Accept</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="isOrder"><span>Is Order</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="eventType.name"><span>Event Type</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="locations.name"><span>Locations</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="locationName"><span>Locations</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="createdDate"><span>Created Date</span> <span
                         class="glyphicon glyphicon-sort"></span>
                     </th>
@@ -76,9 +76,7 @@
                     <td>
                         <a ui-sref="event-type-detail({id:events.eventType.id})">{{events.eventType.name}}</a>
                     </td>
-                    <td>
-                        <a ui-sref="locations-detail({id:events.locations.id})">{{events.locations.name}}</a>
-                    </td>
+                    <td>{{events.locationName}}</td>
                     <td>{{events.createdDate | date:'dd/MM/yy HH:mm'}}</td>
                     <td>{{events.createdBy}}</td>
 

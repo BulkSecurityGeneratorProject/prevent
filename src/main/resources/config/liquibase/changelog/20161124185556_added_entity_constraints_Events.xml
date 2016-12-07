@@ -14,12 +14,6 @@
                                  referencedColumnNames="id"
                                  referencedTableName="event_type"/>
 
-        <addForeignKeyConstraint baseColumnNames="locations_id"
-                                 baseTableName="events"
-                                 constraintName="fk_events_locations_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="locations"/>
-
         <addForeignKeyConstraint baseColumnNames="organizer_id"
                                  baseTableName="events"
                                  constraintName="fk_events_organizer_id"
