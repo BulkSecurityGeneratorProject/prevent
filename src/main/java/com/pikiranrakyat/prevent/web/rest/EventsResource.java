@@ -4,9 +4,12 @@ import com.codahale.metrics.annotation.Timed;
 import com.pikiranrakyat.prevent.domain.Events;
 import com.pikiranrakyat.prevent.service.EventsService;
 import com.pikiranrakyat.prevent.service.LocationsService;
+import com.pikiranrakyat.prevent.service.OrderMerchandiseService;
+import com.pikiranrakyat.prevent.service.dto.EventOrderDTO;
 import com.pikiranrakyat.prevent.web.rest.util.HeaderUtil;
 import com.pikiranrakyat.prevent.web.rest.util.PaginationUtil;
 import com.pikiranrakyat.prevent.web.rest.vm.ManagedEventsVM;
+import com.pikiranrakyat.prevent.web.rest.vm.ManagedOrderMerchandiseVM;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -40,6 +43,9 @@ public class EventsResource {
     @Inject
     private LocationsService locationsService;
 
+    @Inject
+    private OrderMerchandiseService orderMerchandiseService;
+
     /**
      * POST  /events : Create a new events.
      *
@@ -51,7 +57,7 @@ public class EventsResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Events> createEvents(@Valid @RequestBody Events events) throws URISyntaxException {
+    public ResponseEntity<Events> createEvents(@Valid @RequestBody EventOrderDTO events) throws URISyntaxException {
         log.debug("REST request to save Events : {}", events);
         if (events.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("events", "idexists", "A new events cannot already have an ID")).body(null);
@@ -62,7 +68,7 @@ public class EventsResource {
         } else if (events.getFile() == null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("events", "file not exists ", "Mohon masukan file pdf brosur")).body(null);
         } else {
-            Events result = eventsService.save(events);
+            Events result = eventsService.saveWithOrder(events);
             return ResponseEntity.created(new URI("/api/events/" + result.getId()))
                 .headers(HeaderUtil.createEntityCreationAlert("events", result.getId().toString()))
                 .body(result);
@@ -84,15 +90,23 @@ public class EventsResource {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Events> updateEvents(@Valid @RequestBody Events events) throws URISyntaxException {
+    public ResponseEntity<Events> updateEvents(@Valid @RequestBody EventOrderDTO events) throws URISyntaxException {
         log.debug("REST request to update Events : {}", events);
         if (events.getId() == null) {
             return createEvents(events);
         }
-        Events result = eventsService.save(events);
-        return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert("events", events.getId().toString()))
-            .body(result);
+
+        if (events.getImage() == null) {
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("events", "image not exists ", " Mohon masukan brosur jpg")).body(null);
+        } else if (events.getFile() == null) {
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("events", "file not exists ", "Mohon masukan file pdf brosur")).body(null);
+        } else {
+            Events result = eventsService.saveWithOrder(events);
+            return ResponseEntity.ok()
+                .headers(HeaderUtil.createEntityUpdateAlert("events", events.getId().toString()))
+                .body(result);
+        }
+
     }
 
     /**
@@ -124,13 +138,25 @@ public class EventsResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Events> getEvents(@PathVariable Long id) {
+    public ResponseEntity<EventOrderDTO> getEvents(@PathVariable Long id) {
         log.debug("REST request to get Events : {}", id);
         Events events = eventsService.findOne(id);
         return Optional.ofNullable(events)
-            .map(result -> new ResponseEntity<>(
-                result,
-                HttpStatus.OK))
+            .map(result -> {
+                EventOrderDTO dto = new EventOrderDTO(result);
+
+                List<ManagedOrderMerchandiseVM> managedOrderMerchandiseVMs =
+                    orderMerchandiseService
+                        .findByEvent(dto.getId())
+                        .stream()
+                        .map(ManagedOrderMerchandiseVM::new)
+                        .collect(Collectors.toList());
+
+                dto.setOrderMerchandises(managedOrderMerchandiseVMs);
+
+
+                return new ResponseEntity<>(dto, HttpStatus.OK);
+            })
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 

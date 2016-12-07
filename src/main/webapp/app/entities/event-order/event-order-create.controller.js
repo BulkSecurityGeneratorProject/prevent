@@ -18,14 +18,19 @@
         'ManageSearch',
         'geolocation',
         'FileManager',
-        'ImageManager'
+        'ImageManager',
+        'ListOrder',
+        'OrderMerchandise'
     ];
 
     function EventOrderController($scope, $state, Events, entity,
                                   EventType, Locations, ManageLocations, Upload, $timeout,
-                                  EventOrder, ManageSearch, geolocation, FileManager, ImageManager) {
+                                  EventOrder, ManageSearch, geolocation, FileManager, ImageManager, ListOrder, OrderMerchandise) {
         var vm = this;
         vm.events = entity;
+
+        vm.merchandises = [];
+        vm.circulations = [];
 
         vm.progressImage = 0;
         vm.progressFile = 0;
@@ -35,6 +40,8 @@
         vm.openCalendar = openCalendar;
         vm.eventtypes = [];
         vm.organizers = [];
+        vm.ads = [];
+        vm.redactions = [];
 
 
         vm.getLocation = getLocation;
@@ -198,9 +205,85 @@
             vm.datePickerOpenStatus[date] = true;
         }
 
+        function getAllMerchandise() {
+            ListOrder.getListMerchandise()
+                .then(function (response) {
+                    vm.merchandises = response.data;
+                }, function (error) {
+                    console.log(error);
+                })
+        }
+
+        function getAllCirculation() {
+            ListOrder.getListCirculation()
+                .then(function (response) {
+                    vm.circulations = response.data;
+                }, function (error) {
+                    console.log(error);
+                })
+        }
+
+
+        function getAllAds() {
+            ListOrder.getListAds()
+                .then(function (response) {
+                    vm.ads = response.data;
+                }, function (error) {
+                    console.log(error);
+                })
+        }
+
+        function getAllRedaction() {
+            ListOrder.getListRedaction()
+                .then(function (response) {
+                    vm.redactions = response.data;
+                }, function (error) {
+                    console.log(error);
+                })
+        }
+
+        vm.addOrderMerchandise = addOrderMerchandise;
+        vm.orderMerchandise = {};
+
+        function addOrderMerchandise(merchandise) {
+            vm.orderMerchandise.merchandise = merchandise;
+            for (var i = 0; i < vm.events.orderMerchandises.length; i++) {
+                if (vm.events.orderMerchandises[i].merchandise.id == vm.orderMerchandise.merchandise.id) {
+                    swal(
+                        'Error',
+                        'Order ' + merchandise.name + " sudah ada dalam list order",
+                        'error'
+                    );
+                    return false;
+                }
+            }
+            vm.events.orderMerchandises.push(vm.orderMerchandise);
+            vm.orderMerchandise = {};
+            swal(
+                'Berhasil',
+                'Anda mengoder ' + merchandise.name + " Silahkan masukan jumlah yg akan diorder",
+                'success'
+            )
+        }
+
+        vm.deleteOrderMerchandise = function deleteOrderMerchandise(id, idx) {
+            OrderMerchandise.delete({id: id},
+                function (response) {
+                    console.log(response);
+                    vm.events.orderMerchandises.splice(idx, 1);
+                }, function (error) {
+                    console.log(error);
+                });
+        }
+
+
         function init() {
             getAllEventType();
             getOrganizer();
+            getAllMerchandise();
+            getAllCirculation();
+            getAllRedaction();
+            getAllAds();
             geolocation.getLocation().then(function (response) {
                 if (vm.events.locationLatitude == 0) {
                     vm.events.locationLatitude = response.coords.latitude;

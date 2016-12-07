@@ -1,6 +1,7 @@
 package com.pikiranrakyat.prevent.service;
 
 import com.pikiranrakyat.prevent.domain.Events;
+import com.pikiranrakyat.prevent.service.dto.EventOrderDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -16,6 +17,7 @@ public interface EventsService {
      * @return the persisted entity
      */
     Events save(Events events);
+    Events saveWithOrder(EventOrderDTO dto);
 
     /**
      * Get all the events.

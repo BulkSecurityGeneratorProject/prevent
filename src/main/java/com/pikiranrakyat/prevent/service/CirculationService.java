@@ -4,6 +4,8 @@ import com.pikiranrakyat.prevent.domain.Circulation;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 /**
  * Service Interface for managing Circulation.
  */
@@ -18,35 +20,36 @@ public interface CirculationService {
     Circulation save(Circulation circulation);
 
     /**
-     *  Get all the circulations.
+     * Get all the circulations.
      *
-     *  @param pageable the pagination information
-     *  @return the list of entities
+     * @param pageable the pagination information
+     * @return the list of entities
      */
     Page<Circulation> findAll(Pageable pageable);
 
+    List<Circulation> findAll();
+
     /**
-     *  Get the "id" circulation.
+     * Get the "id" circulation.
      *
-     *  @param id the id of the entity
-     *  @return the entity
+     * @param id the id of the entity
+     * @return the entity
      */
     Circulation findOne(Long id);
 
     /**
-     *  Delete the "id" circulation.
+     * Delete the "id" circulation.
      *
-     *  @param id the id of the entity
+     * @param id the id of the entity
      */
     void delete(Long id);
 
     /**
      * Search for the circulation corresponding to the query.
      *
-     *  @param query the query of the search
-     *
-     *  @param pageable the pagination information
-     *  @return the list of entities
+     * @param query    the query of the search
+     * @param pageable the pagination information
+     * @return the list of entities
      */
     Page<Circulation> search(String query, Pageable pageable);
 }

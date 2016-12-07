@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 
+import java.util.List;
+
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
@@ -54,6 +56,12 @@ public class RedactionServiceImpl implements RedactionService{
         log.debug("Request to get all Redactions");
         Page<Redaction> result = redactionRepository.findAll(pageable);
         return result;
+    }
+
+    @Override
+    public List<Redaction> findAll() {
+        log.debug("Request to get all Redactions");
+        return redactionRepository.findAll();
     }
 
     /**

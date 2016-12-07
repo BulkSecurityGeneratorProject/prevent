@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 
+import java.util.List;
+
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
@@ -54,6 +56,12 @@ public class MerchandiseServiceImpl implements MerchandiseService{
         log.debug("Request to get all Merchandises");
         Page<Merchandise> result = merchandiseRepository.findAll(pageable);
         return result;
+    }
+
+    @Override
+    public List<Merchandise> findAll() {
+        log.debug("Request to get all Merchandises");
+        return merchandiseRepository.findAll();
     }
 
     /**

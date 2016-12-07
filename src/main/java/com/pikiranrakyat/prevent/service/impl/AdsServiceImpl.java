@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import javax.inject.Inject;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
@@ -57,6 +58,12 @@ public class AdsServiceImpl implements AdsService {
         log.debug("Request to get all Ads");
         Page<Ads> result = adsRepository.findAll(pageable);
         return result;
+    }
+
+    @Override
+    public List<Ads> findAll() {
+        log.debug("Request to get all Ads");
+        return adsRepository.findAll();
     }
 
     /**

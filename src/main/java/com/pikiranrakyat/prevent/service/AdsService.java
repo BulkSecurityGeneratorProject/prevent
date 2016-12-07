@@ -4,6 +4,8 @@ import com.pikiranrakyat.prevent.domain.Ads;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 /**
  * Service Interface for managing Ads.
  */
@@ -18,35 +20,36 @@ public interface AdsService {
     Ads save(Ads ads);
 
     /**
-     *  Get all the ads.
+     * Get all the ads.
      *
-     *  @param pageable the pagination information
-     *  @return the list of entities
+     * @param pageable the pagination information
+     * @return the list of entities
      */
     Page<Ads> findAll(Pageable pageable);
 
+    List<Ads> findAll();
+
     /**
-     *  Get the "id" ads.
+     * Get the "id" ads.
      *
-     *  @param id the id of the entity
-     *  @return the entity
+     * @param id the id of the entity
+     * @return the entity
      */
     Ads findOne(Long id);
 
     /**
-     *  Delete the "id" ads.
+     * Delete the "id" ads.
      *
-     *  @param id the id of the entity
+     * @param id the id of the entity
      */
     void delete(Long id);
 
     /**
      * Search for the ads corresponding to the query.
      *
-     *  @param query the query of the search
-     *
-     *  @param pageable the pagination information
-     *  @return the list of entities
+     * @param query    the query of the search
+     * @param pageable the pagination information
+     * @return the list of entities
      */
     Page<Ads> search(String query, Pageable pageable);
 }

@@ -126,6 +126,22 @@ public class OrderMerchandiseResource {
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+
+    /**
+     * GET  /order-merchandises/:eventId/event : get the "id" orderMerchandise.
+     *
+     * @param eventId the id of the event to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the orderMerchandise, or with status 404 (Not Found)
+     */
+    @RequestMapping(value = "/order-merchandises/{eventId}/event",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public List<OrderMerchandise> getOrderMerchandiseByEvent(@PathVariable Long eventId) {
+        log.debug("REST request to get OrderMerchandise by event id : {}", eventId);
+        return orderMerchandiseService.findByEvent(eventId);
+    }
+
     /**
      * DELETE  /order-merchandises/:id : delete the "id" orderMerchandise.
      *

@@ -1,11 +1,15 @@
 package com.pikiranrakyat.prevent.service.impl;
 
 import com.pikiranrakyat.prevent.domain.Events;
+import com.pikiranrakyat.prevent.domain.OrderMerchandise;
 import com.pikiranrakyat.prevent.repository.EventsRepository;
 import com.pikiranrakyat.prevent.repository.search.EventsSearchRepository;
 import com.pikiranrakyat.prevent.service.EventsService;
 import com.pikiranrakyat.prevent.service.FileManagerService;
 import com.pikiranrakyat.prevent.service.ImageManagerService;
+import com.pikiranrakyat.prevent.service.OrderMerchandiseService;
+import com.pikiranrakyat.prevent.service.dto.EventOrderDTO;
+import com.pikiranrakyat.prevent.web.rest.vm.ManagedOrderMerchandiseVM;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -14,6 +18,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
@@ -38,6 +44,9 @@ public class EventsServiceImpl implements EventsService {
     @Inject
     private ImageManagerService imageManagerService;
 
+    @Inject
+    private OrderMerchandiseService orderMerchandiseService;
+
     /**
      * Save a events.
      *
@@ -49,6 +58,57 @@ public class EventsServiceImpl implements EventsService {
         Events result = eventsRepository.save(events);
         eventsSearchRepository.save(result);
         return result;
+    }
+
+    @Override
+    public Events saveWithOrder(EventOrderDTO dto) {
+        Events events = new Events();
+        if (dto.getId() != null)
+            events.setId(dto.getId());
+        events.setTitle(dto.getTitle());
+        events.setDescription(dto.getDescription());
+        events.setStarts(dto.getStarts());
+        events.setEnds(dto.getEnds());
+        events.setLocationName(dto.getLocationName());
+        events.setLocationAddress(dto.getLocationAddress());
+        events.setLocationLatitude(dto.getLocationLatitude());
+        events.setLocationLongitude(dto.getLocationLongitude());
+        events.setSubtotal(dto.getSubtotal());
+        events.setAgreeDate(dto.getAgreeDate());
+        events.setAccept(dto.getAccept());
+        events.setNote(dto.getNote());
+        events.setIsOrder(dto.getOrder());
+        events.setEventType(dto.getEventType());
+        events.setOrganizer(dto.getOrganizer());
+        events.setImage(dto.getImage());
+        events.setFile(dto.getFile());
+        Events save = save(events);
+
+        if (dto.getOrderMerchandises().size() > 0)
+            dto.getOrderMerchandises()
+                .stream()
+                .map(merchandiseDTO -> {
+                    
+                    OrderMerchandise orderMerchandise = new OrderMerchandise();
+
+                    if (merchandiseDTO.getId() != null)
+                        orderMerchandise.setId(merchandiseDTO.getId());
+                    if (merchandiseDTO.getOrderNumber() != null)
+                        orderMerchandise.setOrderNumber(merchandiseDTO.getOrderNumber());
+
+                    orderMerchandise.setOrderNumber(UUID.randomUUID().toString());
+                    orderMerchandise.setAccept(merchandiseDTO.getAccept());
+                    orderMerchandise.setNote(merchandiseDTO.getNote());
+                    orderMerchandise.setQty(merchandiseDTO.getQty());
+                    orderMerchandise.setTotal(merchandiseDTO.getTotal());
+                    orderMerchandise.setMerchandise(merchandiseDTO.getMerchandise());
+                    orderMerchandise.setEvents(save);
+
+                    return orderMerchandiseService.save(orderMerchandise);
+                })
+                .map(ManagedOrderMerchandiseVM::new)
+                .collect(Collectors.toList());
+        return save;
     }
 
     /**

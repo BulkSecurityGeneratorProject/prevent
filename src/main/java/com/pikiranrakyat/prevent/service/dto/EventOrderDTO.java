@@ -1,17 +1,20 @@
 package com.pikiranrakyat.prevent.service.dto;
 
-import com.pikiranrakyat.prevent.domain.EventType;
-import com.pikiranrakyat.prevent.domain.Events;
-import com.pikiranrakyat.prevent.domain.Organizer;
+import com.pikiranrakyat.prevent.domain.*;
+import com.pikiranrakyat.prevent.web.rest.vm.ManagedOrderMerchandiseVM;
 
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by aseprojali on 30/11/16.
  */
-public class EventsDTO {
+public class EventOrderDTO {
+
+    private Long id;
 
     @NotNull
     private String title;
@@ -39,6 +42,9 @@ public class EventsDTO {
 
     private Boolean accept = Boolean.FALSE;
 
+    private ZonedDateTime agreeDate;
+
+
     private String note;
 
     private Boolean isOrder = Boolean.FALSE;
@@ -47,23 +53,18 @@ public class EventsDTO {
 
     private Organizer organizer;
 
-    public EventsDTO() {
+    private ImageManager image;
+
+    private FileManager file;
+
+    private List<ManagedOrderMerchandiseVM> orderMerchandises = new ArrayList<>();
+
+
+    public EventOrderDTO() {
     }
 
-    public EventsDTO(String title,
-                     String description,
-                     ZonedDateTime starts,
-                     ZonedDateTime ends,
-                     String locationName,
-                     String locationAddress,
-                     Double locationLatitude,
-                     Double locationLongitude,
-                     BigDecimal subtotal,
-                     Boolean accept,
-                     String note,
-                     Boolean isOrder,
-                     EventType eventType,
-                     Organizer organizer) {
+    public EventOrderDTO(Long id, String title, String description, ZonedDateTime starts, ZonedDateTime ends, String locationName, String locationAddress, Double locationLatitude, Double locationLongitude, BigDecimal subtotal, Boolean accept, ZonedDateTime agreeDate, String note, Boolean isOrder, EventType eventType, Organizer organizer, ImageManager image, FileManager file) {
+        this.id = id;
         this.title = title;
         this.description = description;
         this.starts = starts;
@@ -74,31 +75,45 @@ public class EventsDTO {
         this.locationLongitude = locationLongitude;
         this.subtotal = subtotal;
         this.accept = accept;
+        this.agreeDate = agreeDate;
         this.note = note;
         this.isOrder = isOrder;
         this.eventType = eventType;
         this.organizer = organizer;
+        this.image = image;
+        this.file = file;
     }
 
-    public EventsDTO(Events o) {
+    public EventOrderDTO(Events events) {
         this(
-            o.getTitle(),
-            o.getDescription(),
-            o.getStarts(),
-            o.getEnds(),
-            o.getLocationName(),
-            o.getLocationAddress(),
-            o.getLocationLatitude(),
-            o.getLocationLongitude(),
-            o.getSubtotal(),
-            o.isAccept(),
-            o.getNote(),
-            o.isIsOrder(),
-            o.getEventType(),
-            o.getOrganizer()
-
-
+            events.getId(),
+            events.getTitle(),
+            events.getDescription(),
+            events.getStarts(),
+            events.getEnds(),
+            events.getLocationName(),
+            events.getLocationAddress(),
+            events.getLocationLatitude(),
+            events.getLocationLongitude(),
+            events.getSubtotal(),
+            events.isAccept(),
+            events.getAgreeDate(),
+            events.getNote(),
+            events.isIsOrder(),
+            events.getEventType(),
+            events.getOrganizer(),
+            events.getImage(),
+            events.getFile()
         );
+    }
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -213,10 +228,43 @@ public class EventsDTO {
         this.organizer = organizer;
     }
 
+    public List<ManagedOrderMerchandiseVM> getOrderMerchandises() {
+        return orderMerchandises;
+    }
+
+    public void setOrderMerchandises(List<ManagedOrderMerchandiseVM> orderMerchandises) {
+        this.orderMerchandises = orderMerchandises;
+    }
+
+    public ImageManager getImage() {
+        return image;
+    }
+
+    public void setImage(ImageManager image) {
+        this.image = image;
+    }
+
+    public FileManager getFile() {
+        return file;
+    }
+
+    public void setFile(FileManager file) {
+        this.file = file;
+    }
+
+    public ZonedDateTime getAgreeDate() {
+        return agreeDate;
+    }
+
+    public void setAgreeDate(ZonedDateTime agreeDate) {
+        this.agreeDate = agreeDate;
+    }
+
     @Override
     public String toString() {
-        return "EventsDTO{" +
-            "title='" + title + '\'' +
+        return "EventOrderDTO{" +
+            "id='" + id + '\'' +
+            ", title='" + title + '\'' +
             ", description='" + description + '\'' +
             ", starts=" + starts +
             ", ends=" + ends +
@@ -230,6 +278,9 @@ public class EventsDTO {
             ", isOrder=" + isOrder +
             ", eventType=" + eventType +
             ", organizer=" + organizer +
+            ", image=" + image +
+            ", file=" + file +
+            ", orderMerchandises=" + orderMerchandises +
             '}';
     }
 }

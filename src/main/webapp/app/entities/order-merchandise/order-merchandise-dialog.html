@@ -52,15 +52,10 @@
         </div>
         <div class="form-group">
             <label for="field_events">Events</label>
-            <select class="form-control" id="field_events" name="events" ng-model="vm.orderMerchandise.events" ng-options="events as events.title for events in vm.events track by events.id" required>
-                <option value=""></option>
-            </select>
-        </div>
-        <div ng-show="editForm.events.$invalid">
-            <p class="help-block"
-               ng-show="editForm.events.$error.required">
-                This field is required.
-            </p>
+            <input type="text" class="form-control" name="note" id="field_events"
+                   disabled
+                   ng-model="vm.orderMerchandise.events.title"
+            />
         </div>
 
         <div class="form-group">

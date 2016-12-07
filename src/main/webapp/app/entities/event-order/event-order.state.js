@@ -79,7 +79,8 @@
                             eventType: null,
                             organizer: null,
                             isOrder: false,
-                            id: null
+                            id: null,
+                            orderMerchandises: []
                         };
                     },
                     previousState: ["$state", function ($state) {

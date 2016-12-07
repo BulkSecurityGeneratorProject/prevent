@@ -284,21 +284,21 @@
 
                         </tr>
                         <!--<tr>-->
-                            <!--<td colspan="4"-->
-                                <!--ng-show="vm.event.fileList.length == 0">-->
-                                <!--<small><i>No attachment selected.</i></small>-->
-                            <!--</td>-->
+                        <!--<td colspan="4"-->
+                        <!--ng-show="vm.event.fileList.length == 0">-->
+                        <!--<small><i>No attachment selected.</i></small>-->
+                        <!--</td>-->
                         <!--</tr>-->
                         </tbody>
                     </table>
                 </div>
 
                 <!--<img-->
-                    <!--ng-show="vm.events.image.name != null"-->
-                    <!--ng-src="/api/image/{{vm.events.image.name}}"-->
-                    <!--alt="image"-->
-                    <!--style="margin: 0"-->
-                    <!--class="img-responsive" fallback-src/>-->
+                <!--ng-show="vm.events.image.name != null"-->
+                <!--ng-src="/api/image/{{vm.events.image.name}}"-->
+                <!--alt="image"-->
+                <!--style="margin: 0"-->
+                <!--class="img-responsive" fallback-src/>-->
 
 
             </div>
@@ -387,6 +387,156 @@
         </div>
     </div>
     <!--end file proposal-->
+
+
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Order</h3>
+
+        </div>
+        <div class="box-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th><span>Kode</span></th>
+                        <th><span>Name</span></th>
+                        <th><span>Price</span></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="merchandise in vm.merchandises track by merchandise.id">
+                        <td>Marcomm</td>
+                        <td>{{merchandise.name}}</td>
+                        <td>{{merchandise.price | number}}</td>
+                        <td class="text-right">
+                            <div class="btn-group flex-btn-group-container">
+                                <button type="button"
+                                        ng-click="vm.addOrderMerchandise(merchandise)"
+                                        class="btn btn-primary btn-sm">
+                                    <i class="fa fa-plus fa-fw"></i>
+                                    <span class="hidden-xs hidden-sm"></span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr ng-repeat="circulation in vm.circulations track by circulation.id">
+                        <td>Sirkulasi</td>
+                        <td>{{circulation.name}}</td>
+                        <td>{{circulation.price | number}}</td>
+                        <td class="text-right">
+                            <div class="btn-group flex-btn-group-container">
+                                <button type="button"
+                                        ui-sref="merchandise-detail({id:merchandise.id})"
+                                        class="btn btn-info btn-sm">
+                                    <span class="glyphicon glyphicon-eye-open"></span>
+                                    <span class="hidden-xs hidden-sm"></span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr ng-repeat="ad in vm.ads track by ad.id">
+                        <td>Iklan</td>
+                        <td>{{ad.name}}</td>
+                        <td>{{ad.totalPrice | number}}</td>
+                        <td class="text-right">
+                            <div class="btn-group flex-btn-group-container">
+                                <button type="button"
+                                        ui-sref="merchandise-detail({id:merchandise.id})"
+                                        class="btn btn-info btn-sm">
+                                    <span class="glyphicon glyphicon-eye-open"></span>
+                                    <span class="hidden-xs hidden-sm"></span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+
+
+                    <tr ng-repeat="redaction in vm.redactions track by redaction.id">
+                        <td>Redaksi</td>
+                        <td>{{redaction.name}}</td>
+                        <td>-</td>
+                        <td class="text-right">
+                            <div class="btn-group flex-btn-group-container">
+                                <button type="button"
+                                        ui-sref="merchandise-detail({id:merchandise.id})"
+                                        class="btn btn-info btn-sm">
+                                    <span class="glyphicon glyphicon-eye-open"></span>
+                                    <span class="hidden-xs hidden-sm"></span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">List Order</h3>
+
+        </div>
+        <div class="box-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th><span>Kode</span></th>
+                        <th><span>Name</span></th>
+                        <th><span>Price</span></th>
+                        <th><span>Qty</span></th>
+                        <th><span>Total</span></th>
+                        <th><span>Note</span></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="orderMerchandise in vm.events.orderMerchandises">
+                        <td>Marcomm</td>
+                        <td>{{orderMerchandise.merchandise.name}}</td>
+                        <td>{{orderMerchandise.merchandise.price | number}}</td>
+                        <td><input type="text" class="form-control" ng-model="orderMerchandise.qty"
+                                   ng-change="orderMerchandise.total = orderMerchandise.merchandise.price * orderMerchandise.qty">
+                        </td>
+                        <td>{{orderMerchandise.total | number}}</td>
+                        <td><textarea name="note" id="note" cols="10" rows="5" class="form-control"
+                                      ng-model="orderMerchandise.note"></textarea></td>
+                        <td class="text-right">
+                            <div class="btn-group flex-btn-group-container">
+
+                                <button type="button"
+                                        ng-show="orderMerchandise.id == null"
+                                        ng-click="vm.events.orderMerchandises.splice($index,1)"
+                                        class="btn btn-danger btn-sm">
+                                    <i class="fa fa-minus fa-fw"></i>
+                                    <span class="hidden-xs hidden-sm"></span>
+                                </button>
+
+                                <button type="button"
+                                        ng-show="orderMerchandise.id != null"
+                                        ng-click="vm.deleteOrderMerchandise(orderMerchandise.id, $index)"
+                                        class="btn btn-danger btn-sm">
+                                    <i class="fa fa-minus fa-fw"></i>
+                                    <span class="hidden-xs hidden-sm"></span>
+                                </button>
+
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
 
     <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
         <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>

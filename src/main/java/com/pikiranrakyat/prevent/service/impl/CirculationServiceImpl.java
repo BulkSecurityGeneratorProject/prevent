@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 
+import java.util.List;
+
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
@@ -54,6 +56,12 @@ public class CirculationServiceImpl implements CirculationService{
         log.debug("Request to get all Circulations");
         Page<Circulation> result = circulationRepository.findAll(pageable);
         return result;
+    }
+
+    @Override
+    public List<Circulation> findAll() {
+        log.debug("Request to get all Circulations");
+        return circulationRepository.findAll();
     }
 
     /**
