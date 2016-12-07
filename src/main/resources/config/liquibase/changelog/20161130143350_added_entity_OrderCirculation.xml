@@ -38,7 +38,7 @@
             </column>
 
             <column name="total" type="decimal(30,2)">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
 
             <column name="circulation_id" type="bigint">

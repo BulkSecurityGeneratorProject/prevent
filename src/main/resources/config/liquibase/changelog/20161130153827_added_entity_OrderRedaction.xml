@@ -41,6 +41,12 @@
                 <constraints nullable="true"/>
             </column>
 
+
+            <column name="total" type="decimal(30,2)">
+                <constraints nullable="true"/>
+            </column>
+
+
             <column name="redaction_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
