@@ -17,6 +17,7 @@ public interface EventsService {
      * @return the persisted entity
      */
     Events save(Events events);
+
     Events saveWithOrder(EventOrderDTO dto);
 
     /**

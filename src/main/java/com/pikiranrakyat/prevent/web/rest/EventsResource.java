@@ -4,11 +4,13 @@ import com.codahale.metrics.annotation.Timed;
 import com.pikiranrakyat.prevent.domain.Events;
 import com.pikiranrakyat.prevent.service.EventsService;
 import com.pikiranrakyat.prevent.service.LocationsService;
+import com.pikiranrakyat.prevent.service.OrderCirculationService;
 import com.pikiranrakyat.prevent.service.OrderMerchandiseService;
 import com.pikiranrakyat.prevent.service.dto.EventOrderDTO;
 import com.pikiranrakyat.prevent.web.rest.util.HeaderUtil;
 import com.pikiranrakyat.prevent.web.rest.util.PaginationUtil;
 import com.pikiranrakyat.prevent.web.rest.vm.ManagedEventsVM;
+import com.pikiranrakyat.prevent.web.rest.vm.ManagedOrderCirculationVM;
 import com.pikiranrakyat.prevent.web.rest.vm.ManagedOrderMerchandiseVM;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,6 +47,9 @@ public class EventsResource {
 
     @Inject
     private OrderMerchandiseService orderMerchandiseService;
+
+    @Inject
+    private OrderCirculationService orderCirculationService;
 
     /**
      * POST  /events : Create a new events.
@@ -145,14 +150,19 @@ public class EventsResource {
             .map(result -> {
                 EventOrderDTO dto = new EventOrderDTO(result);
 
-                List<ManagedOrderMerchandiseVM> managedOrderMerchandiseVMs =
+                dto.setOrderMerchandises(
                     orderMerchandiseService
                         .findByEvent(dto.getId())
                         .stream()
                         .map(ManagedOrderMerchandiseVM::new)
-                        .collect(Collectors.toList());
+                        .collect(Collectors.toList()));
 
-                dto.setOrderMerchandises(managedOrderMerchandiseVMs);
+                dto.setOrderCirculations(
+                    orderCirculationService.findByEvent(dto.getId())
+                        .stream()
+                        .map(ManagedOrderCirculationVM::new)
+                        .collect(Collectors.toList())
+                );
 
 
                 return new ResponseEntity<>(dto, HttpStatus.OK);

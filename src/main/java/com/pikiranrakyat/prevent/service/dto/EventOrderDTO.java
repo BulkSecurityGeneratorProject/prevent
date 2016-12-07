@@ -1,6 +1,7 @@
 package com.pikiranrakyat.prevent.service.dto;
 
 import com.pikiranrakyat.prevent.domain.*;
+import com.pikiranrakyat.prevent.web.rest.vm.ManagedOrderCirculationVM;
 import com.pikiranrakyat.prevent.web.rest.vm.ManagedOrderMerchandiseVM;
 
 import javax.validation.constraints.NotNull;
@@ -58,6 +59,8 @@ public class EventOrderDTO {
     private FileManager file;
 
     private List<ManagedOrderMerchandiseVM> orderMerchandises = new ArrayList<>();
+
+    private List<ManagedOrderCirculationVM> orderCirculations = new ArrayList<>();
 
 
     public EventOrderDTO() {
@@ -260,10 +263,18 @@ public class EventOrderDTO {
         this.agreeDate = agreeDate;
     }
 
+    public List<ManagedOrderCirculationVM> getOrderCirculations() {
+        return orderCirculations;
+    }
+
+    public void setOrderCirculations(List<ManagedOrderCirculationVM> orderCirculations) {
+        this.orderCirculations = orderCirculations;
+    }
+
     @Override
     public String toString() {
         return "EventOrderDTO{" +
-            "id='" + id + '\'' +
+            "id=" + id +
             ", title='" + title + '\'' +
             ", description='" + description + '\'' +
             ", starts=" + starts +
@@ -274,6 +285,7 @@ public class EventOrderDTO {
             ", locationLongitude=" + locationLongitude +
             ", subtotal=" + subtotal +
             ", accept=" + accept +
+            ", agreeDate=" + agreeDate +
             ", note='" + note + '\'' +
             ", isOrder=" + isOrder +
             ", eventType=" + eventType +
@@ -281,6 +293,7 @@ public class EventOrderDTO {
             ", image=" + image +
             ", file=" + file +
             ", orderMerchandises=" + orderMerchandises +
+            ", orderCirculations=" + orderCirculations +
             '}';
     }
 }

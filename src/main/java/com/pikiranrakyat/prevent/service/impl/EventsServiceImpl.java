@@ -1,15 +1,12 @@
 package com.pikiranrakyat.prevent.service.impl;
 
 import com.pikiranrakyat.prevent.domain.Events;
+import com.pikiranrakyat.prevent.domain.OrderCirculation;
 import com.pikiranrakyat.prevent.domain.OrderMerchandise;
 import com.pikiranrakyat.prevent.repository.EventsRepository;
 import com.pikiranrakyat.prevent.repository.search.EventsSearchRepository;
-import com.pikiranrakyat.prevent.service.EventsService;
-import com.pikiranrakyat.prevent.service.FileManagerService;
-import com.pikiranrakyat.prevent.service.ImageManagerService;
-import com.pikiranrakyat.prevent.service.OrderMerchandiseService;
+import com.pikiranrakyat.prevent.service.*;
 import com.pikiranrakyat.prevent.service.dto.EventOrderDTO;
-import com.pikiranrakyat.prevent.web.rest.vm.ManagedOrderMerchandiseVM;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -19,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
@@ -47,6 +43,9 @@ public class EventsServiceImpl implements EventsService {
     @Inject
     private OrderMerchandiseService orderMerchandiseService;
 
+    @Inject
+    private OrderCirculationService orderCirculationService;
+
     /**
      * Save a events.
      *
@@ -63,8 +62,10 @@ public class EventsServiceImpl implements EventsService {
     @Override
     public Events saveWithOrder(EventOrderDTO dto) {
         Events events = new Events();
+
         if (dto.getId() != null)
             events.setId(dto.getId());
+
         events.setTitle(dto.getTitle());
         events.setDescription(dto.getDescription());
         events.setStarts(dto.getStarts());
@@ -86,9 +87,8 @@ public class EventsServiceImpl implements EventsService {
 
         if (dto.getOrderMerchandises().size() > 0)
             dto.getOrderMerchandises()
-                .stream()
-                .map(merchandiseDTO -> {
-                    
+                .forEach(merchandiseDTO -> {
+
                     OrderMerchandise orderMerchandise = new OrderMerchandise();
 
                     if (merchandiseDTO.getId() != null)
@@ -104,10 +104,32 @@ public class EventsServiceImpl implements EventsService {
                     orderMerchandise.setMerchandise(merchandiseDTO.getMerchandise());
                     orderMerchandise.setEvents(save);
 
-                    return orderMerchandiseService.save(orderMerchandise);
-                })
-                .map(ManagedOrderMerchandiseVM::new)
-                .collect(Collectors.toList());
+                    orderMerchandiseService.save(orderMerchandise);
+                });
+
+        
+        if (dto.getOrderCirculations().size() > 0)
+            dto.getOrderCirculations()
+                .forEach(o -> {
+                    OrderCirculation orderCirculation = new OrderCirculation();
+
+                    if (o.getId() != null)
+                        orderCirculation.setId(o.getId());
+
+                    if (o.getOrderNumber() != null)
+                        orderCirculation.setOrderNumber(o.getOrderNumber());
+
+                    orderCirculation.setOrderNumber(UUID.randomUUID().toString());
+                    orderCirculation.setAccept(o.getAccept());
+                    orderCirculation.setNote(o.getNote());
+                    orderCirculation.setQty(o.getQty());
+                    orderCirculation.setTotal(o.getTotal());
+                    orderCirculation.setCirculation(o.getCirculation());
+                    orderCirculation.setEvents(save);
+
+                    orderCirculationService.save(orderCirculation);
+                });
+
         return save;
     }
 

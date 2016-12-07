@@ -10,9 +10,9 @@
 
         <addForeignKeyConstraint baseColumnNames="redaction_id"
                                  baseTableName="order_circulation"
-                                 constraintName="fk_order_circulation_master_redaction_id"
+                                 constraintName="fk_order_circulation_master_circulation_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="master_redaction"/>
+                                 referencedTableName="master_circulation"/>
 
         <addForeignKeyConstraint baseColumnNames="events_id"
                                  baseTableName="order_circulation"

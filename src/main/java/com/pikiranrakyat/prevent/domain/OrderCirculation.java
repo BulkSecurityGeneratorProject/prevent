@@ -7,6 +7,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 /**
@@ -28,14 +29,13 @@ public class OrderCirculation extends AbstractAuditingEntity implements Serializ
     private String orderNumber;
 
     @NotNull
-    @Size(min = 5, max = 100)
-    @Column(name = "title", length = 100, nullable = false)
-    private String title;
+    @Min(value = 0)
+    @Column(name = "qty", nullable = false)
+    private Integer qty;
 
-    @NotNull
-    @Size(min = 10, max = 200)
-    @Column(name = "content", length = 200, nullable = false)
-    private String content;
+    @DecimalMin(value = "0")
+    @Column(name = "total", precision = 30, scale = 2, nullable = false)
+    private BigDecimal total;
 
     @NotNull
     @Column(name = "accept", nullable = false)
@@ -46,7 +46,7 @@ public class OrderCirculation extends AbstractAuditingEntity implements Serializ
 
     @ManyToOne
     @NotNull
-    private Redaction redaction;
+    private Circulation circulation;
 
     @ManyToOne
     @NotNull
@@ -71,32 +71,6 @@ public class OrderCirculation extends AbstractAuditingEntity implements Serializ
 
     public void setOrderNumber(String orderNumber) {
         this.orderNumber = orderNumber;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public OrderCirculation title(String title) {
-        this.title = title;
-        return this;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public OrderCirculation content(String content) {
-        this.content = content;
-        return this;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
     }
 
     public Boolean isAccept() {
@@ -125,17 +99,17 @@ public class OrderCirculation extends AbstractAuditingEntity implements Serializ
         this.note = note;
     }
 
-    public Redaction getRedaction() {
-        return redaction;
+    public Circulation getCirculation() {
+        return circulation;
     }
 
-    public OrderCirculation redaction(Redaction redaction) {
-        this.redaction = redaction;
+    public OrderCirculation circulation(Circulation circulation) {
+        this.circulation = circulation;
         return this;
     }
 
-    public void setRedaction(Redaction redaction) {
-        this.redaction = redaction;
+    public void setCirculation(Circulation circulation) {
+        this.circulation = circulation;
     }
 
     public Events getEvents() {
@@ -149,6 +123,23 @@ public class OrderCirculation extends AbstractAuditingEntity implements Serializ
 
     public void setEvents(Events events) {
         this.events = events;
+    }
+
+
+    public Integer getQty() {
+        return qty;
+    }
+
+    public void setQty(Integer qty) {
+        this.qty = qty;
+    }
+
+    public BigDecimal getTotal() {
+        return total;
+    }
+
+    public void setTotal(BigDecimal total) {
+        this.total = total;
     }
 
     @Override
@@ -175,11 +166,13 @@ public class OrderCirculation extends AbstractAuditingEntity implements Serializ
     public String toString() {
         return "OrderCirculation{" +
             "id=" + id +
-            ", orderNumber='" + orderNumber + "'" +
-            ", title='" + title + "'" +
-            ", content='" + content + "'" +
-            ", accept='" + accept + "'" +
-            ", note='" + note + "'" +
+            ", orderNumber='" + orderNumber + '\'' +
+            ", qty=" + qty +
+            ", total=" + total +
+            ", accept=" + accept +
+            ", note='" + note + '\'' +
+            ", circulation=" + circulation +
+            ", events=" + events +
             '}';
     }
 }

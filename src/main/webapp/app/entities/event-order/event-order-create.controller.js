@@ -5,12 +5,9 @@
         .module('preventApp')
         .controller('EventCreateController', EventOrderController);
 
-    EventOrderController.$inject = ['$scope',
+    EventOrderController.$inject = [
         '$state',
-        'Events',
         'entity',
-        'EventType',
-        'Locations',
         'ManageLocations',
         'Upload',
         '$timeout',
@@ -20,12 +17,17 @@
         'FileManager',
         'ImageManager',
         'ListOrder',
-        'OrderMerchandise'
+        'OrderMerchandise',
+        'OrderCirculation'
     ];
 
-    function EventOrderController($scope, $state, Events, entity,
-                                  EventType, Locations, ManageLocations, Upload, $timeout,
-                                  EventOrder, ManageSearch, geolocation, FileManager, ImageManager, ListOrder, OrderMerchandise) {
+    function EventOrderController($state, entity,
+                                  ManageLocations,
+                                  Upload, $timeout,
+                                  EventOrder, ManageSearch,
+                                  geolocation, FileManager,
+                                  ImageManager, ListOrder,
+                                  OrderMerchandise, OrderCirculation) {
         var vm = this;
         vm.events = entity;
 
@@ -242,6 +244,8 @@
                 })
         }
 
+
+        //order merchandise
         vm.addOrderMerchandise = addOrderMerchandise;
         vm.orderMerchandise = {};
 
@@ -259,22 +263,51 @@
             }
             vm.events.orderMerchandises.push(vm.orderMerchandise);
             vm.orderMerchandise = {};
-            swal(
-                'Berhasil',
-                'Anda mengoder ' + merchandise.name + " Silahkan masukan jumlah yg akan diorder",
-                'success'
-            )
-        }
+        };
 
         vm.deleteOrderMerchandise = function deleteOrderMerchandise(id, idx) {
             OrderMerchandise.delete({id: id},
                 function (response) {
-                    console.log(response);
                     vm.events.orderMerchandises.splice(idx, 1);
                 }, function (error) {
                     console.log(error);
                 });
-        }
+        };
+
+        //end order merchandise
+
+
+        // order circulation
+
+        vm.addOrderCirculations = addOrderCirculations;
+        vm.orderCirculation = {};
+
+        function addOrderCirculations(circulation) {
+            vm.orderCirculation.circulation = circulation;
+            for (var i = 0; i < vm.events.orderCirculations.length; i++) {
+                if (vm.events.orderCirculations[i].circulation.id == vm.orderCirculation.circulation.id) {
+                    swal(
+                        'Error',
+                        'Order ' + circulation.name + " sudah ada dalam list order",
+                        'error'
+                    );
+                    return false;
+                }
+            }
+            vm.events.orderCirculations.push(vm.orderCirculation);
+            vm.orderCirculation = {};
+        };
+
+        vm.deleteOrderCirculation = function deleteOrderCirculation(id, idx) {
+            OrderCirculation.delete({id: id},
+                function (response) {
+                    vm.events.orderCirculations.splice(idx, 1);
+                }, function (error) {
+                    console.log(error);
+                });
+        };
+
+        //end order circulation
 
 
         function init() {

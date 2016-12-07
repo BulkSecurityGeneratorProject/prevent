@@ -5,15 +5,15 @@
         .module('preventApp')
         .controller('OrderCirculationDialogController', OrderCirculationDialogController);
 
-    OrderCirculationDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'OrderCirculation', 'Redaction', 'Events'];
+    OrderCirculationDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'OrderCirculation', 'Circulation', 'Events'];
 
-    function OrderCirculationDialogController($timeout, $scope, $stateParams, $uibModalInstance, entity, OrderCirculation, Redaction, Events) {
+    function OrderCirculationDialogController($timeout, $scope, $stateParams, $uibModalInstance, entity, OrderCirculation, Circulation, Events) {
         var vm = this;
 
         vm.orderCirculation = entity;
         vm.clear = clear;
         vm.save = save;
-        vm.redactions = Redaction.query();
+        vm.circulations = Circulation.query();
         vm.events = Events.query();
 
         $timeout(function () {

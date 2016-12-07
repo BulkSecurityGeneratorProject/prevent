@@ -429,9 +429,9 @@
                         <td class="text-right">
                             <div class="btn-group flex-btn-group-container">
                                 <button type="button"
-                                        ui-sref="merchandise-detail({id:merchandise.id})"
-                                        class="btn btn-info btn-sm">
-                                    <span class="glyphicon glyphicon-eye-open"></span>
+                                        ng-click="vm.addOrderCirculations(circulation)"
+                                        class="btn btn-primary btn-sm">
+                                    <i class="fa fa-plus fa-fw"></i>
                                     <span class="hidden-xs hidden-sm"></span>
                                 </button>
                             </div>
@@ -488,6 +488,7 @@
             <div class="table-responsive">
                 <table class="table table-striped table-hover">
                     <thead>
+                    <h4>Order Marcomm</h4>
                     <tr>
                         <th><span>Kode</span></th>
                         <th><span>Name</span></th>
@@ -533,8 +534,56 @@
                     </tr>
                     </tbody>
                 </table>
-            </div>
 
+                <table class="table table-striped table-hover" ng-show="vm.events.orderCirculations.length > 0">
+                    <h4 ng-show="vm.events.orderCirculations.length > 0">Order Sirkulasi</h4>
+                    <thead>
+                    <tr>
+                        <th><span>Kode</span></th>
+                        <th><span>Name</span></th>
+                        <th><span>Price</span></th>
+                        <th><span>Qty</span></th>
+                        <th><span>Total</span></th>
+                        <th><span>Note</span></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="orderCirculation in vm.events.orderCirculations">
+                        <td>Sirkulasi</td>
+                        <td>{{orderCirculation.circulation.name}}</td>
+                        <td>{{orderCirculation.circulation.price | number}}</td>
+                        <td><input type="text" class="form-control" ng-model="orderCirculation.qty"
+                                   ng-change="orderCirculation.total = orderCirculation.circulation.price * orderCirculation.qty">
+                        </td>
+                        <td>{{orderCirculation.total | number}}</td>
+                        <td><textarea name="note" cols="10" rows="5" class="form-control"
+                                      ng-model="orderCirculation.note"></textarea></td>
+                        <td class="text-right">
+                            <div class="btn-group flex-btn-group-container">
+
+                                <button type="button"
+                                        ng-show="orderCirculation.id == null"
+                                        ng-click="vm.events.orderCirculations.splice($index,1)"
+                                        class="btn btn-danger btn-sm">
+                                    <i class="fa fa-minus fa-fw"></i>
+                                    <span class="hidden-xs hidden-sm"></span>
+                                </button>
+
+                                <button type="button"
+                                        ng-show="orderCirculation.id != null"
+                                        ng-click="vm.deleteOrderCirculation(orderCirculation.id, $index)"
+                                        class="btn btn-danger btn-sm">
+                                    <i class="fa fa-minus fa-fw"></i>
+                                    <span class="hidden-xs hidden-sm"></span>
+                                </button>
+
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 

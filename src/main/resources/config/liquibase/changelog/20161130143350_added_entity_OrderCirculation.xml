@@ -25,15 +25,7 @@
                 <constraints nullable="false" unique="true"/>
             </column>
 
-            <column name="title" type="varchar(100)">
-                <constraints nullable="false"/>
-            </column>
-
-            <column name="content" type="varchar(200)">
-                <constraints nullable="false"/>
-            </column>
-
-            <column name="accept" type="boolean">
+            <column name="accept" type="boolean" defaultValue="false">
                 <constraints nullable="false"/>
             </column>
 
@@ -41,7 +33,15 @@
                 <constraints nullable="true"/>
             </column>
 
-            <column name="redaction_id" type="bigint">
+            <column name="qty" type="integer">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="total" type="decimal(30,2)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="circulation_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
 

@@ -80,7 +80,9 @@
                             organizer: null,
                             isOrder: false,
                             id: null,
-                            orderMerchandises: []
+                            orderMerchandises: [],
+                            orderCirculations: []
+
                         };
                     },
                     previousState: ["$state", function ($state) {

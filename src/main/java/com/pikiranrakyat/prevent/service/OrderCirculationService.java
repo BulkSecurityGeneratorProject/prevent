@@ -20,35 +20,36 @@ public interface OrderCirculationService {
     OrderCirculation save(OrderCirculation orderCirculation);
 
     /**
-     *  Get all the orderCirculations.
-     *  
-     *  @param pageable the pagination information
-     *  @return the list of entities
+     * Get all the orderCirculations.
+     *
+     * @param pageable the pagination information
+     * @return the list of entities
      */
     Page<OrderCirculation> findAll(Pageable pageable);
 
+    List<OrderCirculation> findByEvent(Long eventId);
+
     /**
-     *  Get the "id" orderCirculation.
+     * Get the "id" orderCirculation.
      *
-     *  @param id the id of the entity
-     *  @return the entity
+     * @param id the id of the entity
+     * @return the entity
      */
     OrderCirculation findOne(Long id);
 
     /**
-     *  Delete the "id" orderCirculation.
+     * Delete the "id" orderCirculation.
      *
-     *  @param id the id of the entity
+     * @param id the id of the entity
      */
     void delete(Long id);
 
     /**
      * Search for the orderCirculation corresponding to the query.
      *
-     *  @param query the query of the search
-     *  
-     *  @param pageable the pagination information
-     *  @return the list of entities
+     * @param query    the query of the search
+     * @param pageable the pagination information
+     * @return the list of entities
      */
     Page<OrderCirculation> search(String query, Pageable pageable);
 }

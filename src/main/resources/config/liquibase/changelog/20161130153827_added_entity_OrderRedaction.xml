@@ -22,31 +22,31 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="order_number" type="varchar(255)">
-                <constraints nullable="false" />
+                <constraints nullable="false"/>
             </column>
 
             <column name="title" type="varchar(100)">
-                <constraints nullable="false" />
+                <constraints nullable="false"/>
             </column>
 
             <column name="content" type="varchar(200)">
-                <constraints nullable="false" />
+                <constraints nullable="false"/>
             </column>
 
             <column name="accept" type="bit">
-                <constraints nullable="false" />
+                <constraints nullable="false"/>
             </column>
 
             <column name="note" type="varchar(255)">
-                <constraints nullable="true" />
+                <constraints nullable="true"/>
             </column>
 
             <column name="redaction_id" type="bigint">
-                <constraints nullable="false" />
+                <constraints nullable="false"/>
             </column>
 
             <column name="events_id" type="bigint">
-                <constraints nullable="false" />
+                <constraints nullable="false"/>
             </column>
 
             <column name="created_by" type="varchar(50)">

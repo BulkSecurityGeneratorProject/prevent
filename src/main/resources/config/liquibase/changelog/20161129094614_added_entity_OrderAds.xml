@@ -45,7 +45,7 @@
                 <constraints nullable="true"/>
             </column>
 
-            <column name="total" type="decimal(10,2)">
+            <column name="total" type="decimal(30,2)">
                 <constraints nullable="false"/>
             </column>
 

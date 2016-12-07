@@ -9,9 +9,9 @@
         <jhi-alert-error></jhi-alert-error>
 
         <div class="form-group">
-            <label for="field_redaction">Redaction</label>
-            <select class="form-control" id="field_redaction" name="redaction" ng-model="vm.orderCirculation.redaction"
-                    ng-options="redaction as redaction.name for redaction in vm.redactions track by redaction.id"
+            <label for="field_circulation">Redaction</label>
+            <select class="form-control" id="field_circulation" name="redaction" ng-model="vm.orderCirculation.circulation"
+                    ng-options="circulation as circulation.name for circulation in vm.circulations track by circulation.id"
                     required>
                 <option value=""></option>
             </select>
@@ -24,10 +24,10 @@
         </div>
         <div class="form-group">
             <label for="field_events">Events</label>
-            <select class="form-control" id="field_events" name="events" ng-model="vm.orderCirculation.events"
-                    ng-options="events as events.title for events in vm.events track by events.id" required>
-                <option value=""></option>
-            </select>
+            <input type="text" class="form-control" name="note" id="field_events"
+                   disabled
+                   ng-model="vm.orderCirculation.events.title"
+            />
         </div>
 
         <div ng-show="editForm.events.$invalid">
@@ -37,46 +37,6 @@
             </p>
         </div>
 
-        <div class="form-group">
-            <label class="control-label" for="field_title">Title</label>
-            <input type="text" class="form-control" name="title" id="field_title"
-                   ng-model="vm.orderCirculation.title"
-                   required ng-minlength="5" ng-maxlength="100"/>
-            <div ng-show="editForm.title.$invalid">
-                <p class="help-block"
-                   ng-show="editForm.title.$error.required">
-                    This field is required.
-                </p>
-                <p class="help-block"
-                   ng-show="editForm.title.$error.minlength" translate-value-min="5">
-                    This field is required to be at least 5 characters.
-                </p>
-                <p class="help-block"
-                   ng-show="editForm.title.$error.maxlength">
-                    This field cannot be longer than 100 characters.
-                </p>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_content">Content</label>
-            <input type="text" class="form-control" name="content" id="field_content"
-                   ng-model="vm.orderCirculation.content"
-                   required ng-minlength="10" ng-maxlength="200"/>
-            <div ng-show="editForm.content.$invalid">
-                <p class="help-block"
-                   ng-show="editForm.content.$error.required">
-                    This field is required.
-                </p>
-                <p class="help-block"
-                   ng-show="editForm.content.$error.minlength" translate-value-min="10">
-                    This field is required to be at least 10 characters.
-                </p>
-                <p class="help-block"
-                   ng-show="editForm.content.$error.maxlength">
-                    This field cannot be longer than 200 characters.
-                </p>
-            </div>
-        </div>
 
         <div class="form-group">
             <label class="control-label" for="field_note">Note</label>
@@ -84,7 +44,6 @@
                    ng-model="vm.orderCirculation.note"
             />
         </div>
-
 
 
     </div>
