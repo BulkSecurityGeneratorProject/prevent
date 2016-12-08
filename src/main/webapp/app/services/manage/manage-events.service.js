@@ -9,8 +9,19 @@
     function ManageEvents($http) {
 
         return {
-            findEventOrderByCreated: function (id) {
-                return $http.get('api/manage/events')
+            findEventOrderByCreated: function (page, size, sort, sortBy, query) {
+                return $http.get('api/manage/events', {
+                    params: {
+                        page: page,
+                        size: size,
+                        sort: sort,
+                        sortBy: sortBy,
+                        query: query
+                    }
+                })
+            },
+            findEventById: function (id) {
+                return $http.get('api/manage/events/ ' + id);
             }
         }
     }

@@ -28,6 +28,8 @@ public interface EventsService {
      */
     Page<Events> findAll(Pageable pageable);
 
+    Page<Events> findAllWhereAcceptIsTrue(Pageable pageable);
+
     /**
      * @param pageable
      * @return
@@ -57,4 +59,7 @@ public interface EventsService {
      * @return the list of entities
      */
     Page<Events> search(String query, Pageable pageable);
+
+    Page<Events> searchWitAcceptIsTrue(String query, Pageable pageable);
+
 }

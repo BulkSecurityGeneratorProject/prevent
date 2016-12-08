@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.inject.Inject;
 import java.io.File;
+import java.util.Optional;
 
 /**
  * Created by aseprojali on 26/10/16.
@@ -55,14 +56,14 @@ public class ManageFileResource {
 
     }
 
-    @RequestMapping(value = "/image/{name}",
+    @RequestMapping(value = "/image/{id}",
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getImage(@PathVariable("name") String name) {
-        log.debug("Find file " + name);
+    public ResponseEntity<?> getImage(@PathVariable("id") Long id) {
+        log.debug("Find file " + id);
 
         return
-            imageManagerService.findOneByName(name)
+            Optional.ofNullable(imageManagerService.findOne(id))
                 .map(upload -> {
                     FileSystemResource isr = new FileSystemResource(new File(upload.getPath()));
                     HttpHeaders respHeaders = new HttpHeaders();

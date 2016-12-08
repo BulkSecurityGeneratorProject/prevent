@@ -1,6 +1,8 @@
 package com.pikiranrakyat.prevent.repository;
 
 import com.pikiranrakyat.prevent.domain.Events;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -8,5 +10,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 @SuppressWarnings("unused")
 public interface EventsRepository extends JpaRepository<Events, Long> {
+
+    Page<Events> findByAcceptIsTrue(Pageable pageable);
+
+
 
 }

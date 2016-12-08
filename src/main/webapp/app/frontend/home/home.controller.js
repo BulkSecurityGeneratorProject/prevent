@@ -21,7 +21,6 @@
         });
 
         getAccount();
-        loadAll();
 
         function getAccount() {
             Principal.identity().then(function (account) {
@@ -34,15 +33,41 @@
             $state.go('register');
         }
 
-        function loadAll() {
+        loadAll(0, 12);
+
+        vm.page = 0;
+        vm.size = 12;
+        vm.query = null;
+
+        function loadAll(page, size) {
             ManageEvents
-                .findEventOrderByCreated()
+                .findEventOrderByCreated(page, size, 'DESC', 'starts', vm.query)
                 .then(function (response) {
+                    vm.totalItems = response.headers('X-Total-Count');
                     vm.events = response.data;
                 }, function (error) {
                     console.log(error);
                 })
         }
+
+        vm.search = function () {
+            ManageEvents
+                .findEventOrderByCreated(vm.page, vm.size, 'DESC', 'starts', vm.query)
+                .then(function (response) {
+                    vm.totalItems = response.headers('X-Total-Count');
+                    vm.events = response.data;
+                }, function (error) {
+                    console.log(error);
+                })
+        };
+
+        vm.pageChanged = function () {
+            if (vm.page == 1) {
+                loadAll(0, 12);
+            } else {
+                loadAll(vm.page, vm.size);
+            }
+        };
 
 
     }

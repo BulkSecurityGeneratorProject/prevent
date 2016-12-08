@@ -1,0 +1,27 @@
+<div ng-cloak>
+    <div class="row">
+        <div class="col-sm-12">
+            <img style="height: 100%; width: auto;" class="center-block" id="image" src="https://placehold.it/1366x350">
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row" style="margin-bottom: 20px">
+            <div class="col-sm-12">
+                <h3>{{vm.event.title}}</h3>
+                <span style="color:#999;font-size: 13px">
+                                <b>{{vm.event.starts | date:'dd MMMM yyyy hh:mm:ss '}}</b>
+                            </span>
+                <p style="text-overflow:ellipsis;color: #999;overflow: hidden;white-space: nowrap;font-size: 14px">
+                    {{vm.event.locationName}}
+                    <br>
+                    {{vm.event.locationAddress}}
+                </p>
+                <p>{{vm.event.description}}</p>
+                <br>
+
+            </div>
+        </div>
+    </div>
+</div>
+

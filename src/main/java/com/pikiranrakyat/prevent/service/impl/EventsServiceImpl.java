@@ -201,6 +201,11 @@ public class EventsServiceImpl implements EventsService {
     }
 
     @Override
+    public Page<Events> findAllWhereAcceptIsTrue(Pageable pageable) {
+        return eventsRepository.findByAcceptIsTrue(pageable);
+    }
+
+    @Override
     public Page<Events> findAllOrderByCreatedDateAsc(Pageable pageable) {
         log.debug("Request to get all Events order by created date");
         return eventsRepository.findAll(pageable);
@@ -245,5 +250,11 @@ public class EventsServiceImpl implements EventsService {
         log.debug("Request to search for a page of Events for query {}", query);
         Page<Events> result = eventsSearchRepository.search(queryStringQuery(query), pageable);
         return result;
+    }
+
+    @Override
+    public Page<Events> searchWitAcceptIsTrue(String query, Pageable pageable) {
+        return eventsSearchRepository.findByAcceptIsTrue(queryStringQuery(query), pageable);
+
     }
 }

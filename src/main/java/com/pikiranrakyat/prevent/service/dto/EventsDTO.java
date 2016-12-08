@@ -1,8 +1,6 @@
 package com.pikiranrakyat.prevent.service.dto;
 
-import com.pikiranrakyat.prevent.domain.EventType;
-import com.pikiranrakyat.prevent.domain.Events;
-import com.pikiranrakyat.prevent.domain.Organizer;
+import com.pikiranrakyat.prevent.domain.*;
 
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -47,6 +45,11 @@ public class EventsDTO {
 
     private Organizer organizer;
 
+    private ImageManager image;
+
+    private FileManager file;
+
+
     public EventsDTO() {
     }
 
@@ -63,7 +66,9 @@ public class EventsDTO {
                      String note,
                      Boolean isOrder,
                      EventType eventType,
-                     Organizer organizer) {
+                     Organizer organizer,
+                     ImageManager image,
+                     FileManager file) {
         this.title = title;
         this.description = description;
         this.starts = starts;
@@ -78,6 +83,8 @@ public class EventsDTO {
         this.isOrder = isOrder;
         this.eventType = eventType;
         this.organizer = organizer;
+        this.image = image;
+        this.file = file;
     }
 
     public EventsDTO(Events o) {
@@ -95,8 +102,9 @@ public class EventsDTO {
             o.getNote(),
             o.isIsOrder(),
             o.getEventType(),
-            o.getOrganizer()
-
+            o.getOrganizer(),
+            o.getImage(),
+            o.getFile()
 
         );
     }
@@ -213,6 +221,22 @@ public class EventsDTO {
         this.organizer = organizer;
     }
 
+    public ImageManager getImage() {
+        return image;
+    }
+
+    public void setImage(ImageManager image) {
+        this.image = image;
+    }
+
+    public FileManager getFile() {
+        return file;
+    }
+
+    public void setFile(FileManager file) {
+        this.file = file;
+    }
+
     @Override
     public String toString() {
         return "EventsDTO{" +
@@ -230,6 +254,8 @@ public class EventsDTO {
             ", isOrder=" + isOrder +
             ", eventType=" + eventType +
             ", organizer=" + organizer +
+            ", image=" + image +
+            ", file=" + file +
             '}';
     }
 }

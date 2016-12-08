@@ -8,7 +8,9 @@ import com.pikiranrakyat.prevent.web.rest.vm.ManagedEventsVM;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -37,7 +39,6 @@ public class ManageEventsResource {
     /**
      * GET  /manage/events : get all the events.
      *
-     * @param pageable the pagination information
      * @return the ResponseEntity with status 200 (OK) and the list of events in body
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
      */
@@ -45,12 +46,30 @@ public class ManageEventsResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<List<ManagedEventsVM>> getAllEvents(Pageable pageable)
+    public ResponseEntity<List<ManagedEventsVM>> getAllEventsHome(
+        @RequestParam(value = "query", required = false, defaultValue = "") String query,
+        @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
+        @RequestParam(value = "size", required = false, defaultValue = "10") Integer size,
+        @RequestParam(value = "sort", defaultValue = "DESC") String sort,
+        @RequestParam(value = "sortBy", defaultValue = "createdDate") String sortBy)
         throws URISyntaxException {
+
         log.debug("REST request to get a page of Events");
-        Page<Events> page = eventsService.findAllOrderByCreatedDateAsc(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/manage/events");
-        return new ResponseEntity<>(page.getContent().stream().map(ManagedEventsVM::new).collect(Collectors.toList()), headers, HttpStatus.OK);
+
+        Pageable pageable = new PageRequest(page, size, Sort.Direction.fromString(sort), sortBy);
+
+        log.info("Pageable " + pageable.toString());
+
+        Page<Events> paging;
+
+        if (query.isEmpty() || query.equals("")) {
+            paging = eventsService.findAllWhereAcceptIsTrue(pageable);
+        } else {
+            paging = eventsService.searchWitAcceptIsTrue(query, pageable);
+        }
+        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, paging, "/api/manage/event");
+
+        return new ResponseEntity<>(paging.getContent().stream().map(ManagedEventsVM::new).collect(Collectors.toList()), headers, HttpStatus.OK);
     }
 
     /**

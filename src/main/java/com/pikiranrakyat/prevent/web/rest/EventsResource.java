@@ -131,6 +131,7 @@ public class EventsResource {
         return new ResponseEntity<>(page.getContent().stream().map(ManagedEventsVM::new).collect(Collectors.toList()), headers, HttpStatus.OK);
     }
 
+
     /**
      * GET  /events/:id : get the "id" events.
      *

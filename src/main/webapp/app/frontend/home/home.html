@@ -1,35 +1,23 @@
 <div ng-cloak>
     <div class="row">
         <div class="col-sm-12">
-            <div class="jumbotron text-center" style="height: 400px">
-                <!--<h1>Pikiran Rakyat Event</h1>-->
-                <div class="container">
-                    <!--<img src="content/images/6.jpg"  class="center-block" height="500px" width="720px">-->
-
-                    <!--<p class="lead">-->
-                        <!--Dari Rakyat, Oleh Rakyat, Untuk Rakyat-->
-                    <!--</p>-->
-                    <!--<a class="btn btn-lg btn-primary" href="#/user-event/create" ui-sref="user-event.create">-->
-                        <!--<i class="fa fa-calendar fa-fw" aria-hidden="true"></i>-->
-                        <!--<span>Buat Event</span>-->
-                    <!--</a>-->
-                </div>
-            </div>
+            <img style="height: 100%; width: auto;" id="image" class="img-responsive"
+                 src="content/images/logo.png">
         </div>
     </div>
 
     <div class="container">
         <div class="row" style="margin-bottom: 20px">
-            <div class="col-sm-12" style="margin-top: -70px">
+            <div style="margin-top: -80px">
                 <div class="box box-widget"
                      style="position: relative;width: 90%;margin: 0 auto;height: 70px;text-align: center">
                     <div class="box-body">
                         <div class="row">
                             <div class="col-sm-10">
-                                <input type="text" class="form-control input-lg">
+                                <input type="text" class="form-control input-lg" ng-model="vm.query" placeholder="Ketik untuk mencari">
                             </div>
                             <div class="col-sm-2">
-                                <button type="button" class="btn btn-primary btn-lg btn-block">
+                                <button type="button" class="btn btn-primary btn-lg btn-block" ng-click="vm.search()">
                                     <i class="fa fa-search fa-fw" aria-hidden="true"></i>
                                     <span>Cari</span>
                                     </a>
@@ -49,29 +37,29 @@
                 <div class="col-sm-4">
                     <div class="box box-widget">
                         <div class="box-body center-block">
-                            <!--<img class="img-responsive" src="http://lorempixel.com/640/480/technics"-->
-                                 <!--style="margin-bottom: 10px">-->
+                            <img class="img-responsive"
+                                 ng-src="{{event.image == null ? 'http://keepo.me/css/images/imageNotFound404.jpg': '/api/image/' + event.image.id }}"
+                                 style="margin-bottom: 10px">
                             <span style="color:#999;font-size: 13px">
                                 <b>{{event.starts | date:'dd MMMM yyyy hh:mm:ss '}}</b>
                             </span>
-                            <h3 style="margin-top: 0px"><b>{{event.title}}</b></h3>
-                            <p>{{event.description | limitTo:300}}</p>
-                            <br>
                             <p style="text-overflow:ellipsis;color: #999;overflow: hidden;white-space: nowrap;font-size: 14px">
-                                {{event.locations.name}}, {{event.locations.city}}
+                                {{event.locationName}}
                             </p>
-                            <button type="button" class="btn btn-default btn-">
-                                <i class="fa fa-share"></i> Share
-                            </button>
+                            <h3 style="margin-top: 0px"><b><a ui-sref="home-event-id({id:event.id})">{{event.title}}</a></b>
+                            </h3>
+                            <p>{{event.description | limitTo:400}}</p>
+                            <br>
+
+
                         </div>
                     </div>
                 </div><!-- /.col-lg-4 -->
             </div>
         </div>
         <div class="text-center">
-            <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
-            <uib-pagination class="pagination-sm" total-items="vm.totalItems" ng-model="vm.page"
-                            ng-change="vm.transition()"></uib-pagination>
+            <uib-pagination total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.pageChanged(vm.page)">
+            </uib-pagination>
         </div>
     </div>
 </div>
