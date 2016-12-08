@@ -82,7 +82,8 @@
                             id: null,
                             orderMerchandises: [],
                             orderCirculations: [],
-                            orderAds: []
+                            orderAds: [],
+                            orderRedactions: []
 
                         };
                     },

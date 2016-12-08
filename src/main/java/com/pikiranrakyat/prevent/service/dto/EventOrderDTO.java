@@ -4,6 +4,7 @@ import com.pikiranrakyat.prevent.domain.*;
 import com.pikiranrakyat.prevent.web.rest.vm.ManagedOrderAdsVM;
 import com.pikiranrakyat.prevent.web.rest.vm.ManagedOrderCirculationVM;
 import com.pikiranrakyat.prevent.web.rest.vm.ManagedOrderMerchandiseVM;
+import com.pikiranrakyat.prevent.web.rest.vm.ManagedOrderRedactionVM;
 
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -64,6 +65,8 @@ public class EventOrderDTO {
     private List<ManagedOrderCirculationVM> orderCirculations = new ArrayList<>();
 
     private List<ManagedOrderAdsVM> orderAds = new ArrayList<>();
+
+    private List<ManagedOrderRedactionVM> orderRedactions = new ArrayList<>();
 
 
     public EventOrderDTO() {
@@ -282,6 +285,14 @@ public class EventOrderDTO {
         this.orderAds = orderAds;
     }
 
+    public List<ManagedOrderRedactionVM> getOrderRedactions() {
+        return orderRedactions;
+    }
+
+    public void setOrderRedactions(List<ManagedOrderRedactionVM> orderRedactions) {
+        this.orderRedactions = orderRedactions;
+    }
+
     @Override
     public String toString() {
         return "EventOrderDTO{" +
@@ -306,6 +317,7 @@ public class EventOrderDTO {
             ", orderMerchandises=" + orderMerchandises +
             ", orderCirculations=" + orderCirculations +
             ", orderAds=" + orderAds +
+            ", orderRedactions=" + orderRedactions +
             '}';
     }
 }

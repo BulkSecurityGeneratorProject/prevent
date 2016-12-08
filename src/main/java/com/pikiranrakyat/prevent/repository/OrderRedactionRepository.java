@@ -1,8 +1,7 @@
 package com.pikiranrakyat.prevent.repository;
 
 import com.pikiranrakyat.prevent.domain.OrderRedaction;
-
-import org.springframework.data.jpa.repository.*;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
@@ -11,5 +10,7 @@ import java.util.List;
  */
 @SuppressWarnings("unused")
 public interface OrderRedactionRepository extends JpaRepository<OrderRedaction,Long> {
+
+    List<OrderRedaction> findByEventsId(Long eventId);
 
 }

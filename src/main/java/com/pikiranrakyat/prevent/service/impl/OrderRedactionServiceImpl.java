@@ -1,22 +1,20 @@
 package com.pikiranrakyat.prevent.service.impl;
 
-import com.pikiranrakyat.prevent.service.OrderRedactionService;
 import com.pikiranrakyat.prevent.domain.OrderRedaction;
 import com.pikiranrakyat.prevent.repository.OrderRedactionRepository;
 import com.pikiranrakyat.prevent.repository.search.OrderRedactionSearchRepository;
+import com.pikiranrakyat.prevent.service.OrderRedactionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
 /**
  * Service Implementation for managing OrderRedaction.
@@ -26,7 +24,7 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class OrderRedactionServiceImpl implements OrderRedactionService{
 
     private final Logger log = LoggerFactory.getLogger(OrderRedactionServiceImpl.class);
-    
+
     @Inject
     private OrderRedactionRepository orderRedactionRepository;
 
@@ -48,15 +46,20 @@ public class OrderRedactionServiceImpl implements OrderRedactionService{
 
     /**
      *  Get all the orderRedactions.
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public Page<OrderRedaction> findAll(Pageable pageable) {
         log.debug("Request to get all OrderRedactions");
         Page<OrderRedaction> result = orderRedactionRepository.findAll(pageable);
         return result;
+    }
+
+    @Override
+    public List<OrderRedaction> findByEvent(Long eventId) {
+        return orderRedactionRepository.findByEventsId(eventId);
     }
 
     /**
@@ -65,7 +68,7 @@ public class OrderRedactionServiceImpl implements OrderRedactionService{
      *  @param id the id of the entity
      *  @return the entity
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public OrderRedaction findOne(Long id) {
         log.debug("Request to get OrderRedaction : {}", id);
         OrderRedaction orderRedaction = orderRedactionRepository.findOne(id);

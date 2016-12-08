@@ -1,9 +1,6 @@
 package com.pikiranrakyat.prevent.service.impl;
 
-import com.pikiranrakyat.prevent.domain.Events;
-import com.pikiranrakyat.prevent.domain.OrderAds;
-import com.pikiranrakyat.prevent.domain.OrderCirculation;
-import com.pikiranrakyat.prevent.domain.OrderMerchandise;
+import com.pikiranrakyat.prevent.domain.*;
 import com.pikiranrakyat.prevent.repository.EventsRepository;
 import com.pikiranrakyat.prevent.repository.search.EventsSearchRepository;
 import com.pikiranrakyat.prevent.service.*;
@@ -49,6 +46,9 @@ public class EventsServiceImpl implements EventsService {
 
     @Inject
     private OrderAdsService orderAdsService;
+
+    @Inject
+    private OrderRedactionService orderRedactionService;
 
     /**
      * Save a events.
@@ -158,6 +158,31 @@ public class EventsServiceImpl implements EventsService {
                     orderAdsService.save(orderAds);
 
                 });
+
+        if (dto.getOrderRedactions().size() > 0)
+            dto.getOrderRedactions()
+                .forEach(o -> {
+                    OrderRedaction orderRedaction = new OrderRedaction();
+
+                    if (o.getId() != null)
+                        orderRedaction.setId(o.getId());
+
+                    if (o.getOrderNumber() != null)
+                        orderRedaction.setOrderNumber(o.getOrderNumber());
+
+                    orderRedaction.setOrderNumber(UUID.randomUUID().toString());
+                    orderRedaction.setTitle(o.getTitle());
+                    orderRedaction.setContent(o.getContent());
+                    orderRedaction.setNote(o.getNote());
+                    orderRedaction.setAccept(o.getAccept());
+                    orderRedaction.setTotal(o.getTotal());
+                    orderRedaction.setRedaction(o.getRedaction());
+                    orderRedaction.setEvents(save);
+
+
+                    orderRedactionService.save(orderRedaction);
+                });
+
 
         return save;
     }

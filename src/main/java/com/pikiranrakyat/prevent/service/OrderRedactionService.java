@@ -20,35 +20,36 @@ public interface OrderRedactionService {
     OrderRedaction save(OrderRedaction orderRedaction);
 
     /**
-     *  Get all the orderRedactions.
-     *  
-     *  @param pageable the pagination information
-     *  @return the list of entities
+     * Get all the orderRedactions.
+     *
+     * @param pageable the pagination information
+     * @return the list of entities
      */
     Page<OrderRedaction> findAll(Pageable pageable);
 
+    List<OrderRedaction> findByEvent(Long eventId);
+
     /**
-     *  Get the "id" orderRedaction.
+     * Get the "id" orderRedaction.
      *
-     *  @param id the id of the entity
-     *  @return the entity
+     * @param id the id of the entity
+     * @return the entity
      */
     OrderRedaction findOne(Long id);
 
     /**
-     *  Delete the "id" orderRedaction.
+     * Delete the "id" orderRedaction.
      *
-     *  @param id the id of the entity
+     * @param id the id of the entity
      */
     void delete(Long id);
 
     /**
      * Search for the orderRedaction corresponding to the query.
      *
-     *  @param query the query of the search
-     *  
-     *  @param pageable the pagination information
-     *  @return the list of entities
+     * @param query    the query of the search
+     * @param pageable the pagination information
+     * @return the list of entities
      */
     Page<OrderRedaction> search(String query, Pageable pageable);
 }

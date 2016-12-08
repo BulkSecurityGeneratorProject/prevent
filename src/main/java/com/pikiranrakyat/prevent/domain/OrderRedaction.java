@@ -7,6 +7,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 /**
@@ -41,8 +42,15 @@ public class OrderRedaction extends AbstractAuditingEntity implements Serializab
     @Column(name = "accept", nullable = false)
     private Boolean accept;
 
+
+
     @Column(name = "note")
     private String note;
+
+
+    @DecimalMin(value = "0")
+    @Column(name = "total", precision = 30, scale = 2, nullable = true)
+    private BigDecimal total;
 
     @ManyToOne
     @NotNull
@@ -151,6 +159,14 @@ public class OrderRedaction extends AbstractAuditingEntity implements Serializab
         this.events = events;
     }
 
+    public BigDecimal getTotal() {
+        return total;
+    }
+
+    public void setTotal(BigDecimal total) {
+        this.total = total;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -160,7 +176,7 @@ public class OrderRedaction extends AbstractAuditingEntity implements Serializab
             return false;
         }
         OrderRedaction orderRedaction = (OrderRedaction) o;
-        if(orderRedaction.id == null || id == null) {
+        if (orderRedaction.id == null || id == null) {
             return false;
         }
         return Objects.equals(id, orderRedaction.id);

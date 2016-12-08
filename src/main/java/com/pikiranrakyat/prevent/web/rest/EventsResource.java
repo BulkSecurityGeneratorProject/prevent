@@ -6,10 +6,7 @@ import com.pikiranrakyat.prevent.service.*;
 import com.pikiranrakyat.prevent.service.dto.EventOrderDTO;
 import com.pikiranrakyat.prevent.web.rest.util.HeaderUtil;
 import com.pikiranrakyat.prevent.web.rest.util.PaginationUtil;
-import com.pikiranrakyat.prevent.web.rest.vm.ManagedEventsVM;
-import com.pikiranrakyat.prevent.web.rest.vm.ManagedOrderAdsVM;
-import com.pikiranrakyat.prevent.web.rest.vm.ManagedOrderCirculationVM;
-import com.pikiranrakyat.prevent.web.rest.vm.ManagedOrderMerchandiseVM;
+import com.pikiranrakyat.prevent.web.rest.vm.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -48,6 +45,9 @@ public class EventsResource {
 
     @Inject
     private OrderAdsService orderAdsService;
+
+    @Inject
+    private OrderRedactionService orderRedactionService;
 
     /**
      * POST  /events : Create a new events.
@@ -166,6 +166,13 @@ public class EventsResource {
                     orderAdsService.findByEvent(dto.getId())
                         .stream()
                         .map(ManagedOrderAdsVM::new)
+                        .collect(Collectors.toList())
+                );
+
+                dto.setOrderRedactions(
+                    orderRedactionService.findByEvent(dto.getId())
+                        .stream()
+                        .map(ManagedOrderRedactionVM::new)
                         .collect(Collectors.toList())
                 );
 

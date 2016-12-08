@@ -19,7 +19,8 @@
         'ListOrder',
         'OrderMerchandise',
         'OrderCirculation',
-        'OrderAds'
+        'OrderAds',
+        'OrderRedaction'
     ];
 
     function EventOrderController($state, entity,
@@ -29,7 +30,7 @@
                                   geolocation, FileManager,
                                   ImageManager, ListOrder,
                                   OrderMerchandise, OrderCirculation,
-                                  OrderAds) {
+                                  OrderAds, OrderRedaction) {
         var vm = this;
         vm.events = entity;
 
@@ -337,7 +338,36 @@
         };
         //end order ads
 
-        vm.dateFormat = 'yyyy-MM-dd';
+
+        // order redactions
+        vm.orderRedaction = {};
+        vm.addOrderRedaction = function (redaction) {
+            vm.orderRedaction.redaction = redaction;
+            for (var i = 0; i < vm.events.orderRedactions.length; i++) {
+                if (vm.events.orderRedactions[i].redaction.id == vm.orderRedaction.ads.id) {
+                    swal(
+                        'Error',
+                        'Order ' + redaction.name + " sudah ada dalam list order",
+                        'error'
+                    );
+                    return false;
+                }
+            }
+            vm.events.orderRedactions.push(vm.orderRedaction);
+            vm.orderRedaction = {};
+        };
+
+        vm.deleteOrderRedaction = function deleteOrderRedaction(id, idx) {
+            OrderRedaction.delete({id: id},
+                function (response) {
+                    vm.events.orderRedactions.splice(idx, 1);
+                }, function (error) {
+                    console.log(error);
+                });
+        };
+        //end order ads
+
+
         vm.openPublisDate = openPublisDate;
         vm.datePublishOpenStatus = {};
         vm.datePublishOpenStatus.publishDate = false;
