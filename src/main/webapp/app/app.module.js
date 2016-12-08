@@ -18,8 +18,7 @@
             'angular-loading-bar',
             'oitozero.ngSweetAlert',
             'ngFileUpload',
-            'geolocation',
-            'dcbImgFallback'
+            'geolocation'
         ])
         .run(run);
 

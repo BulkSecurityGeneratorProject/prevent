@@ -4,12 +4,15 @@ import com.codahale.metrics.annotation.Timed;
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;
 import com.pikiranrakyat.prevent.config.Constants;
-import com.pikiranrakyat.prevent.domain.*;
+import com.pikiranrakyat.prevent.domain.EventType;
+import com.pikiranrakyat.prevent.domain.Events;
+import com.pikiranrakyat.prevent.domain.Organizer;
+import com.pikiranrakyat.prevent.domain.User;
 import com.pikiranrakyat.prevent.exception.DataNotFoundException;
+import com.pikiranrakyat.prevent.repository.EventsRepository;
 import com.pikiranrakyat.prevent.repository.UserRepository;
 import com.pikiranrakyat.prevent.service.EventTypeService;
 import com.pikiranrakyat.prevent.service.EventsService;
-import com.pikiranrakyat.prevent.service.LocationsService;
 import com.pikiranrakyat.prevent.service.OrganizerService;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
@@ -61,7 +64,7 @@ public class ImportResource {
     private EventTypeService eventTypeService;
 
     @Inject
-    private LocationsService locationsService;
+    private EventsRepository eventsRepository;
 
     @Inject
     private EventsService eventsService;
@@ -188,9 +191,9 @@ public class ImportResource {
                         return event;
                     }).collect(Collectors.toList());
 
-                events.forEach(event -> {
-                    eventsService.save(event);
-                });
+                events
+                    .forEach(event -> eventsRepository.findByTitleIgnoreCase(event.getTitle())
+                        .orElseGet(() -> eventsService.save(event)));
 
 
                 break;

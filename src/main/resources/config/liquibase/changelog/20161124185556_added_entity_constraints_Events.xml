@@ -9,25 +9,25 @@
     <changeSet id="20161124185556-2" author="jhipster">
 
         <addForeignKeyConstraint baseColumnNames="event_type_id"
-                                 baseTableName="events"
+                                 baseTableName="event"
                                  constraintName="fk_events_event_type_id"
                                  referencedColumnNames="id"
                                  referencedTableName="event_type"/>
 
         <addForeignKeyConstraint baseColumnNames="organizer_id"
-                                 baseTableName="events"
+                                 baseTableName="event"
                                  constraintName="fk_events_organizer_id"
                                  referencedColumnNames="id"
                                  referencedTableName="organizer"/>
 
         <addForeignKeyConstraint baseColumnNames="image_id"
-                                 baseTableName="events"
+                                 baseTableName="event"
                                  constraintName="fk_events_image_id"
                                  referencedColumnNames="id"
                                  referencedTableName="image_manager"/>
 
         <addForeignKeyConstraint baseColumnNames="file_id"
-                                 baseTableName="events"
+                                 baseTableName="event"
                                  constraintName="fk_events_file_id"
                                  referencedColumnNames="id"
                                  referencedTableName="file_manager"/>

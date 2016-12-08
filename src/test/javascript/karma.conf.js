@@ -35,7 +35,6 @@ module.exports = function (config) {
             'src/main/webapp/bower_components/jquery-ui/jquery-ui.js',
             'src/main/webapp/bower_components/sweetalert/dist/sweetalert.min.js',
             'src/main/webapp/bower_components/es6-promise/es6-promise.js',
-            'src/main/webapp/bower_components/angular-img-fallback/angular.dcb-img-fallback.js',
             'src/main/webapp/bower_components/angular/angular.js',
             'src/main/webapp/bower_components/angular-aria/angular-aria.js',
             'src/main/webapp/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
@@ -58,10 +57,10 @@ module.exports = function (config) {
             'src/main/webapp/app/app.module.js',
             'src/main/webapp/app/app.state.js',
             'src/main/webapp/app/app.constants.js',
-            'src/main/webapp/app/**/*.+(js|html)',
+            // 'src/main/webapp/app/**/*.+(js|html)',
             'src/test/javascript/spec/helpers/module.js',
             'src/test/javascript/spec/helpers/httpBackend.js',
-            'src/test/javascript/**/!(karma.conf|protractor.conf).js'
+            'src/test/javascript/**/!(karma.conf).js'
         ],
 
 

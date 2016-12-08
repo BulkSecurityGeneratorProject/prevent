@@ -148,6 +148,26 @@
                         $state.go('^');
                     });
                 }]
-            });
+            })
+            .state('event.import', {
+                parent: 'event',
+                url: '/import',
+                data: {
+                    authorities: ['ROLE_ADMIN']
+                },
+                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                    $uibModal.open({
+                        templateUrl: 'app/entities/event-order/event-order-import.html',
+                        controller: 'EventsImportController',
+                        controllerAs: 'vm',
+                        backdrop: 'static',
+                        size: 'lg'
+                    }).result.then(function() {
+                        $state.go('event', null, { reload: 'event' });
+                    }, function() {
+                        $state.go('event');
+                    });
+                }]
+            })
     }
 })();

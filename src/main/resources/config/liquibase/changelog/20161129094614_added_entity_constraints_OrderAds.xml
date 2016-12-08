@@ -18,7 +18,7 @@
                                  baseTableName="order_ads"
                                  constraintName="fk_order_ads_events_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="events"/>
+                                 referencedTableName="event"/>
 
     </changeSet>
 </databaseChangeLog>

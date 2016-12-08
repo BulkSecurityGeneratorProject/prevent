@@ -11,7 +11,7 @@
         $stateProvider
             .state('home', {
                 parent: 'frontend',
-                url: '/events',
+                url: '/',
                 views: {
                     'content-frontend@frontend': {
                         templateUrl: 'app/frontend/home/home.html',

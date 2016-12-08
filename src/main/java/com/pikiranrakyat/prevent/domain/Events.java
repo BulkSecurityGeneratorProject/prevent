@@ -17,9 +17,9 @@ import java.util.Objects;
  * A Events.
  */
 @Entity
-@Table(name = "events")
+@Table(name = "event")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@Document(indexName = "events")
+@Document(indexName = "event")
 public class Events extends AbstractAuditingEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;

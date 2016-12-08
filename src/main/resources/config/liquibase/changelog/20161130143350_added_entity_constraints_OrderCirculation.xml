@@ -18,7 +18,7 @@
                                  baseTableName="order_circulation"
                                  constraintName="fk_order_circulation_events_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="events"/>
+                                 referencedTableName="event"/>
 
     </changeSet>
 </databaseChangeLog>

@@ -40,8 +40,8 @@ spring:
             hibernate.cache.region.factory_class: org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
     data:
         elasticsearch:
-            cluster-name: prevent
-            cluster-nodes: localhost:9200
+            cluster-name: prevents
+            cluster-nodes: localhost:9300
     mail:
         host: localhost
         port: 25
@@ -104,3 +104,4 @@ upload:
     path:
         image: /Users/aseprojali/Workspace/work/temp/image/
         file: /Users/aseprojali/Workspace/work/temp/file/
+        import: /Users/aseprojali/Workspace/work/temp/import/

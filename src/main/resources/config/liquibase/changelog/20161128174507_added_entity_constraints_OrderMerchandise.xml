@@ -19,7 +19,7 @@
                                  constraintName="fk_order_merchandise_events_id"
                                  onUpdate="CASCADE"
                                  referencedColumnNames="id"
-                                 referencedTableName="events"/>
+                                 referencedTableName="event"/>
 
     </changeSet>
 </databaseChangeLog>
