@@ -22,33 +22,24 @@ spring:
         name:
         username:
         password:
-#    jpa:
-#        database-platform: com.pikiranrakyat.prevent.domain.util.FixedH2Dialect
-#        database: H2
-#        open-in-view: false
-#        show-sql: true
-#        hibernate:
-#            ddl-auto: none
-#            naming:
-#                strategy: org.springframework.boot.orm.jpa.hibernate.SpringNamingStrategy
-#        properties:
-#            hibernate.cache.use_second_level_cache: false
-#            hibernate.cache.use_query_cache: false
-#            hibernate.generate_statistics: true
-#            hibernate.hbm2ddl.auto: validate
     jpa:
-        database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-        database: MYSQL
+        database-platform: com.pikiranrakyat.prevent.domain.util.FixedH2Dialect
+        database: H2
+        open-in-view: false
         show-sql: true
+        hibernate:
+            ddl-auto: none
+            naming:
+                strategy: org.springframework.boot.orm.jpa.hibernate.SpringNamingStrategy
         properties:
-            hibernate.cache.use_second_level_cache: true
+            hibernate.cache.use_second_level_cache: false
             hibernate.cache.use_query_cache: false
             hibernate.generate_statistics: true
-            hibernate.cache.region.factory_class: org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
+            hibernate.hbm2ddl.auto: validate
     data:
         elasticsearch:
-            cluster-name: prevents
-            cluster-nodes: localhost:9300
+            cluster-name:
+            cluster-nodes:
             properties:
                 path:
                   logs: target/elasticsearch/log
