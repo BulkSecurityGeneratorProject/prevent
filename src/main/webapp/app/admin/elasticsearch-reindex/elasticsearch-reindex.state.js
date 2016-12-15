@@ -30,7 +30,7 @@
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function ($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/admin/elasticsearch-reindex//elasticsearch-reindex-dialog.html',
+                    templateUrl: 'app/admin/elasticsearch-reindex/elasticsearch-reindex-dialog.html',
                     controller: 'ElasticsearchReindexDialogController',
                     controllerAs: 'vm',
                     size: 'sm'

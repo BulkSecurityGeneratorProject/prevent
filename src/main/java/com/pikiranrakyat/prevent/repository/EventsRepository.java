@@ -17,5 +17,6 @@ public interface EventsRepository extends JpaRepository<Events, Long> {
 
     Optional<Events> findByTitleIgnoreCase(String title);
 
+    Page<Events> findByCreatedBy(String createdBy, Pageable pageable);
 
 }

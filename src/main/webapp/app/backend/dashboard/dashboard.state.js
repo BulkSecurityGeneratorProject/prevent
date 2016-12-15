@@ -11,12 +11,11 @@
         $stateProvider.state('dashboard', {
             parent: 'backend',
             url: '/dashboard',
-            data: {
-                authorities: ['ROLE_ADMIN']
-            },
             views: {
                 'main-content@backend': {
-                    templateUrl: 'app/backend/dashboard/dashboard.html'
+                    templateUrl: 'app/backend/dashboard/dashboard.html',
+                    controller: 'DashboardController',
+                    controllerAs: 'vm'
                 }
             }
         });

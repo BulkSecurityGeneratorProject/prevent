@@ -4,6 +4,8 @@ import com.pikiranrakyat.prevent.domain.EventType;
 import com.pikiranrakyat.prevent.domain.Organizer;
 
 import org.aspectj.weaver.ast.Or;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.Param;
 
@@ -18,6 +20,9 @@ public interface OrganizerRepository extends JpaRepository<Organizer, Long> {
 
     @Query("select organizer from Organizer organizer where organizer.user.login = ?#{principal.username}")
     List<Organizer> findByUserIsCurrentUser();
+
+    @Query("select organizer from Organizer organizer where organizer.user.login = ?#{principal.username}")
+    Page<Organizer> findByUserIsCurrentUser(Pageable pageable);
 
     Optional<Organizer> findByNameIgnoreCase(String name);
 

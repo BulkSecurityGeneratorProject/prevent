@@ -10,7 +10,10 @@
     function stateConfig($stateProvider) {
         $stateProvider.state('account', {
             abstract: true,
-            parent: 'frontend'
+            parent: 'frontend',
+            data: {
+                authorities: ['ROLE_ADMIN','ROLE_USER']
+            }
         });
     }
 })();

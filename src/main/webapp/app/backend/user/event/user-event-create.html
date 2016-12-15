@@ -1,0 +1,779 @@
+<a ui-sref="event-user" type="button" class="btn btn-danger">
+    <span class="fa fa-angle-double-left"></span>
+    <span>Kembali</span>
+</a>
+<br>
+<br>
+
+
+<form name="editForm" role="form" novalidate ng-submit="vm.create()" show-validation>
+
+    <!--meta data-->
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Create Event</h3>
+        </div>
+        <div class="box-body">
+            <div class="row">
+                <div class="col-sm-6">
+
+                    <!--organizer-->
+                    <div class="form-group">
+                        <label for="field_organizer">Organizer</label>
+                        <select class="form-control" id="field_organizer" name="organizer"
+                                ng-model="vm.events.organizer"
+                                ng-options="organizer as organizer.name for organizer in vm.organizers track by organizer.id"
+                                required>
+                            <option value=""></option>
+                        </select>
+                    </div>
+                    <div ng-show="editForm.organizer.$invalid">
+                        <p class="help-block"
+                           ng-show="editForm.organizer.$error.required">
+                            Field ini dibutuhkan.
+                        </p>
+                    </div>
+                    <!--end organizer-->
+
+                    <!--title-->
+                    <div class="form-group">
+                        <label class="control-label" for="field_title">Title</label>
+                        <input type="text" class="form-control" name="title" id="field_title"
+                               ng-model="vm.events.title"
+                               required ng-minlength="6" ng-maxlength="50"/>
+                    </div>
+                    <div ng-show="editForm.title.$invalid">
+                        <p class="help-block"
+                           ng-show="editForm.title.$error.required">
+                            Field ini dibutuhkan.
+                        </p>
+                        <p class="help-block"
+                           ng-show="editForm.title.$error.minlength" translate-value-min="6">
+                            Field ini dibutuhkan setidaknya 6 karakter.
+                        </p>
+                        <p class="help-block"
+                           ng-show="editForm.title.$error.maxlength">
+                            This field cannot be longer than 50 characters.
+                        </p>
+                    </div>
+                    <!--end title-->
+
+                    <!--description-->
+                    <div class="form-group">
+                        <label class="control-label" for="field_description">Description</label>
+
+                        <textarea rows="3"
+                                  class="form-control" name="description" id="field_description"
+                                  ng-model="vm.events.description"
+                                  required ng-minlength="10" ng-maxlength="300"
+                                  placeholder="Enter ..."></textarea>
+                    </div>
+                    <div ng-show="editForm.description.$invalid">
+                        <p class="help-block"
+                           ng-show="editForm.description.$error.required">
+                            Field ini dibutuhkan.
+                        </p>
+                        <p class="help-block"
+                           ng-show="editForm.description.$error.minlength" translate-value-min="10">
+                            Field ini dibutuhkan to be at least 10 characters.
+                        </p>
+                        <p class="help-block"
+                           ng-show="editForm.description.$error.maxlength">
+                            This field cannot be longer than 300 characters.
+                        </p>
+                    </div>
+                    <!--end description-->
+
+
+                </div>
+
+                <div class="col-sm-6">
+                    <!--starts-->
+                    <div class="form-group">
+                        <label class="control-label" for="field_starts">Starts</label>
+                        <div class="input-group">
+                            <input id="field_starts" type="text" class="form-control" name="starts"
+                                   datetime-picker="{{dateformat}}"
+                                   ng-model="vm.events.starts" is-open="vm.datePickerOpenStatus.starts"/>
+                            <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('starts')"><i
+                            class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                        </div>
+                    </div>
+                    <!--end starts-->
+
+                    <!--ends-->
+                    <div class="form-group">
+                        <label class="control-label" for="field_ends">Ends</label>
+                        <div class="input-group">
+                            <input id="field_ends" type="text" class="form-control" name="ends"
+                                   datetime-picker="{{dateformat}}"
+                                   ng-model="vm.events.ends" is-open="vm.datePickerOpenStatus.ends"/>
+                            <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('ends')"><i
+                            class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                        </div>
+                    </div>
+                    <!--end ends-->
+
+                    <!--kategori event-->
+                    <div class="form-group">
+                        <label for="field_eventType">Kategory Event</label>
+                        <select class="form-control" id="field_eventType" name="eventType"
+                                ng-model="vm.events.eventType"
+                                ng-options="eventType as eventType.name for eventType in vm.eventtypes track by eventType.id"
+                                required>
+                            <option value=""></option>
+                        </select>
+                    </div>
+                    <div ng-show="editForm.eventType.$invalid">
+                        <p class="help-block"
+                           ng-show="editForm.eventType.$error.required">
+                            Field ini dibutuhkan.
+                        </p>
+                    </div>
+                    <!--end kategori event-->
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <!--end meta data-->
+
+    <!--lokasi-->
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Lokasi</h3>
+
+        </div>
+        <div class="box-body">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label class="control-label" for="field_name">Nama</label>
+                        <input type="text" class="form-control" name="name" id="field_name"
+                               ng-model="vm.events.locationName"
+                               required ng-minlength="3" ng-maxlength="50"/>
+
+                        <div ng-show="editForm.name.$invalid">
+                            <p class="help-block"
+                               ng-show="editForm.name.$error.required">
+                                Field ini dibutuhkan.
+                            </p>
+                            <p class="help-block"
+                               ng-show="editForm.name.$error.minlength" translate-value-min="3">
+                                Field ini dibutuhkan to be at least 3 characters.
+                            </p>
+                            <p class="help-block"
+                               ng-show="editForm.name.$error.maxlength">
+                                This field cannot be longer than 50 characters.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="field_address">Alamat</label>
+                        <input type="text" class="form-control" name="address" id="field_address"
+                               ng-model="vm.events.locationAddress"
+                               required/>
+                        <div ng-show="editForm.address.$invalid">
+                            <p class="help-block"
+                               ng-show="editForm.address.$error.required">
+                                Field ini dibutuhkan.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <!--<div class="checkbox">-->
+                    <!--<label>-->
+                    <!--<input type="checkbox" ng-model="vm.isMap"> Gunakan Lokasi Anda-->
+                    <!--</label>-->
+                    <!--</div>-->
+                    <!--<div ng-show="vm.isMap">-->
+                    <div class="form-group">
+                        <label class="control-label" for="field_latitude">Latitude</label>
+                        <input type="number" class="form-control" name="latitude" id="field_latitude"
+                               ng-model="vm.events.locationLatitude"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="field_longitude">Longitude</label>
+                        <input type="number" class="form-control" name="longitude" id="field_longitude"
+                               ng-model="vm.events.locationLongitude"
+                        />
+                    </div>
+
+                    <!--</div>-->
+
+                </div>
+            </div>
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+        </div>
+        <!-- /.box-footer-->
+    </div>
+    <!--end lokasi-->
+
+    <!--brosur-->
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Upload Brosur</h3>
+
+        </div>
+        <div class="box-body">
+            <div class="form-group">
+                <label class="control-label" for="field_image">Brosur</label>
+                <div class="drop-box"
+                     id="field_image"
+                     ng-model="image"
+                     name="image"
+                     ng-keep="false"
+                     ngf-pattern="'image/*'"
+                     ngf-accept="'image/*'"
+                     ngf-max-size="5MB"
+                     ngf-min-width="720"
+                     ngf-select="vm.uploadImage($file)">
+                    Pilih Brosur
+                </div>
+                <br>
+                <uib-progressbar animate="false"
+                                 value="vm.progressImage">
+                    <b>{{vm.progressImage}}%</b>
+                </uib-progressbar>
+                <br>
+
+                <div ngf-no-file-drop>
+                    File Drag / Drop tidak didukung untuk browser ini.
+                </div>
+
+                <div class="form-group">
+                    <table class="table"
+                           ng-show="vm.events.image">
+                        <thead>
+                        <tr>
+                            <th>Filename</th>
+                            <th>Type</th>
+                            <th>Size (<i>
+                                <small>KB</small>
+                            </i>)
+                            </th>
+                            <th>File</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>{{vm.events.image.original}}</td>
+                            <td>{{vm.events.image.extension}}</td>
+                            <td>{{vm.events.image.size / 1000}}</td>
+                            <td>
+                                <button type="button"
+                                        class="btn btn-danger btn-sm"
+                                        ng-click="vm.removeImage()">
+                                    <i class="fa fa-remove fa-fw"></i></button>
+                            </td>
+
+                        </tr>
+                        <!--<tr>-->
+                        <!--<td colspan="4"-->
+                        <!--ng-show="vm.event.fileList.length == 0">-->
+                        <!--<small><i>No attachment selected.</i></small>-->
+                        <!--</td>-->
+                        <!--</tr>-->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!--<img-->
+                <!--ng-show="vm.events.image.name != null"-->
+                <!--ng-src="/api/image/{{vm.events.image.name}}"-->
+                <!--alt="image"-->
+                <!--style="margin: 0"-->
+                <!--class="img-responsive" fallback-src/>-->
+
+
+            </div>
+        </div>
+    </div>
+    <!--end brosur-->
+
+    <!--file proposal-->
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Upload Proposal</h3>
+
+        </div>
+        <div class="box-body">
+            <div class="form-group">
+                <label class="control-label" for="field_file">Proposal</label>
+                <div class="drop-box"
+                     id="field_file"
+                     ng-model="file"
+                     name="file"
+                     ng-keep="false"
+                     accept=".pdf,.doc,.docx"
+                     ngf-max-size="5MB"
+                     ngf-select="vm.uploadFile($file)">
+                    Pilih Proposal
+                </div>
+                <br>
+                <uib-progressbar animate="false"
+                                 value="vm.progressFile">
+                    <b>{{vm.progressFile}}%</b>
+                </uib-progressbar>
+                <br>
+
+                <div ngf-no-file-drop>
+                    File Drag / Drop tidak didukung untuk browser ini.
+                </div>
+                <div ng-show="editForm.file.$dirty && editForm.file.$invalid">
+                    <p class="help-block"
+                       ng-show="editForm.file.$error.required"
+                       translate="entity.validation.required">
+                        Field ini dibutuhkan.
+                    </p>
+
+                    <p class="help-block"
+                       ng-show="editForm.file.$error.maxSize">
+                        Ukuran file maksimal 5MB.
+                    </p>
+                </div>
+            </div>
+            <div class="form-group">
+                <table class="table"
+                       ng-show="vm.events.file">
+                    <thead>
+                    <tr>
+                        <th>Filename</th>
+                        <th>Type</th>
+                        <th>Size (<i>
+                            <small>KB</small>
+                        </i>)
+                        </th>
+                        <th>File</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>{{vm.events.file.original}}</td>
+                        <td>{{vm.events.file.extension}}</td>
+                        <td>{{vm.events.file.size / 1000}}</td>
+                        <td>
+                            <button type="button"
+                                    class="btn btn-danger btn-sm"
+                                    ng-click="vm.removeFile()">
+                                <i class="fa fa-remove fa-fw"></i></button>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td colspan="4"
+                            ng-show="vm.event.fileList.length == 0">
+                            <small><i>No attachment selected.</i></small>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!--end file proposal-->
+
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Order</h3>
+
+        </div>
+        <div class="box-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th><span>Nama Order</span></th>
+                        <th><span>Name</span></th>
+                        <th><span>Price</span></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="merchandise in vm.merchandises track by merchandise.id">
+                        <td>Marcomm</td>
+                        <td>{{merchandise.name}}</td>
+                        <td>{{merchandise.price | number}}</td>
+                        <td class="text-right">
+                            <div class="btn-group flex-btn-group-container">
+                                <button type="button"
+                                        ng-click="vm.addOrderMerchandise(merchandise)"
+                                        class="btn btn-primary btn-sm">
+                                    <i class="fa fa-plus fa-fw"></i>
+                                    <span class="hidden-xs hidden-sm"></span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr ng-repeat="circulation in vm.circulations track by circulation.id">
+                        <td>Sirkulasi</td>
+                        <td>{{circulation.name}}</td>
+                        <td>{{circulation.price | number}}</td>
+                        <td class="text-right">
+                            <div class="btn-group flex-btn-group-container">
+                                <button type="button"
+                                        ng-click="vm.addOrderCirculations(circulation)"
+                                        class="btn btn-primary btn-sm">
+                                    <i class="fa fa-plus fa-fw"></i>
+                                    <span class="hidden-xs hidden-sm"></span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr ng-repeat="ad in vm.ads track by ad.id">
+                        <td>Iklan</td>
+                        <td>{{ad.name}}</td>
+                        <td>{{ad.totalPrice | number}}</td>
+                        <td class="text-right">
+                            <div class="btn-group flex-btn-group-container">
+                                <button type="button"
+                                        ng-click="vm.addOrderAds(ad)"
+                                        class="btn btn-primary btn-sm">
+                                    <i class="fa fa-plus fa-fw"></i>
+                                    <span class="hidden-xs hidden-sm"></span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+
+
+                    <tr ng-repeat="redaction in vm.redactions track by redaction.id">
+                        <td>Redaksi</td>
+                        <td>{{redaction.name}}</td>
+                        <td>-</td>
+                        <td class="text-right">
+                            <div class="btn-group flex-btn-group-container">
+                                <button type="button"
+                                        ng-click="vm.addOrderRedaction(redaction)"
+                                        class="btn btn-primary btn-sm">
+                                    <i class="fa fa-plus fa-fw"></i>
+                                    <span class="hidden-xs hidden-sm"></span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">List Order</h3>
+        </div>
+        <div class="box-body">
+            <div class="table-responsive">
+
+                <!--order merchandise-->
+                <table class="table table-striped table-hover">
+                    <h4>Order Marcomm</h4>
+                    <thead>
+                    <tr>
+                        <th><span>Kode</span></th>
+                        <th><span>Name</span></th>
+                        <th><span>Price</span></th>
+                        <th><span>Qty</span></th>
+                        <th><span>Total</span></th>
+                        <th><span>Note</span></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="orderMerchandise in vm.events.orderMerchandises">
+                        <td>Marcomm</td>
+                        <td>{{orderMerchandise.merchandise.name}}</td>
+                        <td>{{orderMerchandise.merchandise.price | number}}</td>
+                        <td><input type="text" class="form-control" ng-model="orderMerchandise.qty"
+                                   ng-change="orderMerchandise.total = orderMerchandise.merchandise.price * orderMerchandise.qty">
+                        </td>
+                        <td>{{orderMerchandise.total | number}}</td>
+                        <td><textarea name="note" id="note" cols="10" rows="5" class="form-control"
+                                      ng-model="orderMerchandise.note"></textarea></td>
+                        <td class="text-right">
+                            <div class="btn-group flex-btn-group-container">
+
+                                <button type="button"
+                                        ng-show="orderMerchandise.id == null"
+                                        ng-click="vm.events.orderMerchandises.splice($index,1)"
+                                        class="btn btn-danger btn-sm">
+                                    <i class="fa fa-trash fa-fw"></i>
+                                    <span class="hidden-xs hidden-sm"></span>
+                                </button>
+
+                                <button type="button"
+                                        ng-show="orderMerchandise.id != null"
+                                        ng-click="vm.deleteOrderMerchandise(orderMerchandise.id, $index)"
+                                        class="btn btn-danger btn-sm">
+                                    <i class="fa fa-trash fa-fw"></i>
+                                    <span class="hidden-xs hidden-sm"></span>
+                                </button>
+
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <!--end order merchandise-->
+
+                <!--order sirkulasi-->
+                <table class="table table-striped table-hover" ng-show="vm.events.orderCirculations.length > 0">
+                    <h4 ng-show="vm.events.orderCirculations.length > 0">Order Sirkulasi</h4>
+                    <thead>
+                    <tr>
+                        <th><span>Kode</span></th>
+                        <th><span>Name</span></th>
+                        <th><span>Price</span></th>
+                        <th><span>Qty</span></th>
+                        <th><span>Total</span></th>
+                        <th><span>Note</span></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="orderCirculation in vm.events.orderCirculations">
+                        <td>Sirkulasi</td>
+                        <td>{{orderCirculation.circulation.name}}</td>
+                        <td>{{orderCirculation.circulation.price | number}}</td>
+                        <td><input type="text" class="form-control" ng-model="orderCirculation.qty"
+                                   ng-change="orderCirculation.total = orderCirculation.circulation.price * orderCirculation.qty">
+                        </td>
+                        <td>{{orderCirculation.total | number}}</td>
+                        <td><textarea name="note" cols="10" rows="5" class="form-control"
+                                      ng-model="orderCirculation.note"></textarea></td>
+                        <td class="text-right">
+                            <div class="btn-group flex-btn-group-container">
+
+                                <button type="button"
+                                        ng-show="orderCirculation.id == null"
+                                        ng-click="vm.events.orderCirculations.splice($index,1)"
+                                        class="btn btn-danger btn-sm">
+                                    <i class="fa fa-minus fa-fw"></i>
+                                    <span class="hidden-xs hidden-sm"></span>
+                                </button>
+
+                                <button type="button"
+                                        ng-show="orderCirculation.id != null"
+                                        ng-click="vm.deleteOrderCirculation(orderCirculation.id, $index)"
+                                        class="btn btn-danger btn-sm">
+                                    <i class="fa fa-minus fa-fw"></i>
+                                    <span class="hidden-xs hidden-sm"></span>
+                                </button>
+
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <!--end order sirkulasi-->
+
+
+                <!--order ads-->
+                <table class="table table-striped table-hover" ng-show="vm.events.orderAds.length > 0"
+                       ng-repeat="orderAds in vm.events.orderAds">
+                    <h4 ng-show="vm.events.orderAds.length > 0">Order Iklan</h4>
+                    <tr>
+                        <th>Nama Order</th>
+                        <td>{{orderAds.ads.name}}</td>
+                    </tr>
+                    <tr>
+                        <th>Judul Iklan:</th>
+                        <td><input type="text"
+                                   name="titlOrderAds"
+                                   class="form-control"
+                                   ng-model="orderAds.title"
+                                   ng-minlength="6"
+                                   ng-maxlength="100">
+                            <div ng-show="editForm.titlOrderAds.$invalid">
+                                <p class="help-block"
+                                   ng-show="editForm.titlOrderAds.$error.minlength" translate-value-min="6">
+                                    Field ini dibutuhkan setidaknya 6 karakter.
+                                </p>
+                                <p class="help-block"
+                                   ng-show="editForm.titlOrderAds.$error.maxlength">
+                                    Field pada karakter ini terlalu panjang, batas 100 karakter.
+                                </p>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Isi Iklan:</th>
+                        <td><textarea name="noteOrderAds"
+                                      cols="10"
+                                      rows="5"
+                                      class="form-control"
+                                      ng-model="orderAds.content"
+                                      ng-minlength="10"
+                                      ng-maxlength="1000">
+
+                        </textarea>
+                            <div ng-show="editForm.noteOrderAds.$invalid">
+                                <p class="help-block"
+                                   ng-show="editForm.noteOrderAds.$error.minlength" translate-value-min="6">
+                                    Field ini dibutuhkan setidaknya 6 karakter.
+                                </p>
+                                <p class="help-block"
+                                   ng-show="editForm.noteOrderAds.$error.maxlength">
+                                    Field pada karakter ini terlalu panjang, batas 1000 karakter.
+                                </p>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Note:</th>
+                        <td><textarea name="note" cols="10" rows="5" class="form-control"
+                                      ng-model="orderAds.note"></textarea></td>
+                    </tr>
+                    <tr>
+                        <th>Tanggal Publish Iklan:</th>
+                        <td>
+                            <div class="input-group">
+                                <input id="field_publishDate"
+                                       type="text"
+                                       class="form-control"
+                                       name="publishDate"
+                                       uib-datepicker-popup="{{dateformat}}"
+                                       ng-model="orderAds.publishDate"
+                                       mo-date-input="orderAds.publishDate"
+                                       is-open="vm.datePublishOpenStatus.publishDate"/>
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default"
+                                            ng-click="vm.openPublisDate('publishDate')">
+                                        <i class="glyphicon glyphicon-calendar"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <td>
+                            <button type="button"
+                                    ng-show="orderAds.id == null"
+                                    ng-click="vm.events.orderAds.splice($index,1)"
+                                    class="btn btn-danger btn-sm">
+                                <i class="fa fa-trash fa-fw"></i>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+
+                            <button type="button"
+                                    ng-show="orderAds.id != null"
+                                    ng-click="vm.deleteOrderAds(orderAds.id, $index)"
+                                    class="btn btn-danger btn-sm">
+                                <i class="fa fa-trash fa-fw"></i>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+                <!--end order ads-->
+
+
+                <!--order redaction-->
+                <table class="table table-striped table-hover" ng-show="vm.events.orderRedactions.length > 0"
+                       ng-repeat="orderRedaction in vm.events.orderRedactions">
+                    <h4 ng-show="vm.events.orderRedactions.length > 0">Order Redaksi</h4>
+                    <tr>
+                        <th>Nama Order</th>
+                        <td>{{orderRedaction.redaction.name}}</td>
+                    </tr>
+                    <tr>
+                        <th>Judul:</th>
+                        <td><input type="text"
+                                   name="titlOrderRedaction"
+                                   class="form-control"
+                                   ng-model="orderRedaction.title"
+                                   ng-minlength="6"
+                                   ng-maxlength="100">
+                            <div ng-show="editForm.titlOrderRedaction.$invalid">
+                                <p class="help-block"
+                                   ng-show="editForm.titlOrderRedaction.$error.minlength" translate-value-min="6">
+                                    Field ini dibutuhkan setidaknya 6 karakter.
+                                </p>
+                                <p class="help-block"
+                                   ng-show="editForm.titlOrderRedaction.$error.maxlength">
+                                    Field pada karakter ini terlalu panjang, batas 100 karakter.
+                                </p>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Keterangan:</th>
+                        <td><textarea name="noteOrderRedaction"
+                                      cols="10"
+                                      rows="5"
+                                      class="form-control"
+                                      ng-model="orderRedaction.content"
+                                      ng-minlength="10"
+                                      ng-maxlength="1000">
+
+                        </textarea>
+                            <div ng-show="editForm.noteOrderRedaction.$invalid">
+                                <p class="help-block"
+                                   ng-show="editForm.noteOrderRedaction.$error.minlength" translate-value-min="6">
+                                    Field ini dibutuhkan setidaknya 6 karakter.
+                                </p>
+                                <p class="help-block"
+                                   ng-show="editForm.noteOrderRedaction.$error.maxlength">
+                                    Field pada karakter ini terlalu panjang, batas 1000 karakter.
+                                </p>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Note:</th>
+                        <td><textarea name="note" cols="10" rows="5" class="form-control"
+                                      ng-model="orderRedaction.note"></textarea></td>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <td>
+                            <button type="button"
+                                    ng-show="orderRedaction.id == null"
+                                    ng-click="vm.events.orderRedactions.splice($index,1)"
+                                    class="btn btn-danger btn-sm">
+                                <i class="fa fa-trash fa-fw"></i>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+
+                            <button type="button"
+                                    ng-show="orderRedaction.id != null"
+                                    ng-click="vm.deleteOrderRedaction(orderRedaction.id, $index)"
+                                    class="btn btn-danger btn-sm">
+                                <i class="fa fa-trash fa-fw"></i>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                        </td>
+                    </tr>
+
+                </table>
+                <!--end order ads-->
+
+            </div>
+        </div>
+    </div>
+
+    <div style="padding: 10px 0px; text-align: center;">
+        <button type="button" class="btn btn-default btn-lg" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-lg btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+
+
+</form>

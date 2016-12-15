@@ -22,16 +22,23 @@
                 </a>
             </li>
 
-            <li ui-sref-active="active">
+            <li ui-sref-active="active" has-authority="ROLE_ADMIN">
                 <a ui-sref="event">
                     <i class="fa fa-heart fa-fw"></i>
                     <span>Event</span>
                 </a>
             </li>
 
+            <li ui-sref-active="active" has-authority="ROLE_USER">
+                <a ui-sref="event-user">
+                    <i class="fa fa-heart fa-fw"></i>
+                    <span>Event</span>
+                </a>
+            </li>
+
             <!--order-->
-            <li class="header">ORDER</li>
-            <li class="treeview">
+            <li class="header" has-authority="ROLE_ADMIN">ORDER</li>
+            <li class="treeview" has-authority="ROLE_ADMIN">
                 <a href="">
                     <i class="fa fa-shopping-cart fa-fw"></i> <span>Order</span>
                     <span class="pull-right-container">
@@ -82,8 +89,8 @@
 
 
             <!--master-->
-            <li class="header">MASTER</li>
-            <li class="treeview">
+            <li class="header" has-authority="ROLE_ADMIN">MASTER</li>
+            <li class="treeview" has-authority="ROLE_ADMIN">
                 <a href="">
                     <i class="fa fa-bar-chart-o"></i> <span>Master</span>
                     <span class="pull-right-container">
@@ -130,7 +137,7 @@
             <!--end master-->
 
             <!--category-->
-            <li class="treeview">
+            <li class="treeview" has-authority="ROLE_ADMIN">
                 <a href="">
                     <i class="fa fa-archive fa-fw"></i> <span>Category</span>
                     <span class="pull-right-container">
@@ -162,7 +169,7 @@
             </li>
             <!--end category-->
 
-            <li ui-sref-active="active">
+            <li ui-sref-active="active" has-authority="ROLE_ADMIN">
                 <a ui-sref="organizer">
                     <i class="fa fa-building-o fa-fw"></i>
                     <span>Organizer</span>
@@ -171,8 +178,8 @@
 
 
             <!--administration-->
-            <li class="header">ADMINISTRATION</li>
-            <li class="treeview">
+            <li class="header" has-authority="ROLE_ADMIN">ADMINISTRATION</li>
+            <li class="treeview" has-authority="ROLE_ADMIN">
                 <a href="">
                     <i class="fa fa-archive fa-fw"></i> <span>Administration</span>
                     <span class="pull-right-container">
@@ -237,13 +244,13 @@
 
             <li class="header">SETTING</li>
             <li ui-sref-active="active">
-                <a ui-sref="settings-admin" ng-click="vm.collapseNavbar()">
+                <a ui-sref="settings" ng-click="vm.collapseNavbar()">
                     <span class="glyphicon glyphicon-wrench"></span>&nbsp;
                     <span>Settings</span>
                 </a>
             </li>
             <li ui-sref-active="active">
-                <a ui-sref="password-admin" ng-click="vm.collapseNavbar()">
+                <a ui-sref="password" ng-click="vm.collapseNavbar()">
                     <span class="glyphicon glyphicon-lock"></span>&nbsp;
                     <span>Password</span>
                 </a>

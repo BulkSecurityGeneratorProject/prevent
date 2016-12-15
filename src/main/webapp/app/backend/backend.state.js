@@ -12,7 +12,7 @@
             abstract: true,
             parent: 'app',
             data: {
-                authorities: ['ROLE_ADMIN']
+                authorities: ['ROLE_ADMIN','ROLE_USER']
             },
             views: {
                 'content@': {

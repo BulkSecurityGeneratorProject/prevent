@@ -53,15 +53,15 @@
 
                 <li ui-sref-active="active" ng-switch-when="true">
                     <a href="" ng-click="vm.logout()" id="logout">
-                        <span class="glyphicon glyphicon-log-out"></span>&nbsp;
-                        <span>Logout</span>
+                        <span class="glyphicon glyphicon-log-out"></span>
+                        <span class="hidden-sm">Logout</span>
                     </a>
                 </li>
 
                 <li ui-sref-active="active" ng-switch-when="false">
                     <a href="" ng-click="vm.login()" id="login">
                         <span class="glyphicon glyphicon-log-in"></span>&nbsp;
-                        <span>Login</span>
+                        <span class="hidden-sm">Login</span>
                     </a>
                 </li>
 
@@ -165,7 +165,7 @@
                     <!--</ul>-->
                 <!--</li>-->
 
-                <li ng-class="{active: vm.$state.includes('dashboard')}" has-authority="ROLE_ADMIN">
+                <li ng-class="{active: vm.$state.includes('dashboard')}" has-any-authority="ROLE_USER,ROLE_ADMIN">
                     <a ui-sref="dashboard" ng-click="vm.collapseNavbar()">
                         <i class="fa fa-dashboard fa-fw"></i>
                         <span class="hidden-sm">Dashboard</span>
