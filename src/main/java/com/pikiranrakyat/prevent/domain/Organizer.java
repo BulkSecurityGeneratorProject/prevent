@@ -33,8 +33,7 @@ public class Organizer extends AbstractAuditingEntity implements Serializable {
     @Column(name = "address", nullable = false)
     private String address;
 
-    @NotNull
-    @Column(name = "phone", nullable = false)
+    @Column(name = "phone")
     private String phone;
 
     @NotNull

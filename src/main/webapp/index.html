@@ -44,12 +44,14 @@
     r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
     ga('create','UA-XXXXX-X');ga('send','pageview');
 </script>-->
-
+<script src='//maps.googleapis.com/maps/api/js?key=AIzaSyAVnX6rmtftZPWezX0dr9V1Q6T74uvUs4o' type="text/javascript"></script>
+<!--<script src='//maps.googleapis.com/maps/api/js?key=AIzaSyAVnX6rmtftZPWezX0dr9V1Q6T74uvUs4o'></script>-->
 <!-- build:js app/vendor.js -->
 <!-- bower:js -->
 <script src="bower_components/jquery/dist/jquery.js"></script>
 <script src="bower_components/json3/lib/json3.js"></script>
 <script src="bower_components/messageformat/messageformat.js"></script>
+<script src="bower_components/lodash/lodash.js"></script>
 <script src="bower_components/sockjs-client/dist/sockjs.js"></script>
 <script src="bower_components/stomp-websocket/lib/stomp.min.js"></script>
 <script src="bower_components/arrive/src/arrive.js"></script>
@@ -59,6 +61,11 @@
 <script src="bower_components/jquery-ui/jquery-ui.js"></script>
 <script src="bower_components/sweetalert/dist/sweetalert.min.js"></script>
 <script src="bower_components/es6-promise/es6-promise.js"></script>
+<script src="bower_components/markerclustererplus/src/markerclusterer.js"></script>
+<script src="bower_components/google-maps-utility-library-v3-markerwithlabel/dist/markerwithlabel.js"></script>
+<script src="bower_components/google-maps-utility-library-v3-infobox/dist/infobox.js"></script>
+<script src="bower_components/google-maps-utility-library-v3-keydragzoom/dist/keydragzoom.js"></script>
+<script src="bower_components/js-rich-marker/src/richmarker.js"></script>
 <script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/angular-aria/angular-aria.js"></script>
 <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
@@ -76,6 +83,8 @@
 <script src="bower_components/sweetalert2/dist/sweetalert2.js"></script>
 <script src="bower_components/angular-object-diff/dist/angular-object-diff.js"></script>
 <script src="bower_components/angularjs-geolocation/src/geolocation.js"></script>
+<script src="bower_components/angular-simple-logger/dist/angular-simple-logger.js"></script>
+<script src="bower_components/angular-google-maps/dist/angular-google-maps.js"></script>
 <!-- endinject -->
 <!-- endbuild -->
 
@@ -250,6 +259,7 @@
 <script src="app/blocks/config/compile.config.js"></script>
 <script src="app/blocks/config/alert.config.js"></script>
 <script src="app/backend/header/header.controller.js"></script>
+<script src="app/backend/sidebar/sidebar.controller.js"></script>
 <script src="app/backend/dashboard/dashboard.state.js"></script>
 <script src="app/backend/backend.state.js"></script>
 <script src="app/app.state.js"></script>

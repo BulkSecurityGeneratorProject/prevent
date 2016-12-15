@@ -4,25 +4,26 @@
         <div class="row">
             <div class="col-xs-4 no-padding-left">
                 <button class="btn btn-primary"
-                        ui-sref="event.create" >
+                        ui-sref="event.create">
                     <span class="glyphicon glyphicon-plus"></span>
-                    <span class="hidden-xs" >
+                    <span class="hidden-xs">
                         Buat Event
                     </span>
                 </button>
                 <button class="btn btn-info"
-                        ui-sref="event.import" >
+                        ui-sref="event.import">
                     <i class="fa fa-upload"></i>
-                    <span class="hidden-xs" >
+                    <span class="hidden-xs">
                         Import
                     </span>
                 </button>
             </div>
             <div class="col-xs-8 no-padding-right">
                 <form name="searchForm" class="form-inline">
-                    <div class="input-group pull-right" >
-                        <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="Query">
-                        <span  class="input-group-btn width-min" >
+                    <div class="input-group pull-right">
+                        <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery"
+                               placeholder="Query">
+                        <span class="input-group-btn width-min">
                             <button class="btn btn-info" ng-click="vm.search(vm.searchQuery)">
                                 <span class="glyphicon glyphicon-search"></span>
                             </button>
@@ -49,15 +50,15 @@
             <table class="jh-table table table-striped table-hover">
                 <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
-                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="id"><span>No</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="title"><span>Title</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="starts"><span>Starts</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="ends"><span>Ends</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="subtotal"><span>Subtotal</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="accept"><span>Accept</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="isOrder"><span>Is Order</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="eventType.name"><span>Event Type</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="locationName"><span>Locations</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="eventType.name"><span>Event Type</span> <span
+                        class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="locationName"><span>Locations</span> <span class="glyphicon glyphicon-sort"></span>
+                    </th>
                     <th jh-sort-by="createdDate"><span>Created Date</span> <span
                         class="glyphicon glyphicon-sort"></span>
                     </th>
@@ -65,9 +66,9 @@
                         class="glyphicon glyphicon-sort"></span>
                     </th>
                     <!--<th jh-sort-by="lastModifiedBy"><span>Last Modified By</span> <span-->
-                        <!--class="glyphicon glyphicon-sort"></span></th>-->
+                    <!--class="glyphicon glyphicon-sort"></span></th>-->
                     <!--<th jh-sort-by="lastModifiedDate"><span>Last Modified Date</span> <span-->
-                        <!--class="glyphicon glyphicon-sort"></span></th>-->
+                    <!--class="glyphicon glyphicon-sort"></span></th>-->
                     <th></th>
                 </tr>
                 </thead>
@@ -75,11 +76,18 @@
                 <tr ng-repeat="events in vm.events track by events.id">
                     <td><a ui-sref="events-detail({id:events.id})">{{events.id}}</a></td>
                     <td>{{events.title}}</td>
-                    <td>{{events.starts |  date:'dd/MM/yyyy HH:mm'}}</td>
+                    <td>{{events.starts | date:'dd/MM/yyyy HH:mm'}}</td>
                     <td>{{events.ends | date:'dd/MM/yyyy HH:mm'}}</td>
-                    <td>{{events.subtotal}}</td>
-                    <td>{{events.accept}}</td>
-                    <td>{{events.isOrder}}</td>
+                    <td class="text-center">
+                        <div ng-if="events.accept == true">
+                            <span class="label label-success">{{events.accept}}</span>
+                        </div>
+
+                        <div ng-if="events.accept == false">
+                            <span class="label label-danger">{{events.accept}}</span>
+                        </div>
+
+                    </td>
                     <td>
                         <a ui-sref="event-type-detail({id:events.eventType.id})">{{events.eventType.name}}</a>
                     </td>
@@ -89,24 +97,43 @@
 
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
-                            <button type="submit"
+
+                            <button type="button"
+                                    ng-show="events.accept == false"
+                                    ng-click="vm.accept($index,events.id)"
+                                    class="btn btn-default btn-sm">
+                                <span class="fa fa-check"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+
+                            <button type="button"
+                                    ng-show="events.accept == true"
+                                    ng-click="vm.reject($index,events.id)"
+                                    class="btn btn-warning btn-sm">
+                                <span class="fa fa-minus"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+
+                            <button type="button"
                                     ui-sref="events-detail({id:events.id})"
                                     class="btn btn-info btn-sm">
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-xs hidden-sm"></span>
                             </button>
-                            <button type="submit"
+                            <button type="button"
                                     ui-sref="event-edit({id:events.id})"
                                     class="btn btn-primary btn-sm">
                                 <span class="glyphicon glyphicon-pencil"></span>
                                 <span class="hidden-xs hidden-sm"></span>
                             </button>
-                            <button type="submit"
+                            <button type="button"
                                     ui-sref="event.delete({id:events.id})"
                                     class="btn btn-danger btn-sm">
                                 <span class="glyphicon glyphicon-remove-circle"></span>
                                 <span class="hidden-xs hidden-sm"></span>
                             </button>
+
+
                         </div>
                     </td>
                 </tr>
@@ -118,7 +145,8 @@
     <div class="box-footer">
         <div class="text-center">
             <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
-            <uib-pagination class="pagination-sm" total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+            <uib-pagination class="pagination-sm" total-items="vm.totalItems" ng-model="vm.page"
+                            ng-change="vm.transition()"></uib-pagination>
         </div>
     </div>
     <!-- /.box-footer-->

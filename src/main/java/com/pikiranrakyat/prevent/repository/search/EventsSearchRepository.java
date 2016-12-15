@@ -10,5 +10,7 @@ import org.springframework.data.elasticsearch.repository.ElasticsearchRepository
  * Spring Data ElasticSearch repository for the Events entity.
  */
 public interface EventsSearchRepository extends ElasticsearchRepository<Events, Long> {
+
     Page<Events> findByAcceptIsTrue(QueryStringQueryBuilder query, Pageable pageable);
+
 }

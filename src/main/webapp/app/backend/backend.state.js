@@ -26,7 +26,7 @@
                 },
                 'main-content-sidebar@backend': {
                     templateUrl: 'app/backend/sidebar/sidebar.html',
-                    controller: 'HeaderController',
+                    controller: 'SidebarController',
                     controllerAs: 'vm'
                 },
                 'main-content-footer@backend': {

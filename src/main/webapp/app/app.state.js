@@ -3,7 +3,7 @@
 
     angular
         .module('preventApp')
-        .config(stateConfig);
+        .config(stateConfig)
 
     stateConfig.$inject = ['$stateProvider'];
 
@@ -20,4 +20,5 @@
             }
         });
     }
+
 })();

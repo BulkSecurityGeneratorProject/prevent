@@ -25,10 +25,8 @@ public class EventOrderDTO {
     @NotNull
     private String description;
 
-    @NotNull
     private ZonedDateTime starts;
 
-    @NotNull
     private ZonedDateTime ends;
 
     @NotNull
@@ -46,7 +44,6 @@ public class EventOrderDTO {
     private Boolean accept = Boolean.FALSE;
 
     private ZonedDateTime agreeDate;
-
 
     private String note;
 

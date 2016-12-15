@@ -31,11 +31,11 @@
             </column>
 
             <column name="starts" type="timestamp" defaultValueDate="${now}">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
 
             <column name="ends" type="timestamp" defaultValueDate="${now}">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
 
             <column name="location_name" type="varchar(255)">

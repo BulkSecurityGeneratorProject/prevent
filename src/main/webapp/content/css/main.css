@@ -16,6 +16,8 @@ Hide ng-cloak on page load, https://docs.angularjs.org/api/ng/directive/ngCloak
     display: none !important;
 }
 
+.angular-google-map-container { height: 400px; }
+
 /* ==========================================================================
 Developement Ribbon
 ========================================================================== */

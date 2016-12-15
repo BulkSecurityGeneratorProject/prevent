@@ -38,12 +38,10 @@ public class Events extends AbstractAuditingEntity implements Serializable {
     @Column(name = "description", length = 10000, nullable = false)
     private String description;
 
-    @NotNull
-    @Column(name = "starts", nullable = false)
+    @Column(name = "starts")
     private ZonedDateTime starts;
 
-    @NotNull
-    @Column(name = "ends", nullable = false)
+    @Column(name = "ends")
     private ZonedDateTime ends;
 
 

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
+import java.util.Optional;
 import java.util.UUID;
 
 import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
@@ -187,6 +188,11 @@ public class EventsServiceImpl implements EventsService {
         return save;
     }
 
+    @Override
+    public Optional<Events> searchTitleIgnoreCase(String title) {
+        return eventsRepository.findByTitleIgnoreCase(title);
+    }
+
     /**
      * Get all the events.
      *
@@ -196,8 +202,7 @@ public class EventsServiceImpl implements EventsService {
     @Transactional(readOnly = true)
     public Page<Events> findAll(Pageable pageable) {
         log.debug("Request to get all Events");
-        Page<Events> result = eventsRepository.findAll(pageable);
-        return result;
+        return eventsRepository.findAll(pageable);
     }
 
     @Override
@@ -220,8 +225,7 @@ public class EventsServiceImpl implements EventsService {
     @Transactional(readOnly = true)
     public Events findOne(Long id) {
         log.debug("Request to get Events : {}", id);
-        Events events = eventsRepository.findOne(id);
-        return events;
+        return eventsRepository.findOne(id);
     }
 
     /**
@@ -248,8 +252,7 @@ public class EventsServiceImpl implements EventsService {
     @Transactional(readOnly = true)
     public Page<Events> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of Events for query {}", query);
-        Page<Events> result = eventsSearchRepository.search(queryStringQuery(query), pageable);
-        return result;
+        return eventsSearchRepository.search(queryStringQuery(query), pageable);
     }
 
     @Override

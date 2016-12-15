@@ -6,6 +6,7 @@
         .controller('EventCreateController', EventOrderController);
 
     EventOrderController.$inject = [
+        '$scope',
         '$state',
         'entity',
         'ManageLocations',
@@ -23,7 +24,8 @@
         'OrderRedaction'
     ];
 
-    function EventOrderController($state, entity,
+    function EventOrderController($scope,
+                                  $state, entity,
                                   ManageLocations,
                                   Upload, $timeout,
                                   EventOrder, ManageSearch,
@@ -32,6 +34,9 @@
                                   OrderMerchandise, OrderCirculation,
                                   OrderAds, OrderRedaction) {
         var vm = this;
+        vm.isMap = false;
+        vm.location = {};
+
         vm.events = entity;
 
         vm.merchandises = [];
@@ -85,8 +90,8 @@
         function create() {
             if (vm.events.id == null) {
                 swal({
-                    title: 'Create?',
-                    text: "Create Event",
+                    title: 'Buat?',
+                    text: "Apakah anda yakin akan buat Event ini ?",
                     type: 'warning',
                     showCancelButton: true,
                     confirmButtonText: 'Ya'
@@ -96,7 +101,7 @@
                             $state.go('event', null, {reload: true});
                             swal(
                                 'Created',
-                                'Event success has been created',
+                                'Event sukses dibust',
                                 'success'
                             )
                         }, function (error) {
@@ -123,7 +128,7 @@
                             $state.go('event', null, {reload: true});
                             swal(
                                 'Update',
-                                'Event success has been updated',
+                                'Event sukses di update',
                                 'success'
                             )
                         }, function (error) {
@@ -384,19 +389,11 @@
             getAllCirculation();
             getAllRedaction();
             getAllAds();
-            geolocation.getLocation().then(function (response) {
-                if (vm.events.locationLatitude == 0) {
-                    vm.events.locationLatitude = response.coords.latitude;
-                }
-                if (vm.events.locationLongitude == 0) {
-                    vm.events.locationLongitude = response.coords.longitude;
-                }
-            }, function (error) {
-                console.log(error)
-            });
         }
 
+
         init();
+
 
     }
 })();

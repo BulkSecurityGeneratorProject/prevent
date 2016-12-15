@@ -18,14 +18,24 @@
             'angular-loading-bar',
             'oitozero.ngSweetAlert',
             'ngFileUpload',
-            'geolocation'
+            'geolocation',
+            'uiGmapgoogle-maps'
         ])
+        .config(mapConfig)
         .run(run);
 
     run.$inject = ['stateHandler'];
+    mapConfig.$inject = ['uiGmapGoogleMapApiProvider'];
 
     function run(stateHandler) {
         stateHandler.initialize();
+    }
 
+    function mapConfig(uiGmapGoogleMapApiProvider) {
+        uiGmapGoogleMapApiProvider.configure({
+            key: 'AIzaSyAVnX6rmtftZPWezX0dr9V1Q6T74uvUs4o',
+            v: '3.20', //defaults to latest 3.X anyhow
+            libraries: 'weather,geometry,visualization'
+        });
     }
 })();

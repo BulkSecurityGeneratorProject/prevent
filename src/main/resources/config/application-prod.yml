@@ -105,3 +105,7 @@ upload:
         image: /Users/aseprojali/Workspace/work/temp/image/
         file: /Users/aseprojali/Workspace/work/temp/file/
         import: /Users/aseprojali/Workspace/work/temp/import/
+existing:
+    path:
+        image: /home/pradmin/www/upload/image/
+        file: /home/pradmin/www/upload/attachment/

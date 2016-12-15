@@ -1,3 +1,11 @@
+<a ui-sref="event" type="button" class="btn btn-danger">
+    <span class="fa fa-angle-double-left"></span>
+    <span>Kembali</span>
+</a>
+<br>
+<br>
+
+
 <form name="editForm" role="form" novalidate ng-submit="vm.create()" show-validation>
 
     <!--meta data-->
@@ -22,7 +30,7 @@
                     <div ng-show="editForm.organizer.$invalid">
                         <p class="help-block"
                            ng-show="editForm.organizer.$error.required">
-                            This field is required.
+                            Field ini dibutuhkan.
                         </p>
                     </div>
                     <!--end organizer-->
@@ -37,11 +45,11 @@
                     <div ng-show="editForm.title.$invalid">
                         <p class="help-block"
                            ng-show="editForm.title.$error.required">
-                            This field is required.
+                            Field ini dibutuhkan.
                         </p>
                         <p class="help-block"
                            ng-show="editForm.title.$error.minlength" translate-value-min="6">
-                            This field is required to be at least 6 characters.
+                            Field ini dibutuhkan setidaknya 6 karakter.
                         </p>
                         <p class="help-block"
                            ng-show="editForm.title.$error.maxlength">
@@ -63,11 +71,11 @@
                     <div ng-show="editForm.description.$invalid">
                         <p class="help-block"
                            ng-show="editForm.description.$error.required">
-                            This field is required.
+                            Field ini dibutuhkan.
                         </p>
                         <p class="help-block"
                            ng-show="editForm.description.$error.minlength" translate-value-min="10">
-                            This field is required to be at least 10 characters.
+                            Field ini dibutuhkan to be at least 10 characters.
                         </p>
                         <p class="help-block"
                            ng-show="editForm.description.$error.maxlength">
@@ -86,23 +94,12 @@
                         <div class="input-group">
                             <input id="field_starts" type="text" class="form-control" name="starts"
                                    datetime-picker="{{dateformat}}"
-                                   ng-model="vm.events.starts" is-open="vm.datePickerOpenStatus.starts"
-                                   required/>
+                                   ng-model="vm.events.starts" is-open="vm.datePickerOpenStatus.starts"/>
                             <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="vm.openCalendar('starts')"><i
                             class="glyphicon glyphicon-calendar"></i></button>
                     </span>
                         </div>
-                    </div>
-                    <div ng-show="editForm.starts.$invalid">
-                        <p class="help-block"
-                           ng-show="editForm.starts.$error.required">
-                            This field is required.
-                        </p>
-                        <p class="help-block"
-                           ng-show="editForm.starts.$error.ZonedDateTimelocal">
-                            This field should be a date and time.
-                        </p>
                     </div>
                     <!--end starts-->
 
@@ -112,23 +109,12 @@
                         <div class="input-group">
                             <input id="field_ends" type="text" class="form-control" name="ends"
                                    datetime-picker="{{dateformat}}"
-                                   ng-model="vm.events.ends" is-open="vm.datePickerOpenStatus.ends"
-                                   required/>
+                                   ng-model="vm.events.ends" is-open="vm.datePickerOpenStatus.ends"/>
                             <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="vm.openCalendar('ends')"><i
                             class="glyphicon glyphicon-calendar"></i></button>
                     </span>
                         </div>
-                    </div>
-                    <div ng-show="editForm.ends.$invalid">
-                        <p class="help-block"
-                           ng-show="editForm.ends.$error.required">
-                            This field is required.
-                        </p>
-                        <p class="help-block"
-                           ng-show="editForm.ends.$error.ZonedDateTimelocal">
-                            This field should be a date and time.
-                        </p>
                     </div>
                     <!--end ends-->
 
@@ -145,7 +131,7 @@
                     <div ng-show="editForm.eventType.$invalid">
                         <p class="help-block"
                            ng-show="editForm.eventType.$error.required">
-                            This field is required.
+                            Field ini dibutuhkan.
                         </p>
                     </div>
                     <!--end kategori event-->
@@ -165,9 +151,9 @@
         </div>
         <div class="box-body">
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-12">
                     <div class="form-group">
-                        <label class="control-label" for="field_name">Name</label>
+                        <label class="control-label" for="field_name">Nama</label>
                         <input type="text" class="form-control" name="name" id="field_name"
                                ng-model="vm.events.locationName"
                                required ng-minlength="3" ng-maxlength="50"/>
@@ -175,11 +161,11 @@
                         <div ng-show="editForm.name.$invalid">
                             <p class="help-block"
                                ng-show="editForm.name.$error.required">
-                                This field is required.
+                                Field ini dibutuhkan.
                             </p>
                             <p class="help-block"
                                ng-show="editForm.name.$error.minlength" translate-value-min="3">
-                                This field is required to be at least 3 characters.
+                                Field ini dibutuhkan to be at least 3 characters.
                             </p>
                             <p class="help-block"
                                ng-show="editForm.name.$error.maxlength">
@@ -188,20 +174,25 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="field_address">Address</label>
+                        <label class="control-label" for="field_address">Alamat</label>
                         <input type="text" class="form-control" name="address" id="field_address"
                                ng-model="vm.events.locationAddress"
                                required/>
                         <div ng-show="editForm.address.$invalid">
                             <p class="help-block"
                                ng-show="editForm.address.$error.required">
-                                This field is required.
+                                Field ini dibutuhkan.
                             </p>
                         </div>
                     </div>
-                </div>
 
-                <div class="col-sm-6">
+
+                    <!--<div class="checkbox">-->
+                    <!--<label>-->
+                    <!--<input type="checkbox" ng-model="vm.isMap"> Gunakan Lokasi Anda-->
+                    <!--</label>-->
+                    <!--</div>-->
+                    <!--<div ng-show="vm.isMap">-->
                     <div class="form-group">
                         <label class="control-label" for="field_latitude">Latitude</label>
                         <input type="number" class="form-control" name="latitude" id="field_latitude"
@@ -214,6 +205,9 @@
                                ng-model="vm.events.locationLongitude"
                         />
                     </div>
+
+                    <!--</div>-->
+
                 </div>
             </div>
         </div>
@@ -339,7 +333,7 @@
                     <p class="help-block"
                        ng-show="editForm.file.$error.required"
                        translate="entity.validation.required">
-                        This field is required.
+                        Field ini dibutuhkan.
                     </p>
 
                     <p class="help-block"
@@ -387,7 +381,6 @@
         </div>
     </div>
     <!--end file proposal-->
-
 
     <div class="box">
         <div class="box-header with-border">
@@ -478,7 +471,6 @@
         </div>
     </div>
 
-
     <div class="box">
         <div class="box-header with-border">
             <h3 class="box-title">List Order</h3>
@@ -487,8 +479,8 @@
             <div class="table-responsive">
 
                 <!--order merchandise-->
-                <table class="table table-striped table-hover" ng-show="vm.events.orderMerchandises > 0">
-                    <h4 ng-show="vm.events.orderMerchandises > 0">Order Marcomm</h4>
+                <table class="table table-striped table-hover">
+                    <h4>Order Marcomm</h4>
                     <thead>
                     <tr>
                         <th><span>Kode</span></th>
@@ -518,7 +510,7 @@
                                         ng-show="orderMerchandise.id == null"
                                         ng-click="vm.events.orderMerchandises.splice($index,1)"
                                         class="btn btn-danger btn-sm">
-                                    <i class="fa fa-minus fa-fw"></i>
+                                    <i class="fa fa-trash fa-fw"></i>
                                     <span class="hidden-xs hidden-sm"></span>
                                 </button>
 
@@ -526,7 +518,7 @@
                                         ng-show="orderMerchandise.id != null"
                                         ng-click="vm.deleteOrderMerchandise(orderMerchandise.id, $index)"
                                         class="btn btn-danger btn-sm">
-                                    <i class="fa fa-minus fa-fw"></i>
+                                    <i class="fa fa-trash fa-fw"></i>
                                     <span class="hidden-xs hidden-sm"></span>
                                 </button>
 
@@ -599,12 +591,46 @@
                     </tr>
                     <tr>
                         <th>Judul Iklan:</th>
-                        <td><input type="text" class="form-control" ng-model="orderAds.title"></td>
+                        <td><input type="text"
+                                   name="titlOrderAds"
+                                   class="form-control"
+                                   ng-model="orderAds.title"
+                                   ng-minlength="6"
+                                   ng-maxlength="100">
+                            <div ng-show="editForm.titlOrderAds.$invalid">
+                                <p class="help-block"
+                                   ng-show="editForm.titlOrderAds.$error.minlength" translate-value-min="6">
+                                    Field ini dibutuhkan setidaknya 6 karakter.
+                                </p>
+                                <p class="help-block"
+                                   ng-show="editForm.titlOrderAds.$error.maxlength">
+                                    Field pada karakter ini terlalu panjang, batas 100 karakter.
+                                </p>
+                            </div>
+                        </td>
                     </tr>
                     <tr>
                         <th>Isi Iklan:</th>
-                        <td><textarea name="note" cols="10" rows="5" class="form-control"
-                                      ng-model="orderAds.content"></textarea></td>
+                        <td><textarea name="noteOrderAds"
+                                      cols="10"
+                                      rows="5"
+                                      class="form-control"
+                                      ng-model="orderAds.content"
+                                      ng-minlength="10"
+                                      ng-maxlength="1000">
+
+                        </textarea>
+                            <div ng-show="editForm.noteOrderAds.$invalid">
+                                <p class="help-block"
+                                   ng-show="editForm.noteOrderAds.$error.minlength" translate-value-min="6">
+                                    Field ini dibutuhkan setidaknya 6 karakter.
+                                </p>
+                                <p class="help-block"
+                                   ng-show="editForm.noteOrderAds.$error.maxlength">
+                                    Field pada karakter ini terlalu panjang, batas 1000 karakter.
+                                </p>
+                            </div>
+                        </td>
                     </tr>
                     <tr>
                         <th>Note:</th>
@@ -632,6 +658,26 @@
                             </div>
                         </td>
                     </tr>
+                    <tr>
+                        <th></th>
+                        <td>
+                            <button type="button"
+                                    ng-show="orderAds.id == null"
+                                    ng-click="vm.events.orderAds.splice($index,1)"
+                                    class="btn btn-danger btn-sm">
+                                <i class="fa fa-trash fa-fw"></i>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+
+                            <button type="button"
+                                    ng-show="orderAds.id != null"
+                                    ng-click="vm.deleteOrderAds(orderAds.id, $index)"
+                                    class="btn btn-danger btn-sm">
+                                <i class="fa fa-trash fa-fw"></i>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                        </td>
+                    </tr>
                 </table>
                 <!--end order ads-->
 
@@ -646,17 +692,71 @@
                     </tr>
                     <tr>
                         <th>Judul:</th>
-                        <td><input type="text" class="form-control" ng-model="orderRedaction.title"></td>
+                        <td><input type="text"
+                                   name="titlOrderRedaction"
+                                   class="form-control"
+                                   ng-model="orderRedaction.title"
+                                   ng-minlength="6"
+                                   ng-maxlength="100">
+                            <div ng-show="editForm.titlOrderRedaction.$invalid">
+                                <p class="help-block"
+                                   ng-show="editForm.titlOrderRedaction.$error.minlength" translate-value-min="6">
+                                    Field ini dibutuhkan setidaknya 6 karakter.
+                                </p>
+                                <p class="help-block"
+                                   ng-show="editForm.titlOrderRedaction.$error.maxlength">
+                                    Field pada karakter ini terlalu panjang, batas 100 karakter.
+                                </p>
+                            </div>
+                        </td>
                     </tr>
                     <tr>
                         <th>Keterangan:</th>
-                        <td><textarea name="note" cols="10" rows="5" class="form-control"
-                                      ng-model="orderRedaction.content"></textarea></td>
+                        <td><textarea name="noteOrderRedaction"
+                                      cols="10"
+                                      rows="5"
+                                      class="form-control"
+                                      ng-model="orderRedaction.content"
+                                      ng-minlength="10"
+                                      ng-maxlength="1000">
+
+                        </textarea>
+                            <div ng-show="editForm.noteOrderRedaction.$invalid">
+                                <p class="help-block"
+                                   ng-show="editForm.noteOrderRedaction.$error.minlength" translate-value-min="6">
+                                    Field ini dibutuhkan setidaknya 6 karakter.
+                                </p>
+                                <p class="help-block"
+                                   ng-show="editForm.noteOrderRedaction.$error.maxlength">
+                                    Field pada karakter ini terlalu panjang, batas 1000 karakter.
+                                </p>
+                            </div>
+                        </td>
                     </tr>
                     <tr>
                         <th>Note:</th>
                         <td><textarea name="note" cols="10" rows="5" class="form-control"
                                       ng-model="orderRedaction.note"></textarea></td>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <td>
+                            <button type="button"
+                                    ng-show="orderRedaction.id == null"
+                                    ng-click="vm.events.orderRedactions.splice($index,1)"
+                                    class="btn btn-danger btn-sm">
+                                <i class="fa fa-trash fa-fw"></i>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+
+                            <button type="button"
+                                    ng-show="orderRedaction.id != null"
+                                    ng-click="vm.deleteOrderRedaction(orderRedaction.id, $index)"
+                                    class="btn btn-danger btn-sm">
+                                <i class="fa fa-trash fa-fw"></i>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                        </td>
                     </tr>
 
                 </table>
@@ -673,7 +773,6 @@
         <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-lg btn-primary">
             <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
         </button>
-
     </div>
 
 

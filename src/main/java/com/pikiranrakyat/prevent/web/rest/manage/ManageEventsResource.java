@@ -35,7 +35,6 @@ public class ManageEventsResource {
     @Inject
     private EventsService eventsService;
 
-
     /**
      * GET  /manage/events : get all the events.
      *
@@ -65,11 +64,12 @@ public class ManageEventsResource {
         if (query.isEmpty() || query.equals("")) {
             paging = eventsService.findAllWhereAcceptIsTrue(pageable);
         } else {
-            paging = eventsService.searchWitAcceptIsTrue(query, pageable);
+            paging = eventsService.search(query, pageable);
         }
+
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, paging, "/api/manage/event");
 
-        return new ResponseEntity<>(paging.getContent().stream().map(ManagedEventsVM::new).collect(Collectors.toList()), headers, HttpStatus.OK);
+        return new ResponseEntity<>(paging.getContent().stream().filter(Events::isAccept).map(ManagedEventsVM::new).collect(Collectors.toList()), headers, HttpStatus.OK);
     }
 
     /**

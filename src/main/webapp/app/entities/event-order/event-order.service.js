@@ -13,6 +13,12 @@
             },
             update: function (data) {
                 return $http.put('api/events', data);
+            },
+            accept: function (id) {
+                return $http.get('api/order/event/' + id + "/accept");
+            },
+            reject: function (id) {
+                return $http.get('api/order/event/' + id + "/reject");
             }
         }
     }

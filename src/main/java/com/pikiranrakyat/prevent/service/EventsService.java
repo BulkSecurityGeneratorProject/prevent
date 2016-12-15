@@ -5,6 +5,8 @@ import com.pikiranrakyat.prevent.service.dto.EventOrderDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.Optional;
+
 /**
  * Service Interface for managing Events.
  */
@@ -19,6 +21,8 @@ public interface EventsService {
     Events save(Events events);
 
     Events saveWithOrder(EventOrderDTO dto);
+
+    Optional<Events> searchTitleIgnoreCase(String title);
 
     /**
      * Get all the events.

@@ -35,6 +35,8 @@ public final class Constants {
 
         String ORGANIZER = "organizer";
         String EVENT = "event";
+        String EVENT_PR = "event_pr";
+        String EVENT_IMAGE = "event_image";
     }
 
 }

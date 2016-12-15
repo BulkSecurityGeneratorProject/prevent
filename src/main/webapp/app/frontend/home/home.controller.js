@@ -13,6 +13,8 @@
         vm.account = null;
         vm.isAuthenticated = null;
         vm.login = LoginService.open;
+
+
         vm.loadAll = loadAll;
         vm.register = register;
 
@@ -26,6 +28,7 @@
             Principal.identity().then(function (account) {
                 vm.account = account;
                 vm.isAuthenticated = Principal.isAuthenticated;
+                vm.isAuthenticated = Principal.isAuthenticated;
             });
         }
 
@@ -33,11 +36,9 @@
             $state.go('register');
         }
 
-        loadAll(0, 12);
 
         vm.page = 0;
         vm.size = 12;
-        vm.query = null;
 
         function loadAll(page, size) {
             ManageEvents
@@ -68,6 +69,9 @@
                 loadAll(vm.page, vm.size);
             }
         };
+
+        loadAll(0, 12);
+
 
 
     }

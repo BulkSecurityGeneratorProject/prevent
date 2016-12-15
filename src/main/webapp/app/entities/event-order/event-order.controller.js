@@ -1,13 +1,13 @@
-(function() {
+(function () {
     'use strict';
 
     angular
         .module('preventApp')
         .controller('EventOrderController', EventOrderController);
 
-    EventOrderController.$inject = ['$scope', '$state', 'Events', 'EventsSearch', 'ParseLinks', 'AlertService', 'pagingParams', 'paginationConstants'];
+    EventOrderController.$inject = ['$scope', '$state', 'Events', 'EventsSearch', 'ParseLinks', 'AlertService', 'pagingParams', 'paginationConstants', 'EventOrder'];
 
-    function EventOrderController ($scope, $state, Events, EventsSearch, ParseLinks, AlertService, pagingParams, paginationConstants) {
+    function EventOrderController($scope, $state, Events, EventsSearch, ParseLinks, AlertService, pagingParams, paginationConstants, EventOrder) {
         var vm = this;
 
         vm.loadPage = loadPage;
@@ -20,10 +20,11 @@
         vm.loadAll = loadAll;
         vm.searchQuery = pagingParams.search;
         vm.currentSearch = pagingParams.search;
+        vm.accept = accept;
 
         loadAll();
 
-        function loadAll () {
+        function loadAll() {
             if (pagingParams.search) {
                 EventsSearch.query({
                     query: pagingParams.search,
@@ -45,6 +46,7 @@
                 }
                 return result;
             }
+
             function onSuccess(data, headers) {
                 vm.links = ParseLinks.parse(headers('link'));
                 vm.totalItems = headers('X-Total-Count');
@@ -52,17 +54,18 @@
                 vm.events = data;
                 vm.page = pagingParams.page;
             }
+
             function onError(error) {
                 AlertService.error(error.data.message);
             }
         }
 
-        function loadPage (page) {
+        function loadPage(page) {
             vm.page = page;
             vm.transition();
         }
 
-        function transition () {
+        function transition() {
             $state.transitionTo($state.$current, {
                 page: vm.page,
                 sort: vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc'),
@@ -70,8 +73,8 @@
             });
         }
 
-        function search (searchQuery) {
-            if (!searchQuery){
+        function search(searchQuery) {
+            if (!searchQuery) {
                 return vm.clear();
             }
             vm.links = null;
@@ -82,13 +85,39 @@
             vm.transition();
         }
 
-        function clear () {
+        function clear() {
             vm.links = null;
             vm.page = 1;
             vm.predicate = 'id';
             vm.reverse = true;
             vm.currentSearch = null;
             vm.transition();
+        }
+
+        function accept(idx, id) {
+            EventOrder.accept(id)
+                .then(function (response) {
+                    vm.events.splice(idx, 1, response.data);
+                }, function (error) {
+                    swal(
+                        'Error',
+                        'Gagal accept event ',
+                        'error'
+                    );
+                })
+        }
+
+        function reject(idx, id) {
+            EventOrder.reject(id)
+                .then(function (response) {
+                    vm.events.splice(idx, 1, response.data);
+                }, function (error) {
+                    swal(
+                        'Error',
+                        'Gagal reject event ',
+                        'error'
+                    );
+                })
         }
     }
 })();

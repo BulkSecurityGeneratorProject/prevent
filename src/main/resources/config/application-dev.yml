@@ -115,4 +115,7 @@ upload:
         image: /Users/aseprojali/Workspace/work/temp/image/
         file: /Users/aseprojali/Workspace/work/temp/file/
         import: /Users/aseprojali/Workspace/work/temp/import/
-
+existing:
+    path:
+        image: /Users/aseprojali/Workspace/data/event-pikiran-rakyat/image/
+        file: /Users/aseprojali/Workspace/data/event-pikiran-rakyat/file/

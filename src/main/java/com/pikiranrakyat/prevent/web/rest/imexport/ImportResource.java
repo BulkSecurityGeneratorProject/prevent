@@ -1,25 +1,14 @@
 package com.pikiranrakyat.prevent.web.rest.imexport;
 
 import com.codahale.metrics.annotation.Timed;
-import com.google.common.base.Charsets;
 import com.google.common.io.Files;
 import com.pikiranrakyat.prevent.config.Constants;
-import com.pikiranrakyat.prevent.domain.EventType;
-import com.pikiranrakyat.prevent.domain.Events;
-import com.pikiranrakyat.prevent.domain.Organizer;
-import com.pikiranrakyat.prevent.domain.User;
-import com.pikiranrakyat.prevent.exception.DataNotFoundException;
-import com.pikiranrakyat.prevent.repository.EventsRepository;
-import com.pikiranrakyat.prevent.repository.UserRepository;
-import com.pikiranrakyat.prevent.service.EventTypeService;
-import com.pikiranrakyat.prevent.service.EventsService;
-import com.pikiranrakyat.prevent.service.OrganizerService;
-import org.apache.commons.io.FileUtils;
+import com.pikiranrakyat.prevent.security.SecurityUtils;
+import com.pikiranrakyat.prevent.service.ImportService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,14 +21,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * Created by aseprojali on 01/12/16.
@@ -55,19 +37,7 @@ public class ImportResource {
     String pathFileImport;
 
     @Inject
-    private UserRepository userRepository;
-
-    @Inject
-    private OrganizerService organizerService;
-
-    @Inject
-    private EventTypeService eventTypeService;
-
-    @Inject
-    private EventsRepository eventsRepository;
-
-    @Inject
-    private EventsService eventsService;
+    private ImportService importService;
 
 
     @RequestMapping(value = "/import",
@@ -115,95 +85,19 @@ public class ImportResource {
 
         switch (type) {
             case Constants.IMPORT.ORGANIZER:
-                List<Organizer> organizers = FileUtils.readLines(file, Charsets.UTF_8)
-                    .stream()
-                    .map(s -> s.split(Constants.DELIMETER_CSV))
-                    .map(contents -> {
-                        Organizer organizer = new Organizer();
-                        organizer.setName(contents[1]);
-                        organizer.setAddress(contents[2]);
-                        organizer.setPhone(Optional.of(contents[3]).filter(s -> !s.equalsIgnoreCase("system")).orElse("0000"));
-                        organizer.setEmail(contents[4]);
-
-                        String userLogin = contents[5];
-                        log.debug("User login " + userLogin);
-                        User user = userRepository.findOneByLogin(userLogin).orElseThrow(() -> new UsernameNotFoundException("User tidak ada"));
-                        organizer.setUser(user);
-
-                        return organizer;
-                    })
-                    .collect(Collectors.toList());
-
-                organizers.forEach(organizer -> {
-
-                    log.debug("Organizer " + organizer.toString());
-
-                    organizerService.findByNameIgnoreCase(organizer.getName())
-                        .map(o -> {
-                            o.setName(organizer.getName());
-                            o.setAddress(organizer.getAddress());
-                            o.setPhone(organizer.getPhone());
-                            o.setEmail(organizer.getEmail());
-                            o.setUser(organizer.getUser());
-                            return organizerService.save(o);
-                        })
-                        .orElseGet(() -> organizerService.save(organizer));
-                });
+                importService.saveOrganizerImport(file);
                 break;
             case Constants.IMPORT.EVENT:
-
-                List<Events> events = FileUtils.readLines(file, Charsets.UTF_8)
-                    .stream()
-                    .map(s -> s.split(Constants.DELIMETER_CSV))
-                    .map(contents -> {
-
-                        Events event = new Events();
-                        event.setTitle(contents[1]);
-                        event.setDescription(contents[2]);
-                        event.setStarts(convertToZoneDateTime(contents[3]));
-                        event.setEnds(convertToZoneDateTime(contents[4]));
-                        event.setAgreeDate(convertToZoneDateTime(contents[5]));
-                        event.setAccept(Boolean.valueOf(contents[6]));
-
-                        EventType eventType = eventTypeService
-                            .findByNameIgnoreCase(contents[7])
-                            .orElseThrow(() -> new DataNotFoundException("Event type tidak ada " + contents[7]));
-                        event.setEventType(eventType);
-
-                        event.setLocationName(contents[8]);
-                        event.setLocationAddress(contents[9]);
-                        event.setLocationLatitude(Double.valueOf(contents[15]));
-                        event.setLocationLongitude(Double.valueOf(contents[16]));
-
-                        event.setCreatedBy(contents[11]);
-                        event.setCreatedDate(convertToZoneDateTime(contents[12]));
-                        event.setLastModifiedBy(contents[13]);
-                        event.setLastModifiedDate(convertToZoneDateTime(contents[14]));
-
-
-                        log.debug("Event set " + event.toString());
-
-                        Organizer organizer = organizerService.findByNameIgnoreCase(contents[10])
-                            .orElseThrow(() -> new DataNotFoundException("Organizer not found " + contents[10]));
-                        log.debug("Organizer set " + organizer);
-                        event.setOrganizer(organizer);
-
-                        return event;
-                    }).collect(Collectors.toList());
-
-                events
-                    .forEach(event -> eventsRepository.findByTitleIgnoreCase(event.getTitle())
-                        .orElseGet(() -> eventsService.save(event)));
-
-
+                importService.saveEventsImport(file);
                 break;
-
+            case Constants.IMPORT.EVENT_PR:
+                importService.saveEventPrImport(file, SecurityUtils.getCurrentUserLogin());
+                break;
+            case Constants.IMPORT.EVENT_IMAGE:
+                importService.saveEventPrImageImport(file, SecurityUtils.getCurrentUserLogin());
+                break;
         }
     }
 
-    public static ZonedDateTime convertToZoneDateTime(String fecha) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss");
-        LocalDate date = LocalDate.parse(fecha, formatter);
-        return date.atStartOfDay(ZoneId.of("Asia/Jakarta"));
-    }
+
 }
