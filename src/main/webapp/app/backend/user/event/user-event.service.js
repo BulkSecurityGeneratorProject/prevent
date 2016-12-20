@@ -12,10 +12,13 @@
                 return $http.get('api/user/events', {params: param})
             },
             createEvent: function (data) {
-                return $http.post('api/events', data);
+                return $http.post('api/user/events', data);
             },
             updateEvent: function (data) {
-                return $http.put('api/events', data);
+                return $http.put('api/user/events', data);
+            },
+            get: function (id) {
+                return $http.get('api/user/events/' + id);
             },
             accept: function (id) {
                 return $http.get('api/order/event/' + id + "/accept");

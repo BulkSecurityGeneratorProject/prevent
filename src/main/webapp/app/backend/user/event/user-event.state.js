@@ -112,8 +112,11 @@
                     }
                 },
                 resolve: {
-                    entity: ['$stateParams', 'Events', function ($stateParams, Events) {
-                        return Events.get({id: $stateParams.id}).$promise;
+                    entity: ['$stateParams', 'UserEvent', function ($stateParams, UserEvent) {
+                        return UserEvent.get($stateParams.id)
+                            .then(function (response) {
+                                return response.data;
+                            });
                     }],
                     previousState: ["$state", function ($state) {
                         var currentStateData = {
@@ -138,8 +141,11 @@
                         controllerAs: 'vm',
                         size: 'md',
                         resolve: {
-                            entity: ['Events', function (Events) {
-                                return Events.get({id: $stateParams.id}).$promise;
+                            entity: ['UserEvent', function (UserEvent) {
+                                return UserEvent.get($stateParams.id)
+                                    .then(function (response) {
+                                        return response.data;
+                                    });
                             }]
                         }
                     }).result.then(function () {

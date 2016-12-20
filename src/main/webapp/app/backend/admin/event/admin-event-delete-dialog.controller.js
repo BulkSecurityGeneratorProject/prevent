@@ -1,24 +1,24 @@
-(function() {
+(function () {
     'use strict';
 
     angular
         .module('preventApp')
-        .controller('EventsDeleteController',EventsDeleteController);
+        .controller('AdminEventDeleteController', AdminEventDeleteController);
 
-    EventsDeleteController.$inject = ['$uibModalInstance', 'entity', 'Events'];
+    AdminEventDeleteController.$inject = ['$uibModalInstance', 'entity', 'Events'];
 
-    function EventsDeleteController($uibModalInstance, entity, Events) {
+    function AdminEventDeleteController($uibModalInstance, entity, Events) {
         var vm = this;
 
         vm.events = entity;
         vm.clear = clear;
         vm.confirmDelete = confirmDelete;
-        
-        function clear () {
+
+        function clear() {
             $uibModalInstance.dismiss('cancel');
         }
 
-        function confirmDelete (id) {
+        function confirmDelete(id) {
             Events.delete({id: id},
                 function () {
                     $uibModalInstance.close(true);

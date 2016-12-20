@@ -5,9 +5,9 @@
         .module('preventApp')
         .controller('UserEventController', UserEventController);
 
-    UserEventController.$inject = ['$scope', '$state', 'Events', 'EventsSearch', 'ParseLinks', 'AlertService', 'pagingParams', 'paginationConstants', 'EventOrder', 'UserEvent'];
+    UserEventController.$inject = ['$scope', '$state', 'ParseLinks', 'AlertService', 'pagingParams', 'paginationConstants', 'UserEvent'];
 
-    function UserEventController($scope, $state, Events, EventsSearch, ParseLinks, AlertService, pagingParams, paginationConstants, EventOrder, UserEvent) {
+    function UserEventController($scope, $state, ParseLinks, AlertService, pagingParams, paginationConstants, UserEvent) {
         var vm = this;
 
         vm.loadPage = loadPage;

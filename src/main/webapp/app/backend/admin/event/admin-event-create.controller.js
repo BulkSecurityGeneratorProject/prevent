@@ -3,16 +3,16 @@
 
     angular
         .module('preventApp')
-        .controller('EventCreateController', EventOrderController);
+        .controller('AdminEventCreateController', AdminEventCreateController);
 
-    EventOrderController.$inject = [
+    AdminEventCreateController.$inject = [
         '$scope',
         '$state',
         'entity',
         'ManageLocations',
         'Upload',
         '$timeout',
-        'EventOrder',
+        'AdminEvent',
         'ManageSearch',
         'geolocation',
         'FileManager',
@@ -21,21 +21,25 @@
         'OrderMerchandise',
         'OrderCirculation',
         'OrderAds',
-        'OrderRedaction'
+        'OrderRedaction',
+        'previousState'
     ];
 
-    function EventOrderController($scope,
-                                  $state, entity,
-                                  ManageLocations,
-                                  Upload, $timeout,
-                                  EventOrder, ManageSearch,
-                                  geolocation, FileManager,
-                                  ImageManager, ListOrder,
-                                  OrderMerchandise, OrderCirculation,
-                                  OrderAds, OrderRedaction) {
+    function AdminEventCreateController($scope,
+                                        $state, entity,
+                                        ManageLocations,
+                                        Upload, $timeout,
+                                        AdminEvent, ManageSearch,
+                                        geolocation, FileManager,
+                                        ImageManager, ListOrder,
+                                        OrderMerchandise, OrderCirculation,
+                                        OrderAds, OrderRedaction, previousState) {
         var vm = this;
         vm.isMap = false;
         vm.location = {};
+
+        vm.previousState = previousState;
+        console.log(vm.previousState);
 
         vm.events = entity;
 
@@ -96,7 +100,7 @@
                     showCancelButton: true,
                     confirmButtonText: 'Ya'
                 }).then(function () {
-                    EventOrder.create(vm.events)
+                    AdminEvent.create(vm.events)
                         .then(function (response) {
                             $state.go('event', null, {reload: true});
                             swal(
@@ -123,7 +127,7 @@
                     showCancelButton: true,
                     confirmButtonText: 'Ya'
                 }).then(function () {
-                    EventOrder.update(vm.events)
+                    AdminEvent.update(vm.events)
                         .then(function (response) {
                             $state.go('event', null, {reload: true});
                             swal(
@@ -379,6 +383,9 @@
             vm.datePublishOpenStatus[date] = true;
         }
 
+        vm.back = function () {
+            $state.go(previousState.name, previousState.params, {reload: previousState.name});
+        };
 
         function init() {
             getAllEventType();

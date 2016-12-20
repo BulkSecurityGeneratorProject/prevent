@@ -8,7 +8,7 @@ import com.pikiranrakyat.prevent.service.*;
 import com.pikiranrakyat.prevent.service.dto.EventOrderDTO;
 import com.pikiranrakyat.prevent.web.rest.util.HeaderUtil;
 import com.pikiranrakyat.prevent.web.rest.util.PaginationUtil;
-import com.pikiranrakyat.prevent.web.rest.vm.ManagedEventsVM;
+import com.pikiranrakyat.prevent.web.rest.vm.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -24,6 +24,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -135,6 +136,57 @@ public class UserEventsResource {
 
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/user/events");
         return new ResponseEntity<>(page.getContent().stream().map(ManagedEventsVM::new).collect(Collectors.toList()), headers, HttpStatus.OK);
+    }
+
+    /**
+     * GET  /events/:id : get the "id" events.
+     *
+     * @param id the id of the events to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the events, or with status 404 (Not Found)
+     */
+    @RequestMapping(value = "/events/{id}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<EventOrderDTO> getEvents(@PathVariable Long id) {
+        log.debug("REST request to get Events : {}", id);
+        Events events = eventsService.findOne(id);
+        return Optional.ofNullable(events)
+            .map(result -> {
+                EventOrderDTO dto = new EventOrderDTO(result);
+
+                dto.setOrderMerchandises(
+                    orderMerchandiseService
+                        .findByEvent(dto.getId())
+                        .stream()
+                        .map(ManagedOrderMerchandiseVM::new)
+                        .collect(Collectors.toList()));
+
+                dto.setOrderCirculations(
+                    orderCirculationService.findByEvent(dto.getId())
+                        .stream()
+                        .map(ManagedOrderCirculationVM::new)
+                        .collect(Collectors.toList())
+                );
+
+                dto.setOrderAds(
+                    orderAdsService.findByEvent(dto.getId())
+                        .stream()
+                        .map(ManagedOrderAdsVM::new)
+                        .collect(Collectors.toList())
+                );
+
+                dto.setOrderRedactions(
+                    orderRedactionService.findByEvent(dto.getId())
+                        .stream()
+                        .map(ManagedOrderRedactionVM::new)
+                        .collect(Collectors.toList())
+                );
+
+
+                return new ResponseEntity<>(dto, HttpStatus.OK);
+            })
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
 

@@ -3,18 +3,20 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="events.new" >
+                <button class="btn btn-primary"
+                        ui-sref="admin-event.create">
                     <span class="glyphicon glyphicon-plus"></span>
-                    <span class="hidden-xs" >
-                        Create new Events
+                    <span class="hidden-xs">
+                        Buat Event
                     </span>
                 </button>
             </div>
             <div class="col-xs-8 no-padding-right">
                 <form name="searchForm" class="form-inline">
-                    <div class="input-group pull-right" >
-                        <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="Query">
-                        <span  class="input-group-btn width-min" >
+                    <div class="input-group pull-right">
+                        <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery"
+                               placeholder="Query">
+                        <span class="input-group-btn width-min">
                             <button class="btn btn-info" ng-click="vm.search(vm.searchQuery)">
                                 <span class="glyphicon glyphicon-search"></span>
                             </button>
@@ -41,25 +43,25 @@
             <table class="jh-table table table-striped table-hover">
                 <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
-                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="id"><span>No</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="title"><span>Title</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="starts"><span>Starts</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="ends"><span>Ends</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="subtotal"><span>Subtotal</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="accept"><span>Accept</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="isOrder"><span>Is Order</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="eventType.name"><span>Event Type</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="locations.name"><span>Locations</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="eventType.name"><span>Event Type</span> <span
+                        class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="locationName"><span>Locations</span> <span class="glyphicon glyphicon-sort"></span>
+                    </th>
                     <th jh-sort-by="createdDate"><span>Created Date</span> <span
                         class="glyphicon glyphicon-sort"></span>
                     </th>
                     <th jh-sort-by="createdBy"><span>Created By</span> <span
                         class="glyphicon glyphicon-sort"></span>
                     </th>
-                    <th jh-sort-by="lastModifiedBy"><span>Last Modified By</span> <span
-                        class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="lastModifiedDate"><span>Last Modified Date</span> <span
-                        class="glyphicon glyphicon-sort"></span></th>
+                    <!--<th jh-sort-by="lastModifiedBy"><span>Last Modified By</span> <span-->
+                    <!--class="glyphicon glyphicon-sort"></span></th>-->
+                    <!--<th jh-sort-by="lastModifiedDate"><span>Last Modified Date</span> <span-->
+                    <!--class="glyphicon glyphicon-sort"></span></th>-->
                     <th></th>
                 </tr>
                 </thead>
@@ -67,41 +69,65 @@
                 <tr ng-repeat="events in vm.events track by events.id">
                     <td><a ui-sref="events-detail({id:events.id})">{{events.id}}</a></td>
                     <td>{{events.title}}</td>
-                    <td>{{events.starts |  date:'dd-MM-yy HH:mm'}}</td>
-                    <td>{{events.ends |  date:'dd-MM-yy HH:mm'}}</td>
-                    <td>{{events.subtotal}}</td>
-                    <td>{{events.accept}}</td>
-                    <td>{{events.isOrder}}</td>
+                    <td>{{events.starts | date:'dd/MM/yyyy HH:mm'}}</td>
+                    <td>{{events.ends | date:'dd/MM/yyyy HH:mm'}}</td>
+                    <td class="text-center">
+                        <div ng-if="events.accept == true">
+                            <span class="label label-success">{{events.accept}}</span>
+                        </div>
+
+                        <div ng-if="events.accept == false">
+                            <span class="label label-danger">{{events.accept}}</span>
+                        </div>
+
+                    </td>
                     <td>
                         <a ui-sref="event-type-detail({id:events.eventType.id})">{{events.eventType.name}}</a>
                     </td>
-                    <td>
-                        <a ui-sref="locations-detail({id:events.locations.id})">{{events.locations.name}}</a>
-                    </td>
-                    <td>{{events.createdDate | date:'dd-MM-yy HH:mm'}}</td>
+                    <td>{{events.locationName}}</td>
+                    <td>{{events.createdDate | date:'dd/MM/yy HH:mm'}}</td>
                     <td>{{events.createdBy}}</td>
-                    <td>{{events.lastModifiedBy}}</td>
-                    <td>{{events.lastModifiedDate | date:'dd/MM/yy HH:mm'}}</td>
+
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
-                            <button type="submit"
-                                    ui-sref="events-detail({id:events.id})"
+
+                            <button type="button"
+                                    ng-show="events.accept == false"
+                                    ng-click="vm.accept($index,events.id)"
+                                    class="btn btn-default btn-sm">
+                                <span class="fa fa-check"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+
+                            <button type="button"
+                                    ng-show="events.accept == true"
+                                    ng-click="vm.reject($index,events.id)"
+                                    class="btn btn-warning btn-sm">
+                                <span class="fa fa-minus"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+
+                            <button type="button"
+                                    ui-sref="admin-event.detail({id:events.id})"
                                     class="btn btn-info btn-sm">
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-xs hidden-sm"></span>
                             </button>
-                            <button type="submit"
-                                    ui-sref="events.edit({id:events.id})"
+
+                            <button type="button"
+                                    ui-sref="admin-event.edit({id:events.id})"
                                     class="btn btn-primary btn-sm">
                                 <span class="glyphicon glyphicon-pencil"></span>
                                 <span class="hidden-xs hidden-sm"></span>
                             </button>
-                            <button type="submit"
-                                    ui-sref="events.delete({id:events.id})"
+                            <button type="button"
+                                    ui-sref="admin-event.delete({id:events.id})"
                                     class="btn btn-danger btn-sm">
                                 <span class="glyphicon glyphicon-remove-circle"></span>
                                 <span class="hidden-xs hidden-sm"></span>
                             </button>
+
+
                         </div>
                     </td>
                 </tr>
@@ -113,7 +139,8 @@
     <div class="box-footer">
         <div class="text-center">
             <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
-            <uib-pagination class="pagination-sm" total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+            <uib-pagination class="pagination-sm" total-items="vm.totalItems" ng-model="vm.page"
+                            ng-change="vm.transition()"></uib-pagination>
         </div>
     </div>
     <!-- /.box-footer-->

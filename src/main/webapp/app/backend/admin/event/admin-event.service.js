@@ -2,17 +2,26 @@
     'use strict';
     angular
         .module('preventApp')
-        .factory('EventOrder', EventOrder);
+        .factory('AdminEvent', AdminEvent);
 
-    EventOrder.$inject = ['$http'];
+    AdminEvent.$inject = ['$http'];
 
-    function EventOrder($http) {
+    function AdminEvent($http) {
         return {
             create: function (data) {
                 return $http.post('api/events', data);
             },
             update: function (data) {
                 return $http.put('api/events', data);
+            },
+            getAll: function (param) {
+                return $http.get('api/events', {params: param});
+            },
+            getOne: function (id) {
+                return $http.get('api/events/' + id);
+            },
+            search: function (param) {
+                return $http.get('api/_search/events', {params: param});
             },
             accept: function (id) {
                 return $http.get('api/order/event/' + id + "/accept");

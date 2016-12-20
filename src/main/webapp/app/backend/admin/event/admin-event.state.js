@@ -9,7 +9,7 @@
 
     function stateConfig($stateProvider) {
         $stateProvider
-            .state('event', {
+            .state('admin-event', {
                 parent: 'entity',
                 url: '/admin/event?page&sort&search',
                 data: {
@@ -18,8 +18,8 @@
                 },
                 views: {
                     'main-content@backend': {
-                        templateUrl: 'app/entities/event-order/event-order.html',
-                        controller: 'EventOrderController',
+                        templateUrl: 'app/backend/admin/event/admin-events.html',
+                        controller: 'AdminEventsController',
                         controllerAs: 'vm'
                     }
                 },
@@ -46,7 +46,7 @@
                     }],
                 }
             })
-            .state('event.create', {
+            .state('admin-event.create', {
                 parent: 'entity',
                 url: '/admin/event/create',
                 data: {
@@ -55,8 +55,8 @@
                 },
                 views: {
                     'main-content@backend': {
-                        templateUrl: 'app/entities/event-order/event-order-create.html',
-                        controller: 'EventCreateController',
+                        templateUrl: 'app/backend/admin/event/admin-event-create.html',
+                        controller: 'AdminEventCreateController',
                         controllerAs: 'vm'
                     }
                 },
@@ -89,7 +89,7 @@
                     },
                     previousState: ["$state", function ($state) {
                         var currentStateData = {
-                            name: $state.current.name || 'event',
+                            name: $state.current.name || 'admin-event',
                             params: $state.params,
                             url: $state.href($state.current.name, $state.params)
                         };
@@ -97,27 +97,29 @@
                     }]
                 }
             })
-            .state('event-edit', {
+            .state('admin-event.edit', {
                 parent: 'entity',
-                url: '/event/edit/{id}',
+                url: '/admin/event/edit/{id}',
                 data: {
                     authorities: ['ROLE_ADMIN'],
                     pageTitle: 'Events'
                 },
                 views: {
                     'main-content@backend': {
-                        templateUrl: 'app/entities/event-order/event-order-create.html',
-                        controller: 'EventCreateController',
+                        templateUrl: 'app/backend/admin/event/admin-event-create.html',
+                        controller: 'AdminEventCreateController',
                         controllerAs: 'vm'
                     }
                 },
                 resolve: {
-                    entity: ['$stateParams', 'Events', function ($stateParams, Events) {
-                        return Events.get({id: $stateParams.id}).$promise;
+                    entity: ['$stateParams', 'AdminEvent', function ($stateParams, AdminEvent) {
+                        return AdminEvent.getOne($stateParams.id).then(function (response) {
+                            return response.data;
+                        });
                     }],
                     previousState: ["$state", function ($state) {
                         var currentStateData = {
-                            name: $state.current.name || 'event',
+                            name: $state.current.name || 'admin-event',
                             params: $state.params,
                             url: $state.href($state.current.name, $state.params)
                         };
@@ -125,49 +127,62 @@
                     }]
                 }
             })
-            .state('event.delete', {
-                parent: 'event',
+            .state('admin-event.delete', {
+                parent: 'admin-event',
                 url: '/{id}/delete',
                 data: {
                     authorities: ['ROLE_ADMIN']
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function ($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        templateUrl: 'app/entities/events/events-delete-dialog.html',
-                        controller: 'EventsDeleteController',
+                        templateUrl: 'app/backend/admin/event/admin-event-delete-dialog.html',
+                        controller: 'AdminEventDeleteController',
                         controllerAs: 'vm',
                         size: 'md',
                         resolve: {
-                            entity: ['Events', function (Events) {
-                                return Events.get({id: $stateParams.id}).$promise;
+                            entity: ['AdminEvent', function (AdminEvent) {
+                                return AdminEvent.getOne($stateParams.id).then(function (response) {
+                                    return response.data;
+                                });
                             }]
                         }
                     }).result.then(function () {
-                        $state.go('event', null, {reload: 'event'});
+                        $state.go('admin-event', null, {reload: 'admin-event'});
                     }, function () {
                         $state.go('^');
                     });
                 }]
             })
-            .state('event.import', {
-                parent: 'event',
-                url: '/import',
+            .state('admin-event.detail', {
+                parent: 'entity',
+                url: '/admin/{id}/event',
                 data: {
-                    authorities: ['ROLE_ADMIN']
+                    authorities: ['ROLE_ADMIN'],
+                    pageTitle: 'Events'
                 },
-                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
-                    $uibModal.open({
-                        templateUrl: 'app/entities/event-order/event-order-import.html',
-                        controller: 'EventsImportController',
-                        controllerAs: 'vm',
-                        backdrop: 'static',
-                        size: 'lg'
-                    }).result.then(function() {
-                        $state.go('event', null, { reload: 'event' });
-                    }, function() {
-                        $state.go('event');
-                    });
-                }]
-            })
+                views: {
+                    'main-content@backend': {
+                        templateUrl: 'app/backend/admin/event/admin-event-detail.html',
+                        controller: 'AdminEventDetailController',
+                        controllerAs: 'vm'
+                    }
+                },
+                resolve: {
+                    entity: ['$stateParams', 'AdminEvent', function ($stateParams, AdminEvent) {
+                        return AdminEvent.getOne($stateParams.id)
+                            .then(function (response) {
+                                return response.data;
+                            });
+                    }],
+                    previousState: ["$state", function ($state) {
+                        var currentStateData = {
+                            name: $state.current.name || 'admin-event',
+                            params: $state.params,
+                            url: $state.href($state.current.name, $state.params)
+                        };
+                        return currentStateData;
+                    }]
+                }
+            });
     }
 })();

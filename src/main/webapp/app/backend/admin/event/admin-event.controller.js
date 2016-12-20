@@ -3,11 +3,11 @@
 
     angular
         .module('preventApp')
-        .controller('EventOrderController', EventOrderController);
+        .controller('AdminEventsController', AdminEventsController);
 
-    EventOrderController.$inject = ['$scope', '$state', 'Events', 'EventsSearch', 'ParseLinks', 'AlertService', 'pagingParams', 'paginationConstants', 'EventOrder'];
+    AdminEventsController.$inject = ['$scope', '$state', 'ParseLinks', 'AlertService', 'pagingParams', 'paginationConstants', 'AdminEvent'];
 
-    function EventOrderController($scope, $state, Events, EventsSearch, ParseLinks, AlertService, pagingParams, paginationConstants, EventOrder) {
+    function AdminEventsController($scope, $state, ParseLinks, AlertService, pagingParams, paginationConstants, AdminEvent) {
         var vm = this;
 
         vm.loadPage = loadPage;
@@ -21,23 +21,24 @@
         vm.searchQuery = pagingParams.search;
         vm.currentSearch = pagingParams.search;
         vm.accept = accept;
+        vm.reject = reject;
 
         loadAll();
 
         function loadAll() {
             if (pagingParams.search) {
-                EventsSearch.query({
+                AdminEvent.search({
                     query: pagingParams.search,
                     page: pagingParams.page - 1,
                     size: vm.itemsPerPage,
                     sort: sort()
-                }, onSuccess, onError);
+                }).then(onSuccess, onError);
             } else {
-                Events.query({
+                AdminEvent.getAll({
                     page: pagingParams.page - 1,
                     size: vm.itemsPerPage,
                     sort: sort()
-                }, onSuccess, onError);
+                }).then(onSuccess, onError);
             }
             function sort() {
                 var result = [vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc')];
@@ -47,11 +48,11 @@
                 return result;
             }
 
-            function onSuccess(data, headers) {
-                vm.links = ParseLinks.parse(headers('link'));
-                vm.totalItems = headers('X-Total-Count');
+            function onSuccess(response) {
+                vm.links = ParseLinks.parse(response.headers('link'));
+                vm.totalItems = response.headers('X-Total-Count');
                 vm.queryCount = vm.totalItems;
-                vm.events = data;
+                vm.events = response.data;
                 vm.page = pagingParams.page;
             }
 
@@ -95,7 +96,7 @@
         }
 
         function accept(idx, id) {
-            EventOrder.accept(id)
+            AdminEvent.accept(id)
                 .then(function (response) {
                     vm.events.splice(idx, 1, response.data);
                 }, function (error) {
@@ -108,7 +109,7 @@
         }
 
         function reject(idx, id) {
-            EventOrder.reject(id)
+            AdminEvent.reject(id)
                 .then(function (response) {
                     vm.events.splice(idx, 1, response.data);
                 }, function (error) {
