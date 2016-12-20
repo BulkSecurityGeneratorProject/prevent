@@ -1,0 +1,126 @@
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myOrganizerLabel">Create or edit a Organizer</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label" for="field_name">Nama</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                           ng-model="vm.organizer.name"
+                           required/>
+                    <div ng-show="editForm.name.$invalid">
+                        <p class="help-block"
+                           ng-show="editForm.name.$error.required">
+                            This field is required.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="field_description">Deskripsi</label>
+
+                    <textarea rows="3"
+                              class="form-control" name="description" id="field_description"
+                              ng-model="vm.organizer.description"
+                              required ng-minlength="10" ng-maxlength="200"
+                              placeholder="Enter ..."></textarea>
+
+                    <div ng-show="editForm.description.$invalid">
+                        <p class="help-block"
+                           ng-show="editForm.description.$error.required">
+                            This field is required.
+                        </p>
+                        <p class="help-block"
+                           ng-show="editForm.description.$error.minlength" translate-value-min="10">
+                            This field is required to be at least 10 characters.
+                        </p>
+                        <p class="help-block"
+                           ng-show="editForm.description.$error.maxlength">
+                            This field cannot be longer than 200 characters.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="email">E-mail Organizer</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Your e-mail organizer"
+                           ng-model="vm.organizer.email" ng-minlength=5 ng-maxlength=100 required>
+                    <div ng-show="editForm.email.$dirty && editForm.email.$invalid">
+                        <p class="help-block"
+                           ng-show="editForm.email.$error.required">
+                            Your e-mail is required.
+                        </p>
+                        <p class="help-block"
+                           ng-show="editForm.email.$error.email">
+                            Your e-mail is invalid.
+                        </p>
+                        <p class="help-block"
+                           ng-show="editForm.email.$error.minlength">
+                            Your e-mail is required to be at least 5 characters.
+                        </p>
+                        <p class="help-block"
+                           ng-show="editForm.email.$error.maxlength">
+                            Your e-mail cannot be longer than 100 characters.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label" for="field_address">Alamat</label>
+
+                    <textarea rows="3"
+                              class="form-control" name="address" id="field_address"
+                              ng-model="vm.organizer.address"
+                              required ng-minlength="10" ng-maxlength="300"
+                              placeholder="Enter ..."></textarea>
+                    <div ng-show="editForm.address.$invalid">
+                        <p class="help-block"
+                           ng-show="editForm.address.$error.required">
+                            Field ini dibutuhkan.
+                        </p>
+                        <p class="help-block"
+                           ng-show="editForm.address.$error.minlength" translate-value-min="10">
+                            Field ini dibutuhkan to be at least 10 characters.
+                        </p>
+                        <p class="help-block"
+                           ng-show="editForm.address.$error.maxlength">
+                            This field cannot be longer than 300 characters.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="field_facebook">Facebook</label>
+                    <input type="text" class="form-control" name="facebook" id="field_facebook"
+                           ng-model="vm.organizer.facebook"
+                    />
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="field_twitter">Twitter</label>
+                    <input type="text" class="form-control" name="twitter" id="field_twitter"
+                           ng-model="vm.organizer.twitter"
+                    />
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

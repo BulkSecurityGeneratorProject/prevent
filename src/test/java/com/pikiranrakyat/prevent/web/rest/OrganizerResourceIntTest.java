@@ -4,10 +4,11 @@ import com.pikiranrakyat.prevent.PreventApp;
 
 import com.pikiranrakyat.prevent.domain.Organizer;
 import com.pikiranrakyat.prevent.domain.User;
-import com.pikiranrakyat.prevent.repository.OrganizerRepository;
+import com.pikiranrakyat.prevent.repository.organizer.OrganizerRepository;
 import com.pikiranrakyat.prevent.service.OrganizerService;
 import com.pikiranrakyat.prevent.repository.search.OrganizerSearchRepository;
 
+import com.pikiranrakyat.prevent.web.rest.organizer.OrganizerResource;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

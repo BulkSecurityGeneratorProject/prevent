@@ -15,12 +15,15 @@
                     }
                 })
             },
-            findEventAll: function () {
-                return $http.get('api/event-type/search/all');
+            findEventTypeAll: function () {
+                return $http.get('api/list/event-type');
             },
             findOrganizerAll: function () {
-                return $http.get('api/organizer/search/all');
+                return $http.get('api/list/organizer');
             },
+            findAllUsers: function () {
+                return $http.get('api/list/user');
+            }
 
         }
     }

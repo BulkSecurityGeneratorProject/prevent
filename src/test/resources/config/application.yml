@@ -38,8 +38,8 @@ spring:
             hibernate.hbm2ddl.auto: validate
     data:
         elasticsearch:
-            cluster-name:
-            cluster-nodes:
+            cluster-name: prevents
+            cluster-nodes: localhost:9300
             properties:
                 path:
                   logs: target/elasticsearch/log

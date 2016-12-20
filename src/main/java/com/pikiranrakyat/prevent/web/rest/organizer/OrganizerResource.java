@@ -1,14 +1,11 @@
-package com.pikiranrakyat.prevent.web.rest;
+package com.pikiranrakyat.prevent.web.rest.organizer;
 
 import com.codahale.metrics.annotation.Timed;
 import com.pikiranrakyat.prevent.domain.Organizer;
-import com.pikiranrakyat.prevent.domain.User;
-import com.pikiranrakyat.prevent.exception.ResourceNotFoundException;
-import com.pikiranrakyat.prevent.repository.UserRepository;
-import com.pikiranrakyat.prevent.security.SecurityUtils;
 import com.pikiranrakyat.prevent.service.OrganizerService;
 import com.pikiranrakyat.prevent.web.rest.util.HeaderUtil;
 import com.pikiranrakyat.prevent.web.rest.util.PaginationUtil;
+import com.pikiranrakyat.prevent.web.rest.vm.ManagedOrganizerVM;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -25,6 +22,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * REST controller for managing Organizer.
@@ -38,8 +36,6 @@ public class OrganizerResource {
     @Inject
     private OrganizerService organizerService;
 
-    @Inject
-    private UserRepository userRepository;
 
     /**
      * POST  /organizers : Create a new organizer.
@@ -57,10 +53,6 @@ public class OrganizerResource {
         if (organizer.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("organizer", "idexists", "A new organizer cannot already have an ID")).body(null);
         }
-
-        User user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin())
-            .orElseThrow(() -> new ResourceNotFoundException("User tidak ada"));
-        organizer.setUser(user);
 
         Organizer result = organizerService.save(organizer);
         return ResponseEntity.created(new URI("/api/organizers/" + result.getId()))
@@ -103,12 +95,12 @@ public class OrganizerResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<List<Organizer>> getAllOrganizers(Pageable pageable)
+    public ResponseEntity<List<ManagedOrganizerVM>> getAllOrganizers(Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to get a page of Organizers");
         Page<Organizer> page = organizerService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/organizers");
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+        return new ResponseEntity<>(page.getContent().stream().map(ManagedOrganizerVM::new).collect(Collectors.toList()), headers, HttpStatus.OK);
     }
 
     /**

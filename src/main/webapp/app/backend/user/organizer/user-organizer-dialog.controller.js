@@ -3,17 +3,16 @@
 
     angular
         .module('preventApp')
-        .controller('OrganizerDialogController', OrganizerDialogController);
+        .controller('UserOrganizerDialogController', UserOrganizerDialogController);
 
-    OrganizerDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Organizer', 'ManageSearch'];
+    UserOrganizerDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'UserOrganizer'];
 
-    function OrganizerDialogController($timeout, $scope, $stateParams, $uibModalInstance, entity, Organizer, ManageSearch) {
+    function UserOrganizerDialogController($timeout, $scope, $stateParams, $uibModalInstance, entity, UserOrganizer) {
         var vm = this;
 
         vm.organizer = entity;
         vm.clear = clear;
         vm.save = save;
-        vm.users = [];
 
         $timeout(function () {
             angular.element('.form-group:eq(1)>input').focus();
@@ -26,9 +25,9 @@
         function save() {
             vm.isSaving = true;
             if (vm.organizer.id !== null) {
-                Organizer.update(vm.organizer, onSaveSuccess, onSaveError);
+                UserOrganizer.updateOrganizer(vm.organizer).then(onSaveSuccess, onSaveError);
             } else {
-                Organizer.save(vm.organizer, onSaveSuccess, onSaveError);
+                UserOrganizer.createOrganizer(vm.organizer).then(onSaveSuccess, onSaveError);
             }
         }
 
@@ -41,17 +40,6 @@
         function onSaveError() {
             vm.isSaving = false;
         }
-
-        function init() {
-            ManageSearch.findAllUsers()
-                .then(function (response) {
-                    vm.users = response.data;
-                }, function (error) {
-                    console.log(error);
-                })
-        }
-
-        init();
 
 
     }

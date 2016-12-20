@@ -11,7 +11,7 @@
         $stateProvider
             .state('event', {
                 parent: 'entity',
-                url: '/event?page&sort&search',
+                url: '/admin/event?page&sort&search',
                 data: {
                     authorities: ['ROLE_ADMIN'],
                     pageTitle: 'Events'
@@ -48,7 +48,7 @@
             })
             .state('event.create', {
                 parent: 'entity',
-                url: '/event/create',
+                url: '/admin/event/create',
                 data: {
                     authorities: ['ROLE_ADMIN'],
                     pageTitle: 'Events'

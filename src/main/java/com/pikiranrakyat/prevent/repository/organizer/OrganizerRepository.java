@@ -1,4 +1,4 @@
-package com.pikiranrakyat.prevent.repository;
+package com.pikiranrakyat.prevent.repository.organizer;
 
 import com.pikiranrakyat.prevent.domain.EventType;
 import com.pikiranrakyat.prevent.domain.Organizer;

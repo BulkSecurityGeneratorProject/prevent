@@ -1,7 +1,8 @@
 package com.pikiranrakyat.prevent.service.impl;
 
 import com.pikiranrakyat.prevent.domain.Organizer;
-import com.pikiranrakyat.prevent.repository.OrganizerRepository;
+import com.pikiranrakyat.prevent.domain.User;
+import com.pikiranrakyat.prevent.repository.organizer.OrganizerRepository;
 import com.pikiranrakyat.prevent.repository.search.OrganizerSearchRepository;
 import com.pikiranrakyat.prevent.service.OrganizerService;
 import org.slf4j.Logger;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
+import java.util.List;
 import java.util.Optional;
 
 import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
@@ -57,6 +59,16 @@ public class OrganizerServiceImpl implements OrganizerService {
         return result;
     }
 
+    @Override
+    public Page<Organizer> findByCurrentUser(Pageable pageable) {
+        return organizerRepository.findByUserIsCurrentUser(pageable);
+    }
+
+    @Override
+    public List<Organizer> findByCurrentUser() {
+        return organizerRepository.findByUserIsCurrentUser();
+    }
+
     /**
      * Get one organizer by id.
      *
@@ -96,7 +108,12 @@ public class OrganizerServiceImpl implements OrganizerService {
     @Transactional(readOnly = true)
     public Page<Organizer> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of Organizers for query {}", query);
-        Page<Organizer> result = organizerSearchRepository.search(queryStringQuery(query), pageable);
-        return result;
+        return organizerSearchRepository.search(queryStringQuery(query), pageable);
+    }
+
+    @Override
+    public Page<Organizer> searchByUser(User user, String query, Pageable pageable) {
+        log.debug("Request to search for a page of Organizers for query {}", query);
+        return organizerSearchRepository.findByUser(user, queryStringQuery(query), pageable);
     }
 }

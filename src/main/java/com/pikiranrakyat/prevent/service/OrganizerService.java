@@ -1,9 +1,11 @@
 package com.pikiranrakyat.prevent.service;
 
 import com.pikiranrakyat.prevent.domain.Organizer;
+import com.pikiranrakyat.prevent.domain.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -26,6 +28,10 @@ public interface OrganizerService {
      * @return the list of entities
      */
     Page<Organizer> findAll(Pageable pageable);
+
+    Page<Organizer> findByCurrentUser(Pageable pageable);
+
+    List<Organizer> findByCurrentUser();
 
     /**
      * Get the "id" organizer.
@@ -52,4 +58,6 @@ public interface OrganizerService {
      * @return the list of entities
      */
     Page<Organizer> search(String query, Pageable pageable);
+
+    Page<Organizer> searchByUser(User user, String query, Pageable pageable);
 }

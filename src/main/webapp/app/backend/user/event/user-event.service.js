@@ -11,9 +11,6 @@
             getEvent: function (param) {
                 return $http.get('api/user/events', {params: param})
             },
-            getOrganizer: function () {
-                return $http.get('api/user/organizers/list')
-            },
             createEvent: function (data) {
                 return $http.post('api/events', data);
             },

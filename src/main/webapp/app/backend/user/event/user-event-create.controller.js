@@ -22,7 +22,8 @@
         'OrderCirculation',
         'OrderAds',
         'OrderRedaction',
-        'UserEvent'
+        'UserEvent',
+        'UserOrganizer'
     ];
 
     function UserEventCreateController($scope,
@@ -33,7 +34,7 @@
                                        geolocation, FileManager,
                                        ImageManager, ListOrder,
                                        OrderMerchandise, OrderCirculation,
-                                       OrderAds, OrderRedaction, UserEvent) {
+                                       OrderAds, OrderRedaction, UserEvent, UserOrganizer) {
         var vm = this;
         vm.isMap = false;
         vm.location = {};
@@ -75,14 +76,14 @@
         };
 
         function getOrganizer() {
-            UserEvent.getOrganizer()
+            UserOrganizer.getAllOrganizer()
                 .then(function (response) {
                     vm.organizers = response.data;
                 });
         };
 
         function getAllEventType() {
-            return ManageSearch.findEventAll()
+            ManageSearch.findEventTypeAll()
                 .then(function (response) {
                     vm.eventtypes = response.data;
                 });

@@ -3,11 +3,10 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary"
-                        ui-sref="event-user.create">
+                <button class="btn btn-primary" ui-sref="user-organizer.new">
                     <span class="glyphicon glyphicon-plus"></span>
                     <span class="hidden-xs">
-                        Buat Event
+                        Buat Organizer
                     </span>
                 </button>
             </div>
@@ -33,89 +32,59 @@
     </div>
     <br/>
 </div>
+
 <div class="box">
     <div class="box-header with-border">
-        <h3 class="box-title">Events</h3>
+        <h3 class="box-title">Organizers</h3>
 
     </div>
     <div class="box-body">
         <div class="table-responsive">
-            <table class="jh-table table table-striped table-hover">
+            <table class="jh-table table table-striped">
                 <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
-                    <th jh-sort-by="id"><span>No</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="title"><span>Title</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="starts"><span>Starts</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="ends"><span>Ends</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="accept"><span>Accept</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="eventType.name"><span>Event Type</span> <span
-                        class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="locationName"><span>Locations</span> <span class="glyphicon glyphicon-sort"></span>
-                    </th>
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="name"><span>Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="user.email"><span>User</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="createdDate"><span>Created Date</span> <span
                         class="glyphicon glyphicon-sort"></span>
                     </th>
                     <th jh-sort-by="createdBy"><span>Created By</span> <span
                         class="glyphicon glyphicon-sort"></span>
                     </th>
-                    <!--<th jh-sort-by="lastModifiedBy"><span>Last Modified By</span> <span-->
-                    <!--class="glyphicon glyphicon-sort"></span></th>-->
-                    <!--<th jh-sort-by="lastModifiedDate"><span>Last Modified Date</span> <span-->
-                    <!--class="glyphicon glyphicon-sort"></span></th>-->
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="events in vm.events track by events.id">
-                    <td><a ui-sref="events-detail({id:events.id})">{{events.id}}</a></td>
-                    <td>{{events.title}}</td>
-                    <td>{{events.starts | date:'dd/MM/yyyy HH:mm'}}</td>
-                    <td>{{events.ends | date:'dd/MM/yyyy HH:mm'}}</td>
-                    <td class="text-center">
-                        <div ng-if="events.accept == true">
-                            <span class="label label-success">Disetujui</span>
-                        </div>
-
-                        <div ng-if="events.accept == false">
-                            <span class="label label-danger">Belum Disetujui</span>
-                        </div>
-
-                    </td>
+                <tr ng-repeat="organizer in vm.organizers track by organizer.id">
+                    <td><a ui-sref="organizer-detail({id:organizer.id})">{{organizer.id}}</a></td>
+                    <td>{{organizer.name}}</td>
                     <td>
-                        <a ui-sref="event-type-detail({id:events.eventType.id})">{{events.eventType.name}}</a>
+                        {{organizer.user.email}}
                     </td>
-                    <td>{{events.locationName}}</td>
-                    <td>{{events.createdDate | date:'dd/MM/yy HH:mm'}}</td>
-                    <td>{{events.createdBy}}</td>
-
+                    <td>{{organizer.createdDate | date:'dd/MM/yy HH:mm'}}</td>
+                    <td>{{organizer.createdBy}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
-                            <!--<button type="button"-->
-                            <!--ui-sref="events-detail({id:events.id})"-->
-                            <!--class="btn btn-info btn-sm">-->
-                            <!--<span class="glyphicon glyphicon-eye-open"></span>-->
-                            <!--<span class="hidden-xs hidden-sm"></span>-->
-                            <!--</button>-->
-                            <button type="button"
-                                    ui-sref="user-event-edit({id:events.id})"
+                            <button type="submit"
+                                    ui-sref="user-organizer.edit({id:organizer.id})"
                                     class="btn btn-primary btn-sm">
                                 <span class="glyphicon glyphicon-pencil"></span>
                                 <span class="hidden-xs hidden-sm"></span>
                             </button>
-                            <button type="button"
-                                    ui-sref="event-user.delete({id:events.id})"
+                            <button type="submit"
+                                    ui-sref="user-organizer.delete({id:organizer.id})"
                                     class="btn btn-danger btn-sm">
                                 <span class="glyphicon glyphicon-remove-circle"></span>
                                 <span class="hidden-xs hidden-sm"></span>
                             </button>
-
-
                         </div>
                     </td>
                 </tr>
                 </tbody>
             </table>
         </div>
+
     </div>
     <!-- /.box-body -->
     <div class="box-footer">

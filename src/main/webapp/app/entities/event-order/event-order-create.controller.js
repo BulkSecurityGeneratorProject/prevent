@@ -81,7 +81,7 @@
         };
 
         function getAllEventType() {
-            return ManageSearch.findEventAll()
+            ManageSearch.findEventTypeAll()
                 .then(function (response) {
                     vm.eventtypes = response.data;
                 });
@@ -146,7 +146,6 @@
 
         };
 
-
         function uploadImage(file) {
             Upload.upload({
                 url: 'api/upload/image',
@@ -163,7 +162,6 @@
                         vm.progressImage = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
                     });
         };
-
 
         function uploadFile(file) {
             Upload.upload({
@@ -390,7 +388,6 @@
             getAllRedaction();
             getAllAds();
         }
-
 
         init();
 

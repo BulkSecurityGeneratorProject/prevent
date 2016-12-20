@@ -3,25 +3,26 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="organizer.new" >
+                <button class="btn btn-primary" ui-sref="organizer.new">
                     <span class="glyphicon glyphicon-plus"></span>
-                    <span class="hidden-xs" >
+                    <span class="hidden-xs">
                         Buat Organizer
                     </span>
                 </button>
                 <button class="btn btn-info"
-                        ui-sref="organizer.import" >
+                        ui-sref="organizer.import">
                     <i class="fa fa-upload"></i>
-                    <span class="hidden-xs" >
+                    <span class="hidden-xs">
                         Import
                     </span>
                 </button>
             </div>
             <div class="col-xs-8 no-padding-right">
                 <form name="searchForm" class="form-inline">
-                    <div class="input-group pull-right" >
-                        <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="Query">
-                        <span  class="input-group-btn width-min" >
+                    <div class="input-group pull-right">
+                        <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery"
+                               placeholder="Query">
+                        <span class="input-group-btn width-min">
                             <button class="btn btn-info" ng-click="vm.search(vm.searchQuery)">
                                 <span class="glyphicon glyphicon-search"></span>
                             </button>
@@ -52,6 +53,12 @@
                     <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="name"><span>Name</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="user.email"><span>User</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdDate"><span>Created Date</span> <span
+                        class="glyphicon glyphicon-sort"></span>
+                    </th>
+                    <th jh-sort-by="createdBy"><span>Created By</span> <span
+                        class="glyphicon glyphicon-sort"></span>
+                    </th>
                     <th></th>
                 </tr>
                 </thead>
@@ -62,6 +69,8 @@
                     <td>
                         {{organizer.user.email}}
                     </td>
+                    <td>{{organizer.createdDate | date:'dd/MM/yy HH:mm'}}</td>
+                    <td>{{organizer.createdBy}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
@@ -94,7 +103,8 @@
     <div class="box-footer">
         <div class="text-center">
             <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
-            <uib-pagination class="pagination-sm" total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+            <uib-pagination class="pagination-sm" total-items="vm.totalItems" ng-model="vm.page"
+                            ng-change="vm.transition()"></uib-pagination>
         </div>
     </div>
     <!-- /.box-footer-->

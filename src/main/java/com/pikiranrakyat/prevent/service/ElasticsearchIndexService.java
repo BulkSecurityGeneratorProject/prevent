@@ -3,6 +3,7 @@ package com.pikiranrakyat.prevent.service;
 import com.codahale.metrics.annotation.Timed;
 import com.pikiranrakyat.prevent.domain.*;
 import com.pikiranrakyat.prevent.repository.*;
+import com.pikiranrakyat.prevent.repository.organizer.OrganizerRepository;
 import com.pikiranrakyat.prevent.repository.search.*;
 import org.elasticsearch.indices.IndexAlreadyExistsException;
 import org.slf4j.Logger;
