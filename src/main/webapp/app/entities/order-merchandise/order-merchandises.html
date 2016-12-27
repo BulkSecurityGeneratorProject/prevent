@@ -2,15 +2,15 @@
     <jhi-alert></jhi-alert>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="order-merchandise.new">
-                    <span class="glyphicon glyphicon-plus"></span>
-                    <span class="hidden-xs">
-                        Create new Order Marcomm
-                    </span>
-                </button>
-            </div>
-            <div class="col-xs-8 no-padding-right">
+            <!--<div class="col-xs-4 no-padding-left">-->
+                <!--<button class="btn btn-primary" ui-sref="order-merchandise.new">-->
+                    <!--<span class="glyphicon glyphicon-plus"></span>-->
+                    <!--<span class="hidden-xs">-->
+                        <!--Create new Order Marcomm-->
+                    <!--</span>-->
+                <!--</button>-->
+            <!--</div>-->
+            <div class="col-xs-12">
                 <form name="searchForm" class="form-inline">
                     <div class="input-group pull-right">
                         <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery"
@@ -46,22 +46,22 @@
                     <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="orderNumber"><span>Order Number</span> <span
                         class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="qty"><span>QTY</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="qty"><span>Jumlah</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="total"><span>Total</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="accept"><span>Accept</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="note"><span>Note</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="merchandise.name"><span>Merchandise</span> <span
+                    <th jh-sort-by="accept"><span>Setujui</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="note"><span>Catatan</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="merchandise.name"><span>Marcomm</span> <span
                         class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="events.title"><span>Events</span> <span class="glyphicon glyphicon-sort"></span>
                     </th>
-                    <th jh-sort-by="createdDate"><span>Created Date</span> <span
+                    <th jh-sort-by="createdDate"><span>Dibuat Tgl</span> <span
                         class="glyphicon glyphicon-sort"></span>
                     </th>
-                    <th jh-sort-by="lastModifiedBy"><span>Last Modified By</span> <span
+                    <th jh-sort-by="lastModifiedBy"><span>Oleh</span> <span
                         class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="lastModifiedDate"><span>Last Modified Date</span> <span
-                        class="glyphicon glyphicon-sort"></span></th>
-                    <th></th>
+                    <!--<th jh-sort-by="lastModifiedDate"><span>Last Modified Date</span> <span-->
+                        <!--class="glyphicon glyphicon-sort"></span></th>-->
+                    <!--<th></th>-->
                 </tr>
                 </thead>
                 <tbody>
@@ -70,7 +70,16 @@
                     <td>{{orderMerchandise.orderNumber}}</td>
                     <td>{{orderMerchandise.qty}}</td>
                     <td>{{orderMerchandise.total}}</td>
-                    <td>{{orderMerchandise.accept}}</td>
+                    <td class="text-center">
+                        <div ng-if="orderMerchandise.accept == true">
+                            <span class="label label-success">Disetujui</span>
+                        </div>
+
+                        <div ng-if="orderMerchandise.accept == false">
+                            <span class="label label-danger">Belum Disetujui</span>
+                        </div>
+
+                    </td>
                     <td>{{orderMerchandise.note}}</td>
                     <td>
                         <a ui-sref="merchandise-detail({id:orderMerchandise.merchandise.id})">{{orderMerchandise.merchandise.name}}</a>
@@ -80,11 +89,11 @@
                     </td>
                     <td>{{orderMerchandise.createdDate | date:'dd/MM/yy HH:mm'}}</td>
                     <td>{{orderMerchandise.lastModifiedBy}}</td>
-                    <td>{{orderMerchandise.lastModifiedDate | date:'dd/MM/yy HH:mm'}}</td>
+                    <!--<td>{{orderMerchandise.lastModifiedDate | date:'dd/MM/yy HH:mm'}}</td>-->
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="button"
-                                    ng-show="!orderMerchandise.accept"
+                                    ng-disabled="orderMerchandise.accept"
                                     ng-click="vm.agreeOrder(orderMerchandise)"
                                     class="btn btn-info btn-sm">
                                 <i class="fa fa-check fa-fw"></i>
@@ -92,7 +101,7 @@
                             </button>
 
                             <button type="button"
-                                    ng-show="orderMerchandise.accept"
+                                    ng-disabled="!orderMerchandise.accept"
                                     ng-click="vm.disagreeOrder(orderMerchandise)"
                                     class="btn btn-danger btn-sm">
                                 <i class="fa fa-minus fa-fw"></i>

@@ -20,6 +20,9 @@
             getOne: function (id) {
                 return $http.get('api/events/' + id);
             },
+            delete: function (id) {
+                return $http.delete('api/events/' + id);
+            },
             search: function (param) {
                 return $http.get('api/_search/events', {params: param});
             },

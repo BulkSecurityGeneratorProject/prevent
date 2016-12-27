@@ -112,10 +112,14 @@
                     }
                 },
                 resolve: {
-                    entity: ['$stateParams', 'UserEvent', function ($stateParams, UserEvent) {
+                    entity: ['$stateParams', 'UserEvent', 'DateUtils', function ($stateParams, UserEvent, DateUtils) {
                         return UserEvent.get($stateParams.id)
                             .then(function (response) {
-                                return response.data;
+                                var data = angular.fromJson(response.data);
+                                data.starts = DateUtils.convertDateTimeFromServer(data.starts);
+                                data.ends = DateUtils.convertDateTimeFromServer(data.ends);
+
+                                return data;
                             });
                     }],
                     previousState: ["$state", function ($state) {

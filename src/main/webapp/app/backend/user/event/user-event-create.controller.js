@@ -382,6 +382,10 @@
             vm.datePublishOpenStatus[date] = true;
         }
 
+        vm.back = function () {
+            $state.go(previousState.name, previousState.params, {reload: previousState.name});
+        };
+
 
         function init() {
             getAllEventType();

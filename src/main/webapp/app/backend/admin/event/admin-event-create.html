@@ -12,7 +12,7 @@
     <!--meta data-->
     <div class="box">
         <div class="box-header with-border">
-            <h3 class="box-title">Create Event</h3>
+            <h3 class="box-title">Buat Event</h3>
         </div>
         <div class="box-body">
             <div class="row">
@@ -20,7 +20,7 @@
 
                     <!--organizer-->
                     <div class="form-group">
-                        <label for="field_organizer">Organizer</label>
+                        <label for="field_organizer">Penyelenggara</label>
                         <select class="form-control" id="field_organizer" name="organizer"
                                 ng-model="vm.events.organizer"
                                 ng-options="organizer as organizer.name for organizer in vm.organizers track by organizer.id"
@@ -38,7 +38,7 @@
 
                     <!--title-->
                     <div class="form-group">
-                        <label class="control-label" for="field_title">Title</label>
+                        <label class="control-label" for="field_title">Nama Event</label>
                         <input type="text" class="form-control" name="title" id="field_title"
                                ng-model="vm.events.title"
                                required ng-minlength="6" ng-maxlength="50"/>
@@ -61,7 +61,7 @@
 
                     <!--description-->
                     <div class="form-group">
-                        <label class="control-label" for="field_description">Description</label>
+                        <label class="control-label" for="field_description">Deskripsi</label>
 
                         <textarea rows="3"
                                   class="form-control" name="description" id="field_description"
@@ -91,7 +91,7 @@
                 <div class="col-sm-6">
                     <!--starts-->
                     <div class="form-group">
-                        <label class="control-label" for="field_starts">Starts</label>
+                        <label class="control-label" for="field_starts">Mulai</label>
                         <div class="input-group">
                             <input id="field_starts" type="text" class="form-control" name="starts"
                                    datetime-picker="{{dateformat}}"
@@ -106,7 +106,7 @@
 
                     <!--ends-->
                     <div class="form-group">
-                        <label class="control-label" for="field_ends">Ends</label>
+                        <label class="control-label" for="field_ends">Selesai</label>
                         <div class="input-group">
                             <input id="field_ends" type="text" class="form-control" name="ends"
                                    datetime-picker="{{dateformat}}"

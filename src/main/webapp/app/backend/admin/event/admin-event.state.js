@@ -112,10 +112,15 @@
                     }
                 },
                 resolve: {
-                    entity: ['$stateParams', 'AdminEvent', function ($stateParams, AdminEvent) {
-                        return AdminEvent.getOne($stateParams.id).then(function (response) {
-                            return response.data;
-                        });
+                    entity: ['$stateParams', 'AdminEvent','DateUtils', function ($stateParams, AdminEvent,DateUtils) {
+                        return AdminEvent.getOne($stateParams.id)
+                            .then(function (response) {
+                                var data = angular.fromJson(response.data);
+                                data.starts = DateUtils.convertDateTimeFromServer(data.starts);
+                                data.ends = DateUtils.convertDateTimeFromServer(data.ends);
+
+                                return data;
+                            });
                     }],
                     previousState: ["$state", function ($state) {
                         var currentStateData = {
@@ -141,9 +146,10 @@
                         size: 'md',
                         resolve: {
                             entity: ['AdminEvent', function (AdminEvent) {
-                                return AdminEvent.getOne($stateParams.id).then(function (response) {
-                                    return response.data;
-                                });
+                                return AdminEvent.getOne($stateParams.id)
+                                    .then(function (response) {
+                                        return response.data;
+                                    });
                             }]
                         }
                     }).result.then(function () {

@@ -5,9 +5,9 @@
         .module('preventApp')
         .controller('OrderMerchandiseController', OrderMerchandiseController);
 
-    OrderMerchandiseController.$inject = ['$scope', '$state', 'OrderMerchandise', 'OrderMerchandiseSearch', 'ParseLinks', 'AlertService', 'pagingParams', 'paginationConstants', 'ManageOrder', 'SweetAlert'];
+    OrderMerchandiseController.$inject = ['$scope', '$state', 'OrderMerchandise', 'OrderMerchandiseSearch', 'ParseLinks', 'AlertService', 'pagingParams', 'paginationConstants', 'ManageOrder'];
 
-    function OrderMerchandiseController($scope, $state, OrderMerchandise, OrderMerchandiseSearch, ParseLinks, AlertService, pagingParams, paginationConstants, ManageOrder, SweetAlert) {
+    function OrderMerchandiseController($scope, $state, OrderMerchandise, OrderMerchandiseSearch, ParseLinks, AlertService, pagingParams, paginationConstants, ManageOrder) {
         var vm = this;
 
         vm.loadPage = loadPage;
@@ -101,29 +101,27 @@
          * @param merchandise
          */
         function agreeOrder(merchandise) {
-            SweetAlert.swal({
-                    title: "Agree order?",
-                    text: "Are you sure agree this order",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#DD6B55", confirmButtonText: "Yes",
-                    cancelButtonText: "No",
-                    closeOnConfirm: false,
-                    closeOnCancel: false
-                },
-                function (isConfirm) {
-                    if (isConfirm) {
-                        ManageOrder.agreeOrderMerchandise(merchandise.id)
-                            .then(function (response) {
-                                loadAll();
-                                SweetAlert.swal("Order Marcomm", "Order is agree", "success");
-                            }, function (error) {
-                                SweetAlert.swal(error.data.error, error.data.message, "error");
-                            })
-                    } else {
-                        SweetAlert.swal("Order Merchandise", "Order cancel agreement", "error");
-                    }
-                });
+            swal({
+                title: 'Setujui Sponsorship?',
+                text: "Apakah anda yakin ?",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya'
+            }).then(function () {
+                ManageOrder.agreeOrderMerchandise(merchandise.id)
+                    .then(function (response) {
+                        loadAll();
+                        swal(
+                            'Setujui',
+                            'Sponsorship berhasil disetujui',
+                            'success'
+                        )
+                    }, function (error) {
+                    });
+
+            });
 
 
         }
@@ -134,29 +132,28 @@
          * @param merchandise
          */
         function disagreeOrder(merchandise) {
-            SweetAlert.swal({
-                    title: "Disagree order?",
-                    text: "Are you sure disagree this order",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#DD6B55", confirmButtonText: "Yes",
-                    cancelButtonText: "No",
-                    closeOnConfirm: false,
-                    closeOnCancel: false
-                },
-                function (isConfirm) {
-                    if (isConfirm) {
-                        ManageOrder.disagreeOrderMerchandise(merchandise.id)
-                            .then(function (response) {
-                                loadAll();
-                                SweetAlert.swal("Order Marcomm", "Order disagree", "success");
-                            }, function (error) {
-                                SweetAlert.swal(error.data.error, error.data.message, "error");
-                            })
-                    } else {
-                        SweetAlert.swal("Order Merchandise", "Order cancel agreement", "error");
-                    }
-                });
+
+            swal({
+                title: 'Tolak Sponsorship?',
+                text: "Apakah anda yakin ?",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya'
+            }).then(function () {
+                ManageOrder.disagreeOrderMerchandise(merchandise.id)
+                    .then(function (response) {
+                        loadAll();
+                        swal(
+                            'Tolak',
+                            'Sponsorship berhasil ditolak',
+                            'success'
+                        )
+                    }, function (error) {
+                    });
+
+            });
 
 
         }

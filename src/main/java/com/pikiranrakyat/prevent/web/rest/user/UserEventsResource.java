@@ -191,6 +191,23 @@ public class UserEventsResource {
 
 
     /**
+     * DELETE  /events/:id : delete the "id" events.
+     *
+     * @param id the id of the events to delete
+     * @return the ResponseEntity with status 200 (OK)
+     */
+    @RequestMapping(value = "/events/{id}",
+        method = RequestMethod.DELETE,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<Void> deleteEvents(@PathVariable Long id) {
+        log.debug("REST request to delete Events : {}", id);
+        eventsService.delete(id);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("events", id.toString())).build();
+    }
+
+
+    /**
      * SEARCH  /_search/events?query=:query : search for the events corresponding
      * to the query.
      *

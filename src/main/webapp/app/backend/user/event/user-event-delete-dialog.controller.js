@@ -5,9 +5,9 @@
         .module('preventApp')
         .controller('UserEventDeleteController', UserEventDeleteController);
 
-    UserEventDeleteController.$inject = ['$uibModalInstance', 'entity', 'Events'];
+    UserEventDeleteController.$inject = ['$uibModalInstance', 'entity', 'UserEvent'];
 
-    function UserEventDeleteController($uibModalInstance, entity, Events) {
+    function UserEventDeleteController($uibModalInstance, entity, UserEvent) {
         var vm = this;
 
         vm.events = entity;
@@ -19,9 +19,11 @@
         }
 
         function confirmDelete(id) {
-            Events.delete({id: id},
-                function () {
+            UserEvent.delete(id)
+                .then(function (response) {
                     $uibModalInstance.close(true);
+                }, function (error) {
+                    console.log(error)
                 });
         }
     }

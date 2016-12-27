@@ -129,7 +129,7 @@
                 }).then(function () {
                     AdminEvent.update(vm.events)
                         .then(function (response) {
-                            $state.go('event', null, {reload: true});
+                            $state.go('admin-event', null, {reload: true});
                             swal(
                                 'Update',
                                 'Event sukses di update',

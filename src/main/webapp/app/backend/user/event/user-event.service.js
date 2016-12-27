@@ -20,6 +20,9 @@
             get: function (id) {
                 return $http.get('api/user/events/' + id);
             },
+            delete: function (id) {
+                return $http.delete('api/user/events/' + id);
+            },
             accept: function (id) {
                 return $http.get('api/order/event/' + id + "/accept");
             },
