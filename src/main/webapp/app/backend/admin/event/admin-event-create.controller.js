@@ -39,7 +39,6 @@
         vm.location = {};
 
         vm.previousState = previousState;
-        console.log(vm.previousState);
 
         vm.events = entity;
 
@@ -188,7 +187,6 @@
             FileManager
                 .deleteFile(vm.events.file.id)
                 .then(function (response) {
-                    console.log(response);
                     vm.events.file = null;
                     vm.file = null;
                     vm.progressFile = 0;
