@@ -3,6 +3,7 @@ package com.pikiranrakyat.prevent.domain;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.DecimalMin;
@@ -39,9 +40,11 @@ public class Events extends AbstractAuditingEntity implements Serializable {
     private String description;
 
     @Column(name = "starts")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private ZonedDateTime starts;
 
     @Column(name = "ends")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private ZonedDateTime ends;
 
 
