@@ -5,9 +5,9 @@
         .module('preventApp')
         .controller('AdminEventsController', AdminEventsController);
 
-    AdminEventsController.$inject = ['$scope', '$state', 'ParseLinks', 'AlertService', 'pagingParams', 'paginationConstants', 'AdminEvent'];
+    AdminEventsController.$inject = ['$scope', '$state', 'ParseLinks', 'AlertService', 'pagingParams', 'paginationConstants', 'AdminEvent','DateUtils'];
 
-    function AdminEventsController($scope, $state, ParseLinks, AlertService, pagingParams, paginationConstants, AdminEvent) {
+    function AdminEventsController($scope, $state, ParseLinks, AlertService, pagingParams, paginationConstants, AdminEvent,DateUtils) {
         var vm = this;
 
         vm.loadPage = loadPage;
@@ -24,6 +24,10 @@
         vm.reject = reject;
 
         loadAll();
+
+        var starts = DateUtils.convertLocalDateTimeToServer(vm.starts);
+        var ends = DateUtils.convertLocalDateTimeToServer(vm.ends);
+
 
         function loadAll() {
             if (pagingParams.search) {

@@ -2,6 +2,8 @@ package com.pikiranrakyat.prevent.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.pikiranrakyat.prevent.domain.Events;
+import com.pikiranrakyat.prevent.repository.EventsRepository;
+import com.pikiranrakyat.prevent.repository.search.EventsSearchRepository;
 import com.pikiranrakyat.prevent.service.*;
 import com.pikiranrakyat.prevent.service.dto.EventOrderDTO;
 import com.pikiranrakyat.prevent.web.rest.util.HeaderUtil;
@@ -10,7 +12,10 @@ import com.pikiranrakyat.prevent.web.rest.vm.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -21,6 +26,7 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -220,5 +226,50 @@ public class EventsResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+
+    @Inject
+    private EventsSearchRepository eventsSearchRepository;
+
+    @Inject
+    private EventsRepository eventsRepository;
+
+    /**
+     * GET  /search/events/between/test : get all the events.
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of events in body
+     * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
+     */
+    @RequestMapping(value = "/_search/events/between",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<?> findStartBetweenAndQuery(
+        @RequestParam(value = "starts", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime starts,
+        @RequestParam(value = "ends", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime ends,
+        @RequestParam(value = "query", required = false, defaultValue = "") String query,
+        @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
+        @RequestParam(value = "size", required = false, defaultValue = "5") Integer size,
+        @RequestParam(value = "sort", defaultValue = "DESC") String sort,
+        @RequestParam(value = "sortBy", defaultValue = "createdDate") String sortBy)
+        throws URISyntaxException {
+
+
+        Pageable pageable = new PageRequest(page, size, Sort.Direction.fromString(sort), sortBy);
+        Page<Events> pages;
+
+
+        eventsService.findAll(pageable);
+
+        pages = eventsSearchRepository.findByStartsBetweenOrTitleLike(starts, ends, query, pageable);
+
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(pages, "/api/events");
+
+        return new ResponseEntity<>(
+            pages.getContent()
+                .stream()
+                .map(ManagedEventsVM::new)
+                .collect(Collectors.toList()), headers, HttpStatus.OK);
+
+    }
 
 }
